@@ -1,0 +1,5 @@
+Zavarski's Better DLC is a descendant of Fargo's Souls DLC mod. This version tries to find a new look on old enchantments and make them unique, similar to vanilla enchantments.
+
+Changelogs:
+v0.11 - making enchantments. If you're reading this - idk how you got this one.
+v0.1 - mod created. Hello!
