@@ -5,6 +5,7 @@ using SoulsBetterDLC.Buffs;
 using System.Collections.Generic;
 using CalamityMod.Items.Armor.Wulfrum;
 using CalamityMod.Items.Accessories;
+using CalamityMod.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 
 
@@ -53,9 +54,8 @@ namespace SoulsBetterDLC.Items.Accessories
             recipe.AddIngredient(ModContent.ItemType<WulfrumHat>(), 1);
             recipe.AddIngredient(ModContent.ItemType<WulfrumJacket>(), 1);
             recipe.AddIngredient(ModContent.ItemType<WulfrumOveralls>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<WulfrumScrewdriver>(), 1);
             recipe.AddIngredient(ModContent.ItemType<TrinketofChi>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<SpiritGlyph>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<AmidiasSpark>(), 1);
             recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }

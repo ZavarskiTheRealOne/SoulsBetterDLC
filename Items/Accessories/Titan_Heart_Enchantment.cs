@@ -1,6 +1,9 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using CalamityMod.Items.Armor.TitanHeart;
+using CalamityMod.Items.Weapons.Magic;
+
 
 namespace SoulsBetterDLC.Items.Accessories
 {
@@ -18,6 +21,18 @@ namespace SoulsBetterDLC.Items.Accessories
             Item.height = 34;
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
+        }
+            public override void AddRecipes()
+        {
+            //recipe
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ModContent.ItemType<TitanHeartMask>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<TitanHeartMantle>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<TitanHeartBoots>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<GloriousEnd>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<AlulaAustralis>(), 1);
+            recipe.AddTile(TileID.DemonAltar);
+            recipe.Register();
         }
     }
 }

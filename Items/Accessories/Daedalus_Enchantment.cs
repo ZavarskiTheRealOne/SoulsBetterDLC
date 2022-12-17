@@ -3,7 +3,6 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using CalamityMod.Items.Armor.Daedalus;
 using CalamityMod.Items.Accessories.Wings;
-using SoulsBetterDLC.Items.Accessories;
 
 namespace SoulsBetterDLC.Items.Accessories
 {

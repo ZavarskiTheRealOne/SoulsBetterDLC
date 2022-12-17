@@ -7,7 +7,7 @@ using CalamityMod.Items.Weapons.Magic;
 using CalamityMod.Items.Tools;
 using CalamityMod.Items.Accessories;
 using Microsoft.Xna.Framework;
-
+using CalamityMod.Items.Accessories.Wings;
 
 namespace SoulsBetterDLC.Items.Accessories
 {
@@ -59,8 +59,8 @@ namespace SoulsBetterDLC.Items.Accessories
             recipe.AddIngredient(ModContent.ItemType<ReaverScaleMail>(), 1);
             recipe.AddIngredient(ModContent.ItemType<ReaverCuisses>(), 1);
             recipe.AddIngredient(ModContent.ItemType<NecklaceofVexation>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<BeastialPickaxe>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<EvergladeSpray>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<AureateBooster>(), 1);
+            recipe.AddIngredient(ItemID.ChlorophytePickaxe, 1);
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }

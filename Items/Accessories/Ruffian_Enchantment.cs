@@ -32,7 +32,6 @@ namespace SoulsBetterDLC.Items.Accessories
             recipe.AddIngredient(ModContent.ItemType<SnowRuffianGreaves>(), 1);
             recipe.AddIngredient(ModContent.ItemType<IcicleStaff>(), 1);
             recipe.AddIngredient(ModContent.ItemType<FrostBlossomStaff>(), 1);
-            recipe.AddIngredient(ItemID.FrostDaggerfish, 200);
             recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }
