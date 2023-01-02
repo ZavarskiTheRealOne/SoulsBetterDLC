@@ -11,8 +11,8 @@
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CalamityMod">
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\TML-Patcher\Extracted\CalamityMod\CalamityMod.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\_decompiledcode\Calamity\CalamityMod.csproj" />
+    <ProjectReference Include="..\..\_decompiledcode\FargowiltasSouls\FargowiltasSouls.csproj" />
+    <ProjectReference Include="..\..\_decompiledcode\Thorium\ThoriumMod.csproj" />
   </ItemGroup>
 </Project>

@@ -2,12 +2,12 @@
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using ThoriumMod;
 using FargowiltasSouls.Items.Accessories.Essences;
 using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 {
+    [JITWhenModsEnabled("ThoriumMod")]
     public class HealerEssence : BaseEssence
     {
         protected override Color nameColor => new Color(255, 0, 255);
@@ -22,8 +22,14 @@ namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(ThoriumDamageBase<HealerDamage>.Instance) += 0.18f;
-            if (player.TryGetModPlayer(out ThoriumPlayer modPlayer)) modPlayer.healBonus += 2;
+            if (!SoulsBetterDLC.thoriumLoaded) return;
+            UpdateAccessoryCorrectly(player);
+        }
+
+        internal void UpdateAccessoryCorrectly(Player player)
+        {
+            player.GetDamage(ThoriumMod.ThoriumDamageBase<ThoriumMod.HealerDamage>.Instance) += 0.18f;
+            if (player.TryGetModPlayer(out ThoriumMod.ThoriumPlayer modPlayer)) modPlayer.healBonus += 2;
         }
 
         public override void AddRecipes()
