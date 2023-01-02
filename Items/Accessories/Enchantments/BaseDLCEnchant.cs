@@ -27,18 +27,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
-        public override void SafeModifyTooltips(List<TooltipLine> tooltips)
-        {
-            base.SafeModifyTooltips(tooltips);
-
-            if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
-                itemNameLine.OverrideColor = nameColor;
-			
-            TooltipLine line = new TooltipLine(Mod, "disabled", $"Doesn't do anything without {ModName}");
-            line.OverrideColor = Color.Red;
-            if (!ModLoader.HasMod(ModName)) tooltips.Add(line);
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

@@ -19,15 +19,7 @@ namespace SoulsBetterDLC.Items.Accessories.Essences
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
-        public override void SafeModifyTooltips(List<TooltipLine> tooltips)
-        {
-            base.SafeModifyTooltips(tooltips);
-
-            if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
-                itemNameLine.OverrideColor = nameColor;
-        }
-
+		
         public override void SetDefaults()
         {
             base.SetDefaults();

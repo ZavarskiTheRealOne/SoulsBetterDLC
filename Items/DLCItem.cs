@@ -12,16 +12,7 @@ namespace SoulsBetterDLC.Items
 	public abstract class CrossModItem : SoulsItem
 	{
         public abstract string ModName { get; }
-		public override string Texture 
-		{
-			get 
-			{
-				// Automatically gives an item the placeholder texture if it doesnt have one
-				if (ModContent.FileExists((base.GetType().Namespace + "." + this.Name).Replace('.', '/')))
-					return (base.GetType().Namespace + "." + this.Name).Replace('.', '/');
-				return "SoulsBetterDLC/Items/Placeholder";
-			}
-		}
+		public override string Texture => ModContent.HasAsset(base.Texture) ? base.Texture : "SoulsBetterDLC/Items/Placeholder";
 		
         public override void AddRecipes()
         {
