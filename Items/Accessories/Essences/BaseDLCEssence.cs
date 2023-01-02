@@ -30,6 +30,14 @@ namespace SoulsBetterDLC.Items.Accessories.Essences
             Item.value = 150000;
             Item.rare = ItemRarityID.LightRed;
         }
+		
+		public override void SafeModifyTooltips(List<TooltipLine> tooltips)
+        {
+            base.SafeModifyTooltips(tooltips);
+
+            if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
+                itemNameLine.OverrideColor = nameColor;
+        }
 
         public override Color? GetAlpha(Color lightColor) => Color.White;
 		#endregion

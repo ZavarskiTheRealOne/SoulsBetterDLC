@@ -35,6 +35,15 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
             Item.height = 20;
             Item.accessory = true;
         }
+		
+		public override void SafeModifyTooltips(List<TooltipLine> tooltips)
+        {
+            base.SafeModifyTooltips(tooltips);
+
+            if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
+                itemNameLine.OverrideColor = nameColor;
+        }
+		
 		#endregion
     }
 }
