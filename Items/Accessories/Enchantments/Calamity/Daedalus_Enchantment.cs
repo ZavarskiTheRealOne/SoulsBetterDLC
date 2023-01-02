@@ -24,13 +24,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
         }
-        //public override void AddRecipes()
-        //{
-        //    if (!SoulsBetterDLC.calamityLoaded) return;
-        //    HideRecipes();
-        //}
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

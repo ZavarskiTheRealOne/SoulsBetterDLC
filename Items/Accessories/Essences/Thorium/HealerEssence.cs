@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 {
-    [JITWhenModsEnabled("ThoriumMod")]
-    public class HealerEssence : BaseEssence
+    public class HealerEssence : BaseDLCEssence
     {
         protected override Color nameColor => new Color(255, 0, 255);
+		public override string ModName => "ThoriumMod";
 
         public override void SetStaticDefaults()
         {
@@ -20,19 +20,13 @@ namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
             Tooltip.SetDefault("Something about healers here\nIncreases radiant damage by 18% and bonus healing by 2");
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
-            if (!SoulsBetterDLC.thoriumLoaded) return;
-            UpdateAccessoryCorrectly(player);
-        }
-
-        internal void UpdateAccessoryCorrectly(Player player)
+        internal void SafeUpdateAccessory(Player player, bool hideVisual)
         {
             player.GetDamage(ThoriumMod.ThoriumDamageBase<ThoriumMod.HealerDamage>.Instance) += 0.18f;
             if (player.TryGetModPlayer(out ThoriumMod.ThoriumPlayer modPlayer)) modPlayer.healBonus += 2;
         }
 
-        public override void AddRecipes()
+        public override void SafeAddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ItemID.HallowedBar, 5)

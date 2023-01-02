@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
@@ -11,19 +6,17 @@ using System.Collections.Generic;
 using FargowiltasSouls.Utilities;
 using Terraria.ID;
 
-namespace SoulsBetterDLC.Items.Accessories.Enchantments
+namespace SoulsBetterDLC.Items.Accessories.Essences
 {
-    public abstract class BaseDLCEnchant : CrossModItem
-    {
-		#region BaseEnchant stuff
+	public abstract class BaseDLCEssence : CrossModItem
+	{	
+		#region BaseEssence stuff
 		protected abstract Color nameColor { get; }
-        public abstract string wizardEffect { get; }
 
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
 
-            ItemID.Sets.ItemNoGravity[Type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -33,10 +26,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
 
             if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
                 itemNameLine.OverrideColor = nameColor;
-			
-            TooltipLine line = new TooltipLine(Mod, "disabled", $"Doesn't do anything without {ModName}");
-            line.OverrideColor = Color.Red;
-            if (!ModLoader.HasMod(ModName)) tooltips.Add(line);
         }
 
         public override void SetDefaults()
@@ -46,7 +35,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
             Item.width = 20;
             Item.height = 20;
             Item.accessory = true;
+            Item.value = 150000;
+            Item.rare = ItemRarityID.LightRed;
         }
+
+        public override Color? GetAlpha(Color lightColor) => Color.White;
 		#endregion
-    }
+	}
 }

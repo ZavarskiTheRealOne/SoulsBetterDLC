@@ -7,14 +7,6 @@ namespace SoulsBetterDLC
 {
     public class SoulsBetterDLC : Mod
     {
-        internal static bool thoriumLoaded = false;
-        internal static bool calamityLoaded = false;
-        public override void Load()
-        {
-            thoriumLoaded = ModLoader.HasMod("ThoriumMod");
-            calamityLoaded = ModLoader.HasMod("CalamityMod");
-            base.Load();
-        }
         /*public class Keybinds: ModSystem
         {
             internal static ModKeybind UmbraVamps;
@@ -30,16 +22,13 @@ namespace SoulsBetterDLC
             }*/
     }
 
+    // TODO: figure out which JIT exceptions are nessisary
     [JITWhenModsEnabled("CalamityMod")]
     public class RecipeSystem : ModSystem
     {
         public override void AddRecipes()
         {
-            // Calamity Recipes
-            if (!ModLoader.HasMod("CalamityMod"))
-            {
-                return;
-            }
+            if (!ModLoader.HasMod("CalamityMod")) return;
 
             AddRecipesCorrectly();
         }
