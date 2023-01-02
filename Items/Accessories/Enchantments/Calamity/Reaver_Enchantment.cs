@@ -1,13 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System.Collections.Generic;
-using CalamityMod.Items.Armor.Reaver;
-using CalamityMod.Items.Weapons.Magic;
-using CalamityMod.Items.Tools;
-using CalamityMod.Items.Accessories;
 using Microsoft.Xna.Framework;
-using CalamityMod.Items.Accessories.Wings;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -61,10 +55,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             //recipe
             Recipe recipe = CreateRecipe();
             recipe.AddRecipeGroup("SoulsBetterDLC:AnyReaverHelms", 1);
-            recipe.AddIngredient(ModContent.ItemType<ReaverScaleMail>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<ReaverCuisses>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<NecklaceofVexation>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<AureateBooster>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverScaleMail>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverCuisses>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.NecklaceofVexation>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.Wings.AureateBooster>(), 1);
             recipe.AddIngredient(ItemID.ChlorophytePickaxe, 1);
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
