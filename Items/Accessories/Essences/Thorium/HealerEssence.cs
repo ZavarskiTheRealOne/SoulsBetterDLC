@@ -4,6 +4,11 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using FargowiltasSouls.Items.Accessories.Essences;
 using Microsoft.Xna.Framework;
+using ThoriumMod;
+using ThoriumMod.Items.HealerItems;
+using ThoriumMod.Items.Scouter;
+using ThoriumMod.Items.DD;
+using ThoriumMod.Items.Donate;
 
 namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 {
@@ -22,13 +27,22 @@ namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 
         internal void SafeUpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(ThoriumMod.ThoriumDamageBase<ThoriumMod.HealerDamage>.Instance) += 0.18f;
-            if (player.TryGetModPlayer(out ThoriumMod.ThoriumPlayer modPlayer)) modPlayer.healBonus += 2;
+            player.GetDamage(ThoriumDamageBase<HealerDamage>.Instance) += 0.18f;
+            if (player.TryGetModPlayer(out ThoriumPlayer modPlayer)) modPlayer.healBonus += 2;
         }
 
         public override void SafeAddRecipes()
         {
             CreateRecipe()
+				.AddIngredient(ModContent.ItemType<LeechBolt>())
+				.AddIngredient(ModContent.ItemType<PoisonPrickler>())
+				.AddIngredient(ModContent.ItemType<TheStalker>())
+				.AddIngredient(ModContent.ItemType<EaterOfPain>())
+				.AddIngredient(ModContent.ItemType<DarkGate>())
+				.AddIngredient(ModContent.ItemType<BloomGuard>())
+				.AddIngredient(ModContent.ItemType<DarkMageStaff>())
+				.AddIngredient(ModContent.ItemType<StarRod>())
+				.AddIngredient(ModContent.ItemType<ClericEmblem>())
                 .AddIngredient(ItemID.HallowedBar, 5)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
