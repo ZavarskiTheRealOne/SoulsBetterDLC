@@ -10,8 +10,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     {
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => Color.Blue;
-
+        protected override Color nameColor => new Color (105, 122, 116);
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Snow Ruffian Enchantment");

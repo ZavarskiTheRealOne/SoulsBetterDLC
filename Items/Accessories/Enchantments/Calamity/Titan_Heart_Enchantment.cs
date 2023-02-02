@@ -9,7 +9,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     [JITWhenModsEnabled("CalamityMod")]
     public class Titan_Heart_Enchantment : BaseDLCEnchant
     {
-        protected override Color nameColor => Color.Blue;
+        protected override Color nameColor => new Color(118, 109, 139);
         public override string wizardEffect => "";
         public override string ModName => "CalamityMod";
         public override void SetStaticDefaults()
@@ -34,6 +34,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.TitanHeart.TitanHeartBoots>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Magic.GloriousEnd>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Magic.AlulaAustralis>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<FargowiltasSouls.Items.Accessories.Enchantments.PearlwoodEnchant>(), 1);
             recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }

@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     {
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new(220, 190, 110);
+        protected override Color nameColor => new(69, 117, 164);
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Daedalus Enchantment");
