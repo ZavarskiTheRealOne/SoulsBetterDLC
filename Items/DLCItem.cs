@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace SoulsBetterDLC.Items 
 {
 	/// <summary>
-	///	Class that takes care of WeakReferences
+	///	Class that takes care of WeakReferences for recipes and Accessory effects.
 	/// </summary>
 	public abstract class CrossModItem : SoulsItem
 	{
@@ -25,9 +25,6 @@ namespace SoulsBetterDLC.Items
         /// </summary>
         public abstract void SafeAddRecipes();
 		
-		/// <summary>
-		/// Don't reference other mods here
-		/// </summary>
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			if (!ModLoader.HasMod(ModName)) return;
