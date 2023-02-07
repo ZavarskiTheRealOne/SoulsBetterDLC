@@ -8,7 +8,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     [JITWhenModsEnabled("CalamityMod")]
     public class Reaver_Enchantment : BaseDLCEnchant
     {
-        protected override Color nameColor => new Color(53, 164, 66);
+        protected override Color nameColor => new Color(43, 136, 53);
         public override string wizardEffect => "";
         public override string ModName => "CalamityMod";
 

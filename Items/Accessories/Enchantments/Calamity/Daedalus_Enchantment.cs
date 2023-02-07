@@ -1,16 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [AutoloadEquip(EquipType.Wings)]
     public class Daedalus_Enchantment : Enchantments.BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new(220, 190, 110);
+        protected override Color nameColor => new(69, 117, 164);
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Daedalus Enchantment");
@@ -23,9 +25,24 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.height = 34;
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
+            ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(135, 6.87f);
         }
 
-        public override void SafeAddRecipes()
+        public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
+        {
+            ascentWhenFalling = 0.5f;
+            ascentWhenRising = 0.1f;
+            maxCanAscendMultiplier = 0.5f;
+            maxAscentMultiplier = 1.5f;
+            constantAscend = 0.1f;
+        }
+        //public override void AddRecipes()
+        //{
+        //    if (!SoulsBetterDLC.calamityLoaded) return;
+        //    HideRecipes();
+        //}
+
+        public override void AddRecipesCorrectly()
         {
             //recipe
             Recipe recipe = CreateRecipe();

@@ -6,12 +6,13 @@ using Terraria.ModLoader;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [AutoloadEquip(EquipType.Wings)]
     public class Ruffian_Enchantment : BaseDLCEnchant
     {
+        private bool shouldBoost = true;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => Color.Blue;
-
+        protected override Color nameColor => new Color (105, 122, 116);
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Snow Ruffian Enchantment");
@@ -25,8 +26,41 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
         }
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            if (player.controlJump)
+            {
+                player.noFallDmg = true;
+                player.UpdateJumpHeight();
+                Main.NewText("cond1");
+                if (shouldBoost && !player.mount.Active)
+                {
+                    player.velocity.X *= 1.1f;
+                    shouldBoost = false;
+                    Main.NewText("cond2");
+                }
+            }
+            else if (!shouldBoost && player.velocity.Y == 0f)
+            {
+                shouldBoost = true;
+                Main.NewText("cond3");
+            }
+        }
+        public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
+        {
+            ascentWhenFalling = 0.5f;
+            ascentWhenRising = 0f;
+            maxCanAscendMultiplier = 0f;
+            maxAscentMultiplier = 0f;
+            constantAscend = 0f;
+        }
 
-        public override void SafeAddRecipes()
+        public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
+        {
+            speed = 2f;
+            acceleration *= 1.25f;
+        }
+        public override void AddRecipesCorrectly()
         {
             //recipe
             Recipe recipe = CreateRecipe();

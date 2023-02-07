@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public int peaceTimer;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new Color(129, 168, 109);
+        protected override Color nameColor => new Color(103, 137, 100);
 
         public override void SetStaticDefaults()
         {
@@ -33,7 +33,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.statLife <= player.statLifeMax / 2)
+            if (player.statLife <= player.statLifeMax2 * 0.3f)
                 player.AddBuff(ModContent.BuffType<WulfrumCoreBuff>(), 2);
         }
 
