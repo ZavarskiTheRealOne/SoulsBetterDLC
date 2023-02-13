@@ -42,7 +42,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         //    HideRecipes();
         //}
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

@@ -50,7 +50,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
 
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

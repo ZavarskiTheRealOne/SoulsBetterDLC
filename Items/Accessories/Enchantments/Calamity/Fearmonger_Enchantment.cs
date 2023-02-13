@@ -21,38 +21,24 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void SetDefaults()
         {
-            //size, state and rarity
-            Item.width = 30;
-            Item.height = 34;
-            Item.accessory = true;
+			base.SetDefaults();
+			
             Item.rare = ItemRarityID.Red;
         }
-        // This shouldnt be nessisary if it inherits from BaseEnchant
-        //public override void ModifyTooltips(List<TooltipLine> list)
-        //{
-        //    //changes name's color
-        //    foreach (TooltipLine tooltipLine in list)
-        //    {
-        //        if (tooltipLine.Mod == "Terraria" && tooltipLine.Name == "ItemName")
-        //        {
-        //            tooltipLine.OverrideColor = new Color(52, 46, 77);
-        //        }
-        //    }
-        //}
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             if (!ModLoader.HasMod("CalamityMod")) return;
-			UpdateAccessoryCorrectly(player, hideVisual);
+			FearmongerEffect(player, Item);
         }
 		
-		public void UpdateAccessoryCorrectly(Player player, bool hideVisual)
+		public void FearmongerEffect(Player player, Item item)
 		{
             if (player.HeldItem.DamageType != DamageClass.Summon && player.HeldItem.DamageType != DamageClass.Default && player.HeldItem.DamageType != ModContent.GetInstance<CalamityMod.AverageDamageClass>() && player.HeldItem.active)
                 player.GetDamage(DamageClass.Summon) += 0.25f;
 		}
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
 			//recipe
 			Recipe recipe = CreateRecipe();

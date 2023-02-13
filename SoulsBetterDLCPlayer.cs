@@ -1,7 +1,8 @@
 ﻿using SoulsBetterDLC.Buffs;
-using Steamworks;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.DataStructures;
+using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC
 {
@@ -9,6 +10,10 @@ namespace SoulsBetterDLC
     {
         public bool UmbraCrazyRegen;
         public bool BFCrazierRegen;
+        public bool shouldRuffianBoost;
+        // thorium
+        public bool EbonEnch;
+        public bool ClericEnch;
 
         public override void ResetEffects()
         {
@@ -54,6 +59,12 @@ namespace SoulsBetterDLC
                     Player.Heal(damage / 2);
                 }
             }
+        }
+
+        // thorium 
+        public void EbonBlast(int damage)
+        {
+            Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(-16 * Player.direction, 0), ModContent.ProjectileType<Projectiles.EbonBlast>(), damage, 5, Player.whoAmI);
         }
     }
 }

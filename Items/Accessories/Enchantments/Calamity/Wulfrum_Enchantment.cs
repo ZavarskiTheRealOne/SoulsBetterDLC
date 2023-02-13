@@ -30,17 +30,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
         }
-        //public override void ModifyTooltips(List<TooltipLine> list)
-        //{
-        //    //changes name's color
-        //    foreach (TooltipLine tooltipLine in list)
-        //    {
-        //        if (tooltipLine.Mod == "Terraria" && tooltipLine.Name == "ItemName")
-        //        {
-        //            tooltipLine.OverrideColor = new Color(129, 168, 109);
-        //        }
-        //    }
-        //}
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -48,20 +37,17 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
                 player.AddBuff(ModContent.BuffType<WulfrumCoreBuff>(), 2);
         }
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
-            if (SoulsBetterDLC.calamityLoaded)
-            {
-                //recipe
-                Recipe recipe = CreateRecipe();
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumHat>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumJacket>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumOveralls>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Melee.WulfrumScrewdriver>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.TrinketofChi>(), 1);
-                recipe.AddTile(TileID.DemonAltar);
-                recipe.Register();
-            }
+			//recipe
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumHat>(), 1);
+			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumJacket>(), 1);
+			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumOveralls>(), 1);
+			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Melee.WulfrumScrewdriver>(), 1);
+			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.TrinketofChi>(), 1);
+			recipe.AddTile(TileID.DemonAltar);
+			recipe.Register();
         }
     }
 }

@@ -6,7 +6,6 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    // i think i may have broken this sorry
     [JITWhenModsEnabled("CalamityMod")]
     public class CorvidRaven : ModProjectile
     {
@@ -20,12 +19,13 @@ namespace SoulsBetterDLC.Projectiles
         public override void SetDefaults()
         {
             if (!ModLoader.HasMod("CalamityMod")) return;
-            SetDefaultsCorrectly();
+            SafeSetDefaults();
         }
-        internal void SetDefaultsCorrectly()
+		
+        internal void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ModContent.ProjectileType<CalamityMod.Projectiles.Summon.PowerfulRaven>());
-            AIType = 317;
+            AIType = -1; //317;
         }
     }
 }
