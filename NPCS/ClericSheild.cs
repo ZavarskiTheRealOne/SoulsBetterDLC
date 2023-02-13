@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.DataStructures;
 
 namespace SoulsBetterDLC.NPCS
 {
@@ -19,8 +20,19 @@ namespace SoulsBetterDLC.NPCS
             NPC.lavaImmune = true;
             NPC.aiStyle = -1;
 		}
-		
-		public override void AI()
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            base.OnSpawn(source);
+			NPC.lifeMax = 50;
+			if (Main.expertMode) NPC.lifeMax += 50;
+			if (Main.masterMode) NPC.defDefense = Main.player[(int)NPC.ai[0]].statDefense / 2;
+			if (FargowiltasSouls.FargoSoulsWorld.EternityMode) NPC.lifeRegen += (NPC.lifeRegen / 2);
+
+			NPC.life = NPC.lifeMax;
+		}
+
+        public override void AI()
 		{
 			Player player = Main.player[(int)NPC.ai[0]];
 			Vector2 position = player.Center + new Vector2(24 * player.Directions.X, 0);
@@ -31,7 +43,7 @@ namespace SoulsBetterDLC.NPCS
 			{
 				NPC.Center = position;
 			}
-			else NPC.velocity = distance / 8f;
+			else NPC.velocity = distance / 4f;
 		}
 		
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -42,7 +54,7 @@ namespace SoulsBetterDLC.NPCS
             Vector2 Pos = NPC.position - screenPos;
 			SpriteEffects Effect = Main.player[(int)NPC.ai[0]].Directions.X == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-            spriteBatch.Draw(texture, Pos + zero, null, drawColor, 0f, default, 1f, Effect, 0f);
+            spriteBatch.Draw(texture, Pos, null, drawColor, 0f, default, 1f, Effect, 0f);
 
             return false; // Stop vanilla draw code from running
 		}
@@ -50,9 +62,22 @@ namespace SoulsBetterDLC.NPCS
         public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
         {
 			SoulsBetterDLCPlayer modplayer = Main.player[(int)NPC.ai[0]].GetModPlayer<SoulsBetterDLCPlayer>();
-			if (modplayer.EbonEnch && damage > 0)
+
+			int dmg;
+			if (damage < NPC.life)
             {
-				modplayer.EbonBlast(damage);
+				dmg = damage;
+				projectile.Kill();
+            }
+			else
+            {
+				dmg = NPC.life;
+				projectile.damage -= NPC.life;
+            }
+
+			if (modplayer.EbonEnch && dmg > 0)
+            {
+				modplayer.EbonBlast(dmg);
             }
 		}
     }

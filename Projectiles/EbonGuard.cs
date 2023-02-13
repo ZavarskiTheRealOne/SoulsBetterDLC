@@ -20,16 +20,16 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void AI()
         {
-            Vector2 position = Main.player[Projectile.owner].Center + new Vector2(-24 * Main.player[Projectile.owner].Directions.X, 0);
+            Vector2 position = Main.player[Projectile.owner].Center + new Vector2(-24 * Main.player[Projectile.owner].Directions.X, -16);
 
-            Projectile.direction = Main.player[Projectile.owner].direction;
+            Projectile.spriteDirection = Main.player[Projectile.owner].direction;
             Vector2 distance = position - Projectile.Center;
             float Length = distance.Length();
             if (Length > 1000f)
             {
                 Projectile.Center = position;
             }
-            else Projectile.velocity = distance / 8f;
+            else Projectile.velocity = distance / 4f;
         }
     }
 

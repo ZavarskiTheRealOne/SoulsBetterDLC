@@ -64,7 +64,7 @@ namespace SoulsBetterDLC
         // thorium 
         public void EbonBlast(int damage)
         {
-            Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(16 * Player.direction, 0), ModContent.ProjectileType<Projectiles.EbonBlast>(), damage, 5, Player.whoAmI);
+            Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(-16 * Player.direction, 0), ModContent.ProjectileType<Projectiles.EbonBlast>(), damage, 5, Player.whoAmI);
         }
     }
 }
