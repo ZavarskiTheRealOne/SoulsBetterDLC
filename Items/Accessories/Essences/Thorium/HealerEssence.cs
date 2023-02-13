@@ -12,6 +12,7 @@ using ThoriumMod.Items.Donate;
 
 namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 {
+    [JITWhenModsEnabled("ThoriumMod")]
     public class HealerEssence : BaseDLCEssence
     {
         protected override Color nameColor => new Color(255, 0, 255);
@@ -25,7 +26,7 @@ namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
             Tooltip.SetDefault("'This is only the beginning...'\nIncreases radiant damage by 18% and bonus healing by 2");
         }
 
-        internal void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void SafeUpdateAccessory(Player player, bool hideVisual)
         {
             player.GetDamage(ThoriumDamageBase<HealerDamage>.Instance) += 0.18f;
             if (player.TryGetModPlayer(out ThoriumPlayer modPlayer)) modPlayer.healBonus += 2;

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
+	[JITWhenModsEnabled("ThoriumMod")]
 	public class NoviceClericEnchant : BaseDLCEnchant
 	{
 		public override string ModName => "ThoriumMod";
@@ -38,11 +39,13 @@ $@"Creates a weak sheild in front of you that absorbs 50 damage before breaking 
 		
 		public override void SafeUpdateAccessory(Player player, bool hideVisual) 
 		{
-            if (player.whoAmI != Main.myPlayer)
-                return;
+            if (player.whoAmI != Main.myPlayer) return;
+
+			player.GetModPlayer<SoulsBetterDLCPlayer>().ClericEnch = true;
 			
 			ThoriumPlayer thoriumPlayer = player.GetModPlayer<ThoriumPlayer>();
 			
+			// cooldown is twice as fast out of combat
 			if (thoriumPlayer.OutOfCombat) SheildCD--;
 			SheildCD--;
 			

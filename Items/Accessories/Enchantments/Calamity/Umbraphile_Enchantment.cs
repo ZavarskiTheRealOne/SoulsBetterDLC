@@ -31,21 +31,18 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             player.GetModPlayer<SoulsBetterDLCPlayer>().UmbraCrazyRegen = true;
         }
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
-            if (SoulsBetterDLC.calamityLoaded)
-            {
-                //recipe
-                Recipe recipe = CreateRecipe();
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileHood>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileRegalia>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileBoots>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<FargowiltasSouls.Items.Accessories.Enchantments.PalladiumEnchant>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.VampiricTalisman>(), 1);
-                recipe.AddIngredient(ItemID.SanguineStaff, 1);
-                recipe.AddTile(TileID.CrystalBall);
-                recipe.Register();
-            }
+            //recipe
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileHood>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileRegalia>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileBoots>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<FargowiltasSouls.Items.Accessories.Enchantments.PalladiumEnchant>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.VampiricTalisman>(), 1);
+            recipe.AddIngredient(ItemID.SanguineStaff, 1);
+            recipe.AddTile(TileID.CrystalBall);
+            recipe.Register();
         }
     }
 }

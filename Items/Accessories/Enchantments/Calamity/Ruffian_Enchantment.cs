@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+
+// just use shipman's one it seems like it works better
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -25,30 +28,31 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.height = 34;
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
+            ArmorIDs.Wing.Sets.Stats[base.Item.wingSlot] = new WingStats(0, 1f, 1f);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             if (player.controlJump)
             {
+                Main.NewText("flight");
                 player.noFallDmg = true;
                 player.UpdateJumpHeight();
-                Main.NewText("cond1");
                 if (shouldBoost && !player.mount.Active)
                 {
                     player.velocity.X *= 1.1f;
                     shouldBoost = false;
-                    Main.NewText("cond2");
+                    Main.NewText("Takeoff");
                 }
             }
-            else if (!shouldBoost && player.velocity.Y == 0f)
+            if (!shouldBoost && player.velocity.Y == 0)
             {
                 shouldBoost = true;
-                Main.NewText("cond3");
+                Main.NewText("Land");
             }
         }
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
-            ascentWhenFalling = 0.5f;
+            ascentWhenFalling = 0.1f;
             ascentWhenRising = 0f;
             maxCanAscendMultiplier = 0f;
             maxAscentMultiplier = 0f;
@@ -60,7 +64,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             speed = 2f;
             acceleration *= 1.25f;
         }
-        public override void AddRecipesCorrectly()
+
+        public override void SafeAddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

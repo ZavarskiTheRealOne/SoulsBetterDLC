@@ -31,21 +31,18 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             player.GetModPlayer<SoulsBetterDLCPlayer>().BFCrazierRegen = true;
         }
 
-        public override void AddRecipesCorrectly()
+        public override void SafeAddRecipes()
         {
-            if (SoulsBetterDLC.calamityLoaded)
-            {
-                //recipe
-                Recipe recipe = CreateRecipe();
-                recipe.AddRecipeGroup("SoulsBetterDLC:AnyBloodflareHelms", 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareBodyArmor>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareCuisses>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<Umbraphile_Enchantment>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.BloodBoiler>(), 1);
-                recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.DragonbloodDisgorger>(), 1);
-                recipe.AddTile(TileID.LunarCraftingStation);
-                recipe.Register();
-            }
+            //recipe
+            Recipe recipe = CreateRecipe();
+            recipe.AddRecipeGroup("SoulsBetterDLC:AnyBloodflareHelms", 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareBodyArmor>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareCuisses>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<Umbraphile_Enchantment>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.BloodBoiler>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.DragonbloodDisgorger>(), 1);
+            recipe.AddTile(TileID.LunarCraftingStation);
+            recipe.Register();
         }
     }
 }

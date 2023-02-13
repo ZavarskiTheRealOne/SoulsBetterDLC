@@ -8,6 +8,7 @@ using ThoriumMod;
 
 namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
 {
+    [JITWhenModsEnabled("ThoriumMod")]
     public class ThrowerEssence : BaseDLCEssence
     {
         protected override Color nameColor => new Color(127, 0, 255);
@@ -21,7 +22,7 @@ namespace SoulsBetterDLC.Items.Accessories.Essences.Thorium
             Tooltip.SetDefault("'This is only the beginning...'");
         }
 
-        internal void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void SafeUpdateAccessory(Player player, bool hideVisual)
         {
 			
         }
