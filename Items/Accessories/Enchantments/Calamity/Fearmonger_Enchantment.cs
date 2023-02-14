@@ -21,19 +21,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void SetDefaults()
         {
-			base.SetDefaults();
-			
+            base.SetDefaults();
             Item.rare = ItemRarityID.Red;
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
+        public void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (!ModLoader.HasMod("CalamityMod")) return;
-			FearmongerEffect(player, Item);
-        }
-		
-		public void FearmongerEffect(Player player, Item item)
-		{
             if (player.HeldItem.DamageType != DamageClass.Summon && player.HeldItem.DamageType != DamageClass.Default && player.HeldItem.DamageType != ModContent.GetInstance<CalamityMod.AverageDamageClass>() && player.HeldItem.active)
                 player.GetDamage(DamageClass.Summon) += 0.25f;
 		}
