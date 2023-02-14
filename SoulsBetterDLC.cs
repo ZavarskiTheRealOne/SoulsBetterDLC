@@ -22,13 +22,16 @@ namespace SoulsBetterDLC
             }*/
     }
 
-    // TODO: figure out which JIT exceptions are nessisary
     [JITWhenModsEnabled("CalamityMod")]
     public class RecipeSystem : ModSystem
     {
         public override void AddRecipes()
         {
-            if (!ModLoader.HasMod("CalamityMod")) return;
+            // Calamity Recipes
+            if (!ModLoader.HasMod("CalamityMod"))
+            {
+                return;
+            }
 
             AddRecipesCorrectly();
         }

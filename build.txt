@@ -1,5 +1,5 @@
 displayName = Zavarski's Better DLC
-author = Zavarski
-version = 0.2
+author = Zavarski and contributors
+version = 0.22
 modReferences = FargowiltasSouls@1.4.1.2, Fargowiltas@2.8.7
 weakReferences = ThoriumMod@1.7.0.1, CalamityMod@2.0.1.5

@@ -2,7 +2,6 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using SoulsBetterDLC.Buffs;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 
@@ -24,11 +23,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void SetDefaults()
         {
-            //size, state and rarity
-            Item.width = 30;
-            Item.height = 34;
-            Item.accessory = true;
-            Item.rare = ItemRarityID.Blue;
+            base.SetDefaults();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -39,15 +34,15 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void SafeAddRecipes()
         {
-			//recipe
-			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumHat>(), 1);
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumJacket>(), 1);
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumOveralls>(), 1);
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Melee.WulfrumScrewdriver>(), 1);
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.TrinketofChi>(), 1);
-			recipe.AddTile(TileID.DemonAltar);
-			recipe.Register();
+            //recipe
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumHat>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumJacket>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Wulfrum.WulfrumOveralls>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.WulfrumController>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.TrinketofChi>(), 1);
+            recipe.AddTile(TileID.DemonAltar);
+            recipe.Register();
         }
     }
 }

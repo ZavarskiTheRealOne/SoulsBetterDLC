@@ -1,10 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CalamityMod.CalPlayer;
+using CalamityMod.Projectiles.Rogue;
+using CalamityMod;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-
-// just use shipman's one it seems like it works better
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -19,43 +20,50 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Snow Ruffian Enchantment");
-            Tooltip.SetDefault("It does absolutely nothing for now.");
+            Tooltip.SetDefault("Grants a glide effect.\nWhile flying or gliding, damaging icicles fall down from your feet.\nIcicles deal 24 true damage and cannot be affected by boosts.\n*and goes, sans, look, it's snowing!");
         }
         public override void SetDefaults()
         {
-            //size, state and rarity
-            Item.width = 30;
-            Item.height = 34;
-            Item.accessory = true;
+            base.SetDefaults();
             Item.rare = ItemRarityID.Blue;
-            ArmorIDs.Wing.Sets.Stats[base.Item.wingSlot] = new WingStats(0, 1f, 1f);
+            ArmorIDs.Wing.Sets.Stats[base.Item.wingSlot] = new WingStats(0, 2f, 1.25f);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            if (player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown > 0)
+            {
+                player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown--;
+            }
             if (player.controlJump)
             {
-                Main.NewText("flight");
                 player.noFallDmg = true;
                 player.UpdateJumpHeight();
                 if (shouldBoost && !player.mount.Active)
                 {
                     player.velocity.X *= 1.1f;
                     shouldBoost = false;
-                    Main.NewText("Takeoff");
                 }
             }
-            if (!shouldBoost && player.velocity.Y == 0)
+            else if (!shouldBoost && player.velocity.Y == 0f)
             {
                 shouldBoost = true;
-                Main.NewText("Land");
+            }
+            if (player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown <= 0 && player.controlJump && !player.canJumpAgain_Cloud && player.jump == 0 && player.velocity.Y != 0f && !player.mount.Active && !player.mount.Cart)
+            {
+                int num = Projectile.NewProjectile(player.GetSource_Accessory(Item), Damage: 24, X: player.Center.X, Y: player.Center.Y, SpeedX: player.velocity.X * 0f, SpeedY: 2f, Type: ModContent.ProjectileType<FrostShardFriendly>(), KnockBack: 3f, Owner: player.whoAmI, ai0: 1f);
+                if (num.WithinBounds(1000))
+                {
+                    Main.projectile[num].DamageType = DamageClass.Generic;
+                    Main.projectile[num].frame = Main.rand.Next(5);
+                }
+                player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown = 20;
             }
         }
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
-            ascentWhenFalling = 0.1f;
+            ascentWhenFalling = 0.5f;
             ascentWhenRising = 0f;
             maxCanAscendMultiplier = 0f;
-            maxAscentMultiplier = 0f;
             constantAscend = 0f;
         }
 
@@ -64,7 +72,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             speed = 2f;
             acceleration *= 1.25f;
         }
-
         public override void SafeAddRecipes()
         {
             //recipe

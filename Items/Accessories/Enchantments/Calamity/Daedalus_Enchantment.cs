@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CalamityMod.Projectiles.Rogue;
+using CalamityMod;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -16,14 +18,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Daedalus Enchantment");
-            Tooltip.SetDefault("It does absolutely nothing for now.");
+            Tooltip.SetDefault("Grands Daedalus Wings.\nWhile flying or gliding, damaging icicles fall down from your feet rapidly.\nIcicles deal 72 true damage and cannot be affected by boosts.\n*wow, it looks like a blizzard in here.");
         }
         public override void SetDefaults()
         {
-            //size, state and rarity
-            Item.width = 30;
-            Item.height = 34;
-            Item.accessory = true;
+            base.SetDefaults();
             Item.rare = ItemRarityID.Blue;
             ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(135, 6.87f);
         }
@@ -36,11 +35,23 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             maxAscentMultiplier = 1.5f;
             constantAscend = 0.1f;
         }
-        //public override void AddRecipes()
-        //{
-        //    if (!SoulsBetterDLC.calamityLoaded) return;
-        //    HideRecipes();
-        //}
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            if (player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown > 0)
+            {
+                player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown--;
+            }
+            if (player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown <= 0 && player.controlJump && !player.canJumpAgain_Cloud && player.jump == 0 && player.velocity.Y != 0f && !player.mount.Active && !player.mount.Cart)
+            {
+                int num = Projectile.NewProjectile(player.GetSource_Accessory(Item), Damage: 72, X: player.Center.X, Y: player.Center.Y, SpeedX: player.velocity.X * 0f, SpeedY: 2f, Type: ModContent.ProjectileType<FrostShardFriendly>(), KnockBack: 3f, Owner: player.whoAmI, ai0: 1f);
+                if (num.WithinBounds(1000))
+                {
+                    Main.projectile[num].DamageType = DamageClass.Generic;
+                    Main.projectile[num].frame = Main.rand.Next(5);
+                }
+                player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown = 10;
+            }
+        }
 
         public override void SafeAddRecipes()
         {

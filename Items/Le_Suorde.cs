@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Items
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("L'epee"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-			Tooltip.SetDefault("A bread sword from France.\nFor some reason, hitting enemies fulfills your hunger.");
+			Tooltip.SetDefault("A bread sword from France.\nFor some reason, hitting enemies with it fulfills your hunger.");
 		}
 
 		public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
