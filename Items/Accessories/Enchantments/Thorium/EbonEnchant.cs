@@ -19,9 +19,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Ebon Enchantment");
-			Tooltip.SetDefault(
-$@"cringe"
-			);
+			Tooltip.SetDefault($@"cringe");
 		}
 
 		public override void SetDefaults()
