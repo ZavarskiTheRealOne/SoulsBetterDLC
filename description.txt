@@ -1,8 +1,9 @@
 Zavarski's Better DLC is a descendant of Fargo's Souls DLC mod. This version tries to find a new look on old enchantments and make them unique, similar to vanilla enchantments.
 
 Changelogs:
-v0.0.22 - this officially marks the Flying High Update, where Daedalus, Snow Ruffian and Reaver enchantment were made working. Final version before the first public release.
-v0.0.21 - this marks the Bloodthirst Update that was called like that just because it added Umbraphile and Bloodflare enchantments. It added much more to the mod, however.
+v0.1 - the very first public release. Not available on Steam Workshop yet
+v0.0.2.2 - this officially marks the Flying High Update, where Daedalus, Snow Ruffian and Reaver enchantment were made working. Final version before the first public release.
+v0.0.2.1 - this marks the Bloodthirst Update that was called like that just because it added Umbraphile and Bloodflare enchantments. It added much more to the mod, however.
 v0.0.2 - whole mod got restructured lord help me
-v0.0.11 - making enchantments. It was quite a challenge for me early on
+v0.0.1.1 - making enchantments. It was quite a challenge for me early on
 v0.0.1 - mod created. Hello!
