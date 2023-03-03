@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "49C1lMbVH39Iq4mZuclcdsAO3q800mwNGrsm/iu2a5u1mEXZ/3ysRRqIAg3nVSN1Xi3R+yCvMj8KW3YoIZ5Zlw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\irkne\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SoulsBetterDLC\\SoulsBetterDLC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\irkne\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}

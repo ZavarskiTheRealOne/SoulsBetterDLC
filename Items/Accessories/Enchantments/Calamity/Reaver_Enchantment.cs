@@ -8,7 +8,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     [JITWhenModsEnabled("CalamityMod")]
     public class Reaver_Enchantment : BaseDLCEnchant
     {
-        protected override Color nameColor => new Color(43, 136, 53);
+        protected override Color nameColor => new Color(145, 203, 102);
         public override string wizardEffect => "";
         public override string ModName => "CalamityMod";
 
@@ -26,25 +26,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().ReaverHage = true;
-            if (!player.GetModPlayer<SoulsBetterDLCPlayer>().ReaverHageBuff)
-            {
-                player.endurance += 0.15f;
-                player.moveSpeed += 0.15f;
-                player.wingTime += 0.15f;
-                player.pickSpeed += 0.3f;
-                player.lifeRegen += 2;
-                player.GetDamage(DamageClass.Generic) -= 0.15f;
-                player.GetAttackSpeed(DamageClass.Generic) -= 0.1f;
-            }
-            else
-            {
-                player.GetDamage(DamageClass.Generic) += 0.1f;
-                player.GetAttackSpeed(DamageClass.Generic) += 0.1f;
-                player.moveSpeed += 0.15f;
-                player.wingTime += 0.15f;
-                player.pickSpeed += 0.3f;
-            }
+            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            SBDPlayer.ReaverHage = true;
         }
 
 

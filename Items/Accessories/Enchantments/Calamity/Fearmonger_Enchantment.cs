@@ -1,35 +1,32 @@
 ﻿using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-
+using CalamityMod.Rarities;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
     public class Fearmonger_Enchantment : BaseDLCEnchant
     {
-        protected override Color nameColor => new(43, 42, 65);
+        protected override Color nameColor => new(81, 99, 123);
         public override string wizardEffect => "";
         public override string ModName => "CalamityMod";
-
         public override void SetStaticDefaults()
         {
-            //name and description
             DisplayName.SetDefault("Fearmonger Enchantment");
-            Tooltip.SetDefault("Decreases summon nerf by 25%.\nDoes... something. Not right now, sadly.\n'Remember the legend of Prometheus?'");
+            Tooltip.SetDefault("Decreases summon nerf by 25%.\nSummons a Damned Valkyrie that fires homing feathers.\n'There's something gorgeous in these creatures.'");
         }
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.rare = ItemRarityID.Red;
+            Item.rare = ModContent.RarityType<DarkBlue>();
         }
 
-        public void UpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.HeldItem.DamageType != DamageClass.Summon && player.HeldItem.DamageType != DamageClass.Default && player.HeldItem.DamageType != ModContent.GetInstance<CalamityMod.AverageDamageClass>() && player.HeldItem.active)
-                player.GetDamage(DamageClass.Summon) += 0.25f;
-		}
+            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            SBDPlayer.FearOfTheValkyrie = true;
+        }
 
         public override void SafeAddRecipes()
         {
@@ -40,8 +37,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Fearmonger.FearmongerGreaves>(), 1);
 			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.CorvidHarbringerStaff>(), 1);
 			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.CosmicViperEngine>(), 1);
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.EnergyStaff>(), 1);
-			recipe.AddTile(TileID.CrystalBall);
+			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Summon.SanctifiedSpark>(), 1);
+			recipe.AddTile(ModContent.TileType<CalamityMod.Tiles.Furniture.CraftingStations.DraedonsForge>());
 			recipe.Register(); 
         }
     }

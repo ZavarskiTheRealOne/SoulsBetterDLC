@@ -13,10 +13,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     [AutoloadEquip(EquipType.Wings)]
     public class Ruffian_Enchantment : BaseDLCEnchant
     {
-        private bool shouldBoost = true;
+        private bool shouldBoost;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new Color (105, 122, 116);
+        protected override Color nameColor => new Color (160, 185, 213);
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Snow Ruffian Enchantment");
@@ -26,17 +26,13 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             base.SetDefaults();
             Item.rare = ItemRarityID.Blue;
-            ArmorIDs.Wing.Sets.Stats[base.Item.wingSlot] = new WingStats(0, 2f, 1.25f);
+            ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(0, 2f, 1.25f);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown > 0)
-            {
-                player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown--;
-            }
+            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             if (player.controlJump)
             {
-                player.noFallDmg = true;
                 player.UpdateJumpHeight();
                 if (shouldBoost && !player.mount.Active)
                 {
@@ -48,16 +44,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             {
                 shouldBoost = true;
             }
-            if (player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown <= 0 && player.controlJump && !player.canJumpAgain_Cloud && player.jump == 0 && player.velocity.Y != 0f && !player.mount.Active && !player.mount.Cart)
-            {
-                int num = Projectile.NewProjectile(player.GetSource_Accessory(Item), Damage: 24, X: player.Center.X, Y: player.Center.Y, SpeedX: player.velocity.X * 0f, SpeedY: 2f, Type: ModContent.ProjectileType<FrostShardFriendly>(), KnockBack: 3f, Owner: player.whoAmI, ai0: 1f);
-                if (num.WithinBounds(1000))
-                {
-                    Main.projectile[num].DamageType = DamageClass.Generic;
-                    Main.projectile[num].frame = Main.rand.Next(5);
-                }
-                player.GetModPlayer<SoulsBetterDLCPlayer>().SDIcicleCooldown = 20;
-            }
+            SBDPlayer.AyeCicleSmol = true;
         }
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
@@ -76,7 +63,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             //recipe
             Recipe recipe = CreateRecipe();
-                
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.SnowRuffian.SnowRuffianMask>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.SnowRuffian.SnowRuffianChestplate>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.SnowRuffian.SnowRuffianGreaves>(), 1);
