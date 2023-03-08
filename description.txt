@@ -8,7 +8,7 @@ Special thanks to:
 	And everyone else who contributed to the mod, be it suggestions or prime contribution to the mod's insides
 
 Changelogs:
-v0.1.1 - another non-release update. Added Aerospec, Plague Reaper and Victide Enchantments and reworked Fearmonger enchantment that previously was broken and not present in the mod.
+v0.1.1 - another non-release update. Added Aerospec, Plague Reaper Enchantments and a base for Victide Enchantment and reworked Fearmonger enchantment that previously was broken and not present in the mod.
 v0.1 - the very first public release. Not available on Steam Workshop yet
 v0.0.2.2 - this officially marks the Flying High Update, where Daedalus, Snow Ruffian and Reaver enchantment were made working. Final version before the first public release.
 v0.0.2.1 - this marks the Bloodthirst Update that was called like that just because it added Umbraphile and Bloodflare enchantments. It added much more to the mod, however.

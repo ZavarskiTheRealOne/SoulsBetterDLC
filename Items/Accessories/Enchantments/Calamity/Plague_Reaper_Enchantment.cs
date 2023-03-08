@@ -1,7 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using CalamityMod.Rarities;
 using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
@@ -20,7 +19,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults() 
         {
             base.SetDefaults();
-            Item.rare = ModContent.RarityType<Turquoise>();
+            /*if (ModLoader.TryGetMod("CalamityMod", out Mod mod))
+                Item.rare = ModContent.RarityType<CalamityMod.Rarities.Turquoise>();
+            else */Item.rare = ItemRarityID.Red;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

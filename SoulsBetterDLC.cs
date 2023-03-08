@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.ID;
+using System.Collections.Generic;
 
 namespace SoulsBetterDLC
 {
@@ -25,13 +26,33 @@ namespace SoulsBetterDLC
     [JITWhenModsEnabled("CalamityMod")]
     public class RecipeSystem : ModSystem
     {
+        internal bool CalamityLoaded;
+        public override void PostSetupContent()
+        {
+            CalamityLoaded = ModLoader.HasMod("CalamityMod");
+        }
         public override void AddRecipes()
         {
             // Calamity Recipes
-            if (!ModLoader.HasMod("CalamityMod"))
+            if (CalamityLoaded)
             {
-                return;
+                CalamityRecipes();
             }
+        }
+        public override void AddRecipeGroups()
+        {
+            //any t3 watch
+            RecipeGroup T3WatchGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Gold Watch"}",
+                ItemID.GoldWatch,
+                ItemID.PlatinumWatch);
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyGoldWatch", T3WatchGroup);
+            if (CalamityLoaded)
+            {
+                CalamityGroups();
+            }
+        }
+        static void CalamityRecipes()
+        {
             //trinket of chi
             Recipe tocrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.TrinketofChi>());
             tocrecipe.AddIngredient(ItemID.ClayBlock, 20);
@@ -75,13 +96,8 @@ namespace SoulsBetterDLC
             lgrecipe.AddTile(TileID.Anvils);
             lgrecipe.Register();
         }
-
-        public override void AddRecipeGroups()
+        static void CalamityGroups()
         {
-            if (!ModLoader.TryGetMod("CalamityMod", out Mod ClamMod))
-            {
-                return;
-            }
             //reaver head group
             RecipeGroup ReaverHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Reaver Headpiece"}",
                 ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadExplore>(),
@@ -120,11 +136,6 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHelmet>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHeadgear>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAerospecHelms", AerospecHelmsGroup);
-            //any t3 watch
-            RecipeGroup T3WatchGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Gold Watch"}",
-                ItemID.GoldWatch,
-                ItemID.PlatinumWatch);
-            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyGoldWatch", T3WatchGroup);
         }
     }
 }

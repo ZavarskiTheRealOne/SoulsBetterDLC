@@ -1,14 +1,14 @@
 ﻿using SoulsBetterDLC.Buffs;
+using SoulsBetterDLC;
 using Terraria;
 using Terraria.ModLoader;
 using SoulsBetterDLC.Projectiles;
 using CalamityMod.Projectiles.Rogue;
 using CalamityMod;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC
 {
+    [JITWhenModsEnabled("CalamityMod")]
     public class SoulsBetterDLCPlayer : ModPlayer
     {
         public bool UmbraCrazyRegen;
@@ -22,6 +22,7 @@ namespace SoulsBetterDLC
         public bool AyeCicleSmol;
         public bool WulfrumOverpower;
         public bool VictideSwimmin;
+        public bool MolluskSwaggin;
         public bool aValkie;
         public bool aScarey;
         public bool AeroValkyrie;
@@ -33,8 +34,14 @@ namespace SoulsBetterDLC
 
         //public bool EbonEnch;
         //public bool ClericEnch;
-
         public override void ResetEffects()
+        {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityResEff();
+            }
+        }
+        private void CalamityResEff()
         {
             UmbraCrazyRegen = false;
             BFCrazierRegen = false;
@@ -47,6 +54,7 @@ namespace SoulsBetterDLC
             AyeCicleSmol = false;
             WulfrumOverpower = false;
             VictideSwimmin = false;
+            MolluskSwaggin = false;
             aValkie = false;
             aScarey = false;
             AeroValkyrie = false;
@@ -55,6 +63,13 @@ namespace SoulsBetterDLC
 
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
         {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityHurt();
+            }
+        }
+        private void CalamityHurt()
+        {
             if (ReaverHage)
             {
                 if (Main.rand.NextBool(4) && !ReaverHageBuff)
@@ -62,6 +77,7 @@ namespace SoulsBetterDLC
                     Player.AddBuff(ModContent.BuffType<Reaver_Fury>(), 600);
                 }
             }
+
         }
         public override void UpdateDead()
         {
@@ -70,11 +86,30 @@ namespace SoulsBetterDLC
         }
         public override void PostUpdateEquips()
         {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityPostUpd();
+            }
+        }
+        private void CalamityPostUpd()
+        { 
             //victide
             if (VictideSwimmin)
             {
                 Player.ignoreWater = true;
                 Player.gills = true;
+            }
+            //mollusk
+            if (MolluskSwaggin)
+            {
+                Player.ignoreWater = true;
+                Player.gills = true;
+                Player.accFlipper = true;
+                Player.accDivingHelm = true;
+                if (!Player.wet)
+                {
+                    Player.velocity.X *= 0.985f;
+                }
             }
             //aerospec
             if (RideOfTheValkyrie)
@@ -181,6 +216,13 @@ namespace SoulsBetterDLC
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityOnHit(target,damage);
+            }
+        }
+        private void CalamityOnHit(NPC target, int damage)
+        { 
             //just some timer calculations
             if (damage / 2 <= 180)
             {
@@ -223,6 +265,13 @@ namespace SoulsBetterDLC
         }
         public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityModifyHit(target);
+            }
+        }
+        private void CalamityModifyHit(NPC target)
+        {
             //Plague Reaper conditions
             if (ButterBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
             {
@@ -231,6 +280,13 @@ namespace SoulsBetterDLC
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityOnHitProj(target,damage);
+            }
+        }
+        private void CalamityOnHitProj(NPC target, int damage)
         {
             //same as in OnHit but, yeah
             if (damage / 2 <= 180)
@@ -273,6 +329,13 @@ namespace SoulsBetterDLC
             }
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
+                CalamityModifyHitProj(target);
+            }
+        }
+        private void CalamityModifyHitProj(NPC target)
         {
             //plague reaper
             if (ButterBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)

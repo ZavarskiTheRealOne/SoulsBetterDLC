@@ -7,6 +7,7 @@ using CalamityMod;
 
 namespace SoulsBetterDLC.Projectiles
 {
+    [JITWhenModsEnabled("CalamityMod")]
     public class Fearsome_Feather: ModProjectile
     {
         public override void SetStaticDefaults()
