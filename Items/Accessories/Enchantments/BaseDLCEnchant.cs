@@ -34,6 +34,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
         {
             base.SafeModifyTooltips(tooltips);
 
+            // From soulsMod, as we can't inherit from 2 classes we need it to be here also. 
             if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
                 itemNameLine.OverrideColor = nameColor;
         }
