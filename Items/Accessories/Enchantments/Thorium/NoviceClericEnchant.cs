@@ -52,13 +52,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 			SheildCD = 60 * 15;
 			
 			for (int i = 0; i < Main.maxNPCs; i++)
-				if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<NPCS.ClericSheild>() && Main.npc[i].ai[0] == player.whoAmI)
+				if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<NPCS.ClericShield>() && Main.npc[i].ai[0] == player.whoAmI)
 					return;
 			
-			// TODO: Netcode
 			if (Main.netMode == NetmodeID.SinglePlayer) 
 			{
-				NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI), (int)player.Center.X, (int)player.Center.Y, ModContent.NPCType<NPCS.ClericSheild>(), 0, (float)player.whoAmI);
+				NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI), (int)player.Center.X, (int)player.Center.Y, ModContent.NPCType<NPCS.ClericShield>(), 0, (float)player.whoAmI);
 			}
 		}
 	}

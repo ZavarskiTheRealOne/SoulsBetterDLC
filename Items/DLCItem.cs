@@ -38,7 +38,7 @@ namespace SoulsBetterDLC.Items
 		}
 		
 		/// <summary>
-		/// Doesn't run unless ModName is loaded. Allows you to reference classes from that mod. If an item's effect does not reference content from other mods then use UpdateAccessory()
+		/// Doesn't run unless ModName is loaded. Allows you to reference classes from that mod. If an item's effect does not reference content from other mods then still use this as it shouldn't be able to do anything without it
 		/// </summary>
 		public virtual void SafeUpdateAccessory(Player player, bool hideVisual) {}
 		

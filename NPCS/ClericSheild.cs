@@ -3,10 +3,11 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using Terraria.ID;
 
 namespace SoulsBetterDLC.NPCS
 {
-	public class ClericSheild : ModNPC
+	public class ClericShield : ModNPC
 	{
 		public override void SetDefaults()
 		{
@@ -61,7 +62,8 @@ namespace SoulsBetterDLC.NPCS
 
         public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
         {
-			SoulsBetterDLCPlayer modplayer = Main.player[(int)NPC.ai[0]].GetModPlayer<SoulsBetterDLCPlayer>();
+			Player player = Main.player[(int)NPC.ai[0]];
+			SoulsBetterDLCPlayer modplayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
 
 			int dmg;
 			if (damage < NPC.life)
@@ -76,9 +78,13 @@ namespace SoulsBetterDLC.NPCS
             }
 
 			if (modplayer.EbonEnch && dmg > 0)
-            {
-				modplayer.EbonBlast(dmg);
-            }
+			{
+				if (Main.netMode != NetmodeID.MultiplayerClient)
+				{
+					Main.NewText("test");
+					Projectile.NewProjectile(new EntitySource_Parent(player), player.Center, new Vector2(-16 * player.direction, 0), ModContent.ProjectileType<Projectiles.EbonBlast>(), dmg, 5, player.whoAmI);
+				}
+			}
 		}
     }
 }
