@@ -18,7 +18,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Novice Cleric Enchantment");
-            Tooltip.SetDefault("Creates a weak sheild in front of you that absorbs 50 damage before breaking.\nShield has a cooldown of 15 seconds.\nCooldown is faster when out of combat.");
+            Tooltip.SetDefault($"Creates a weak sheild in front of you that absorbs {(Main.expertMode ? "100" : "50")} damage before breaking." +
+                "\nShield has a cooldown of 15 seconds." +
+                "\nCooldown is faster when out of combat." +
+				"\n\nSynergises with Ebon Enchantment");
         }
 		
         public override void SetDefaults()

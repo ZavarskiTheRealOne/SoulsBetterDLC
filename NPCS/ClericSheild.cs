@@ -28,7 +28,7 @@ namespace SoulsBetterDLC.NPCS
 			NPC.lifeMax = 50;
 			if (Main.expertMode) NPC.lifeMax += 50;
 			if (Main.masterMode) NPC.defDefense = Main.player[(int)NPC.ai[0]].statDefense / 2;
-			if (FargowiltasSouls.FargoSoulsWorld.EternityMode) NPC.lifeRegen += (NPC.lifeRegen / 2);
+			if (FargowiltasSouls.FargoSoulsWorld.EternityMode) NPC.lifeRegen = (int)(NPC.lifeRegen * 1.5f);
 
 			NPC.life = NPC.lifeMax;
 		}
@@ -36,23 +36,21 @@ namespace SoulsBetterDLC.NPCS
         public override void AI()
 		{
 			Player player = Main.player[(int)NPC.ai[0]];
+			if (!player.GetModPlayer<SoulsBetterDLCPlayer>().ClericEnch)
+            {
+				NPC.life = 0;
+            }
 			Vector2 position = player.Center + new Vector2(24 * player.Directions.X, 0);
 			
-			Vector2 distance = position - NPC.Center;
-			float Length = distance.Length();
-			if (Length > 1000f)
-			{
-				NPC.Center = position;
-			}
-			else NPC.velocity = distance / 4f;
+			NPC.Center = position;
 		}
 		
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
 
-            Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange, Main.offScreenRange); 
-            Vector2 Pos = NPC.position - screenPos;
+            //Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange, Main.offScreenRange); 
+            Vector2 Pos = NPC.position - screenPos + Vector2.Zero;
 			SpriteEffects Effect = Main.player[(int)NPC.ai[0]].Directions.X == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
             spriteBatch.Draw(texture, Pos, null, drawColor, 0f, default, 1f, Effect, 0f);
@@ -82,7 +80,13 @@ namespace SoulsBetterDLC.NPCS
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Main.NewText("test");
-					Projectile.NewProjectile(new EntitySource_Parent(player), player.Center, new Vector2(-16 * player.direction, 0), ModContent.ProjectileType<Projectiles.EbonBlast>(), dmg, 5, player.whoAmI);
+					Projectile.NewProjectile(new EntitySource_Parent(player),
+                              player.Center,
+                              new Vector2(-16 * player.direction, 0),
+                              ModContent.ProjectileType<Projectiles.EbonBlast>(),
+                              100,
+                              5,
+                              player.whoAmI);
 				}
 			}
 		}

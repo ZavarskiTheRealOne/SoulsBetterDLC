@@ -10,15 +10,25 @@ namespace SoulsBetterDLC
     {
         public bool EbonEnch;
         public bool ClericEnch;
+        public bool TemplarEnch;
 
-        public void ThoriumResEff()
+        public int TemplarCD = 360;
+        public Item TemplarEnchItem;
+
+        public void Thorium_ResetEffects()
         {
             EbonEnch = false;
             ClericEnch = false;
+            TemplarEnch = false;
         }
-        public void EbonBlast(int damage)
+
+        public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage)
         {
-            Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(-16 * Player.direction, 0), ModContent.ProjectileType<EbonBlast>(), damage, 5, Player.whoAmI);
+            if (TemplarEnch && TemplarCD == 0)
+            {
+                TemplarCD = 360;
+                Items.Accessories.Enchantments.Thorium.TemplarEnchant.summonHolyFire(Player);
+            }
         }
     }
 }

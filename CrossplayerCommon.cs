@@ -8,7 +8,7 @@ namespace SoulsBetterDLC
         public override void ResetEffects()
         {
             if (ModLoader.HasMod("CalamityMod")) CalamityResEff();
-            if (ModLoader.HasMod("ThoriumMod")) ThoriumResEff();
+            if (ModLoader.HasMod("ThoriumMod")) Thorium_ResetEffects();
         }
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
         {
@@ -29,6 +29,7 @@ namespace SoulsBetterDLC
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             if (ModLoader.HasMod("CalamityMod")) CalamityOnHitProj(target, damage);
+            if (ModLoader.HasMod("ThoriumMod")) Thorium_OnHitNPCWithProj(proj, target, damage);
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
