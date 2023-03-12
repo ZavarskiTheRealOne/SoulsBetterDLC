@@ -23,7 +23,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.width = 30;
             Item.height = 34;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Blue;
+            /*if (ModLoader.TryGetMod("CalamityMod", out Mod mod))
+                Item.rare = ModContent.RarityType<CalamityMod.Rarities.PureGreen>();
+            else */Item.rare = ItemRarityID.Purple;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

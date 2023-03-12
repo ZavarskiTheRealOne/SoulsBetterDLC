@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     {
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new Color(69, 62, 63);
+        protected override Color nameColor => new Color(117, 69, 87);
         public override void SetStaticDefaults()
         {
             //name and description
@@ -23,12 +23,13 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.width = 30;
             Item.height = 34;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.Lime;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().UmbraCrazyRegen = true;
+            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            SBDPlayer.UmbraCrazyRegen = true;
         }
 
         public override void SafeAddRecipes()
@@ -38,9 +39,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileHood>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileRegalia>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Umbraphile.UmbraphileBoots>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<FargowiltasSouls.Items.Accessories.Enchantments.PalladiumEnchant>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.VampiricTalisman>(), 1);
+            recipe.AddIngredient(ItemID.VampireKnives, 1);
             recipe.AddIngredient(ItemID.SanguineStaff, 1);
+            recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.VampiricTalisman>(), 1);
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }

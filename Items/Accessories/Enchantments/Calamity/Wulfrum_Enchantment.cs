@@ -13,23 +13,24 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public int peaceTimer;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new Color(103, 137, 100);
+        protected override Color nameColor => new Color(206, 201, 170);
 
         public override void SetStaticDefaults()
         {
             //name and description
             DisplayName.SetDefault("Wulfrum Enchantment");
-            Tooltip.SetDefault("When your health is below 50%, you gain a buff.\nThis buff increases damage dealt and decreases damage taken by 30%.\n'ELECTRICITY IS FUN!.'");
+            Tooltip.SetDefault("When your health is below 30%, you gain a buff.\nThis buff increases damage dealt and decreases damage taken by 30%.\n'ELECTRICITY IS FUN!.'");
         }
         public override void SetDefaults()
         {
             base.SetDefaults();
+            Item.rare = ItemRarityID.Blue;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.statLife <= player.statLifeMax2 * 0.3f)
-                player.AddBuff(ModContent.BuffType<WulfrumCoreBuff>(), 2);
+            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            SBDPlayer.WulfrumOverpower = true;
         }
 
         public override void SafeAddRecipes()

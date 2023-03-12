@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.ID;
+using System.Collections.Generic;
 
 namespace SoulsBetterDLC
 {
@@ -25,18 +26,32 @@ namespace SoulsBetterDLC
     [JITWhenModsEnabled("CalamityMod")]
     public class RecipeSystem : ModSystem
     {
+        internal bool CalamityLoaded;
+        public override void PostSetupContent()
+        {
+            CalamityLoaded = ModLoader.HasMod("CalamityMod");
+        }
         public override void AddRecipes()
         {
             // Calamity Recipes
-            if (!ModLoader.HasMod("CalamityMod"))
+            if (CalamityLoaded)
             {
-                return;
+                CalamityRecipes();
             }
-
-            AddRecipesCorrectly();
         }
-
-        internal void AddRecipesCorrectly()
+        public override void AddRecipeGroups()
+        {
+            //any t3 watch
+            RecipeGroup T3WatchGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Gold Watch"}",
+                ItemID.GoldWatch,
+                ItemID.PlatinumWatch);
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyGoldWatch", T3WatchGroup);
+            if (CalamityLoaded)
+            {
+                CalamityGroups();
+            }
+        }
+        static void CalamityRecipes()
         {
             //trinket of chi
             Recipe tocrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.TrinketofChi>());
@@ -48,7 +63,7 @@ namespace SoulsBetterDLC
             //gladiator's locket
             Recipe glrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.GladiatorsLocket>());
             glrecipe.AddIngredient(ItemID.Marble, 20);
-            glrecipe.AddRecipeGroup("SoulsBetterDLC:AnySilverSSword", 1);
+            glrecipe.AddIngredient(ItemID.LifeCrystal, 2);
             glrecipe.AddRecipeGroup("SoulsBetterDLC:AnyGoldWatch", 1);
             glrecipe.AddTile(TileID.DemonAltar);
             glrecipe.Register();
@@ -66,16 +81,9 @@ namespace SoulsBetterDLC
             fgrecipe.AddIngredient(ItemID.ClayPot, 1);
             fgrecipe.AddTile(TileID.LivingLoom);
             fgrecipe.Register();
-            //excavator key recipe
-            Recipe oekrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Mounts.OnyxExcavatorKey>());
-            oekrecipe.AddIngredient(ItemID.Obsidian, 20);
-            oekrecipe.AddIngredient(ItemID.Amethyst, 2);
-            oekrecipe.AddRecipeGroup("SoulsBetterDLC:AnyGoldPickaxe", 1);
-            oekrecipe.AddTile(TileID.Anvils);
-            oekrecipe.Register();
             //tundra leash recipe
             Recipe tlrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Mounts.TundraLeash>());
-            tlrecipe.AddIngredient(ItemID.SilverBar, 20);
+            tlrecipe.AddRecipeGroup("AnySilverBar", 20);
             tlrecipe.AddIngredient(ItemID.Leather, 2);
             tlrecipe.AddIngredient(ItemID.Bunny, 1);
             tlrecipe.AddTile(TileID.CookingPots);
@@ -88,8 +96,7 @@ namespace SoulsBetterDLC
             lgrecipe.AddTile(TileID.Anvils);
             lgrecipe.Register();
         }
-
-        internal void AddRecipeGroupsCorrectly()
+        static void CalamityGroups()
         {
             //reaver head group
             RecipeGroup ReaverHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Reaver Headpiece"}",
@@ -106,40 +113,29 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Daedalus.DaedalusHeadRogue>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyDaedalusHelms", DeadalusHelmsGroup);
             //bloodflare head group
-            RecipeGroup BloodflareHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Daedalus Headpiece"}",
+            RecipeGroup BloodflareHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Bloodflare Headpiece"}",
                 ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareHeadMelee>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareHeadRanged>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareHeadMagic>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareHeadSummon>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareHeadRogue>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyBloodflareHelms", BloodflareHelmsGroup);
-            //any t3 watch
-            RecipeGroup T3WatchGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Gold Watch"}",
-                ItemID.GoldWatch,
-                ItemID.PlatinumWatch);
-            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyGoldWatch", T3WatchGroup);
-            //any t3 shortsword
-            RecipeGroup T3SSwordGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Silver Shortsword"}",
-                ItemID.SilverShortsword,
-                ItemID.TungstenShortsword); ;
-            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnySilverSSword", T3SSwordGroup);
-            //any t4 pickaxe
-            RecipeGroup T4PickGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Gold Pickaxe"}",
-                ItemID.GoldPickaxe,
-                ItemID.PlatinumPickaxe);
-            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyGoldPickaxe", T4PickGroup);
-        }
-
-        [JITWhenModsEnabled("CalamityMod")]
-        public override void AddRecipeGroups()
-        {
-            // Calamity Groups
-            if (!ModLoader.TryGetMod("CalamityMod", out Mod ClamMod))
-            {
-                return;
-            }
-
-            AddRecipeGroupsCorrectly();
+            //victide head group
+            /*RecipeGroup VictideHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Victide Headpiece"}",
+                ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadMelee>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadRanged>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadMagic>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadSummon>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadRogue>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyVictideHelms", VictideHelmsGroup);
+            //aerospec head group
+            RecipeGroup AerospecHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Aerospec Headpiece"}",
+                ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHelm>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHood>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHat>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHelmet>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHeadgear>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAerospecHelms", AerospecHelmsGroup);*/
         }
     }
 }

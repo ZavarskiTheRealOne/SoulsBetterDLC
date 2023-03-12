@@ -2,7 +2,7 @@
 Mods: {
 	SoulsBetterDLC: {
 		Buffs: {
-			BFRegenSHITPOSTIER: {
+			Bloodflare_Regeneration: {
 				DisplayName: Bloodflare Regeneration
 				Description: The insides of your enemies drive you crazy.
 			}
