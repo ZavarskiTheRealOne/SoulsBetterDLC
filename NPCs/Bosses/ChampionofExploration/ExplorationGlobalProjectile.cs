@@ -7,6 +7,7 @@ using CalamityMod.NPCs.TownNPCs;
 using ThoriumMod.Empowerments;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
 {
@@ -25,7 +26,7 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
         //dont run normal kill method for copper coin projectiles so it doesnt spawn items
         public override bool PreKill(Projectile projectile, int timeLeft)
         {
-            if (projectile.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>() && projectile.ai[1] == 1)
+            if (projectile.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>() && projectile.ai[1] == 1)
             {
                 return false;
             }
@@ -38,9 +39,9 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
-            if (projectile.type == ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.GladiatorSword>() && projectile.ai[0] == 1)
+            if (projectile.type == ProjectileID.GladiusStab && projectile.ai[0] == 50)
             {
-                Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Typeless/GladiatorSword").Value;
+                Texture2D texture = TextureAssets.Projectile[ProjectileID.GladiusStab].Value;
                 Main.EntitySpriteDraw(texture, projectile.Top - Main.screenPosition, null, lightColor, projectile.rotation, new Vector2(11, 11), projectile.scale, SpriteEffects.FlipVertically, 0);
                 return false;
             }
@@ -58,21 +59,21 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
         //AI edit for crackshot colt projectile so it bounces between all coins and then to the player
         public override bool PreAI(Projectile projectile)
         {
-            if (projectile.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotBlast>() && projectile.damage > 50) {
+            if (projectile.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.MarksmanShot>() && projectile.damage > 75) {
                 Projectile coin = null;
-                
-                if (projectile.ai[1] == -1 || (!Main.projectile[(int)projectile.ai[1]].active && Main.projectile[(int)projectile.ai[1]].type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>()) || projectile.Hitbox.Intersects(Main.projectile[(int)projectile.ai[1]].Hitbox))
+                projectile.ai[0] = 0;
+                if (projectile.ai[1] == -1 || (!Main.projectile[(int)projectile.ai[1]].active && Main.projectile[(int)projectile.ai[1]].type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>()) || projectile.Hitbox.Intersects(Main.projectile[(int)projectile.ai[1]].Hitbox))
                 {
                     for (int i = 0; i < Main.projectile.Length; i++)
                     {
 
                         Projectile the = Main.projectile[i];
-                        if (the.Hitbox.Intersects(projectile.Hitbox) && the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>())
+                        if (the.Hitbox.Intersects(projectile.Hitbox) && the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>())
                         {
                             
                             the.Kill();
                         }
-                        if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>() && (coin == null || the.Distance(projectile.Center) < coin.Distance(projectile.Center)) && !the.Hitbox.Intersects(projectile.Hitbox) && the.active)
+                        if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>() && (coin == null || the.Distance(projectile.Center) < coin.Distance(projectile.Center)) && !the.Hitbox.Intersects(projectile.Hitbox) && the.active)
                         {
                             coin = the;
                             projectile.ai[1] = coin.whoAmI;
@@ -93,8 +94,8 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                     }
                 }
                 
-                return false;
-            } if (projectile.type == ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.GladiatorSword>() && projectile.ai[0] == 1)
+                return true;
+            } if (projectile.type == ProjectileID.GladiusStab && projectile.ai[0] == 50)
             {
                 Player target = Main.player[(int)projectile.ai[1]];
                 if (projectile.timeLeft % 60 == 0)

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.Utilities.Terraria.Utilities;
 using Terraria.Audio;
+using CalamityMod.Projectiles.Rogue;
 
 namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
 {
@@ -40,7 +41,7 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
         {
             NPC.width = 100;
             NPC.height = 100;
-            NPC.lifeMax = 100000;
+            NPC.lifeMax = 200000;
             NPC.HitSound = SoundID.NPCHit4;
             NPC.DeathSound = SoundID.NPCDeath6;
             NPC.defense = 30;
@@ -56,6 +57,7 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             NPC.frame.Height = 136;
             Main.npcFrameCount[NPC.type] = 4;
             NPC.damage = 100;
+            NPC.color = new Color(255, 255, 255);
             if (!Main.dedServ)
             {
                 Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
@@ -144,6 +146,8 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
         public int attackTimer = 0;
         public int attack = 0;
         public Player target;
+        public int phase;
+        public int lastAttack;
         public enum attackP1
         {
             None,
@@ -158,21 +162,31 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             Targetting();
             UpdateTrailLength();
             
-            if (attack == (int)attackP1.None)
+            if (NPC.GetLifePercent() <= 0.3 && phase == 0)
             {
-                NoAttack();
-                targetDrawLength = 3;
-            } else if (attack == (int)attackP1.Circle)
+                PhaseTransition();
+                return;
+            }
+            switch ((attackP1)(int)attack)
             {
-                CircleAttack();
-                targetDrawLength = 7;
-            } else if (attack == (int)attackP1.Coins)
-            {
-                CoinsAttack();
-                targetDrawLength = 4;
-            } else if(attack == (int)attackP1.Lightning)
-            {
-                LightningAttack();
+                case attackP1.None:
+                    NoAttack();
+                    targetDrawLength = 3;
+                    break;
+                case attackP1.Circle:
+                    CircleAttack();
+                    targetDrawLength = 7;
+                    break;
+                case attackP1.Coins:
+                    CoinsAttack();
+                    targetDrawLength = 4;
+                    break;
+                case attackP1.Lightning:
+                    LightningAttack();
+                    break;
+                case attackP1.Wulfrum:
+                    WulfrumAttack();
+                    break;
             }
         }
         //targetting the player, giving the player as a variable, despawning if no player, turning to face the player
@@ -216,6 +230,32 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 drawLength += 0.5f;
             }
         }
+        //i tried to use attackTimer but it breaks
+        public int transitionTimer;
+        public void PhaseTransition()
+        {
+            NPC.defense = 75;
+            transitionTimer++;
+            NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.Zero, 0.03f);
+            if (transitionTimer == 60)
+            {
+                SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+                SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/AbilitySounds/WulfrumBastionActivate"), NPC.Center);
+            }
+            if (transitionTimer > 60)
+            {
+                NPC.color = Color.Lerp(NPC.color, new Color(197, 255, 159), 0.05f);
+            }
+            if (transitionTimer == 120)
+            {
+                attack = (int)attackP1.None;
+                transitionTimer = 0;
+                phase = 1;
+                attackTimer = 0;
+                dashTimer = 0;
+                turbulenceTimer = 0;
+            }
+        }
         //No attack chosen (intermediate between attacks, dashes towards player)
         public int dashTimer = 0;
         public void NoAttack()
@@ -229,6 +269,17 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             if (dashTimer == 60 && attackTimer != 4)
             {
                 NPC.velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 37;
+                if (phase == 1)
+                {
+                    for (int i = -1; i < 2; i++)
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX).RotatedBy(MathHelper.ToRadians(i*5)) * 12, ModContent.ProjectileType<CalamityMod.Projectiles.Rogue.TurbulanceProjectile>(), NPC.damage / 2, 0);
+                        proj.hostile = true;
+                        proj.friendly = false;
+                    }
+                    SoundEngine.PlaySound(SoundID.Item1);
+                    NPC.velocity *= 1.25f;
+                }
                 dashTimer = 0;
                 
             }
@@ -236,8 +287,13 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             if (attackTimer == 4)
             {
                 attackTimer = 0;
-                attack = Main.rand.Next((int)attackP1.Circle, (int)attackP1.Lightning + 1);
-                
+                attack = Main.rand.Next((int)attackP1.Circle, (int)attackP1.Wulfrum + 1);
+                while (lastAttack == attack)
+                {
+                    attack = Main.rand.Next((int)attackP1.Circle, (int)attackP1.Wulfrum + 1);
+                }
+                lastAttack = attack;
+                //attack = (int)attackP1.Wulfrum;
                 dashTimer = 0;
             }
         }
@@ -258,13 +314,18 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 
             }
             attackTimer++;
+            int rotationAmount = 3;
+            if (phase == 1)
+            {
+                rotationAmount = 4;
+            }
             if (direction == -1)
             {
-                offset = offset.RotatedBy(MathHelper.ToRadians(3));
+                offset = offset.RotatedBy(MathHelper.ToRadians(rotationAmount));
             }
             else
             {
-                offset = offset.RotatedBy(MathHelper.ToRadians(-3));
+                offset = offset.RotatedBy(MathHelper.ToRadians(-rotationAmount));
             }
             Vector2 targetPos = target.Center + offset;
             Vector2 toTargetPos = (targetPos - NPC.Center).SafeNormalize(Vector2.Zero);
@@ -298,7 +359,14 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 attack = (int)attackP1.None;
                 attackTimer = 0;
             }
-            NPC.velocity = Vector2.Lerp(NPC.velocity, toTargetPos * 50, 0.05f);
+            if (phase == 0)
+            {
+                NPC.velocity = Vector2.Lerp(NPC.velocity, toTargetPos * 50, 0.05f);
+            }
+            else
+            {
+                NPC.velocity = Vector2.Lerp(NPC.velocity, toTargetPos * 60, 0.07f);
+            }
         }
         public void CoinsAttack()
         {
@@ -310,6 +378,12 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 {
                     Projectile proj2 = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(-1000, i), Vector2.Zero, ProjectileID.SandnadoHostile, NPC.damage/2, 0f, Main.myPlayer);
                     Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(1000, i), Vector2.Zero, ProjectileID.SandnadoHostile, NPC.damage/2, 0f, Main.myPlayer);
+                    
+                }
+                if (phase == 1)
+                {
+                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(-500, 0), Vector2.Zero, ProjectileID.SandnadoHostile, NPC.damage / 2, 0f, Main.myPlayer);
+                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(500, 0), Vector2.Zero, ProjectileID.SandnadoHostile, NPC.damage / 2, 0f, Main.myPlayer);
                 }
                 for (int i = -1000; i < 1001; i += 75)
                 {
@@ -327,9 +401,9 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             }
             if (attackTimer%5 == 0 && attackTimer <= 130 && attackTimer > 60)
             {
-                Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -1).RotatedBy(MathHelper.ToRadians(Main.rand.Next(0, 360))) *Main.rand.Next(1, 5), ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>(), 0, 0);
+                Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -1).RotatedBy(MathHelper.ToRadians(Main.rand.Next(0, 360))) *Main.rand.Next(1, 5), ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>(), 0, 0);
                 proj.owner = 0;
-                proj.ai[1] = 1;
+                proj.ai[1] = -1;
                 SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/Ultrabling"), NPC.Center);
                 
             }
@@ -339,13 +413,13 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 for (int i = 0; i < Main.projectile.Length; i++)
                 {
                     Projectile the = Main.projectile[i];
-                    if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>() && (coin == null || the.Distance(NPC.Center) < coin.Distance(NPC.Center)))
+                    if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>() && (coin == null || the.Distance(NPC.Center) < coin.Distance(NPC.Center)))
                     {
                        
                         coin = the;
                         
                     }
-                    if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>())
+                    if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>())
                     {
                         the.velocity = new Vector2(0, -1);
                     }
@@ -353,10 +427,10 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 }
                 if (coin != null) {
                     coin.velocity *= 0;
-                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, (coin.Center - NPC.Center).SafeNormalize(Vector2.Zero)*1, ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotBlast>(), NPC.damage/2, 0, 0);
+                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, (coin.Center - NPC.Center).SafeNormalize(Vector2.Zero)*1, ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.MarksmanShot>(), NPC.damage/2, 0, 0);
                     proj.friendly = false;
                     proj.hostile = true;
-                    proj.ai[1] = -1;
+                    proj.ai[1] = 0;
                     proj.extraUpdates = 10;
                     proj.timeLeft = 1000;
                     SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Item/CrackshotColtShot"), NPC.Center);
@@ -367,7 +441,7 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                 for (int i = 0; i < Main.projectile.Length; i++)
                 {
                     Projectile the = Main.projectile[i];
-                    if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.CrackshotCoin>())
+                    if (the.type == ModContent.ProjectileType<CalamityMod.Projectiles.Ranged.RicoshotCoin>())
                     {
                         the.velocity = new Vector2(0, 0);
                     }
@@ -393,33 +467,41 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
         int currentLightning;
         public void LightningAttack()
         {
-            bool spawnSword = true;
-            for (int i = 0; i < used.Length; i++)
-            {
-                if (used[i] == true)
-                {
-                    spawnSword = false;
-                }
-            }
             
-            if (spawnSword)
-            {
-                Projectile sword = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.velocity, ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.GladiatorSword>(), NPC.damage/2, 0);
-                sword.ai[1] = target.whoAmI;
-                sword.ai[0] = 1;
-                sword.timeLeft = 600;
-                sword.scale = 2;
-            }
             if (attackTimer == 0)
             {
-                
+                bool spawnSword = true;
+                for (int i = 0; i < used.Length; i++)
+                {
+                    if (used[i] == true)
+                    {
+                        spawnSword = false;
+                    }
+                }
+
+                if (spawnSword)
+                {
+                    Projectile sword = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.velocity, ProjectileID.GladiusStab, NPC.damage / 2, 0);
+                    sword.ai[1] = target.whoAmI;
+                    sword.ai[0] = 50;
+                    sword.timeLeft = 800;
+                    sword.scale = 2;
+                    if (phase == 1)
+                    {
+                        Projectile sword2 = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, -NPC.velocity, ProjectileID.GladiusStab, NPC.damage / 2, 0);
+                        sword2.ai[1] = target.whoAmI;
+                        sword2.ai[0] = 50;
+                        sword2.timeLeft = 770;
+                        sword2.scale = 2;
+                    }
+                }
                 currentLightning = Main.rand.Next(0, (int)LightningPos.MAX + 1);
                 
                 while (used[currentLightning] == true)
                 {
                     currentLightning = Main.rand.Next(0, (int)LightningPos.MAX + 1);
                 }
-                used[currentLightning] = true;
+                
                 attackTimer++;
                 
             }
@@ -427,38 +509,40 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             Vector2 futureTarget = Vector2.Zero;
             Vector2 lightningOffset = Vector2.Zero;
             Vector2 sparkVelocity = Vector2.Zero;
-            float lightningRot;
+            float lightningRot = 0;
             
-            if (currentLightning == (int)LightningPos.TopLeft)
+            switch ((LightningPos)currentLightning)
             {
-                targetPos = target.Center + new Vector2(-400, -400);
-                futureTarget = target.Center + new Vector2(400, -400);
-                lightningOffset = new Vector2(-300, 0);
-                sparkVelocity = new Vector2(0, 5);
-                lightningRot = 0;
-            } else if (currentLightning == (int)LightningPos.TopRight)
-            {
-                targetPos = target.Center + new Vector2(400, -400);
-                futureTarget = target.Center + new Vector2(400, 400);
-                lightningOffset = new Vector2(0, -300);
-                sparkVelocity = new Vector2(-5, 0);
-                lightningRot = MathHelper.ToRadians(90);
-            } else if(currentLightning == (int)LightningPos.BottomLeft)
-            {
-                targetPos = target.Center + new Vector2(-400, 400);
-                futureTarget = target.Center + new Vector2(-400, -400);
-                lightningOffset = new Vector2(0, 300);
-                sparkVelocity = new Vector2(5, 0);
-                lightningRot = MathHelper.ToRadians(270);
+                case LightningPos.TopLeft:
+                    targetPos = target.Center + new Vector2(-400, -400);
+                    futureTarget = target.Center + new Vector2(400, -400);
+                    lightningOffset = new Vector2(-300, 0);
+                    sparkVelocity = new Vector2(0, 5);
+                    lightningRot = 0;
+                    break;
+                case LightningPos.TopRight:
+                    targetPos = target.Center + new Vector2(400, -400);
+                    futureTarget = target.Center + new Vector2(400, 400);
+                    lightningOffset = new Vector2(0, -300);
+                    sparkVelocity = new Vector2(-5, 0);
+                    lightningRot = MathHelper.ToRadians(90);
+                    break;
+                case LightningPos.BottomLeft:
+                    targetPos = target.Center + new Vector2(-400, 400);
+                    futureTarget = target.Center + new Vector2(-400, -400);
+                    lightningOffset = new Vector2(0, 300);
+                    sparkVelocity = new Vector2(5, 0);
+                    lightningRot = MathHelper.ToRadians(270);
+                    break;
+                case LightningPos.BottomRight:
+                    targetPos = target.Center + new Vector2(400, 400);
+                    futureTarget = target.Center + new Vector2(-400, 400);
+                    lightningOffset = new Vector2(300, 0);
+                    sparkVelocity = new Vector2(0, -5);
+                    lightningRot = MathHelper.ToRadians(180);
+                    break;
             }
-            else
-            {
-                targetPos = target.Center + new Vector2(400, 400);
-                futureTarget = target.Center + new Vector2(-400, 400);
-                lightningOffset = new Vector2(300, 0);
-                sparkVelocity = new Vector2(0, -5);
-                lightningRot = MathHelper.ToRadians(180);
-            }
+            
             attackTimer++;
             if (attackTimer >= 120)
             {
@@ -474,30 +558,30 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
                     }
                     if (currentLightning == (int)LightningPos.TopLeft && lightning != null)
                     {
-                        for (int i = (int)targetPos.X-400; i < (int)futureTarget.X+400; i += 150) 
+                        for (int i = 0; i < 360; i += 15) 
                         {
-                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), new Vector2(i, lightning.Center.Y), sparkVelocity * 3, ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
+                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(20, 0).RotatedBy(MathHelper.ToRadians(i)), ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
                         }
                     }
                     else if (currentLightning == (int)LightningPos.TopRight && lightning != null)
                     {
-                        for (int i = (int)targetPos.Y - 400; i < (int)futureTarget.Y + 400; i += 150)
+                        for (int i = 0; i < 360; i += 15)
                         {
-                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), new Vector2(lightning.Center.X, i), sparkVelocity * 3, ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
+                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 20).RotatedBy(MathHelper.ToRadians(i)), ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
                         }
                     }
                     else if (currentLightning == (int)LightningPos.BottomRight && lightning != null)
                     {
-                        for (int i = (int)futureTarget.X - 400; i < (int)targetPos.X + 400; i += 150)
+                        for (int i = 0; i < 360; i += 15)
                         {
-                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), new Vector2(i, lightning.Center.Y), sparkVelocity * 3, ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
+                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(-20, 0).RotatedBy(MathHelper.ToRadians(i)), ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
                         }
                     }
                     else if (currentLightning == (int)LightningPos.BottomLeft && lightning != null)
                     {
-                        for (int i = (int)futureTarget.Y - 400; i < (int)targetPos.Y + 400; i += 150)
+                        for (int i = 0; i < 360; i += 15)
                         {
-                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), new Vector2(lightning.Center.X, i), sparkVelocity * 3, ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
+                            Projectile spark = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -20).RotatedBy(MathHelper.ToRadians(i)), ProjectileID.MartianTurretBolt, NPC.damage/2, 0f);
                         }
                     }
                     
@@ -520,6 +604,7 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             if (attackTimer == 180)
             {
                 attackTimer = 0;
+                used[currentLightning] = true;
             }
             
             for (int i = 0; i < used.Length; i++)
@@ -534,6 +619,65 @@ namespace SoulsBetterDLC.NPCs.Bosses.ChampionofExploration
             used = new bool[4] { false, false, false, false};
             attack = (int)attackP1.None;
             attackTimer = 0;
+        }
+        Vector2 laserBaseVel = Vector2.Zero;
+        public void WulfrumAttack()
+        {
+            
+            
+            if (attackTimer == 0)
+            {
+                SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/AbilitySounds/WulfrumBastionActivate"), NPC.Center);
+                
+            }
+            if (attackTimer < 60)
+            {
+                laserBaseVel = (target.Center - NPC.Center).SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.ToRadians(90)) * 15;
+                NPC.velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.Zero) * NPC.Distance(target.Center)/30;
+            }
+            int sweepingTime = 230;
+            if (phase == 1)
+            {
+                sweepingTime += 120;
+            }
+            if (attackTimer < sweepingTime && attackTimer > 60)
+            {
+
+                Vector2 vel = laserBaseVel;
+                vel = vel.RotatedBy(MathHelper.ToRadians(Main.rand.Next(-10, 10)));
+                Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, vel, ProjectileID.SaucerLaser, NPC.damage / 2, 0);
+                for (int i = 0; i < 2; i++)
+                {
+                    Projectile scrap = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, vel.RotatedBy(MathHelper.ToRadians(Main.rand.Next(-20, 20))) * (float)Main.rand.Next(1, 40) / 4f, ModContent.ProjectileType<WulfrumScrap>(), NPC.damage / 2, 0);
+                    scrap.timeLeft = 500;
+                    scrap.scale = 2;
+                }
+                //proj.timeLeft = 200;
+                
+                NPC.velocity = Vector2.Lerp(NPC.velocity, (target.Center - NPC.Center).SafeNormalize(Vector2.Zero) * 3, 0.03f);
+                if (attackTimer % 4 == 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Item91, NPC.Center);
+                }
+            }
+            attackTimer++;
+            laserBaseVel = laserBaseVel.RotatedBy(MathHelper.ToRadians(-2.2f));
+            if (attackTimer == 10 + sweepingTime)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    NPC drone = NPC.NewNPCDirect(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<CalamityMod.NPCs.NormalNPCs.WulfrumDrone>());
+                    drone.lifeMax = 5000;
+                    drone.life = 5000;
+                    drone.extraValue = 2;
+                    drone.ai[3] = 1000;
+                }
+                
+            } else if (attackTimer == 20 + sweepingTime)
+            {
+                attackTimer = 0;
+                attack = (int)attackP1.None;
+            }
         }
     }
 }
