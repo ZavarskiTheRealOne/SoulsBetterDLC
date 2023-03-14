@@ -31,19 +31,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
-            if (player.controlJump)
-            {
-                player.UpdateJumpHeight();
-                if (shouldBoost && !player.mount.Active)
-                {
-                    player.velocity.X *= 1.1f;
-                    shouldBoost = false;
-                }
-            }
-            else if (!shouldBoost && player.velocity.Y == 0f)
-            {
-                shouldBoost = true;
-            }
             SBDPlayer.AyeCicleSmol = true;
         }
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)

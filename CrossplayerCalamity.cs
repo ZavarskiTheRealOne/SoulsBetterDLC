@@ -134,7 +134,7 @@ namespace SoulsBetterDLC
                 }
                 if (SDIcicleCooldown <= 0 && Player.controlJump && !Player.canJumpAgain_Cloud && Player.jump == 0 && Player.velocity.Y != 0f && !Player.mount.Active && !Player.mount.Cart)
                 {
-                    int bigIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Damage: 72, X: Player.Center.X, Y: Player.Center.Y, SpeedX: Player.velocity.X * 0f, SpeedY: 2f, Type: ModContent.ProjectileType<FrostShardFriendly>(), KnockBack: 3f, Owner: Player.whoAmI, ai0: 1f);
+                    int bigIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center.X, Player.Center.Y, 0f, 2f, ModContent.ProjectileType<FrostShardFriendly>(), 72, 3f, Player.whoAmI, 1f);
                     if (bigIcicle.WithinBounds(1000))
                     {
                         Main.projectile[bigIcicle].DamageType = DamageClass.Generic;
@@ -175,7 +175,7 @@ namespace SoulsBetterDLC
                 }
                 if (SDIcicleCooldownSmol <= 0 && Player.controlJump && !Player.canJumpAgain_Cloud && Player.jump == 0 && Player.velocity.Y != 0f && !Player.mount.Active && !Player.mount.Cart)
                 {
-                    int smallIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Damage: 24, X: Player.Center.X, Y: Player.Center.Y, SpeedX: Player.velocity.X * 0f, SpeedY: 2f, Type: ModContent.ProjectileType<FrostShardFriendly>(), KnockBack: 3f, Owner: Player.whoAmI, ai0: 1f);
+                    int smallIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center.X, Player.Center.Y, 0f, 2f, ModContent.ProjectileType<FrostShardFriendly>(), 24, 3f, Player.whoAmI, 1f);
                     if (smallIcicle.WithinBounds(1000))
                     {
                         Main.projectile[smallIcicle].DamageType = DamageClass.Generic;
