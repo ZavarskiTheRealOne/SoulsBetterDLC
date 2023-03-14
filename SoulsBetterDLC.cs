@@ -3,11 +3,18 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.ID;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 
 namespace SoulsBetterDLC
 {
     public class SoulsBetterDLC : Mod
     {
+        internal static ModKeybind LivingWoodBind;
+
+        public override void Load()
+        {
+            LivingWoodBind = KeybindLoader.RegisterKeybind(this, "Living wood roots", Keys.P);
+        }
         /*public class Keybinds: ModSystem
         {
             internal static ModKeybind UmbraVamps;

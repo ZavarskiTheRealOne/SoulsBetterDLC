@@ -1,9 +1,10 @@
 ﻿using Terraria;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 
 namespace SoulsBetterDLC
 {
-    public partial class SoulsBetterDLCPlayer
+    public partial class SoulsBetterDLCPlayer : ModPlayer
     {
         public override void ResetEffects()
         {
@@ -34,6 +35,22 @@ namespace SoulsBetterDLC
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             if (ModLoader.HasMod("CalamityMod")) CalamityModifyHitProj(target);
+        }
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (ModLoader.HasMod("ThoriumMod")) Thorium_ProcessTriggers(triggersSet);
+        }
+        public override void OnHitByNPC(NPC npc, int damage, bool crit)
+        {
+            if (ModLoader.HasMod("ThoriumMod")) Thorium_OnHitByNPC(npc, damage, crit);
+        }
+        public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
+        {
+            if (ModLoader.HasMod("ThoriumMod")) Thorium_OnHitByProjectile(proj, damage, crit);
+        }
+        public override void PreUpdate()
+        {
+            if (ModLoader.HasMod("ThoriumMod")) Thorium_PreUpdate();
         }
     }
 }
