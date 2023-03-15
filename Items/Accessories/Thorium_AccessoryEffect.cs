@@ -44,5 +44,13 @@ namespace SoulsBetterDLC
                 }
             }
         }
+
+        public void SilkEffect()
+        {
+            SilkEnch = true;
+            if (Player.statMana >= Player.statManaMax * 0.95) return; // so you dont get boosts with just full mana
+            Player.GetDamage(DamageClass.Generic) += (0.125f * Player.statMana);
+            if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Player.GetDamage(DamageClass.Generic) += (0.125f * Player.statMana);
+        }
     }
 }

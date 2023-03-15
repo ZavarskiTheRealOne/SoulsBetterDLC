@@ -45,9 +45,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
 			modplayer.EbonEnch = true;
 
-			if (player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.EbonGuard>()] == 0)
+			if (player.ownedProjectileCounts[ModContent.ProjectileType<EbonGuard>()] == 0)
 			{
-				Projectile.NewProjectile(new EntitySource_ItemUse(player, Item), player.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.EbonGuard>(), 0, 0, player.whoAmI);
+				Projectile.NewProjectile(new EntitySource_ItemUse(player, Item), player.Center, Vector2.Zero, ModContent.ProjectileType<EbonGuard>(), 0, 0, player.whoAmI);
 			}
 
 			BlastCD--;
