@@ -3,22 +3,74 @@ using Terraria.ModLoader;
 using SoulsBetterDLC.Projectiles;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
+using Terraria.GameInput;
+using SoulsBetterDLC.Items.Accessories;
+using System;
+using SoulsBetterDLC.Buffs;
 
 namespace SoulsBetterDLC
 {
-    public partial class SoulsBetterDLCPlayer
+    public partial class SoulsBetterDLCPlayer : ModPlayer
     {
         public bool EbonEnch;
         public bool ClericEnch;
+        public bool TemplarEnch;
+        public bool LivingWoodEnch;
+        public bool SilkEnch;
+        public bool WhiteKnightEnch;
 
-        public void ThoriumResEff()
+        public int TemplarCD = 360;
+        public Item TemplarEnchItem;
+        public Item LivingWoodEnchItem;
+
+        public void Thorium_ResetEffects()
         {
             EbonEnch = false;
             ClericEnch = false;
+            TemplarEnch = false;
+            LivingWoodEnch = false;
+            SilkEnch = false;
+            WhiteKnightEnch = false;
         }
-        public void EbonBlast(int damage)
+
+        public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage)
         {
-            Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(-16 * Player.direction, 0), ModContent.ProjectileType<EbonBlast>(), damage, 5, Player.whoAmI);
+            if (TemplarEnch && TemplarCD == 0)
+            {
+                TemplarCD = 360;
+                Items.Accessories.Enchantments.Thorium.TemplarEnchant.summonHolyFire(Player);
+            }
+        }
+
+        public void Thorium_ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (SoulsBetterDLC.LivingWoodBind.JustPressed)
+            {
+                LivingWoodKey();
+            }
+        }
+
+        public void Thorium_OnHitByNPC(NPC npc, int damage, bool crit)
+        {
+            if (Player.HasBuff<LivingWood_Root_B>())
+            {
+                Player.ClearBuff(ModContent.BuffType<LivingWood_Root_B>());
+                KillLivingWoodRoots();
+            }
+        }
+
+        public void Thorium_OnHitByProjectile(Projectile proj, int damage, bool crit)
+        {
+            if (Player.HasBuff<LivingWood_Root_B>())
+            {
+                Player.ClearBuff(ModContent.BuffType<LivingWood_Root_B>());
+                KillLivingWoodRoots();
+            }
+        }
+
+        public void Thorium_PreUpdate()
+        {
+
         }
     }
 }

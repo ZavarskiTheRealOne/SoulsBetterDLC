@@ -4,6 +4,7 @@ using Terraria.ID;
 using ThoriumMod;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
+using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
@@ -44,9 +45,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
 			modplayer.EbonEnch = true;
 
-			if (player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.EbonGuard>()] == 0)
+			if (player.ownedProjectileCounts[ModContent.ProjectileType<EbonGuard>()] == 0)
 			{
-				Projectile.NewProjectile(new EntitySource_ItemUse(player, Item), player.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.EbonGuard>(), 0, 0, player.whoAmI);
+				Projectile.NewProjectile(new EntitySource_ItemUse(player, Item), player.Center, Vector2.Zero, ModContent.ProjectileType<EbonGuard>(), 0, 0, player.whoAmI);
 			}
 
 			BlastCD--;
@@ -54,7 +55,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
 			int dmg = 10;
 			if (modplayer.ClericEnch) dmg *= 2;
-			modplayer.EbonBlast(dmg);
+			if (Main.myPlayer == player.whoAmI)
+            {
+				Projectile.NewProjectile(new EntitySource_Parent(player), player.Center, new Vector2(-16 * player.direction, 0), ModContent.ProjectileType<EbonBlast>(), dmg, 5, player.whoAmI);
+            }
 
 			BlastCD = 60 * 15;
 		}
