@@ -17,6 +17,7 @@ namespace SoulsBetterDLC
         public bool TemplarEnch;
         public bool LivingWoodEnch;
         public bool SilkEnch;
+        public bool WhiteKnightEnch;
 
         public int TemplarCD = 360;
         public Item TemplarEnchItem;
@@ -29,6 +30,7 @@ namespace SoulsBetterDLC
             TemplarEnch = false;
             LivingWoodEnch = false;
             SilkEnch = false;
+            WhiteKnightEnch = false;
         }
 
         public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage)

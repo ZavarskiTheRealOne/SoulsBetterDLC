@@ -52,5 +52,12 @@ namespace SoulsBetterDLC
             Player.GetDamage(DamageClass.Generic) += (0.125f * Player.statMana);
             if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Player.GetDamage(DamageClass.Generic) += (0.125f * Player.statMana);
         }
+
+        public void WhiteKnightEffect()
+        {
+            WhiteKnightEnch = true;
+            if (Main.time % 60 == 0)
+                Main.NewText(Player.nearbyActiveNPCs);
+        }
     }
 }
