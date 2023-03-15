@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
     [JITWhenModsEnabled("ThoriumMod")]
     public class LodeStoneEnchant : BaseDLCEnchant
     {
-        public override string ModName => "Thorium";
+        public override string ModName => "ThoriumMod";
         public override string wizardEffect => "";
         protected override Color nameColor => Color.Brown;
 
@@ -34,24 +34,23 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         }
     }
 
-    public class LodeStoneEffectGlobalItem : GlobalItem
-    {
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.sentry;
-        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
-            if (modPlayer.LodeStoneEnch)
-            {
-                Main.NewText("ShootCond1");
-                if (Main.projectile[modPlayer.LodeStonePlatform].ModProjectile is LodeStonePlatform platform)
-                {
-                    Main.NewText("ShootCond2");
-                    if (platform.TryAddSentryToPlatform(Main.MouseWorld, player)) return false;
-                }
-            }
-            Main.NewText("ShootCond0");
-            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
-        }
-    }
+    //public class LodeStoneEffectGlobalItem : GlobalItem
+    //{
+    //    public override bool InstancePerEntity => true;
+    //    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.sentry;
+    //    public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    //    {
+    //        if (!base.Shoot(item, player, source, position, velocity, type, damage, knockback)) return false;
+
+    //        SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+    //        if (modPlayer.LodeStoneEnch)
+    //        {
+    //            if (Main.projectile[modPlayer.LodeStonePlatform].ModProjectile is LodeStonePlatform platform)
+    //            {
+    //                if (platform.TryAddSentryToPlatform(LodeStoneHeldSentry.LastSpawnedSentryProjectile, Main.MouseWorld, player)) return false;
+    //            }
+    //        }
+    //        return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
+    //    }
+    //}
 }
