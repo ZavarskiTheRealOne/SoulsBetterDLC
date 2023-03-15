@@ -49,15 +49,14 @@ namespace SoulsBetterDLC
         {
             SilkEnch = true;
             if (Player.statMana >= Player.statManaMax * 0.95) return; // so you dont get boosts with just full mana
-            Player.GetDamage(DamageClass.Generic) += (0.125f * Player.statMana);
-            if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Player.GetDamage(DamageClass.Generic) += (0.125f * Player.statMana);
+            Player.GetDamage(DamageClass.Generic) += (0.0025f * Player.statMana);
+            if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Player.GetDamage(DamageClass.Generic) += (0.0025f * Player.statMana);
         }
 
         public void WhiteKnightEffect()
         {
             WhiteKnightEnch = true;
-            if (Main.time % 60 == 0)
-                Main.NewText(Player.nearbyActiveNPCs);
+            Player.GetDamage(DamageClass.Generic) += (0.075f * Player.townNPCs);
         }
     }
 }
