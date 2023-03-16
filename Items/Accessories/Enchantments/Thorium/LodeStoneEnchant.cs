@@ -4,6 +4,7 @@ using SoulsBetterDLC;
 using Microsoft.Xna.Framework;
 using SoulsBetterDLC.Projectiles;
 using Terraria.DataStructures;
+using System;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
@@ -17,7 +18,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Lodestone Enchantment");
-            Tooltip.SetDefault("Summons a floating lodestone platform capable of holding a limited number of sentries");
+            Tooltip.SetDefault("Summons several floating lodestone platforms capable of holding a 1 sentry each");
         }
 
         public override void SafeUpdateAccessory(Player player, bool hideVisual)
@@ -27,30 +28,23 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             SoulsBetterDLCPlayer modplayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             modplayer.LodeStoneEnch = true;
 
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<LodeStonePlatform>()] == 0)
+            int maxPlatforms = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 3 : 2;
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<LodeStonePlatform>()] != maxPlatforms)
             {
-                modplayer.LodeStonePlatform = Projectile.NewProjectile(new EntitySource_ItemUse(player, Item), player.Center, Vector2.Zero, ModContent.ProjectileType<LodeStonePlatform>(), 0, 0, player.whoAmI);
+                foreach (int index in modplayer.LodeStonePlatforms) Main.projectile[index].Kill();
+                modplayer.LodeStonePlatforms = new();
+                for (int i = 0; i < maxPlatforms; i++)
+                {
+                    modplayer.LodeStonePlatforms.Add(Projectile.NewProjectile(new EntitySource_ItemUse(player, Item),
+                                                                              player.Center,
+                                                                              Vector2.Zero,
+                                                                              ModContent.ProjectileType<LodeStonePlatform>(),
+                                                                              0,
+                                                                              0,
+                                                                              player.whoAmI,
+                                                                              i * ((2 * MathF.PI) / maxPlatforms)));
+                }
             }
         }
     }
-
-    //public class LodeStoneEffectGlobalItem : GlobalItem
-    //{
-    //    public override bool InstancePerEntity => true;
-    //    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.sentry;
-    //    public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-    //    {
-    //        if (!base.Shoot(item, player, source, position, velocity, type, damage, knockback)) return false;
-
-    //        SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
-    //        if (modPlayer.LodeStoneEnch)
-    //        {
-    //            if (Main.projectile[modPlayer.LodeStonePlatform].ModProjectile is LodeStonePlatform platform)
-    //            {
-    //                if (platform.TryAddSentryToPlatform(LodeStoneHeldSentry.LastSpawnedSentryProjectile, Main.MouseWorld, player)) return false;
-    //            }
-    //        }
-    //        return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
-    //    }
-    //}
 }

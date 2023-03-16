@@ -7,6 +7,7 @@ using Terraria.GameInput;
 using SoulsBetterDLC.Items.Accessories;
 using System;
 using SoulsBetterDLC.Buffs;
+using System.Collections.Generic;
 
 namespace SoulsBetterDLC
 {
@@ -23,7 +24,7 @@ namespace SoulsBetterDLC
         public int TemplarCD = 360;
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
-        public int LodeStonePlatform;
+        public List<int> LodeStonePlatforms = new();
 
         public void Thorium_ResetEffects()
         {
