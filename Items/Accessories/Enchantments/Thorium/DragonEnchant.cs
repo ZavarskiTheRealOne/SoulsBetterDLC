@@ -34,7 +34,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                                         player.Center,
                                         Vector2.Zero,
                                         ModContent.ProjectileType<DragonMinionHead>(),
-                                        0,
+                                        45,
                                         0,
                                         player.whoAmI);
             }

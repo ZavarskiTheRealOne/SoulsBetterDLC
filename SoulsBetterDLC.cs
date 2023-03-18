@@ -9,25 +9,17 @@ namespace SoulsBetterDLC
 {
     public class SoulsBetterDLC : Mod
     {
+        internal static bool CalamityLoaded;
+        internal static bool ThoriumLoaded;
         internal static ModKeybind LivingWoodBind;
 
         public override void Load()
         {
+            ThoriumLoaded = ModLoader.HasMod("ThoriumMod");
+            CalamityLoaded = ModLoader.HasMod("CalamityMod");
+
             LivingWoodBind = KeybindLoader.RegisterKeybind(this, "Living wood roots", Keys.P);
         }
-        /*public class Keybinds: ModSystem
-        {
-            internal static ModKeybind UmbraVamps;
-
-            public override void Load()
-            {
-                UmbraVamps = KeybindLoader.RegisterKeybind(Mod, "Umbraphile Bats", "Y");
-            }
-
-            public override void Unload()
-            {
-                UmbraVamps = null;
-            }*/
     }
 
     [JITWhenModsEnabled("CalamityMod")]
