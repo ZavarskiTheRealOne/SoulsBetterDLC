@@ -5,53 +5,81 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria.DataStructures;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SoulsBetterDLC.Projectiles
 {
+	public struct DragonData
+    {
+		public int Parent = -1, Child = -1, Head = -1, position = -1;
+		public static DragonData FromProjIndex(int i)
+        {
+			Projectile proj = Main.projectile[i];
+			if (DragonMinion.DragonTypes.Contains(proj.type) && proj.ModProjectile is DragonMinion dragonPiece)
+			{
+				return dragonPiece.data;
+			}
+			else return new();
+        }
+
+		public DragonData(int h, int i, int p = -1, int c = -1)
+        {
+			Parent = p;
+			Child = c;
+			Head = h;
+			position = i;
+        }
+	}
     public abstract class DragonMinion : ModProjectile
     {
-		static int HeadType => ModContent.ProjectileType<DragonMinionHead>();
-		static int BodyType1 => ModContent.ProjectileType<DragonMinionBody>();
-		static int BodyType2 => ModContent.ProjectileType<DragonMinionBody>();
-		static int TailType => ModContent.ProjectileType<DragonMinionTail>();
-		static List<int> DragonTypes => new() { HeadType, BodyType1, BodyType2, TailType };
+		public static int HeadType => ModContent.ProjectileType<DragonMinionHead>();
+		public static int BodyType1 => ModContent.ProjectileType<DragonMinionBody>();
+		public static int BodyType2 => ModContent.ProjectileType<DragonMinionBody2>();
+		public static int TailType => ModContent.ProjectileType<DragonMinionTail>();
+		public static List<int> DragonTypes => new() { HeadType, BodyType1, BodyType2, TailType };
+
+		public DragonData data;
 
 		// is this allowed? its vanilla code thats been adapted and made more readable but its still like 200 lines
 		public static void DragonAI(DragonMinion modProjectile)
         {
 			Player player = Main.player[modProjectile.Projectile.owner];
 			SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
-			if ((int)Main.timeForVisualEffects % 120 == 0)
-			{
-				modProjectile.Projectile.netUpdate = true;
-			}
+            if ((int)Main.timeForVisualEffects % 120 == 0)
+            {
+                modProjectile.Projectile.netUpdate = true;
+            }
 
-			// kill if player dies or doesnt have the enchant on
-			if (modPlayer.DragonEnch && player.active && !player.dead)
+            // kill if player dies or doesnt have the enchant on
+            if (modPlayer.DragonEnch && player.active && !player.dead)
 			{
 				modProjectile.Projectile.timeLeft = 2;
 			}
-			else return;
+			else
+			{
+				Main.NewText("Bad player test");
+				return;
+            }
 
 			bool Head = modProjectile.Type == HeadType;
 			int num17 = 30; // some kind of width scaling factor
 
-			// spawn dust particles
-			if (Main.rand.NextBool(30))
-			{
-				int num18;
-				num18 = Dust.NewDust(modProjectile.Projectile.position, modProjectile.Projectile.width, modProjectile.Projectile.height, DustID.IceTorch, 0f, 0f, 0, default, 2f);
-				Main.dust[num18].noGravity = true;
-				Main.dust[num18].fadeIn = 2f;
-				Point point;
-				point = Main.dust[num18].position.ToTileCoordinates();
-				if (WorldGen.InWorld(point.X, point.Y, 5) && WorldGen.SolidTile(point.X, point.Y))
-				{
-					Main.dust[num18].noLight = true;
-				}
-			}
+            // spawn dust particles
+            if (Main.rand.NextBool(30))
+            {
+                int num18;
+                num18 = Dust.NewDust(modProjectile.Projectile.position, modProjectile.Projectile.width, modProjectile.Projectile.height, DustID.GreenTorch, 0f, 0f, 0, default, 2f);
+                Main.dust[num18].noGravity = true;
+                Main.dust[num18].fadeIn = 2f;
+                Point point;
+                point = Main.dust[num18].position.ToTileCoordinates();
+                if (WorldGen.InWorld(point.X, point.Y, 5) && WorldGen.SolidTile(point.X, point.Y))
+                {
+                    Main.dust[num18].noLight = true;
+                }
+            }
 
-			if (Head)
+            if (Head)
 			{
 				Vector2 playerPos = player.Center;
 				float maxTargetedNPCDistance = 700f;
@@ -94,8 +122,8 @@ namespace SoulsBetterDLC.Projectiles
 					target = Main.npc[targetedNPCIndex];
 					Vector2 toTarget;
 					toTarget = target.Center - modProjectile.Projectile.Center;
-					(toTarget.X > 0f).ToDirectionInt(); // what is this
-					(toTarget.Y > 0f).ToDirectionInt(); // I don't want to remove it incase it does something
+					//(toTarget.X > 0f).ToDirectionInt(); // what is this
+					//(toTarget.Y > 0f).ToDirectionInt(); // I don't want to remove it incase it does something
 
 					// velocity multiplier
 					float scaleFactor;
@@ -168,7 +196,6 @@ namespace SoulsBetterDLC.Projectiles
 					}
 				}
 
-
 				modProjectile.Projectile.rotation = modProjectile.Projectile.velocity.ToRotation() + MathF.PI / 2f;
 				int direction = modProjectile.Projectile.direction;
 				modProjectile.Projectile.direction = (modProjectile.Projectile.spriteDirection = ((modProjectile.Projectile.velocity.X > 0f) ? 1 : (-1)));
@@ -177,66 +204,70 @@ namespace SoulsBetterDLC.Projectiles
 					modProjectile.Projectile.netUpdate = true;
 				}
 
-				// some kind of weird scaling stuff, not sure what localAI means here
-				float num12 = MathHelper.Clamp(modProjectile.Projectile.localAI[0], 0f, 50f);
-				modProjectile.Projectile.position = modProjectile.Projectile.Center;
-				modProjectile.Projectile.scale = 1f + num12 * 0.01f;
-				modProjectile.Projectile.width = (modProjectile.Projectile.height = (int)((float)num17 * modProjectile.Projectile.scale));
+                // some kind of weird scaling stuff, not sure what localAI means here
+                float num12 = MathHelper.Clamp(modProjectile.Projectile.localAI[0], 0f, 50f);
+                modProjectile.Projectile.position = modProjectile.Projectile.Center;
+                modProjectile.Projectile.scale = 1f + num12 * 0.01f;
+                modProjectile.Projectile.width = (modProjectile.Projectile.height = (int)((float)num17 * modProjectile.Projectile.scale));
 				modProjectile.Projectile.Center = modProjectile.Projectile.position;
 
-				// fading?
-				if (modProjectile.Projectile.alpha > 0)
-				{
-					for (int j = 0; j < 2; j++)
-					{
-						int num13;
-						num13 = Dust.NewDust(new Vector2(modProjectile.Projectile.position.X, modProjectile.Projectile.position.Y), modProjectile.Projectile.width, modProjectile.Projectile.height, 135, 0f, 0f, 100, default(Color), 2f);
-						Main.dust[num13].noGravity = true;
-						Main.dust[num13].noLight = true;
-					}
-					modProjectile.Projectile.alpha -= 42;
-					if (modProjectile.Projectile.alpha < 0)
-					{
-						modProjectile.Projectile.alpha = 0;
-					}
-				}
-			}
+                // fading?
+                if (modProjectile.Projectile.alpha > 0)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        int num13;
+                        num13 = Dust.NewDust(new Vector2(modProjectile.Projectile.position.X, modProjectile.Projectile.position.Y), modProjectile.Projectile.width, modProjectile.Projectile.height, DustID.GreenTorch, 0f, 0f, 100, default(Color), 2f);
+                        Main.dust[num13].noGravity = true;
+                        Main.dust[num13].noLight = true;
+                    }
+                    modProjectile.Projectile.alpha -= 42;
+                    if (modProjectile.Projectile.alpha < 0)
+                    {
+                        modProjectile.Projectile.alpha = 0;
+                    }
+                }
+            }
 			// not head
 			else
 			{
 				bool flag2 = false;
-				Vector2 leaderPos = Vector2.Zero;
-				float leaderRotation = 0f;
+				Vector2 parentPos = Vector2.Zero;
+				float parentRotation = 0f;
 				float scaleFactor2 = 0f;
 				float scaleFactor3 = 1f;
-				if (modProjectile.Projectile.ai[1] == 1f)
-				{
-					modProjectile.Projectile.ai[1] = 0f;
-					modProjectile.Projectile.netUpdate = true;
-				}
+				//if (modProjectile.Projectile.ai[1] == 1f)
+				//{
+				//	modProjectile.Projectile.ai[1] = 0f;
+				//	modProjectile.Projectile.netUpdate = true;
+				//}
 
-				int byUUID = Projectile.GetByUUID(modProjectile.Projectile.owner, (int)modProjectile.Projectile.ai[0]);
+				// not sure if byUUID is nessicary or what it does
+				int byUUID = Projectile.GetByUUID(modProjectile.Projectile.owner, modProjectile.data.Parent);
 				if (Main.projectile.IndexInRange(byUUID))
 				{
-					Projectile following = Main.projectile[byUUID];
-					if (following.active && (following.type == HeadType || following.type == BodyType1 || following.type == BodyType2))
+					Projectile parent = Main.projectile[byUUID];
+					if (parent.active && (parent.type == HeadType || parent.type == BodyType1 || parent.type == BodyType2))
 					{
 						flag2 = true;
-						leaderPos = following.Center;
-						leaderRotation = following.rotation;
-						scaleFactor3 = MathHelper.Clamp(following.scale, 0f, 50f);
+						parentPos = parent.Center;
+						parentRotation = parent.rotation;
+						scaleFactor3 = MathHelper.Clamp(parent.scale, 0f, 50f);
 						scaleFactor2 = 16f;
-						following.localAI[0] = modProjectile.Projectile.localAI[0] + 1f;
+						// parent.localAI[0] = modProjectile.Projectile.localAI[0] + 1f; ??
 
-						if (following.type != HeadType)
+						if (parent.type != HeadType)
 						{
-							following.localAI[1] = modProjectile.Projectile.whoAmI;
+							DragonData parentData = DragonData.FromProjIndex(parent.whoAmI);
+							// TODO: test is this references data correctly
+							parentData.Child = modProjectile.Projectile.whoAmI; // parent's child should be us
 						}
 
 						// kill if there's only a head and tail
-						if (modProjectile.Projectile.owner == Main.myPlayer && modProjectile.Projectile.type == TailType && following.type == HeadType)
+						if (modProjectile.Projectile.owner == Main.myPlayer && modProjectile.Projectile.type == TailType && parent.type == HeadType)
 						{
-							following.Kill();
+							Main.NewText("TailHead test");
+							parent.Kill();
 							modProjectile.Projectile.Kill();
 							return;
 						}
@@ -244,61 +275,64 @@ namespace SoulsBetterDLC.Projectiles
 				}
 				if (!flag2)
 				{
+					Main.NewText("Detached");
 					// find the projectile this is meant to be following
 					for (int k = 0; k < 1000; k++)
 					{
-						Projectile projectile2;
-						projectile2 = Main.projectile[k];
-						if (projectile2.active && projectile2.owner == modProjectile.Projectile.owner && DragonTypes.Contains(projectile2.type) && projectile2.localAI[1] == modProjectile.Projectile.ai[0])
+						Projectile potentialParent;
+						potentialParent = Main.projectile[k];
+						DragonData potentialParentData = DragonData.FromProjIndex(k);
+						if (potentialParent.active && potentialParent.owner == modProjectile.Projectile.owner && DragonTypes.Contains(potentialParent.type) && potentialParentData.Child == modProjectile.Projectile.whoAmI)
 						{
-							modProjectile.Projectile.ai[0] = projectile2.projUUID;
-							projectile2.localAI[1] = modProjectile.Projectile.whoAmI;
+							modProjectile.data.Parent = potentialParent.projUUID;
 							modProjectile.Projectile.netUpdate = true;
+							Main.NewText("Attached");
+							break;
 						}
 					}
 					return;
 				}
 
 				// if it's visible create dust
-				if (modProjectile.Projectile.alpha > 0)
-				{
-					for (int l = 0; l < 2; l++)
-					{
-						int num15;
-						num15 = Dust.NewDust(modProjectile.Projectile.position, modProjectile.Projectile.width, modProjectile.Projectile.height, DustID.IceTorch, 0f, 0f, 100, default(Color), 2f);
-						Main.dust[num15].noGravity = true;
-						Main.dust[num15].noLight = true;
-					}
-				}
+				//if (modProjectile.Projectile.alpha > 0)
+				//{
+				//	for (int l = 0; l < 2; l++)
+				//	{
+				//		int num15;
+				//		num15 = Dust.NewDust(modProjectile.Projectile.position, modProjectile.Projectile.width, modProjectile.Projectile.height, DustID.IceTorch, 0f, 0f, 100, default(Color), 2f);
+				//		Main.dust[num15].noGravity = true;
+				//		Main.dust[num15].noLight = true;
+				//	}
+				//}
 				// fading?
-				modProjectile.Projectile.alpha -= 42;
-				if (modProjectile.Projectile.alpha < 0)
-				{
-					modProjectile.Projectile.alpha = 0;
-				}
+				//modProjectile.Projectile.alpha -= 42;
+				//if (modProjectile.Projectile.alpha < 0)
+				//{
+				//	modProjectile.Projectile.alpha = 0;
+				//}
 
 				modProjectile.Projectile.velocity = Vector2.Zero;
-				Vector2 toLeader = leaderPos - modProjectile.Projectile.Center;
+				Vector2 toParent = parentPos - modProjectile.Projectile.Center;
 
 				// adjust target rotation to not be too far from our current rotation
-				if (leaderRotation != modProjectile.Projectile.rotation)
+				if (parentRotation != modProjectile.Projectile.rotation)
 				{
 					float num16;
-					num16 = MathHelper.WrapAngle(leaderRotation - modProjectile.Projectile.rotation);
-					toLeader = toLeader.RotatedBy(num16 * 0.1f);
+					num16 = MathHelper.WrapAngle(parentRotation - modProjectile.Projectile.rotation);
+					toParent = toParent.RotatedBy(num16 * 0.1f);
 				}
 
-				modProjectile.Projectile.rotation = toLeader.ToRotation() + (float)Math.PI / 2f; // + 90 degrees anti(?)Clockwise
+				modProjectile.Projectile.rotation = toParent.ToRotation() + (float)Math.PI / 2f; // + 90 degrees anti(?)Clockwise
 				modProjectile.Projectile.position = modProjectile.Projectile.Center;
 				modProjectile.Projectile.scale = scaleFactor3;
 				modProjectile.Projectile.width = (modProjectile.Projectile.height = (int)(num17 * modProjectile.Projectile.scale));
 				modProjectile.Projectile.Center = modProjectile.Projectile.position;
-				if (toLeader != Vector2.Zero)
+				if (toParent != Vector2.Zero)
 				{
 					// actually moving
-					modProjectile.Projectile.Center = leaderPos - Vector2.Normalize(toLeader) * scaleFactor2 * scaleFactor3;
+					modProjectile.Projectile.Center = parentPos - Vector2.Normalize(toParent) * scaleFactor2 * scaleFactor3;
 				}
-				modProjectile.Projectile.spriteDirection = ((toLeader.X > 0f) ? 1 : (-1));
+				modProjectile.Projectile.spriteDirection = ((toParent.X > 0f) ? 1 : (-1));
 			}
 
 			// making sure it stays in the world
@@ -308,55 +342,100 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void OnSpawn(IEntitySource source)
 		{
+			if (Projectile.type == TailType)
+            {
+				Main.NewText("tail spawned");
+				return;
+            }
+
+			data.position = (int)Projectile.ai[0];
 			Player player = Main.player[Projectile.owner];
 			int length = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 4 : 6;
+			if (Projectile.ai[0] >= length)
+			{
+				SpawnSegment(TailType);
+				return;
+			}
+
+			// no i cant use a switch
 			if (Projectile.type == HeadType)
             {
-				Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Vector2.Zero, BodyType1, 0, 0, Projectile.owner, 0f, Projectile.whoAmI);
+				Main.NewText("head spawned");
+				data = new(Projectile.whoAmI, 0, -1);
+				SpawnSegment(BodyType1);
             }
-			else if (Projectile.type == BodyType1)
-            {
-				if (Projectile.ai[0] < length - 1)
-					Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Vector2.Zero, BodyType2, 0, 0, Projectile.owner, Projectile.ai[0]++, Projectile.whoAmI);
-				else Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Vector2.Zero, TailType, 0, 0, Projectile.owner, Projectile.ai[0]++, Projectile.whoAmI);
-			}
-			else if (Projectile.type == BodyType2)
+            else if (Projectile.type == BodyType1)
 			{
-				if (Projectile.ai[0] < length - 1)
-					Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Vector2.Zero, BodyType1, 0, 0, Projectile.owner, Projectile.ai[0]++, Projectile.whoAmI);
-				else Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Vector2.Zero, TailType, 0, 0, Projectile.owner, Projectile.ai[0]++, Projectile.whoAmI);
+				Main.NewText("body spawned");
+				SpawnSegment(BodyType2);
 			}
+            else if (Projectile.type == BodyType2)
+			{
+				Main.NewText("body spawned");
+				SpawnSegment(BodyType1);
+			}
+        }
+
+		void SpawnSegment(int type)
+        {
+			// using ai[0] to pass in position so it doesnt shit itself before we can assign a value ot its data
+			int i = Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Vector2.Zero, type, 0, 0, Projectile.owner, data.position + 1);
+			data.Child = i;
+			DragonMinion child = Main.projectile[i].ModProjectile as DragonMinion;
+			child.data.Parent = Projectile.whoAmI;
+			child.data.Head = data.Head;
 		}
 
 		public override void AI()
 		{
 			DragonAI(this);
 		}
-	}
+    }
 
 	public class DragonMinionHead : DragonMinion
     {
         public override void SetDefaults()
 		{
-			Projectile.CloneDefaults(ProjectileID.StardustDragon1);
+			//Projectile.CloneDefaults(ProjectileID.StardustDragon1);
 			Projectile.aiStyle = -1;
+			Projectile.width = 32;
+			Projectile.height = 66;
+			Projectile.tileCollide = false;
+			Projectile.damage = 45;
 		}
-    }
+	}
     public class DragonMinionBody : DragonMinion
 	{
 		public override void SetDefaults()
 		{
-			Projectile.CloneDefaults(ProjectileID.StardustDragon2);
+			//Projectile.CloneDefaults(ProjectileID.StardustDragon2);
 			Projectile.aiStyle = -1;
+			Projectile.width = 32;
+			Projectile.height = 66;
+			Projectile.tileCollide = false;
 		}
 	}
-
-    public class DragonMinionTail : DragonMinion
+	public class DragonMinionBody2 : DragonMinion
 	{
 		public override void SetDefaults()
 		{
-			Projectile.CloneDefaults(ProjectileID.StardustDragon4);
+			//Projectile.CloneDefaults(ProjectileID.StardustDragon2);
 			Projectile.aiStyle = -1;
+			Projectile.width = 32;
+			Projectile.height = 66;
+			Projectile.tileCollide = false;
+		}
+	}
+
+	public class DragonMinionTail : DragonMinion
+	{
+		public override void SetDefaults()
+		{
+			//Projectile.CloneDefaults(ProjectileID.StardustDragon4);
+			Projectile.aiStyle = -1;
+			Projectile.width = 32;
+			Projectile.height = 66;
+			Projectile.tileCollide = false;
 		}
 	}
 }
