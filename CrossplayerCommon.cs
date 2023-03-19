@@ -8,24 +8,32 @@ namespace SoulsBetterDLC
 {
     public partial class SoulsBetterDLCPlayer : ModPlayer
     {
-        public DamageClass GetHighestDamageBonus(bool thorium, bool calamity)
+        /// <summary>
+        /// Dictionary of all the damage classes this player has bonuses in and the additive (%) bonus of that class.
+        /// </summary>
+        public Dictionary<DamageClass, float> GetDamageBonuses(bool thorium, bool calamity)
         {
-            List<DamageClass> classes = new() { DamageClass.Melee, DamageClass.Magic, DamageClass.Ranged, DamageClass.Summon };
+            Dictionary<DamageClass, float> classes = new();
+            classes.Add(DamageClass.Generic, Player.GetDamage(DamageClass.Generic).Additive);
+            classes.Add(DamageClass.Melee, Player.GetDamage(DamageClass.Melee).Additive);
+            classes.Add(DamageClass.Magic, Player.GetDamage(DamageClass.Magic).Additive);
+            classes.Add(DamageClass.Ranged, Player.GetDamage(DamageClass.Ranged).Additive);
+            classes.Add(DamageClass.Summon, Player.GetDamage(DamageClass.Summon).Additive);
             if (calamity && SoulsBetterDLC.CalamityLoaded) AddCalamityClassesForSafety(ref classes);
             if (thorium && SoulsBetterDLC.ThoriumLoaded) AddThoriumClassesForSafety(ref classes);
-            classes.Sort(new Comparison<DamageClass>((a, b) => Player.GetDamage(a).Additive > Player.GetDamage(a).Additive ? 1 : (Player.GetDamage(a).Additive == Player.GetDamage(a).Additive ? 0 : -1)));
-            return classes[classes.Count];
+            return classes;
         }
 
-        void AddThoriumClassesForSafety(ref List<DamageClass> list) 
-        { 
-            list.Add(ThoriumMod.HealerDamage.Instance);
-            list.Add(DamageClass.Throwing);
-            list.Add(ThoriumMod.BardDamage.Instance);
-        }
-        void AddCalamityClassesForSafety(ref List<DamageClass> list)
+        void AddThoriumClassesForSafety(ref Dictionary<DamageClass, float> dict) 
         {
-            list.Add(DamageClass.Throwing); // i think this is what calamity uses for rogue?
+            dict.Add(ThoriumMod.HealerDamage.Instance, Player.GetDamage(ThoriumMod.HealerDamage.Instance).Additive);
+            dict.Add(ThoriumMod.BardDamage.Instance, Player.GetDamage(ThoriumMod.BardDamage.Instance).Additive);
+            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
+        }
+        void AddCalamityClassesForSafety(ref Dictionary<DamageClass, float> dict)
+        {
+            // i think this is what calamity uses for rogue?
+            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
         }
 
         public override void ResetEffects()
