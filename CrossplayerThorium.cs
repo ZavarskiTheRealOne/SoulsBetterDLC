@@ -21,10 +21,14 @@ namespace SoulsBetterDLC
         public bool WhiteKnightEnch;
         public bool LodeStoneEnch;
         public bool DragonEnch;
+        public bool SteelEnch;
+        public bool DarkSteelEnch;
 
-        public int TemplarCD = 360;
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
+        public Item SteelEnchItem;
+
+        public int TemplarCD = 360;
         public List<int> LodeStonePlatforms = new();
 
         public void Thorium_ResetEffects()
@@ -37,6 +41,12 @@ namespace SoulsBetterDLC
             WhiteKnightEnch = false;
             LodeStoneEnch = false;
             DragonEnch = false;
+            SteelEnch = false;
+            DarkSteelEnch = false;
+
+            TemplarEnchItem = null;
+            LivingWoodEnchItem = null;
+            SteelEnchItem = null;
         }
 
         public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage)
@@ -53,6 +63,10 @@ namespace SoulsBetterDLC
             if (SoulsBetterDLC.LivingWoodBind.JustPressed)
             {
                 LivingWoodKey();
+            }
+            if (SoulsBetterDLC.SteelParryBind.JustPressed)
+            {
+                ParryKey();
             }
         }
 

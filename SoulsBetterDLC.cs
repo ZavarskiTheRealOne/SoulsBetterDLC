@@ -12,13 +12,20 @@ namespace SoulsBetterDLC
         internal static bool CalamityLoaded;
         internal static bool ThoriumLoaded;
         internal static ModKeybind LivingWoodBind;
+        internal static ModKeybind SteelParryBind;
 
         public override void Load()
         {
             ThoriumLoaded = ModLoader.HasMod("ThoriumMod");
             CalamityLoaded = ModLoader.HasMod("CalamityMod");
 
+            if (ThoriumLoaded) Thorium_Load();
+        }
+
+        public void Thorium_Load()
+        {
             LivingWoodBind = KeybindLoader.RegisterKeybind(this, "Living wood roots", Keys.P);
+            SteelParryBind = KeybindLoader.RegisterKeybind(this, "Steel parry", Keys.F);
         }
     }
 

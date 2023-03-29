@@ -58,5 +58,18 @@ namespace SoulsBetterDLC
             WhiteKnightEnch = true;
             Player.GetDamage(DamageClass.Generic) += (0.075f * Player.townNPCs);
         }
+
+        public void ParryKey()
+        {
+            if (SteelEnchItem == null || Main.myPlayer != Player.whoAmI) return;
+
+            if (!Player.HasBuff<SteelParry_CD>())
+            {   
+                Player.AddBuff(ModContent.BuffType<SteelParry_CD>(), 600);
+
+                float rot = Player.Center.DirectionTo(Main.MouseWorld).ToRotation();
+                Projectile.NewProjectile(Player.GetSource_Accessory(SteelEnchItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Steel_Parry>(), 0, 0, Player.whoAmI, DarkSteelEnch ? 1f : 0f, rot);
+            }
+        }
     }
 }
