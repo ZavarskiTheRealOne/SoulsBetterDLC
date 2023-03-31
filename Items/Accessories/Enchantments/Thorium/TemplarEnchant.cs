@@ -20,7 +20,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Templar Enchantment");
+            base.SetStaticDefaults();
             Tooltip.SetDefault($"Occasionally summons holy fire from the sky above the cursor upon when hitting an enemy that heals allys and damages enemies");
         }
 

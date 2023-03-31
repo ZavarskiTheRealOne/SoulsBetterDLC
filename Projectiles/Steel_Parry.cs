@@ -23,7 +23,6 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            // note that we pass the direction the player is 'looking' (mouse position) into here as its initial velocity.
             IsDarkSteel = Projectile.ai[0] != 0f;
             Projectile.rotation = Projectile.ai[1];
         }

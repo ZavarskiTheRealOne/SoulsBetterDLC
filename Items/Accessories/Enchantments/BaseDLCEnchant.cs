@@ -9,7 +9,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
 {
     public abstract class BaseDLCEnchant : CrossModItem
     {
-		#region BaseEnchant stuff
 		protected abstract Color nameColor { get; }
         public abstract string wizardEffect { get; }
 
@@ -19,6 +18,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
 
             ItemID.Sets.ItemNoGravity[Type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+
+            if (Name.Contains("Enchant"))
+            {
+                // "ValadiumEnchant" => "Valadium Enchantment"
+                DisplayName.SetDefault(Name.Remove(Name.LastIndexOf("Enchant")) + " Enchantment");
+            }
         }
 
         public override void SetDefaults()
@@ -38,7 +43,5 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
             if (tooltips.TryFindTooltipLine("ItemName", out TooltipLine itemNameLine))
                 itemNameLine.OverrideColor = nameColor;
         }
-		
-		#endregion
     }
 }

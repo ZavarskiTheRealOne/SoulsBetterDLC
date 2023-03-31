@@ -23,13 +23,17 @@ namespace SoulsBetterDLC
         public bool DragonEnch;
         public bool SteelEnch;
         public bool DarkSteelEnch;
+        public bool ValadiumEnch;
 
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
         public Item SteelEnchItem;
+        public Item ValadiumEnchItem;
 
-        public int TemplarCD = 360;
         public List<int> LodeStonePlatforms = new();
+
+        internal int TemplarCD = 360;
+        internal int ValadiumCD = 240;
 
         public void Thorium_ResetEffects()
         {
@@ -43,10 +47,12 @@ namespace SoulsBetterDLC
             DragonEnch = false;
             SteelEnch = false;
             DarkSteelEnch = false;
+            ValadiumEnch = false;
 
             TemplarEnchItem = null;
             LivingWoodEnchItem = null;
             SteelEnchItem = null;
+            ValadiumEnchItem = null;
         }
 
         public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage)
@@ -55,6 +61,11 @@ namespace SoulsBetterDLC
             {
                 TemplarCD = 360;
                 Items.Accessories.Enchantments.Thorium.TemplarEnchant.summonHolyFire(Player);
+            }
+            if (ValadiumEnch && ValadiumCD == 0)
+            {
+                ValadiumCD = 240;
+                Items.Accessories.Enchantments.Thorium.ValadiumEnchant.SummonChunk(Player);
             }
         }
 
