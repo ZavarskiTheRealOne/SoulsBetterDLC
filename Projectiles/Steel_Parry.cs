@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Thorium;
 using System;
+using Terraria.Audio;
 
 namespace SoulsBetterDLC.Projectiles
 {
@@ -76,23 +77,27 @@ namespace SoulsBetterDLC.Projectiles
         // oops i accidentally used something i learned in school
         internal static void HandleParryDirection(Projectile proj, Player player, float parryRotation)
         {
-            CombatText.NewText(new((int)(player.position.X - 16), (int)(player.position.Y - 48), (player.width + 32), 32), Color.White, "+Parried");
             Vector2 direction = proj.DirectionTo(player.Center);
             float rotationTo = direction.ToRotation();
 
-            // if the projectile is close enough to where we aimed the parry, the projectile should reverse its direction rather than simply bouncing. 
+            // if the projectile is close enough to where we aimed the parry, the projectile should go in the direction of the cursor rather than simply bouncing. 
             // In this case, allowing a 90 degree range.
             if (MathF.Abs(MathHelper.WrapAngle(MathF.PI + rotationTo) - MathHelper.WrapAngle(parryRotation)) < (Math.PI / 4))
             {
-                Main.NewText("Accurate parry");
-                proj.velocity *= -2;
-                return;
+                CombatText.NewText(new((int)(player.position.X - 16), (int)(player.position.Y - 48), player.width + 32, 32), Color.Orange, "+Parried", true);
+                float mag = proj.velocity.Length();
+                proj.velocity = mag * new Vector2(MathF.Cos(parryRotation), MathF.Sin(parryRotation)); 
+                //proj.velocity *= -2;
             }
+            else
+            {
+                CombatText.NewText(new((int)(player.position.X - 16), (int)(player.position.Y - 48), player.width + 32, 32), Color.White, "+Parried");
 
-            // Finding the conponent of the projectile's velocity parallel to the direction vector (already normalised)
-            Vector2 para = Vector2.Dot(direction, proj.velocity) * direction;
-            // hence, relfecting the projectile relative to the player.
-            proj.velocity -= (2 * para);
+                // Finding the component of the projectile's velocity parallel to the direction vector (already normalised)
+                Vector2 para = Vector2.Dot(direction, proj.velocity) * direction;
+                // hence, relfecting the projectile relative to the player.
+                proj.velocity -= (2 * para);
+            }
         }
     }
 
@@ -106,10 +111,33 @@ namespace SoulsBetterDLC.Projectiles
         {
             if (timeLeft != 0 && explodeOnDeath)
             {
-                Projectile explosion = Projectile.NewProjectileDirect(projectile.GetSource_Death(), projectile.Center, Vector2.Zero, ProjectileID.ExplosiveBullet, (int)(projectile.damage * 0.75f), 5f, projectile.owner);
-                explosion.scale = 2f;
-                explosion.timeLeft = 0;
+                // why did I do this
+                //Projectile explosion = Projectile.NewProjectileDirect(projectile.GetSource_Death(), projectile.Center, Vector2.Zero, ProjectileID.ExplosiveBullet, (int)(projectile.damage * 0.75f), 5f, projectile.owner);
+                //explosion.scale = 2f;
+                //explosion.timeLeft = 0;
+
+                Projectile.NewProjectileDirect(projectile.GetSource_Death(), projectile.Center, Vector2.Zero, ModContent.ProjectileType<MidExplosion>(), (int)(projectile.damage * 0.75f), 5f, projectile.owner);
             }
+        }
+    }
+
+    public class MidExplosion : FargowiltasSouls.Projectiles.Masomode.MoonLordSunBlast
+    {
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Projectile.scale = 1f;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
+            Projectile.usesLocalNPCImmunity = true;
+        }
+
+        public override void AI()
+        {
+            base.AI();
+            Projectile.scale = 1f; // base Ai changes scale which i didn't want.
         }
     }
 }
