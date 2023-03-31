@@ -15,7 +15,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             //name and description
             DisplayName.SetDefault("Bloodflare Enchantment");
-            Tooltip.SetDefault("Drastically boosts your life regen and slightly boosts damage and DR on enemy hits.\nYour attacks have a 25% chance to lifesteal for half of their damage.\nEnemies have a chance to drop a heart on hit and always drop one on death.\n'I don't know dude, I jus- I just drink blood, dude.'");
+            Tooltip.SetDefault("Drastically boosts your life regen and slightly boosts damage and DR on enemy hits.\nEvery 5 seconds you will lifesteal for a fifth of your damage,\nunless it exceeds half of your max health.\nEnemies have a chance to drop a heart on hit and always drop one on death.\n'I don't know dude, I jus- I just drink blood, dude.'");
         }
         public override void SetDefaults()
         {
@@ -23,14 +23,16 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.width = 30;
             Item.height = 34;
             Item.accessory = true;
-            /*if (ModLoader.TryGetMod("CalamityMod", out Mod mod))
+            if (ModLoader.TryGetMod("CalamityMod", out _))
                 Item.rare = ModContent.RarityType<CalamityMod.Rarities.PureGreen>();
-            else */Item.rare = ItemRarityID.Purple;
+            else Item.rare = ItemRarityID.Purple;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().BFCrazierRegen = true;
+            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            SBDPlayer.BFCrazierRegen = true;
+            SBDPlayer.UmbraCrazyRegen = false;
         }
 
         public override void SafeAddRecipes()

@@ -13,7 +13,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     [AutoloadEquip(EquipType.Wings)]
     public class Ruffian_Enchantment : BaseDLCEnchant
     {
-        private bool shouldBoost;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
         protected override Color nameColor => new Color (160, 185, 213);

@@ -12,7 +12,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
 		#region BaseEnchant stuff
 		protected abstract Color nameColor { get; }
         public abstract string wizardEffect { get; }
-
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -20,7 +19,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
             ItemID.Sets.ItemNoGravity[Type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

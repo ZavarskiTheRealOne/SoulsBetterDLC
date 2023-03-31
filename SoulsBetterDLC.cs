@@ -3,6 +3,8 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.ID;
 using System.Collections.Generic;
+using ThoriumMod;
+using CalamityMod.Items.Placeables.Furniture;
 
 namespace SoulsBetterDLC
 {
@@ -23,20 +25,19 @@ namespace SoulsBetterDLC
             }*/
     }
 
-    [JITWhenModsEnabled("CalamityMod")]
+    [JITWhenModsEnabled("CalamityMod", "ThoriumMod")]
     public class RecipeSystem : ModSystem
     {
-        internal bool CalamityLoaded;
-        public override void PostSetupContent()
-        {
-            CalamityLoaded = ModLoader.HasMod("CalamityMod");
-        }
         public override void AddRecipes()
         {
             // Calamity Recipes
-            if (CalamityLoaded)
+            if (ModLoader.HasMod("CalamityMod"))
             {
                 CalamityRecipes();
+            }
+            if (ModLoader.HasMod("ThoriumMod"))
+            {
+                ThoriumRecipes();
             }
         }
         public override void AddRecipeGroups()
@@ -46,9 +47,14 @@ namespace SoulsBetterDLC
                 ItemID.GoldWatch,
                 ItemID.PlatinumWatch);
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyGoldWatch", T3WatchGroup);
-            if (CalamityLoaded)
+
+            if (ModLoader.HasMod("CalamityMod"))
             {
                 CalamityGroups();
+            }
+            if (ModLoader.HasMod("ThoriumMod"))
+            {
+                ThoriumGroups();
             }
         }
         static void CalamityRecipes()
@@ -60,6 +66,7 @@ namespace SoulsBetterDLC
             tocrecipe.AddIngredient(ItemID.RedHusk, 1);
             tocrecipe.AddTile(TileID.Furnaces);
             tocrecipe.Register();
+
             //gladiator's locket
             Recipe glrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.GladiatorsLocket>());
             glrecipe.AddIngredient(ItemID.Marble, 20);
@@ -67,6 +74,7 @@ namespace SoulsBetterDLC
             glrecipe.AddRecipeGroup("SoulsBetterDLC:AnyGoldWatch", 1);
             glrecipe.AddTile(TileID.DemonAltar);
             glrecipe.Register();
+
             //granite core recipe
             Recipe ugcrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.UnstableGraniteCore>());
             ugcrecipe.AddIngredient(ItemID.Granite, 20);
@@ -74,6 +82,7 @@ namespace SoulsBetterDLC
             ugcrecipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.AmidiasSpark>(), 1);
             ugcrecipe.AddTile(TileID.DemonAltar);
             ugcrecipe.Register();
+
             //symbiote recipe
             Recipe fgrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.FungalSymbiote>());
             fgrecipe.AddIngredient(ItemID.GlowingMushroom, 20);
@@ -81,6 +90,7 @@ namespace SoulsBetterDLC
             fgrecipe.AddIngredient(ItemID.ClayPot, 1);
             fgrecipe.AddTile(TileID.LivingLoom);
             fgrecipe.Register();
+
             //tundra leash recipe
             Recipe tlrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Mounts.TundraLeash>());
             tlrecipe.AddRecipeGroup("AnySilverBar", 20);
@@ -88,6 +98,7 @@ namespace SoulsBetterDLC
             tlrecipe.AddIngredient(ItemID.Bunny, 1);
             tlrecipe.AddTile(TileID.CookingPots);
             tlrecipe.Register();
+
             //luxor recipe
             Recipe lgrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.LuxorsGift>());
             lgrecipe.AddIngredient(ItemID.FossilOre, 20);
@@ -95,6 +106,21 @@ namespace SoulsBetterDLC
             lgrecipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.ScuttlersJewel>(), 1);
             lgrecipe.AddTile(TileID.Anvils);
             lgrecipe.Register();
+
+            //effigies recipes
+            Recipe coref = Recipe.Create(ModContent.ItemType<CorruptionEffigy>());
+            coref.AddIngredient(ItemID.EbonstoneBlock, 25);
+            coref.AddIngredient(ItemID.RottenChunk, 5);
+            coref.AddIngredient(ItemID.AngelStatue, 1);
+            coref.AddTile(TileID.DemonAltar);
+            coref.Register();
+
+            Recipe crief = Recipe.Create(ModContent.ItemType<CrimsonEffigy>());
+            crief.AddIngredient(ItemID.CrimstoneBlock, 25);
+            crief.AddIngredient(ItemID.Vertebrae, 5);
+            crief.AddIngredient(ItemID.AngelStatue, 1);
+            crief.AddTile(TileID.DemonAltar);
+            crief.Register();
         }
         static void CalamityGroups()
         {
@@ -102,7 +128,7 @@ namespace SoulsBetterDLC
             RecipeGroup ReaverHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Reaver Headpiece"}",
                 ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadExplore>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadMobility>(),
-                ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadMobility>());
+                ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadTank>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyReaverHelms", ReaverHelmsGroup);
             //daedalus head group
             RecipeGroup DeadalusHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Daedalus Headpiece"}",
@@ -121,7 +147,7 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Bloodflare.BloodflareHeadRogue>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyBloodflareHelms", BloodflareHelmsGroup);
             //victide head group
-            /*RecipeGroup VictideHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Victide Headpiece"}",
+            RecipeGroup VictideHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Victide Headpiece"}",
                 ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadMelee>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadRanged>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Victide.VictideHeadMagic>(),
@@ -135,7 +161,17 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHat>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHelmet>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHeadgear>());
-            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAerospecHelms", AerospecHelmsGroup);*/
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAerospecHelms", AerospecHelmsGroup);
+        }
+
+        static void ThoriumRecipes()
+        { }
+        static void ThoriumGroups()
+        {
+            RecipeGroup T3ShieldsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Silver Shield"}",
+                ModContent.ItemType<ThoriumMod.Items.BasicAccessories.SilverBulwark>(),
+                ModContent.ItemType<ThoriumMod.Items.BasicAccessories.TungstenBulwark>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyT3Shield", T3ShieldsGroup);
         }
     }
 }

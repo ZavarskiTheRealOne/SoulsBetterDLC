@@ -1,9 +1,9 @@
 ﻿using SoulsBetterDLC.Buffs;
 using Terraria;
 using Terraria.ModLoader;
+using SoulsBetterDLC.Projectiles;
 using CalamityMod.Projectiles.Rogue;
 using CalamityMod;
-using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC
@@ -15,22 +15,31 @@ namespace SoulsBetterDLC
         public bool BFCrazierRegen;
         public bool ReaverHage;
         public bool ReaverHageBuff;
-        //public bool ButterBeeKill;
-        //public bool RideOfTheValkyrie;
-        //public bool FearOfTheValkyrie;
+        public bool DoctorBeeKill;
+        public bool RideOfTheValkyrie;
+        public bool FearOfTheValkyrie;
         public bool AyeCicle;
         public bool AyeCicleSmol;
         public bool WulfrumOverpower;
-        //public bool VictideSwimmin;
-        //public bool MolluskSwaggin;
-        //public bool aValkie;
-        //public bool aScarey;
-        //public bool AeroValkyrie;
-        //public bool FearValkyrie;
+        public bool VictideSwimmin;
+        public bool MolluskSwaggin;
+        public bool SulphurBubble;
+        public bool FathomBubble;
+
+        public bool aValkie;
+        public bool aScarey;
+        public bool AeroValkyrie;
+        public bool FearValkyrie;
+        public bool DirtyPop;
+        public bool NastyPop;
+
         public int UmbraBuffTimer;
         public int BloodBuffTimer;
+        public int LifestealCD;
         public int SDIcicleCooldown;
         public int SDIcicleCooldownSmol;
+
+        public Vector2 bubbleOffset;
 
         private void CalamityResEff()
         {
@@ -38,18 +47,21 @@ namespace SoulsBetterDLC
             BFCrazierRegen = false;
             ReaverHage = false;
             ReaverHageBuff = false;
-            //ButterBeeKill = false;
-            //RideOfTheValkyrie = false;
-            //FearOfTheValkyrie = false;
+            DoctorBeeKill = false;
+            RideOfTheValkyrie = false;
+            FearOfTheValkyrie = false;
             AyeCicle = false;
             AyeCicleSmol = false;
             WulfrumOverpower = false;
-            //VictideSwimmin = false;
-            //MolluskSwaggin = false;
-            //aValkie = false;
-            //aScarey = false;
-            //AeroValkyrie = false;
-            //FearValkyrie = false;
+            VictideSwimmin = false;
+            MolluskSwaggin = false;
+            SulphurBubble = false;
+            FathomBubble = false;
+
+            aValkie = false;
+            aScarey = false;
+            AeroValkyrie = false;
+            FearValkyrie = false;
         }
 
         private void CalamityHurt()
@@ -67,11 +79,12 @@ namespace SoulsBetterDLC
         {
             SDIcicleCooldown = 0;
             SDIcicleCooldownSmol = 0;
+            LifestealCD = 0;
         }
         private void CalamityPostUpd()
         { 
             //victide
-            /*if (VictideSwimmin)
+            if (VictideSwimmin)
             {
                 Player.ignoreWater = true;
                 Player.gills = true;
@@ -104,7 +117,6 @@ namespace SoulsBetterDLC
                     }
                 }
             }
-
             //fearmonger
             if (FearOfTheValkyrie)
             {
@@ -122,7 +134,7 @@ namespace SoulsBetterDLC
                         Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center.X, Player.Center.Y, 0f, -1f, ModContent.ProjectileType<Fear_Valkyrie>(), 0, 0f, Main.myPlayer);
                     }
                 }
-            }*/
+            }
 
             //daedalus
             if (AyeCicle)
@@ -140,6 +152,24 @@ namespace SoulsBetterDLC
                         Main.projectile[bigIcicle].frame = Main.rand.Next(5);
                     }
                     SDIcicleCooldown = 10;
+                }
+            }
+            //snow ruffian
+            if (AyeCicleSmol)
+            {
+                if (SDIcicleCooldownSmol > 0)
+                {
+                    SDIcicleCooldownSmol--;
+                }
+                if (SDIcicleCooldownSmol <= 0 && Player.controlJump && !Player.canJumpAgain_Cloud && Player.jump == 0 && Player.velocity.Y != 0f && !Player.mount.Active && !Player.mount.Cart)
+                {
+                    int smallIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center.X, Player.Center.Y, 0f, 2f, ModContent.ProjectileType<FrostShardFriendly>(), 24, 3f, Player.whoAmI, 1f);
+                    if (smallIcicle.WithinBounds(1000))
+                    {
+                        Main.projectile[smallIcicle].DamageType = DamageClass.Generic;
+                        Main.projectile[smallIcicle].frame = Main.rand.Next(5);
+                    }
+                    SDIcicleCooldownSmol = 20;
                 }
             }
 
@@ -165,24 +195,6 @@ namespace SoulsBetterDLC
                     Player.pickSpeed += 0.3f;
                 }
             }
-            //ruffian
-            if (AyeCicleSmol)
-            {
-                if (SDIcicleCooldownSmol > 0)
-                {
-                    SDIcicleCooldownSmol--;
-                }
-                if (SDIcicleCooldownSmol <= 0 && Player.controlJump && !Player.canJumpAgain_Cloud && Player.jump == 0 && Player.velocity.Y != 0f && !Player.mount.Active && !Player.mount.Cart)
-                {
-                    int smallIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center.X, Player.Center.Y, 0f, 2f, ModContent.ProjectileType<FrostShardFriendly>(), 24, 3f, Player.whoAmI, 1f);
-                    if (smallIcicle.WithinBounds(1000))
-                    {
-                        Main.projectile[smallIcicle].DamageType = DamageClass.Generic;
-                        Main.projectile[smallIcicle].frame = Main.rand.Next(5);
-                    }
-                    SDIcicleCooldownSmol = 20;
-                }
-            }
 
             //wulfrum
             if (WulfrumOverpower)
@@ -190,30 +202,60 @@ namespace SoulsBetterDLC
                 if (Player.statLife <= Player.statLifeMax2 * 0.3f)
                     Player.AddBuff(ModContent.BuffType<Wulfrum_Empowerment>(), 2);
             }
+
+            //sulphurous
+            if (SulphurBubble && !FathomBubble)
+            {
+                if (!DirtyPop && !NastyPop)
+                {
+                    bubbleOffset.X = -400 + Main.rand.Next(800);
+                    bubbleOffset.Y = -300 + Main.rand.Next(320);
+                    NPC.NewNPC(Player.GetSource_FromThis(), (int)Player.Center.X, (int)Player.Center.Y, ModContent.NPCType<NPCS.Sulphur_Bubble>(), ai0: Player.whoAmI);
+                    DirtyPop = true;
+                }
+            }
+            //fathom swarmer
+            if (FathomBubble)
+            {
+                if (!NastyPop)
+                {
+                    bubbleOffset.X = -400 + Main.rand.Next(800);
+                    bubbleOffset.Y = -300 + Main.rand.Next(320);
+                    NPC.NewNPC(Player.GetSource_FromThis(), (int)Player.Center.X, (int)Player.Center.Y, ModContent.NPCType<NPCS.Fathom_Bubble>(), ai0: Player.whoAmI);
+                    NastyPop = true;
+                }
+            }
+
+            //umbra and bf timer
+            if (UmbraCrazyRegen || BFCrazierRegen)
+                if (LifestealCD > 0) LifestealCD--;
         }
         private void CalamityOnHit(NPC target, int damage)
         { 
             //just some timer calculations
-            if (damage / 2 <= 180)
+            if (damage / 5 <= 180)
             {
-                UmbraBuffTimer = damage / 2;
-                BloodBuffTimer = damage / 2;
+                UmbraBuffTimer = damage / 5;
+                BloodBuffTimer = damage / 3;
             }
-            else if (damage / 2 > 180 && damage / 2 <= 300)
+            else if (damage / 5 > 180 && damage / 3 <= 300)
             {
                 UmbraBuffTimer = 180;
-                BloodBuffTimer = damage / 2;
+                BloodBuffTimer = damage / 3;
             }
-            else if (damage / 2 > 300)
+            else if (damage / 3 > 300)
                 BloodBuffTimer = 300;
 
             //Umbraphile conditions
             if (UmbraCrazyRegen)
             {
                 Player.AddBuff(ModContent.BuffType<Vampiric_Regeneration>(), UmbraBuffTimer);
-                if (Main.rand.NextBool(10))
+                if (LifestealCD <= 0)
                 {
-                    Player.Heal(damage / 2);
+                    if (damage / 5 < Player.statLifeMax2 / 4)
+                        Player.Heal(damage / 5);
+                    else Player.Heal(Player.statLifeMax2 / 4);
+                    LifestealCD = 300;
                 }
             }
 
@@ -221,11 +263,12 @@ namespace SoulsBetterDLC
             if (BFCrazierRegen)
             {
                 Player.AddBuff(ModContent.BuffType<Bloodflare_Regeneration>(), BloodBuffTimer);
-                Player.GetDamage(DamageClass.Generic) += 0.1f;
-                Player.endurance += 0.1f;
-                if (Main.rand.NextBool(4))
+                if (LifestealCD <= 0)
                 {
-                    Player.Heal(damage / 2);
+                    if (damage / 3 < Player.statLifeMax2 / 2)
+                        Player.Heal(damage / 3);
+                    else Player.Heal(Player.statLifeMax2 / 2);
+                    LifestealCD = 300;
                 }
                 if (Main.rand.NextBool(20) || target.life <= 0)
                 {
@@ -236,35 +279,44 @@ namespace SoulsBetterDLC
         private void CalamityModifyHit(NPC target)
         {
             //Plague Reaper conditions
-            /*if (ButterBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
+            if (DoctorBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
             {
                 if (Main.rand.NextBool(2))
-                    target.StrikeNPC(70000, 0, 0);
-            }*/
+                {
+
+                    target.life = 0;
+                    target.HitEffect();
+                    target.active = false;
+                    target.NPCLoot();
+                }
+            }
         }
         private void CalamityOnHitProj(NPC target, int damage)
         {
             //same as in OnHit but, yeah
-            if (damage / 2 <= 180)
+            if (damage / 5 <= 180)
             {
-                UmbraBuffTimer = damage / 2;
-                BloodBuffTimer = damage / 2;
+                UmbraBuffTimer = damage / 5;
+                BloodBuffTimer = damage / 3;
             }
-            else if (damage / 2 > 180 && damage / 2 <= 300)
+            else if (damage / 5 > 180 && damage / 3 <= 300)
             {
                 UmbraBuffTimer = 180;
-                BloodBuffTimer = damage / 2;
+                BloodBuffTimer = damage / 3;
             }
-            else if (damage / 2 > 300)
+            else if (damage / 3 > 300)
                 BloodBuffTimer = 300;
 
             //umbra
             if (UmbraCrazyRegen)
             {
                 Player.AddBuff(ModContent.BuffType<Vampiric_Regeneration>(), UmbraBuffTimer);
-                if (Main.rand.NextBool(10))
+                if (LifestealCD <= 0)
                 {
-                    Player.Heal(damage / 2);
+                    if (damage / 5 < Player.statLifeMax2 / 4)
+                        Player.Heal(damage / 5);
+                    else Player.Heal(Player.statLifeMax2 / 4);
+                    LifestealCD = 300;
                 }
             }
 
@@ -272,11 +324,12 @@ namespace SoulsBetterDLC
             if (BFCrazierRegen)
             {
                 Player.AddBuff(ModContent.BuffType<Bloodflare_Regeneration>(), BloodBuffTimer);
-                Player.GetDamage(DamageClass.Generic) += 0.1f;
-                Player.endurance += 0.1f;
-                if (Main.rand.NextBool(4))
+                if (LifestealCD <= 0)
                 {
-                    Player.Heal(damage / 2);
+                    if (damage / 3 < Player.statLifeMax2 / 2)
+                        Player.Heal(damage / 3);
+                    else Player.Heal(Player.statLifeMax2 / 2);
+                    LifestealCD = 300;
                 }
                 if (Main.rand.NextBool(20) || target.life <= 0)
                 {
@@ -287,11 +340,17 @@ namespace SoulsBetterDLC
         private void CalamityModifyHitProj(NPC target)
         {
             //plague reaper
-            /*if (ButterBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
+            if (DoctorBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
             {
                 if (Main.rand.NextBool(2))
-                    target.StrikeNPC(70000, 0, 0);
-            }*/
+                {
+                    target.life = 0;
+                    target.HitEffect();
+                    target.active = false;
+                    target.NPCLoot();
+                }
+            }
         }
+
     }
 }
