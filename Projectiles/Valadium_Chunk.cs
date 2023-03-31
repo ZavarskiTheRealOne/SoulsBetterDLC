@@ -12,19 +12,25 @@ namespace SoulsBetterDLC.Projectiles
     {
         // Size is ai[0], Mass is ai[1]
         public static List<int> ActiveChunks = new();
-        public const float ChunkAttractConst = 0.25f;
-        public const float PlayerMass = 500f;
-        public const float PlayerAttractConst = 0.25f;
+        public const float ChunkAttractConst = 4f;
+        public const float PlayerMass = 1200f;
+        public const float PlayerAttractConst = 12f;
+        public const float MaxSpeed = 16;
 
-        public static float Mass(float size)
+        private int hitCD;
+
+        public float Mass
         {
-            return size switch
+            get
             {
-                1 => 100f,
-                2 => 400f,
-                3 => 800f,
-                _ => 000f,
-            };
+                return Projectile.ai[0] switch
+                {
+                    1 => 100f,
+                    2 => 400f,
+                    3 => 800f,
+                    _ => 000f,
+                };
+            }
         }
         public int Radius
         {
@@ -51,36 +57,38 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
+            if (Projectile.ai[0] == 0f) return;
             ActiveChunks.Add(Projectile.whoAmI);
-            Projectile.ai[1] = Mass(Projectile.ai[0]);
+            Projectile.ai[1] = Mass;
             Projectile.width = Radius * 2;
             Projectile.height = Radius * 2;
+            hitCD = 15;
+            //Projectile.frame = (int)Projectile.ai[0] - 1;
         }
 
         public override void Kill(int timeLeft)
         {
+            Main.NewText($"Chunk killed: {timeLeft}");
             ActiveChunks.Remove(Projectile.whoAmI);
-            if (timeLeft != 0) Split();
+            if (timeLeft >= 0) Split();
         }
 
         public void Split()
         {
+            Main.NewText("Chunk split");
             if (Projectile.ai[0] > 1f)
             {
-                // good luck understanding this. Spawns two chunks of 1 smaller size and velocities at 45 degree angles to the original's. Note that damage and velocities of new chunks are a thrid of the original's
-                float SinCos = 0.23570226f; // sqrt(2) / 6 
+                // good luck understanding this. Spawns two chunks of 1 smaller size and velocities at 45 degree angles to the original's. Note that damage and velocities of new chunks are two thirds of the original's
+                float SinCos = 0.47140452079f; // sqrt(2) / 3 // yes thats intentional
                 Vector2 veloA = new Vector2(Projectile.velocity.X - Projectile.velocity.Y, Projectile.velocity.X + Projectile.velocity.Y) * SinCos;
-                Vector2 veloB = new Vector2(Projectile.velocity.X + Projectile.velocity.Y, Projectile.velocity.X - Projectile.velocity.Y) * SinCos;
+                Vector2 veloB = new Vector2(Projectile.velocity.X + Projectile.velocity.Y, Projectile.velocity.Y - Projectile.velocity.X) * SinCos;
 
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, veloA, Projectile.type, Projectile.damage / 3, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, veloB, Projectile.type, Projectile.damage / 3, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, veloA, Projectile.type, Projectile.damage * 2 / 3, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, veloB, Projectile.type, Projectile.damage * 2 / 3, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
             }
         }
 
-        public override bool? CanHitNPC(NPC target)
-        {
-            return base.CanHitNPC(target);
-        }
+        public override bool? CanHitNPC(NPC target) => hitCD <= 0;
 
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
@@ -89,7 +97,12 @@ namespace SoulsBetterDLC.Projectiles
 
         public override bool PreAI()
         {
-
+            if (Projectile.position.X < 128 || Projectile.position.X > Main.tile.Width * 16 - 128 || Projectile.position.Y < 128 || Projectile.position.Y > Main.tile.Height * 16 - 128)
+            {
+                CombatText.NewText(Projectile.Hitbox, Color.Red, "Scrongbongled", true);
+                Kill(-69420);
+                return false;
+            }
             return true;
         }
 
@@ -101,6 +114,8 @@ namespace SoulsBetterDLC.Projectiles
                 return;
             }
 
+            if (hitCD > 0) hitCD--;
+
             Player player = Main.player[Projectile.owner];
             if (!player.dead && player.active && player.GetModPlayer<SoulsBetterDLCPlayer>().ValadiumEnch)
             {
@@ -108,14 +123,19 @@ namespace SoulsBetterDLC.Projectiles
             }
 
             // player attraction
-            float playerDistSQ = (player.position - Projectile.position).LengthSquared();
-            if (playerDistSQ > 256)
+            float playerDistSQ = (player.Center - Projectile.Center).LengthSquared();
+            if (playerDistSQ > 6400f)
             {
-                Vector2 force = (PlayerMass * Projectile.ai[1] / playerDistSQ) * (player.position - Projectile.position) * PlayerAttractConst;
+                Vector2 force = (PlayerMass * Projectile.ai[1] / (playerDistSQ - MathF.Sqrt(playerDistSQ))) * Vector2.Normalize(player.Center - Projectile.Center) * PlayerAttractConst;
                 Projectile.velocity += (force / Projectile.ai[1]);
             }
 
-            if (playerDistSQ > 980100) return; // if its too far (offscreen) from the player only be attracted to them.
+            // if its too far (offscreen) from the player then ignore other chunks
+            if (playerDistSQ > 980100f)
+            {
+                //Projectile.timeLeft = 0;
+                return;
+            } 
 
             if (ActiveChunks.Count <= 1) return;
 
@@ -126,11 +146,11 @@ namespace SoulsBetterDLC.Projectiles
 
                 Projectile proj = Main.projectile[index];
 
-                float distSQ = (Projectile.position - proj.position).LengthSquared();
+                float distSQ = (Projectile.Center - proj.Center).LengthSquared();
 
                 if (distSQ < 256) continue;
 
-                Vector2 force = (proj.ai[1] * Projectile.ai[1] / distSQ) * (Projectile.position - proj.position) * ChunkAttractConst;
+                Vector2 force = (proj.ai[1] * Projectile.ai[1] / distSQ) * Vector2.Normalize(Projectile.Center - proj.Center) * ChunkAttractConst;
 
                 proj.velocity += (force / proj.ai[1]);
                 Projectile.velocity += (-force / Projectile.ai[1]);
@@ -140,19 +160,31 @@ namespace SoulsBetterDLC.Projectiles
         public override void PostAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Projectile.velocity *= 0.95f;
+            if (Projectile.velocity.LengthSquared() > MaxSpeed * MaxSpeed)
+            {
+                Projectile.velocity.Normalize();
+                Projectile.velocity *= MaxSpeed;
+            }
+            Player player = Main.player[Projectile.owner];
+            float playerDistSQ = (player.Center - Projectile.Center).LengthSquared();
+            if (playerDistSQ > 980100f)
+            {
+                Projectile.velocity = Projectile.Center.DirectionTo(player.Center) * Projectile.velocity.Length();
+            }
             Projectile.position += Projectile.velocity;
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             if (Projectile.ai[0] == 0) return false;
+            if (Projectile.position.X < 128 || Projectile.position.X > Main.tile.Width * 16 - 128 || Projectile.position.Y < 128 || Projectile.position.Y > Main.tile.Height * 16 - 128)
+                return false;
 
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Rectangle rect = new(0, (int)(Projectile.ai[0] - 1) * 64, 64, 64);
             Vector2 origin = rect.Size() / 2f;
             Color drawColor = Projectile.GetAlpha(lightColor);
-            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, rect, drawColor, 0f, origin, 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rect, drawColor, Projectile.rotation, origin, 1f, SpriteEffects.None, 0);
 
             return false;
         }

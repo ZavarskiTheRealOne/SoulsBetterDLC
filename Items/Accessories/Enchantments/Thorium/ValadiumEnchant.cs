@@ -37,6 +37,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             {
                 modPlayer.ValadiumCD--;
             }
+            else if (player.ownedProjectileCounts[ModContent.ProjectileType<Valadium_Chunk>()] < 20)
+            {
+                modPlayer.ValadiumCD = 120;
+                SummonChunk(player);
+            }
         }
 
         public static void SummonChunk(Player player)
@@ -45,10 +50,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             float oneOnSqrt2 = 0.707106781187f;
             // doing this gives an elipse that surrounds the edge of the screen.
-            Vector2 spawnPos = Vector2.UnitY * 360; // Main.rand.NextVector2CircularEdge(oneOnSqrt2 * Main.screenWidth, oneOnSqrt2 * Main.screenHeight);
+            Vector2 spawnPos = Main.rand.NextVector2CircularEdge(oneOnSqrt2 * Main.screenWidth, oneOnSqrt2 * Main.screenHeight);
             Projectile.NewProjectile(player.GetSource_Accessory(modPlayer.ValadiumEnchItem),
                                      spawnPos + player.Center,
-                                     Vector2.Normalize(spawnPos) * -4,
+                                     Main.rand.NextVector2Circular(4, 4),
                                      ModContent.ProjectileType<Valadium_Chunk>(),
                                      50,
                                      3,

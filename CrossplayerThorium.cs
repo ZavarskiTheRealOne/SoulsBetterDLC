@@ -62,11 +62,6 @@ namespace SoulsBetterDLC
                 TemplarCD = 360;
                 Items.Accessories.Enchantments.Thorium.TemplarEnchant.summonHolyFire(Player);
             }
-            if (ValadiumEnch && ValadiumCD == 0)
-            {
-                ValadiumCD = 240;
-                Items.Accessories.Enchantments.Thorium.ValadiumEnchant.SummonChunk(Player);
-            }
         }
 
         public void Thorium_ProcessTriggers(TriggersSet triggersSet)
