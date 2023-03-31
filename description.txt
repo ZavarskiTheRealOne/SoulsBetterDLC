@@ -1,5 +1,5 @@
 Zavarski's Better DLC is a somewhat major fan effort to create a better version of Fargo's Souls DLC mod. This mod tries to find a new perspective for old enchantments and make them unique, similar to vanilla enchantments.
-If you got this mod not from our Discord server and have found some crucial bugs - please contact me @Zavarski#8071 on Discord to file a report.
+If you got this mod not from our Discord server and have found some crucial bugs - please contact me @Zavarski#8073 on Discord to file a report.
 
 Special thanks to:
 	Ghoose - actively helping in creating the mod, mainly transferring crossmod parts to Weak References
