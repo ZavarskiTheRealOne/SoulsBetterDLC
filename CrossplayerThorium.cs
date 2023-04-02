@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+using SoulsBetterDLC.Projectiles;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 
