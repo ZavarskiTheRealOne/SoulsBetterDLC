@@ -24,6 +24,7 @@ namespace SoulsBetterDLC
         public bool SteelEnch;
         public bool DarkSteelEnch;
         public bool ValadiumEnch;
+        public bool BerserkerEnch;
 
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
@@ -32,6 +33,7 @@ namespace SoulsBetterDLC
 
         public List<int> LodeStonePlatforms = new();
         public List<int> ActiveValaChunks = new();
+        internal List<int> BerserkerHits = new();
 
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;
@@ -49,6 +51,7 @@ namespace SoulsBetterDLC
             SteelEnch = false;
             DarkSteelEnch = false;
             ValadiumEnch = false;
+            BerserkerEnch = false;
 
             TemplarEnchItem = null;
             LivingWoodEnchItem = null;
@@ -62,6 +65,10 @@ namespace SoulsBetterDLC
             {
                 TemplarCD = 360;
                 Items.Accessories.Enchantments.Thorium.TemplarEnchant.summonHolyFire(Player);
+            }
+            if (BerserkerEnch)
+            {
+                BerserkerHits.Add(600);
             }
         }
 
