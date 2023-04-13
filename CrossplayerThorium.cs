@@ -31,6 +31,7 @@ namespace SoulsBetterDLC
         public Item ValadiumEnchItem;
 
         public List<int> LodeStonePlatforms = new();
+        public List<int> ActiveValaChunks = new();
 
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;

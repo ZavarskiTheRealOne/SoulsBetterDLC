@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
     [JITWhenModsEnabled("ThoriumMod")]
-    public class SlikEnchant : BaseDLCEnchant
+    public class SilkEnchant : BaseDLCEnchant
     {
         public override string wizardEffect => "";
         protected override Color nameColor => Color.BlueViolet;
@@ -14,8 +14,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Silk Enchantment");
-            Tooltip.SetDefault("Magic and radiant damage is increased with higher mana");
+            base.SetStaticDefaults();
+            Tooltip.SetDefault("Increases damage with high but not full mana");
         }
 
         public override void SafeUpdateAccessory(Player player, bool hideVisual)

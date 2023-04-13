@@ -12,13 +12,13 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
     public class LodeStoneEnchant : BaseDLCEnchant
     {
         public override string ModName => "ThoriumMod";
-        public override string wizardEffect => "";
+        public override string wizardEffect => "Summons a third platform";
         protected override Color nameColor => Color.Brown;
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lodestone Enchantment");
-            Tooltip.SetDefault("Summons several floating lodestone platforms capable of holding a 1 sentry each");
+            base.SetStaticDefaults();
+            Tooltip.SetDefault("Summons two floating lodestone platforms capable of holding a sentry each");
         }
 
         public override void SafeUpdateAccessory(Player player, bool hideVisual)
@@ -42,7 +42,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                                                                               0,
                                                                               0,
                                                                               player.whoAmI,
-                                                                              i * ((2 * MathF.PI) / maxPlatforms)));
+                                                                              i * ((2 * MathF.PI) / maxPlatforms))); 
                 }
             }
         }

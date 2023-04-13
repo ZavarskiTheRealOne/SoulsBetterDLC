@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
     {
         protected override Color nameColor => Color.Silver;
         public override string ModName => "ThoriumMod";
-        public override string wizardEffect => "";
+        public override string wizardEffect => "TBD";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("White Knight Enchantment");

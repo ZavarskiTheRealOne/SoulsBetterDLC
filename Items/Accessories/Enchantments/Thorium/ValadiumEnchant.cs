@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using SoulsBetterDLC.Projectiles;
 using Terraria.ID;
+using System.Collections.Generic;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
@@ -11,7 +12,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
     {
         protected override Color nameColor => Color.Purple;
         public override string ModName => "ThoriumMod";
-        public override string wizardEffect => "Chunks can spawn larger (not implemneted)";
+        public override string wizardEffect => "Chunks can collide";
 
         public override void SetStaticDefaults()
         {
@@ -46,7 +47,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public static void SummonChunk(Player player)
         {
-            Main.NewText("chunk spawned");
+            //Main.NewText("chunk spawned");
             SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             float oneOnSqrt2 = 0.707106781187f;
             // doing this gives an elipse that surrounds the edge of the screen.

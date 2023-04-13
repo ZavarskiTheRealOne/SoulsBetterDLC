@@ -15,7 +15,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Steel Enchantment");
-            Tooltip.SetDefault($"Press Key to parry incoming projectiles. \nParrying projectiles allows then to deal boosted damage to enemies.");
+            Tooltip.SetDefault($"Press the parry hotkey to parry incoming projectiles. \nParrying projectiles allows then to deal boosted damage to enemies.");
         }
 
         public override void SafeUpdateAccessory(Player player, bool hideVisual)

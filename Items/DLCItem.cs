@@ -42,16 +42,16 @@ namespace SoulsBetterDLC.Items
 		/// </summary>
 		public virtual void SafeUpdateAccessory(Player player, bool hideVisual) {}
 		
-		/// <summary>
-		/// Shows a warning to the player if the required mod is not loaded, method name is a misnomer, you shouldn't reference other mods in this method
-		/// </summary>
 		public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
 			base.SafeModifyTooltips(tooltips);
-			
-            TooltipLine line = new TooltipLine(Mod, "disabled", $"Doesn't do anything without {ModName}");
-            line.OverrideColor = Color.Red;
-            if (!ModLoader.HasMod(ModName)) tooltips.Add(line);
+
+			if (!ModLoader.HasMod(ModName))
+			{
+				TooltipLine line = new TooltipLine(Mod, "disabled", $"Doesn't do anything without {ModName}");
+				line.OverrideColor = Color.Red;
+				tooltips.Add(line);
+			}
         }
 	}
 }

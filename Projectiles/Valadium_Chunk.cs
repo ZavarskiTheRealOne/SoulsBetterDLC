@@ -5,17 +5,18 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System;
 using Microsoft.Xna.Framework.Graphics;
+using static SoulsBetterDLC.Projectiles.ValaChunkCollisions;
 
 namespace SoulsBetterDLC.Projectiles
 {
     public class Valadium_Chunk : ModProjectile
     {
         // Size is ai[0], Mass is ai[1]
-        public static List<int> ActiveChunks = new();
+        //public List<int> ActiveChunks = new();
         public const float ChunkAttractConst = 4f;
         public const float PlayerMass = 1200f;
         public const float PlayerAttractConst = 12f;
-        public const float MaxSpeed = 16;
+        public const float MaxSpeed = 24; // do NOT make this any lower
 
         private int hitCD;
 
@@ -28,6 +29,7 @@ namespace SoulsBetterDLC.Projectiles
                     1 => 100f,
                     2 => 400f,
                     3 => 800f,
+                    4 => 1600f,
                     _ => 000f,
                 };
             }
@@ -41,6 +43,7 @@ namespace SoulsBetterDLC.Projectiles
                     1 => 12,
                     2 => 18,
                     3 => 24,
+                    4 => 30,
                     _ => 0,
                 };
             }
@@ -58,7 +61,8 @@ namespace SoulsBetterDLC.Projectiles
         public override void OnSpawn(IEntitySource source)
         {
             if (Projectile.ai[0] == 0f) return;
-            ActiveChunks.Add(Projectile.whoAmI);
+            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            DLCPlayer.ActiveValaChunks.Add(Projectile.whoAmI);
             Projectile.ai[1] = Mass;
             Projectile.width = Radius * 2;
             Projectile.height = Radius * 2;
@@ -68,37 +72,40 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            Main.NewText($"Chunk killed: {timeLeft}");
-            ActiveChunks.Remove(Projectile.whoAmI);
+            //Main.NewText($"Chunk killed: {timeLeft}");
+            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            DLCPlayer.ActiveValaChunks.Remove(Projectile.whoAmI);
             if (timeLeft >= 0) Split();
         }
 
-        public void Split()
+        private void Split()
         {
-            Main.NewText("Chunk split");
+            //Main.NewText("Chunk split");
             if (Projectile.ai[0] > 1f)
             {
-                // good luck understanding this. Spawns two chunks of 1 smaller size and velocities at 45 degree angles to the original's. Note that damage and velocities of new chunks are two thirds of the original's
-                float SinCos = 0.47140452079f; // sqrt(2) / 3 // yes thats intentional
-                Vector2 veloA = new Vector2(Projectile.velocity.X - Projectile.velocity.Y, Projectile.velocity.X + Projectile.velocity.Y) * SinCos;
-                Vector2 veloB = new Vector2(Projectile.velocity.X + Projectile.velocity.Y, Projectile.velocity.Y - Projectile.velocity.X) * SinCos;
+                // good luck understanding this. Spawns two chunks of 1 smaller size and velocities at 45 degree angles to the original's. Note that damage and velocities of new chunks are two thirds of the original
+                float Sqrt2on3 = 1.41421f / 3;
+                Vector2 veloA = new Vector2(Projectile.velocity.X - Projectile.velocity.Y, Projectile.velocity.X + Projectile.velocity.Y) * Sqrt2on3;
+                Vector2 veloB = new Vector2(Projectile.velocity.X + Projectile.velocity.Y, Projectile.velocity.Y - Projectile.velocity.X) * Sqrt2on3;
 
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, veloA, Projectile.type, Projectile.damage * 2 / 3, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, veloB, Projectile.type, Projectile.damage * 2 / 3, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
             }
         }
 
+
         public override bool? CanHitNPC(NPC target) => hitCD <= 0;
 
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            damage *= (int)(Projectile.velocity.Length() / 64);
+            damage *= (int)(Projectile.velocity.Length() * Projectile.ai[0] / 128); // subject to change
         }
 
         public override bool PreAI()
         {
             if (Projectile.position.X < 128 || Projectile.position.X > Main.tile.Width * 16 - 128 || Projectile.position.Y < 128 || Projectile.position.Y > Main.tile.Height * 16 - 128)
             {
+                // Chunks existing out of bounds was causing rendering issues
                 CombatText.NewText(Projectile.Hitbox, Color.Red, "Scrongbongled", true);
                 Kill(-69420);
                 return false;
@@ -133,14 +140,15 @@ namespace SoulsBetterDLC.Projectiles
             // if its too far (offscreen) from the player then ignore other chunks
             if (playerDistSQ > 980100f)
             {
-                //Projectile.timeLeft = 0;
+                Projectile.velocity += Projectile.Center.DirectionTo(player.Center) / 4f;
                 return;
-            } 
+            }
 
-            if (ActiveChunks.Count <= 1) return;
+            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            if (DLCPlayer.ActiveValaChunks.Count <= 1) return;
 
             // chunk attraction
-            foreach (int index in ActiveChunks)
+            foreach (int index in DLCPlayer.ActiveValaChunks)
             {
                 if (index <= Projectile.whoAmI) continue;
 
@@ -148,7 +156,14 @@ namespace SoulsBetterDLC.Projectiles
 
                 float distSQ = (Projectile.Center - proj.Center).LengthSquared();
 
-                if (distSQ < 256) continue;
+                if (distSQ < 256)
+                {
+                    if (Main.player[Projectile.owner].GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive)
+                    {
+                        Collide(Projectile, proj);
+                    }
+                    continue;
+                }
 
                 Vector2 force = (proj.ai[1] * Projectile.ai[1] / distSQ) * Vector2.Normalize(Projectile.Center - proj.Center) * ChunkAttractConst;
 
@@ -166,11 +181,11 @@ namespace SoulsBetterDLC.Projectiles
                 Projectile.velocity *= MaxSpeed;
             }
             Player player = Main.player[Projectile.owner];
-            float playerDistSQ = (player.Center - Projectile.Center).LengthSquared();
-            if (playerDistSQ > 980100f)
-            {
-                Projectile.velocity = Projectile.Center.DirectionTo(player.Center) * Projectile.velocity.Length();
-            }
+            //float playerDistSQ = (player.Center - Projectile.Center).LengthSquared();
+            //if (playerDistSQ > 980100f)
+            //{
+            //    Projectile.velocity += Projectile.Center.DirectionTo(player.Center) / 4f;
+            //}
             Projectile.position += Projectile.velocity;
         }
 

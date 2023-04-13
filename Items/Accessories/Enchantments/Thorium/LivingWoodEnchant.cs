@@ -13,14 +13,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
     public class LivingWoodEnchant : BaseDLCEnchant
     {
-        public override string wizardEffect => "";
+        public override string wizardEffect => "Shoots high-velocity bullets instead of arrows";
         public override string ModName => "ThoriumMod";
         protected override Color nameColor => Color.Brown;
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Living Wood Enchantment");
-            Tooltip.SetDefault("Pressing a key while on ground causes you to stop moving and grow roots below you." +
+            DisplayName.SetDefault("Living wood enchantment");
+            Tooltip.SetDefault($"Pressing the living roots hotkey while causes you to stop moving and grow roots below you." +
                 "\nTaking damage will result in the roots being destroyed while growing." +
                 "\nWhen fully grown the roots will fire at enemies for a minute before dying.");
         }

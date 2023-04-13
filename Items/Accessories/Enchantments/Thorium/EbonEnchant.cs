@@ -17,7 +17,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
 		private int BlastCD;
 
-		public override void SetStaticDefaults()
+		public override bool IsLoadingEnabled(Mod mod) => false; // not ready for release
+
+        public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Ebon Enchantment");
 			Tooltip.SetDefault($@"cringe");

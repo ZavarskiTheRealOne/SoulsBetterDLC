@@ -14,8 +14,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         protected override Color nameColor => new(241, 242, 157);
 		
 		private int SheildCD;
-		
-        public override void SetStaticDefaults()
+		public override bool IsLoadingEnabled(Mod mod) => false; // not ready for release
+
+		public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Novice Cleric Enchantment");
             Tooltip.SetDefault($"Creates a weak sheild in front of you that absorbs {(Main.expertMode ? "100" : "50")} damage before breaking." +

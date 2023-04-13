@@ -91,7 +91,9 @@ namespace SoulsBetterDLC.Projectiles
                 int damage = wizard ? 50 : 20;
                 Vector2 ShootOrigin = Projectile.Center + new Vector2(0, -24);
                 Vector2 ShootVec = Vector2.Normalize(target.Center - ShootOrigin) * (wizard ? 12 : 12); // Note: adjust these
+
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), ShootOrigin, ShootVec, projType, damage, 5f, Projectile.owner);
+
                 if (ShootVec.X > 0)
                 {
                     Projectile.direction = 1;

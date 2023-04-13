@@ -15,7 +15,7 @@ namespace SoulsBetterDLC
 
             if (!Player.HasBuff<LivingWood_Root_DB>() && !Player.HasBuff<LivingWood_Root_B>())
             {
-                Player.AddBuff(ModContent.BuffType<LivingWood_Root_DB>(), 7200);
+                Player.AddBuff(ModContent.BuffType<LivingWood_Root_DB>(), 1200);
                 Player.AddBuff(ModContent.BuffType<LivingWood_Root_B>(), 300);
 
                 Projectile.NewProjectile(Player.GetSource_Misc(""),

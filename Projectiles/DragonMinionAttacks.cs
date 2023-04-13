@@ -9,14 +9,32 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SoulsBetterDLC.Projectiles
 {
+	// this code is shit sorry
     public partial class DragonMinionHead : DragonMinion
 	{
+		const int FlamesAmount = 180; // *disclaimer: not representative of actual number of flames
+		const int FlamesDist = 32;
+		const int FlamesMinDist = 32;
+		int flamesLeft = FlamesAmount;
 		void RangedAttack()
 		{
-			int retreatRadius = 1536;
-			int flamesDist = 512;
-			int flamesMinDist = 128;
-			
+			Vector2 toTarget = targetPos - Projectile.Center;
+			float distanceToTarget = toTarget.Length();
+
+			if ((FlamesMinDist < distanceToTarget && distanceToTarget < FlamesDist) || flamesLeft <= 0)
+				flamesLeft--;
+
+			if (FlamesMinDist < distanceToTarget && distanceToTarget < FlamesDist && flamesLeft > 0 && flamesLeft % 10 == 0)
+            {
+				Projectile.velocity *= 0.5f;
+				Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Normalize(Projectile.velocity) * 10f, ProjectileID.Fireball, 0, 0f, Projectile.owner);
+			}
+
+			// counter is used as a timer cope
+			if (flamesLeft <= -180)
+            {
+				flamesLeft = FlamesAmount;
+            }
 		}
 
 		void HeadAttack()

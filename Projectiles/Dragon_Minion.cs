@@ -321,7 +321,7 @@ namespace SoulsBetterDLC.Projectiles
 				{
 					Main.NewText('2');
 					if (Ranged) RangedAttack();
-					else HeadAttack();
+					HeadAttack();
 				}
 				else
 				{

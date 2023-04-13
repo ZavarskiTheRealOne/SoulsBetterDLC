@@ -14,14 +14,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
     [JITWhenModsEnabled("ThoriumMod")]
     public class TemplarEnchant : BaseDLCEnchant
     {
-        public override string wizardEffect => "";
+        public override string wizardEffect => "TBD";
         protected override Color nameColor => Color.PaleVioletRed;
         public override string ModName => "ThoriumMod";
 
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault($"Occasionally summons holy fire from the sky above the cursor upon when hitting an enemy that heals allys and damages enemies");
+            Tooltip.SetDefault($"Occasionally summons holy fire from the sky above the cursor when attacking that heals allys and damages enemies");
         }
 
         public override void SafeUpdateAccessory(Player player, bool hideVisual)
