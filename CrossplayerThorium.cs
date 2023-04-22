@@ -8,6 +8,7 @@ using SoulsBetterDLC.Items.Accessories;
 using System;
 using SoulsBetterDLC.Buffs;
 using System.Collections.Generic;
+using SoulsBetterDLC.Items.Accessories.Enchantments.Thorium;
 
 namespace SoulsBetterDLC
 {
@@ -25,6 +26,7 @@ namespace SoulsBetterDLC
         public bool DarkSteelEnch;
         public bool ValadiumEnch;
         public bool BerserkerEnch;
+        public bool FungusEnch;
 
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
@@ -33,7 +35,7 @@ namespace SoulsBetterDLC
 
         public List<int> LodeStonePlatforms = new();
         public List<int> ActiveValaChunks = new();
-        internal List<int> BerserkerHits = new();
+        internal List<(int npc, int time)> BerserkerHits = new();
 
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;
@@ -52,6 +54,7 @@ namespace SoulsBetterDLC
             DarkSteelEnch = false;
             ValadiumEnch = false;
             BerserkerEnch = false;
+            FungusEnch = false;
 
             TemplarEnchItem = null;
             LivingWoodEnchItem = null;
@@ -64,11 +67,20 @@ namespace SoulsBetterDLC
             if (TemplarEnch && TemplarCD == 0)
             {
                 TemplarCD = 360;
-                Items.Accessories.Enchantments.Thorium.TemplarEnchant.summonHolyFire(Player);
+                TemplarEnchant.summonHolyFire(Player);
             }
             if (BerserkerEnch)
             {
-                BerserkerHits.Add(600);
+                if (!BerserkerHits.Exists(i => i.npc == target.whoAmI))
+                    BerserkerHits.Add(new(target.whoAmI, 600));
+            }
+            if (FungusEnch)
+            {
+                if (target.TryGetGlobalNPC(out FungusEnemy funguy) && !funguy.Infected && !target.boss && Main.rand.NextBool(10))
+                {
+                    Main.NewText("infected");
+                    funguy.Infected = true;
+                }
             }
         }
 

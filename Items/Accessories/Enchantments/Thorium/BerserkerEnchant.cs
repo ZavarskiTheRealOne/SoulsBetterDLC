@@ -21,10 +21,17 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             DLCPlayer.BerserkerEnch = true;
 
-            DLCPlayer.BerserkerHits.ForEach(i => i--);
-            DLCPlayer.BerserkerHits.RemoveAll(i => i <= 0);
+            for (int i = DLCPlayer.BerserkerHits.Count - 1; i >= 0; i--)
+            {
+                DLCPlayer.BerserkerHits[i] = (DLCPlayer.BerserkerHits[i].npc, DLCPlayer.BerserkerHits[i].time - 1);
+                if (DLCPlayer.BerserkerHits[i].time <= 0 || !Main.npc[DLCPlayer.BerserkerHits[i].npc].active)
+                {
+                    DLCPlayer.BerserkerHits.RemoveAt(i);
+                    i--;
+                }
+            }
 
-            player.GetDamage(DamageClass.Generic) += 0.04f * DLCPlayer.BerserkerHits.Count;
+            player.GetDamage(DamageClass.Generic) += 0.02f * DLCPlayer.BerserkerHits.Count;
             Item.defense = DLCPlayer.BerserkerHits.Count * 2;
         }
     }
