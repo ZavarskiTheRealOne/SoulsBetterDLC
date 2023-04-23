@@ -27,7 +27,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             SBDPlayer.VictideSwimmin = true;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddRecipeGroup("SoulsBetterDLC:AnyVictideHelms", 1);

@@ -5,7 +5,6 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
     [ExtendsFromMod("CalamityMod")]
     public class Aerospec_Enchantment : BaseDLCEnchant
     {
@@ -27,7 +26,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             SBDPlayer.RideOfTheValkyrie = true;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddRecipeGroup("SoulsBetterDLC:AnyAerospecHelms");

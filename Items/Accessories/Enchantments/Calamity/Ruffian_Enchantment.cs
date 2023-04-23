@@ -46,7 +46,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             speed = 2f;
             acceleration *= 1.25f;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

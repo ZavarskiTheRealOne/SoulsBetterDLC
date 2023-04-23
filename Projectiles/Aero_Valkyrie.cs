@@ -8,7 +8,6 @@ using CalamityMod;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
     [ExtendsFromMod("CalamityMod")]
     public class Aero_Valkyrie: ModProjectile
     {

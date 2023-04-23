@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Fathom_Cloud: ModProjectile
     {
         private int timerDead;

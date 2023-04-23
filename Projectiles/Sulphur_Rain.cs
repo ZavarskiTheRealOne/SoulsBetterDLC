@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Sulphur_Rain : ModProjectile
     {
         public override void SetStaticDefaults()
