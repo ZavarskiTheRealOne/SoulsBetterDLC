@@ -6,7 +6,7 @@ using CalamityMod.Rarities;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     public class Bloodflare_Enchantment : BaseDLCEnchant
     {
@@ -32,7 +32,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SBDPlayer.UmbraCrazyRegen = false;
         }
 
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     [AutoloadEquip(EquipType.Wings)]
     public class Daedalus_Enchantment : BaseDLCEnchant
@@ -40,7 +40,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SBDPlayer.AyeCicle = true;
         }
 
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

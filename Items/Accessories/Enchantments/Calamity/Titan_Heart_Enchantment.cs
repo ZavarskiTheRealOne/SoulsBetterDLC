@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Titan_Heart_Enchantment : BaseDLCEnchant
     {
         protected override Color nameColor => new Color(118, 109, 139);
@@ -25,7 +25,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     public class Fathom_Enchantment: BaseDLCEnchant
     {
@@ -28,7 +28,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SBDPlayer.FathomBubble = true;
             SBDPlayer.SulphurBubble = false;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient<CalamityMod.Items.Armor.FathomSwarmer.FathomSwarmerVisage>();

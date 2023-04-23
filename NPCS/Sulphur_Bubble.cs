@@ -7,7 +7,6 @@ using Terraria.Audio;
 
 namespace SoulsBetterDLC.NPCS
 {
-    [JITWhenModsEnabled("CalamityMod")]
     [ExtendsFromMod("CalamityMod")]
     public class Sulphur_Bubble : ModNPC
     {

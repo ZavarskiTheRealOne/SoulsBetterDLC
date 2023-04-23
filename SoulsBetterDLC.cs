@@ -13,24 +13,22 @@ namespace SoulsBetterDLC
         //I'll place something here later :p
     }
 
-    [JITWhenModsEnabled("CalamityMod", "ThoriumMod")]
-    public class RecipeSystem : ModSystem
+    [ExtendsFromMod("CalamityMod")] 
+    public class ClamRecipeSystem : ModSystem
     {
         public override void AddRecipes()
         {
-            // Calamity Recipes
             if (ModLoader.HasMod("CalamityMod"))
             {
                 CalamityRecipes();
             }
-            if (ModLoader.HasMod("ThoriumMod"))
-            {
-                ThoriumRecipes();
-            }
+            //if (ModLoader.HasMod("ThoriumMod"))
+            //{
+            //    ThoriumRecipes();
+            //}
         }
         public override void AddRecipeGroups()
         {
-            //any t3 watch
             RecipeGroup T3WatchGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Gold Watch"}",
                 ItemID.GoldWatch,
                 ItemID.PlatinumWatch);
@@ -40,10 +38,10 @@ namespace SoulsBetterDLC
             {
                 CalamityGroups();
             }
-            if (ModLoader.HasMod("ThoriumMod"))
-            {
-                ThoriumGroups();
-            }
+            //if (ModLoader.HasMod("ThoriumMod"))
+            //{
+            //    ThoriumGroups();
+            //}
         }
         static void CalamityRecipes()
         {
@@ -160,14 +158,14 @@ namespace SoulsBetterDLC
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyHydrothermHelms", HydrothermHelmsGroup);
         }
 
-        static void ThoriumRecipes()
-        { }
-        static void ThoriumGroups()
-        {
-            RecipeGroup T3ShieldsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Silver Shield"}",
-                ModContent.ItemType<ThoriumMod.Items.BasicAccessories.SilverBulwark>(),
-                ModContent.ItemType<ThoriumMod.Items.BasicAccessories.TungstenBulwark>());
-            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyT3Shield", T3ShieldsGroup);
-        }
+        //static void ThoriumRecipes()
+        //{ }
+        //static void ThoriumGroups()
+        //{
+        //    RecipeGroup T3ShieldsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Silver Shield"}",
+        //        ModContent.ItemType<ThoriumMod.Items.BasicAccessories.SilverBulwark>(),
+        //        ModContent.ItemType<ThoriumMod.Items.BasicAccessories.TungstenBulwark>());
+        //    RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyT3Shield", T3ShieldsGroup);
+        //}
     }
 }

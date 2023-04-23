@@ -4,7 +4,7 @@ using CalamityMod;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Sulphur_Cloud: ModProjectile
     {
         public override void SetStaticDefaults()

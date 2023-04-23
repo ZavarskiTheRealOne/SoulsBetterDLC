@@ -6,7 +6,6 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
     [ExtendsFromMod("CalamityMod")]
     public class Fear_Valkyrie : ModProjectile
     {
@@ -20,7 +19,6 @@ namespace SoulsBetterDLC.Projectiles
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }
 
-        [JITWhenModsEnabled("CalamityMod")]
         public override void SetDefaults()
         {
             Projectile.width = 30;
