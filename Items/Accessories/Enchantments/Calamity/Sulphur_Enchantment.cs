@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Sulphur_Enchantment: BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -14,12 +15,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sulphurous Enchantment");
-            Tooltip.SetDefault("A bubble spawns on the screen sometimes.\nIf you hit the bubble, it will spawn a static Toxic Cloud\nthat rains Armor Crunch drops.\nOnly one cloud can exist at a time.\n'Water so dirty, just the smell of it makes you vomit.'");
+            Tooltip.SetDefault("A bubble spawns on the screen sometimes.\nIf you hit the bubble, it will spawn a static Toxic Cloud\nthat rains Armor Crunch drops.\nOnly one cloud can exist at a time.\n'Water so dirty, just the smell of it makes you sick.'");
         }
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.rare = ItemRarityID.Lime;
+            Item.rare = ItemRarityID.Green;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

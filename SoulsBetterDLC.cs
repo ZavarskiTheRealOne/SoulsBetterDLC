@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.ID;
-using System.Collections.Generic;
+using System;
 using ThoriumMod;
 using CalamityMod.Items.Placeables.Furniture;
 
@@ -10,19 +10,7 @@ namespace SoulsBetterDLC
 {
     public class SoulsBetterDLC : Mod
     {
-        /*public class Keybinds: ModSystem
-        {
-            internal static ModKeybind UmbraVamps;
-
-            public override void Load()
-            {
-                UmbraVamps = KeybindLoader.RegisterKeybind(Mod, "Umbraphile Bats", "Y");
-            }
-
-            public override void Unload()
-            {
-                UmbraVamps = null;
-            }*/
+        //I'll place something here later :p
     }
 
     [JITWhenModsEnabled("CalamityMod", "ThoriumMod")]
@@ -162,6 +150,14 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHelmet>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Aerospec.AerospecHeadgear>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAerospecHelms", AerospecHelmsGroup);
+            //aerospec head group
+            RecipeGroup HydrothermHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Hydrothermic Headpiece"}",
+                ModContent.ItemType<CalamityMod.Items.Armor.Hydrothermic.HydrothermicHeadMelee>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Hydrothermic.HydrothermicHeadRanged>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Hydrothermic.HydrothermicHeadMagic>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Hydrothermic.HydrothermicHeadSummon>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Hydrothermic.HydrothermicHeadRogue>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyHydrothermHelms", HydrothermHelmsGroup);
         }
 
         static void ThoriumRecipes()

@@ -2,10 +2,12 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using CalamityMod.Rarities;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Bloodflare_Enchantment : BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -19,13 +21,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void SetDefaults()
         {
-            //size, state and rarity
-            Item.width = 30;
-            Item.height = 34;
-            Item.accessory = true;
-            if (ModLoader.TryGetMod("CalamityMod", out _))
-                Item.rare = ModContent.RarityType<CalamityMod.Rarities.PureGreen>();
-            else Item.rare = ItemRarityID.Purple;
+            base.SetDefaults();
+            Item.rare = ModContent.RarityType<PureGreen>();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

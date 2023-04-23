@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Fathom_Enchantment: BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -14,12 +15,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Fathom Swarmer Enchantment");
-            Tooltip.SetDefault("A bubble spawns on the screen sometimes.\nIf you hit the bubble, it will spawn a static Toxic Cloud\nthat rains Armor Crunch drops and sometimes strikes a lightning down.\nOnly one cloud can exist at a time.\n'Oh, look, someone already vomitted in your glass.'");
+            Tooltip.SetDefault("A bubble spawns on the screen sometimes.\nIf you hit the bubble, it will spawn a static Toxic Cloud\nthat rains Armor Crunch drops and sometimes strikes a lightning down.\nOnly one cloud can exist at a time.\n'Oh, look, someone already vomited in your glass.'");
         }
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Lime;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -36,7 +37,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient<Sulphur_Enchantment>();
             recipe.AddIngredient<CalamityMod.Items.Weapons.Magic.Miasma>();
             recipe.AddIngredient<CalamityMod.Items.Accessories.CorrosiveSpine>();
-            recipe.AddTile(TileID.DemonAltar);
+            recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }
     }

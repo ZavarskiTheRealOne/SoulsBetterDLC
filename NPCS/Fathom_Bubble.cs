@@ -7,6 +7,8 @@ using Terraria.Audio;
 
 namespace SoulsBetterDLC.NPCS
 {
+    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Fathom_Bubble : ModNPC
     {
         private int timerDead;

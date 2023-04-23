@@ -9,6 +9,7 @@ Special thanks to:
 	And everyone else who have contributed to the mod, be it suggestions or direct contribution to the mod's insides
 
 Changelogs:
+v0.2.2 - a little un-little update that adds Plaguebringer and Hydrothermic enchantments and Devastation Force, as well as the Wizard effects of the enchantments present in that force
 v0.2.1 - "Late April Fools Patch". Fixes several bugs caused by Calamity not being enabled and updated the mod to work with new Fargo's mods versions 
 v0.2 - second public release.
 v0.1.1 - a re-release of v0.1 with some bug fixes and changes done to code. For the rest it's the same mod as it was at v0.1

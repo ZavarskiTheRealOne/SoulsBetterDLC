@@ -9,9 +9,11 @@ using CalamityMod;
 namespace SoulsBetterDLC.Projectiles
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Aero_Valkyrie: ModProjectile
     {
         private int feathimer = 0;
+        public override string Texture => "CalamityMod/Projectiles/Summon/Valkyrie";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Enchanted Valkyrie");

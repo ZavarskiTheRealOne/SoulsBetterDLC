@@ -1,11 +1,11 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Fearmonger_Enchantment : BaseDLCEnchant
     {
         protected override Color nameColor => new(81, 99, 123);
@@ -19,11 +19,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults()
         {
             base.SetDefaults();
-            if (ModLoader.TryGetMod("CalamityMod", out _))
-                Item.rare = ModContent.RarityType<CalamityMod.Rarities.DarkBlue>();
-            else Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<CalamityMod.Rarities.DarkBlue>();
         }
-
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();

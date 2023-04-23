@@ -1,16 +1,15 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using SoulsBetterDLC.Buffs;
 using Microsoft.Xna.Framework;
 
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Wulfrum_Enchantment : BaseDLCEnchant
     {
-        public int peaceTimer;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
         protected override Color nameColor => new Color(206, 201, 170);
@@ -19,7 +18,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             //name and description
             DisplayName.SetDefault("Wulfrum Enchantment");
-            Tooltip.SetDefault("When your health is below 30%, you gain a buff.\nThis buff increases damage dealt and decreases damage taken by 30%.\n'ELECTRICITY IS FUN!.'");
+            Tooltip.SetDefault("When your health is below 30%, you gain a buff.\nThis buff increases damage dealt and decreases damage taken by 30%.\n'ELECTRICITY IS FUN!'");
         }
         public override void SetDefaults()
         {

@@ -5,6 +5,7 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Projectiles
 {
+    [JITWhenModsEnabled("CalamityMod")]
     public class Fathom_Cloud: ModProjectile
     {
         private int timerDead;
@@ -63,7 +64,7 @@ namespace SoulsBetterDLC.Projectiles
                     {
                         Player player = Main.player[Projectile.owner];
                         int lightnDamage = (int)player.GetBestClassDamage().ApplyTo(60f);
-                        int lightning = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, 0f, 15f, ProjectileID.CultistBossLightningOrbArc, lightnDamage, 0f, Projectile.owner, ai0: 1.5f, ai1: 0f);
+                        int lightning = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.position.Y, 0f, 15f, ProjectileID.CultistBossLightningOrbArc, lightnDamage, 0f, Projectile.owner, ai0: 1.5f, ai1: 0f);
                         if (Main.projectile.IndexInRange(lightning))
                         {
                             Main.projectile[lightning].friendly = true;

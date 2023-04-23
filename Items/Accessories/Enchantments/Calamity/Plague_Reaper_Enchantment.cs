@@ -6,6 +6,7 @@ using Terraria.ID;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Plague_Reaper_Enchantment: BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -19,9 +20,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults() 
         {
             base.SetDefaults();
-            if (ModLoader.TryGetMod("CalamityMod", out _))
-                Item.rare = ModContent.RarityType<CalamityMod.Rarities.Turquoise>();
-            else Item.rare = ItemRarityID.Red;
+            Item.rare = ModContent.RarityType<CalamityMod.Rarities.Turquoise>();
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

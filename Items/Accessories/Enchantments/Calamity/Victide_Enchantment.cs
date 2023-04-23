@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Victide_Enchantment: BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";

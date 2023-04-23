@@ -6,6 +6,7 @@ using Terraria.ID;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Aerospec_Enchantment : BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";

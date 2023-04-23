@@ -7,13 +7,15 @@ using Terraria.ModLoader;
 namespace SoulsBetterDLC.Projectiles
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Fear_Valkyrie : ModProjectile
     {
         private int feathimerScary = 0;
+        public override string Texture => "CalamityMod/Projectiles/Summon/PowerfulRaven";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Damned Valkyrie");
-            Main.projFrames[Projectile.type] = 4;
+            Main.projFrames[Projectile.type] = 5;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }
@@ -197,7 +199,7 @@ namespace SoulsBetterDLC.Projectiles
             //visuals
             if (Math.Abs(Projectile.velocity.X) > 0.2f)
             {
-                Projectile.spriteDirection = -Projectile.direction;
+                Projectile.spriteDirection = Projectile.direction;
             }
             Projectile.frameCounter++;
             if (Projectile.frameCounter > 7)

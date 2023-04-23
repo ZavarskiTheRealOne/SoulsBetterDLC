@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     [AutoloadEquip(EquipType.Wings)]
     public class Ruffian_Enchantment : BaseDLCEnchant
     {

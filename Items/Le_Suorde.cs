@@ -40,7 +40,7 @@ namespace SoulsBetterDLC.Items
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Potions.Baguette>(), 2);
+			recipe.AddIngredient(ItemID.Hay, 20);
 			recipe.AddRecipeGroup("Wood", 1);
 			recipe.AddTile(TileID.Furnaces);
 			recipe.Register();
