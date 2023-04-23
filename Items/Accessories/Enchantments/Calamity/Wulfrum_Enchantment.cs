@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     public class Wulfrum_Enchantment : BaseDLCEnchant
     {

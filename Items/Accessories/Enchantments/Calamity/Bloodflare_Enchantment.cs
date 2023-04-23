@@ -6,7 +6,7 @@ using CalamityMod.Rarities;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     public class Bloodflare_Enchantment : BaseDLCEnchant
     {

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     public class Umbraphile_Enchantment : BaseDLCEnchant
     {

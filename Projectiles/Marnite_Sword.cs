@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Marnite_Sword : ModProjectile
     {
         public override void SetStaticDefaults()

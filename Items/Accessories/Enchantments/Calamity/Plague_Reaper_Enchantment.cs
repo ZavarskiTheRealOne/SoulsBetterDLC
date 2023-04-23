@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
     [ExtendsFromMod("CalamityMod")]
     public class Plague_Reaper_Enchantment: BaseDLCEnchant
     {
