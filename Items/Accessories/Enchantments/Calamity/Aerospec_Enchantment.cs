@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Aerospec_Enchantment : BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -19,13 +19,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults()
         {
             base.SetDefaults();
+            Item.rare = ItemRarityID.Orange;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             SBDPlayer.RideOfTheValkyrie = true;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddRecipeGroup("SoulsBetterDLC:AnyAerospecHelms");
@@ -34,7 +35,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient<CalamityMod.Items.Weapons.Rogue.Turbulance>(1);
             recipe.AddIngredient<CalamityMod.Items.Weapons.Magic.SkyGlaze>(1);
             recipe.AddIngredient<CalamityMod.Items.Accessories.FeatherCrown>(1);
-            recipe.AddTile(TileID.LunarCraftingStation);
+            recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }
     }

@@ -4,13 +4,15 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using System;
 using CalamityMod.Projectiles.Typeless;
+using CalamityMod;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Aero_Valkyrie: ModProjectile
     {
         private int feathimer = 0;
+        public override string Texture => "CalamityMod/Projectiles/Summon/Valkyrie";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Enchanted Valkyrie");
@@ -183,7 +185,7 @@ namespace SoulsBetterDLC.Projectiles
                 Vector2 velocity = Vector2.One;
                 for (int j = 0; j < 3; j++)
                 {
-                    int damage = (int)player.GetDamage(DamageClass.Summon).ApplyTo(20f);
+                    int damage = (int)player.GetBestClassDamage().ApplyTo(20f);
                     int aeroFethahs = Projectile.NewProjectile(player.GetSource_FromThis(), ValkyrieCenter, velocity, ModContent.ProjectileType<StickyFeatherAero>(), damage, 1f, player.whoAmI);
                     if (Main.projectile.IndexInRange(aeroFethahs))
                     {

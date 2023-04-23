@@ -1,6 +1,4 @@
-﻿using CalamityMod.Projectiles.Rogue;
-using CalamityMod;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -8,9 +6,10 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
+    [ExtendsFromMod("CalamityMod")]
     [AutoloadEquip(EquipType.Wings)]
-    public class Daedalus_Enchantment : Enchantments.BaseDLCEnchant
+    public class Daedalus_Enchantment : BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
@@ -41,7 +40,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SBDPlayer.AyeCicle = true;
         }
 
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

@@ -9,7 +9,7 @@ namespace SoulsBetterDLC.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("L'epee"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
+			DisplayName.SetDefault("L'epee");
 			Tooltip.SetDefault("A bread sword from France.\nFor some reason, hitting enemies with it fulfills your hunger.");
 		}
 
@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Items
 		{
 			if (target.lifeMax > 5)
 			{
-				player.AddBuff(BuffID.WellFed, 60);
+				player.AddBuff(BuffID.WellFed2, 60);
 				SoundEngine.PlaySound(SoundID.Item2);
 			}
 		}
@@ -40,7 +40,8 @@ namespace SoulsBetterDLC.Items
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.Hay, 10);
+			recipe.AddIngredient(ItemID.Hay, 20);
+			recipe.AddRecipeGroup("Wood", 1);
 			recipe.AddTile(TileID.Furnaces);
 			recipe.Register();
 		}

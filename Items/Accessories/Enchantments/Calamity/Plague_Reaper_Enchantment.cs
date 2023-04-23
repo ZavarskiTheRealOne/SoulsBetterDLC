@@ -5,7 +5,8 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
+    [ExtendsFromMod("CalamityMod")]
     public class Plague_Reaper_Enchantment: BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -19,23 +20,21 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults() 
         {
             base.SetDefaults();
-            /*if (ModLoader.TryGetMod("CalamityMod", out Mod mod))
-                Item.rare = ModContent.RarityType<CalamityMod.Rarities.Turquoise>();
-            else */Item.rare = ItemRarityID.Red;
+            Item.rare = ModContent.RarityType<CalamityMod.Rarities.Turquoise>();
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
-            SBDPlayer.ButterBeeKill = true;
+            SBDPlayer.DoctorBeeKill = true;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient<CalamityMod.Items.Armor.PlagueReaper.PlagueReaperMask>(1);
             recipe.AddIngredient<CalamityMod.Items.Armor.PlagueReaper.PlagueReaperVest>(1);
             recipe.AddIngredient<CalamityMod.Items.Armor.PlagueReaper.PlagueReaperStriders>(1);
             recipe.AddIngredient<CalamityMod.Items.Weapons.Rogue.AlphaVirus>(1);
-            recipe.AddIngredient<CalamityMod.Items.Weapons.Magic.NanoPurge>(1);
+            recipe.AddIngredient<CalamityMod.Items.Weapons.Melee.AnarchyBlade>(1);
             recipe.AddIngredient<CalamityMod.Items.Weapons.Melee.SoulHarvester>(1);
             recipe.AddTile(TileID.LunarCraftingStation);
             recipe.Register();

@@ -9,11 +9,11 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
+    [ExtendsFromMod("CalamityMod")]
     [AutoloadEquip(EquipType.Wings)]
     public class Ruffian_Enchantment : BaseDLCEnchant
     {
-        private bool shouldBoost;
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
         protected override Color nameColor => new Color (160, 185, 213);
@@ -46,7 +46,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             speed = 2f;
             acceleration *= 1.25f;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();

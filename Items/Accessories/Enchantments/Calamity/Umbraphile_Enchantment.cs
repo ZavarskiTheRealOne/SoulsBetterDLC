@@ -5,7 +5,8 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    
+    [ExtendsFromMod("CalamityMod")]
     public class Umbraphile_Enchantment : BaseDLCEnchant
     {
         public override string ModName => "CalamityMod";
@@ -15,7 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             //name and description
             DisplayName.SetDefault("Umbraphile Enchantment");
-            Tooltip.SetDefault("Boosts your life regen on enemy hits.\nYour attacks have a 10% chance to lifesteal for half of their damage.\n'When the vamps outside, lil bitch, you better be ready.'");
+            Tooltip.SetDefault("Boosts your life regen on enemy hits.\nEvery 5 seconds you will lifesteal for a third of your damage,\nunless it exceeds quarter of your max health.\n'When the vamps outside, lil bitch, you better be ready.'");
         }
         public override void SetDefaults()
         {
@@ -32,7 +33,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             SBDPlayer.UmbraCrazyRegen = true;
         }
 
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             //recipe
             Recipe recipe = CreateRecipe();
