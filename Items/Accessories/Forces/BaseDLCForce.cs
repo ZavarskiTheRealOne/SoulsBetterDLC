@@ -2,23 +2,29 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Forces
 {
-    public abstract class BaseDLCForce : CrossModItem
+    public abstract class BaseDLCForce : FargowiltasSouls.Items.Accessories.Forces.BaseForce
     {
-        public override void SetStaticDefaults()
+        public abstract string ModName { get; }
+        public bool ModLoaded => ModLoader.HasMod(ModName);
+        public override string Texture => ModContent.HasAsset(base.Texture) ? base.Texture : "SoulsBetterDLC/Items/Placeholder";
+
+        public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
-            base.SetStaticDefaults();
-            ItemID.Sets.ItemNoGravity[Type] = true;
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        }
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            Item.width = 20;
-            Item.height = 20;
-            Item.accessory = true;
+            base.SafeModifyTooltips(tooltips);
+            if (!ModLoader.HasMod(ModName))
+            {
+                TooltipLine line = new(Mod, "disabled",
+                    $"Doesn't do anything without {ModName} " +
+                    $"\nHow is this even loaded?");
+
+                line.OverrideColor = Color.Red;
+                tooltips.Add(line);
+            }
         }
     }
 }
