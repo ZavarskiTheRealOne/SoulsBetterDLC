@@ -32,14 +32,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 			SheildCD = 60;
         }
 
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }
 		
-		public override void SafeUpdateAccessory(Player player, bool hideVisual) 
+		public override void UpdateAccessory(Player player, bool hideVisual) 
 		{
             if (player.whoAmI != Main.myPlayer) return;
 

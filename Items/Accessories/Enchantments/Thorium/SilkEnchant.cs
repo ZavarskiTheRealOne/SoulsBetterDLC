@@ -18,7 +18,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Tooltip.SetDefault("Increases damage with high but not full mana");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<SoulsBetterDLCPlayer>().SilkEffect();
         }

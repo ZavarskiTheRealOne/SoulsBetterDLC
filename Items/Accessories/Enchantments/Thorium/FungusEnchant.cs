@@ -28,7 +28,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 "\n\"It's an 1NF3S+@+!0N\"");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             DLCPlayer.FungusEnch = true;

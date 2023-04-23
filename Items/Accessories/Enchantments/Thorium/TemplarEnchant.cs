@@ -24,7 +24,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
             Tooltip.SetDefault($"Occasionally summons holy fire from the sky above the cursor when attacking that heals allys and damages enemies");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             modPlayer.TemplarEnch = true;
@@ -52,7 +52,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
                                      Main.MouseWorld.Y);
         }
 
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ModContent.ItemType<TemplarsCirclet>(), 1);

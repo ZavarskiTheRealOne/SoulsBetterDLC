@@ -22,7 +22,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 "\nNot complete or ready for testing.");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             if (player.whoAmI != Main.myPlayer) return;
 

@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Tooltip.SetDefault("Increases damage the more frienly npcs are nearby");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<SoulsBetterDLCPlayer>().WhiteKnightEffect();
         }

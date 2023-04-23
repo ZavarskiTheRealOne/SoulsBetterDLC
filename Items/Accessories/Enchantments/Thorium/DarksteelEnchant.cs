@@ -19,7 +19,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 $"\nYour projectiles can also be boosted.");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             DLCPlayer.DarkSteelEnch = true;

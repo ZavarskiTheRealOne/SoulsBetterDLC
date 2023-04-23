@@ -28,7 +28,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Item.useAnimation = 10;
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             modPlayer.ValadiumEnch = true;

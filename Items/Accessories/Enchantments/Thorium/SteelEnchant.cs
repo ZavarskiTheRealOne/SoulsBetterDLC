@@ -18,7 +18,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Tooltip.SetDefault($"Press the parry hotkey to parry incoming projectiles. \nParrying projectiles allows then to deal boosted damage to enemies.");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             DLCPlayer.SteelEnch = true;

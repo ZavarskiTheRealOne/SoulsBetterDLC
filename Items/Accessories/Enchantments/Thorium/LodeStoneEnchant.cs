@@ -21,7 +21,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Tooltip.SetDefault("Summons two floating lodestone platforms capable of holding a sentry each");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             if (player.whoAmI != Main.myPlayer) return;
 

@@ -16,7 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Tooltip.SetDefault($"Grants damage and defence bonuses based on the number of enemies you have hit in the last 10 seconds. \n\"The only thing they fear is you\"");
         }
 
-        public override void SafeUpdateAccessory(Player player, bool hideVisual)
+        public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             DLCPlayer.BerserkerEnch = true;
