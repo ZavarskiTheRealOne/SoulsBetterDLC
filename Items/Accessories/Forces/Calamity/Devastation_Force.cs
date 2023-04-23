@@ -33,7 +33,7 @@ namespace SoulsBetterDLC.Items.Accessories.Forces.Calamity
             SBDPlayer.ButterBeeSwarm = true;
             SBDPlayer.AtaxiaEruption = true;
         }
-        public override void SafeAddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ModContent.ItemType<Daedalus_Enchantment>());
