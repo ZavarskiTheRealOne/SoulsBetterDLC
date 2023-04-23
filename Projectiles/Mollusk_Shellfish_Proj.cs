@@ -8,7 +8,7 @@ using CalamityMod.Buffs.DamageOverTime;
 
 namespace SoulsBetterDLC.Projectiles
 {
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class Mollusk_Shellfish_Proj: ModProjectile
     {
 

@@ -11,6 +11,7 @@ using ThoriumMod.Items.HealerItems;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class LivingWoodEnchant : BaseDLCEnchant
     {
         public override string wizardEffect => "Shoots high-velocity bullets instead of arrows";

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
-    [JITWhenModsEnabled("ThoriumMod")]
+    [ExtendsFromMod("ThoriumMod")]
     public class SilkEnchant : BaseDLCEnchant
     {
         public override string wizardEffect => "";

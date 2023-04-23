@@ -5,7 +5,7 @@ using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
-    [JITWhenModsEnabled("ThoriumMod")]
+    [ExtendsFromMod("ThoriumMod")]
     public class SteelEnchant : BaseDLCEnchant
     {
         protected override Color nameColor => Color.DarkGray;

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using CalamityMod;
 using CalamityMod.CalPlayer;
 using FargowiltasSouls;
+using System.Collections.Generic;
 
 namespace SoulsBetterDLC
 {
@@ -62,6 +63,12 @@ namespace SoulsBetterDLC
         public int LifestealCD;
 
         public Vector2 bubbleOffset;
+
+        private void AddCalamityClassesForSafety(ref Dictionary<DamageClass, float> dict)
+        {
+            // i think this is what calamity uses for rogue?
+            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
+        }
 
         private void CalamityResEff()
         {

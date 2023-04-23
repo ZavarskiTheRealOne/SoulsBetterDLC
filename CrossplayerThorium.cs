@@ -40,6 +40,13 @@ namespace SoulsBetterDLC
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;
 
+        private void AddThoriumClassesForSafety(ref Dictionary<DamageClass, float> dict)
+        {
+            dict.Add(ThoriumMod.HealerDamage.Instance, Player.GetDamage(ThoriumMod.HealerDamage.Instance).Additive);
+            dict.Add(ThoriumMod.BardDamage.Instance, Player.GetDamage(ThoriumMod.BardDamage.Instance).Additive);
+            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
+        }
+
         public void Thorium_ResetEffects()
         {
             EbonEnch = false;

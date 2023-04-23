@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
-    [JITWhenModsEnabled("ThoriumMod")]
+    [ExtendsFromMod("ThoriumMod")]
     public class ValadiumEnchant : BaseDLCEnchant
     {
         protected override Color nameColor => Color.Purple;

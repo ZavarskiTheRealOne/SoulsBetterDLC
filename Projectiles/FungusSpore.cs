@@ -49,8 +49,6 @@ namespace SoulsBetterDLC.Projectiles
             }
 
             Projectile.rotation = Projectile.velocity.X * 0.2f;
-
-            base.AI();
         }
 
         public override void Kill(int timeLeft)
@@ -61,6 +59,7 @@ namespace SoulsBetterDLC.Projectiles
                 dust.velocity *= 2f;
                 dust.noGravity = true;
             }
+            base.Kill(timeLeft);
         }
 
         //public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

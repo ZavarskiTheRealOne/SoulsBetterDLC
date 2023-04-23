@@ -13,6 +13,7 @@ using static Terraria.GameContent.Bestiary.BestiaryDatabaseNPCsPopulator.CommonT
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class FungusEnchant : BaseDLCEnchant
     {
         public override string ModName => "ThoriumMod";

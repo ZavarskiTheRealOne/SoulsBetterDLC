@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
-    [JITWhenModsEnabled("ThoriumMod")]
+    [ExtendsFromMod("ThoriumMod")]
     public class DarksteelEnchant : SteelEnchant
     {
         protected override Color nameColor => Color.DarkRed;

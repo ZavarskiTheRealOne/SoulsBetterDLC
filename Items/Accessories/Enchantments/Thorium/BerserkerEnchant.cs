@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class BerserkerEnchant : BaseDLCEnchant
     {
         public override string ModName => "ThoriumMod";

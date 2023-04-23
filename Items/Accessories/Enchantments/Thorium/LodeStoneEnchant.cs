@@ -8,7 +8,7 @@ using System;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
-    [JITWhenModsEnabled("ThoriumMod")]
+    [ExtendsFromMod("ThoriumMod")]
     public class LodeStoneEnchant : BaseDLCEnchant
     {
         public override string ModName => "ThoriumMod";

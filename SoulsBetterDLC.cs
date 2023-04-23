@@ -32,7 +32,7 @@ namespace SoulsBetterDLC
         }
     }
 
-    [JITWhenModsEnabled("CalamityMod")]
+    [ExtendsFromMod("CalamityMod")]
     public class RecipeSystem : ModSystem
     {
         internal bool CalamityLoaded;

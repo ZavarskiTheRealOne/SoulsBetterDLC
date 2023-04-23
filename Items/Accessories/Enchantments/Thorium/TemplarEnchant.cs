@@ -11,7 +11,7 @@ using ThoriumMod.Items.HealerItems;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest crossmod namespace
 {
-    [JITWhenModsEnabled("ThoriumMod")]
+    [ExtendsFromMod("ThoriumMod")]
     public class TemplarEnchant : BaseDLCEnchant
     {
         public override string wizardEffect => "TBD";

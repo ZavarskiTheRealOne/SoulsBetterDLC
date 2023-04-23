@@ -24,18 +24,6 @@ namespace SoulsBetterDLC
             return classes;
         }
 
-        private void AddThoriumClassesForSafety(ref Dictionary<DamageClass, float> dict) 
-        {
-            dict.Add(ThoriumMod.HealerDamage.Instance, Player.GetDamage(ThoriumMod.HealerDamage.Instance).Additive);
-            dict.Add(ThoriumMod.BardDamage.Instance, Player.GetDamage(ThoriumMod.BardDamage.Instance).Additive);
-            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
-        }
-        private void AddCalamityClassesForSafety(ref Dictionary<DamageClass, float> dict)
-        {
-            // i think this is what calamity uses for rogue?
-            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
-        }
-
         public override void ResetEffects()
         {
             if (SoulsBetterDLC.CalamityLoaded) CalamityResEff();
