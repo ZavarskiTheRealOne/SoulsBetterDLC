@@ -11,7 +11,7 @@ namespace SoulsBetterDLC.Projectiles
     [ExtendsFromMod("CalamityMod")]
     public class Aero_Valkyrie: ModProjectile
     {
-        private int feathimer = 0;
+        private int feathimer = 90;
         public override string Texture => "CalamityMod/Projectiles/Summon/Valkyrie";
         public override void SetStaticDefaults()
         {
@@ -131,10 +131,9 @@ namespace SoulsBetterDLC.Projectiles
             float inertia;
             if (foundTarget)
             {
-                feathimer++;
+                feathimer--;
                 if (distanceFromTarget > 120f)
                 {
-                    feathimer = 90;
                     speed = 10f;
                     inertia = 20f;
                     Vector2 direction = targetCenter - ValkyrieCenter;
@@ -159,7 +158,6 @@ namespace SoulsBetterDLC.Projectiles
             }
             else
             {
-                feathimer= 1;
                 if (distanceToIdlePosition > 600f)
                 {
                     speed = 20f;
@@ -178,14 +176,14 @@ namespace SoulsBetterDLC.Projectiles
                     Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
                 }
             }
-            if (feathimer > 90)
+            if (feathimer <= 0)
             {
-                feathimer = 0;
+                feathimer = 90;
                 Projectile.netUpdate = true;
                 Vector2 velocity = Vector2.One;
                 for (int j = 0; j < 3; j++)
                 {
-                    int damage = (int)player.GetBestClassDamage().ApplyTo(20f);
+                    int damage = (int)player.GetBestClassDamage().ApplyTo(25f);
                     int aeroFethahs = Projectile.NewProjectile(player.GetSource_FromThis(), ValkyrieCenter, velocity, ModContent.ProjectileType<StickyFeatherAero>(), damage, 1f, player.whoAmI);
                     if (Main.projectile.IndexInRange(aeroFethahs))
                     {

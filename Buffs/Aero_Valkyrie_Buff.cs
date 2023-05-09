@@ -4,8 +4,10 @@ using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Buffs
 {
+    [ExtendsFromMod("CalamityMod")]
     public class Aero_Valkyrie_Buff : ModBuff
     {
+        public override string Texture => "CalamityMod/Buffs/Summon/ValkyrieBuff";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Enchanted Valkyrie");

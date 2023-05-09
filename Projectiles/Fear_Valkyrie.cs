@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using CalamityMod;
 
 namespace SoulsBetterDLC.Projectiles
 {
     [ExtendsFromMod("CalamityMod")]
     public class Fear_Valkyrie : ModProjectile
     {
-        private int feathimerScary = 0;
+        private int feathimerScary = 120;
         public override string Texture => "CalamityMod/Projectiles/Summon/PowerfulRaven";
         public override void SetStaticDefaults()
         {
@@ -130,10 +131,9 @@ namespace SoulsBetterDLC.Projectiles
             float inertia;
             if (foundTarget)
             {
-                feathimerScary++;
+                feathimerScary--;
                 if (distanceFromTarget > 120f)
                 {
-                    feathimerScary = 120;
                     speed = 30f;
                     inertia = 60f;
                     Vector2 direction = targetCenter - FValkyrieCenter;
@@ -158,7 +158,6 @@ namespace SoulsBetterDLC.Projectiles
             }
             else
             {
-                feathimerScary = 1;
                 if (distanceToIdlePosition > 600f)
                 {
                     speed = 40f;
@@ -177,14 +176,14 @@ namespace SoulsBetterDLC.Projectiles
                     Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
                 }
             }
-            if (feathimerScary > 120)
+            if (feathimerScary <= 0)
             {
-                feathimerScary = 0;
+                feathimerScary = 120;
                 Projectile.netUpdate = true;
                 Vector2 velocity = Vector2.One;
                 for (int i = 0; i < 4; i++)
                 {
-                    int damage = (int)player.GetDamage(DamageClass.Summon).ApplyTo(110f);
+                    int damage = (int)player.GetBestClassDamage().ApplyTo(180f);
                     int fearFethahs = Projectile.NewProjectile(player.GetSource_FromThis(), FValkyrieCenter, velocity, ModContent.ProjectileType<Fearsome_Feather>(), damage, 1f, player.whoAmI);
                     if (Main.projectile.IndexInRange(fearFethahs))
                     {

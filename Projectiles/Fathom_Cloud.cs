@@ -63,7 +63,7 @@ namespace SoulsBetterDLC.Projectiles
                     if (Projectile.owner == Main.myPlayer)
                     {
                         Player player = Main.player[Projectile.owner];
-                        int lightnDamage = (int)player.GetBestClassDamage().ApplyTo(60f);
+                        int lightnDamage = (int)player.GetBestClassDamage().ApplyTo(80f);
                         int lightning = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.position.Y, 0f, 15f, ProjectileID.CultistBossLightningOrbArc, lightnDamage, 0f, Projectile.owner, ai0: 1.5f, ai1: 0f);
                         if (Main.projectile.IndexInRange(lightning))
                         {
