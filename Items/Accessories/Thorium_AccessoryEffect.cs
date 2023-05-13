@@ -65,10 +65,29 @@ namespace SoulsBetterDLC
 
             if (!Player.HasBuff<SteelParry_CD>())
             {   
-                Player.AddBuff(ModContent.BuffType<SteelParry_CD>(), 600);
+                Player.AddBuff(ModContent.BuffType<SteelParry_CD>(), 900);
 
                 float rot = Player.Center.DirectionTo(Main.MouseWorld).ToRotation();
                 Projectile.NewProjectile(Player.GetSource_Accessory(SteelEnchItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Steel_Parry>(), 0, 0, Player.whoAmI, DarkSteelEnch ? 1f : 0f, rot);
+            }
+        }
+
+        public void SpawnGraniteCore(Vector2 position)
+        {
+            Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_Accessory(GraniteEnchItem), position, Vector2.Zero, ModContent.ProjectileType<GraniteCore>(), 0, 0f, Player.whoAmI);
+            if (GraniteCores.Count > 0)
+            {
+                proj.ai[0] = GraniteCores[^1];
+            }
+            else
+            {
+                proj.ai[0] = -1;
+            }
+            GraniteCores.Add(proj.whoAmI);
+
+            if (GraniteCores.Count >= 10)
+            {
+                Main.projectile[GraniteCores[0]].Kill();
             }
         }
     }

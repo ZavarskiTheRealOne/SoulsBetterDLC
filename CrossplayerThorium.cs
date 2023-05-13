@@ -27,14 +27,17 @@ namespace SoulsBetterDLC
         public bool ValadiumEnch;
         public bool BerserkerEnch;
         public bool FungusEnch;
+        public bool GraniteEnch;
 
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
         public Item SteelEnchItem;
         public Item ValadiumEnchItem;
+        public Item GraniteEnchItem;
 
         public List<int> LodeStonePlatforms = new();
         public List<int> ActiveValaChunks = new();
+        public List<int> GraniteCores = new();
         internal List<(int npc, int time)> BerserkerHits = new();
 
         internal int TemplarCD = 360;
@@ -62,14 +65,16 @@ namespace SoulsBetterDLC
             ValadiumEnch = false;
             BerserkerEnch = false;
             FungusEnch = false;
+            GraniteEnch = false;
 
             TemplarEnchItem = null;
             LivingWoodEnchItem = null;
             SteelEnchItem = null;
             ValadiumEnchItem = null;
+            GraniteEnchItem = null;
         }
 
-        public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage)
+        public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage, bool crit)
         {
             if (TemplarEnch && TemplarCD == 0)
             {
@@ -85,9 +90,13 @@ namespace SoulsBetterDLC
             {
                 if (target.TryGetGlobalNPC(out FungusEnemy funguy) && !funguy.Infected && !target.boss && Main.rand.NextBool(10))
                 {
-                    Main.NewText("infected");
+                    funguy.infectedBy = Player.whoAmI;
                     funguy.Infected = true;
                 }
+            }
+            if (GraniteEnch && crit)
+            {
+                SpawnGraniteCore(proj.Center);
             }
         }
 
@@ -100,6 +109,14 @@ namespace SoulsBetterDLC
             if (SoulsBetterDLC.SteelParryBind.JustPressed)
             {
                 ParryKey();
+            }
+            if (ThoriumMod.ThoriumHotkeySystem.AccessoryKey.JustPressed)
+            {
+                if (GraniteEnch)
+                {
+                    if (GraniteCores.Count != 0) 
+                        Main.projectile[GraniteCores[0]].Kill();
+                }
             }
         }
 

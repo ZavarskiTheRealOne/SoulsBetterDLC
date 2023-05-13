@@ -48,7 +48,7 @@ namespace SoulsBetterDLC
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             if (SoulsBetterDLC.CalamityLoaded) CalamityOnHitProj(proj, target, damage, crit);
-            if (SoulsBetterDLC.ThoriumLoaded) Thorium_OnHitNPCWithProj(proj, target, damage);
+            if (SoulsBetterDLC.ThoriumLoaded) Thorium_OnHitNPCWithProj(proj, target, damage, crit);
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {

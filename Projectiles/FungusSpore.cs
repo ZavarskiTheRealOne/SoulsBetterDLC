@@ -37,7 +37,7 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void AI()
         {
-            //Projectile.friendly = (Projectile.timeLeft < 599);
+            Projectile.friendly = (Projectile.timeLeft < 598);
             Projectile.ai[0]++;
             Projectile.frame = (int)MathF.Floor(Projectile.ai[0] / 15) % 3;
 
@@ -59,16 +59,15 @@ namespace SoulsBetterDLC.Projectiles
                 dust.velocity *= 2f;
                 dust.noGravity = true;
             }
-            base.Kill(timeLeft);
         }
 
-        //public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
-        //{
-        //    if (target.TryGetGlobalNPC(out FungusEnemy funguy) && !funguy.Infected)
-        //    {
-        //        funguy.Infected = true;
-        //    }
-        //    base.OnHitNPC(target, damage, knockback, crit);
-        //}
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            if (target.TryGetGlobalNPC(out FungusEnemy funguy) && !funguy.Infected)
+            {
+                funguy.Infected = true;
+                funguy.infectedBy = Projectile.owner;
+            }
+        }
     }
 }

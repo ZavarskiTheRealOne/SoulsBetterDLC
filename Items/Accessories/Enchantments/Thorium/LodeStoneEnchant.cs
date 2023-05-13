@@ -29,9 +29,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             modplayer.LodeStoneEnch = true;
 
             int maxPlatforms = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 3 : 2;
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<LodeStonePlatform>()] != maxPlatforms)
+            int currentPlatforms = player.ownedProjectileCounts[ModContent.ProjectileType<LodeStonePlatform>()];
+            if (currentPlatforms != maxPlatforms)
             {
-                foreach (int index in modplayer.LodeStonePlatforms) Main.projectile[index].Kill();
                 modplayer.LodeStonePlatforms = new();
                 for (int i = 0; i < maxPlatforms; i++)
                 {

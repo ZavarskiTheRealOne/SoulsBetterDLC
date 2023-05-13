@@ -80,10 +80,9 @@ namespace SoulsBetterDLC.Projectiles
 
         private void Split()
         {
-            //Main.NewText("Chunk split");
             if (Projectile.ai[0] > 1f)
             {
-                // good luck understanding this. Spawns two chunks of 1 smaller size and velocities at 45 degree angles to the original's. Note that damage and velocities of new chunks are two thirds of the original
+                // Spawns two chunks of 1 smaller size and velocities at 45 degree angles to the original's. Velocities of new chunks are two thirds of the original
                 float Sqrt2on3 = 1.41421f / 3;
                 Vector2 veloA = new Vector2(Projectile.velocity.X - Projectile.velocity.Y, Projectile.velocity.X + Projectile.velocity.Y) * Sqrt2on3;
                 Vector2 veloB = new Vector2(Projectile.velocity.X + Projectile.velocity.Y, Projectile.velocity.Y - Projectile.velocity.X) * Sqrt2on3;
@@ -98,7 +97,7 @@ namespace SoulsBetterDLC.Projectiles
 
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            damage *= (int)(Projectile.velocity.Length() * Projectile.ai[0] / 128); // subject to change
+            damage = (int)(Projectile.velocity.LengthSquared() * Mass / 300); 
         }
 
         public override bool PreAI()
@@ -180,7 +179,7 @@ namespace SoulsBetterDLC.Projectiles
                 Projectile.velocity.Normalize();
                 Projectile.velocity *= MaxSpeed;
             }
-            Player player = Main.player[Projectile.owner];
+            //Player player = Main.player[Projectile.owner];
             //float playerDistSQ = (player.Center - Projectile.Center).LengthSquared();
             //if (playerDistSQ > 980100f)
             //{
