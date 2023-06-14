@@ -35,7 +35,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient<CalamityMod.Items.Armor.FathomSwarmer.FathomSwarmerBreastplate>();
             recipe.AddIngredient<CalamityMod.Items.Armor.FathomSwarmer.FathomSwarmerBoots>();
             recipe.AddIngredient<Sulphur_Enchantment>();
-            recipe.AddIngredient<CalamityMod.Items.Weapons.Magic.Miasma>();
+            recipe.AddIngredient<CalamityMod.Items.Weapons.Melee.SulphurousGrabber>();
             recipe.AddIngredient<CalamityMod.Items.Accessories.CorrosiveSpine>();
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();

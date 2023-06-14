@@ -3,7 +3,6 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     

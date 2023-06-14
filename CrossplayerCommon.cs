@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using System;
@@ -32,13 +33,22 @@ namespace SoulsBetterDLC
             if (CalamityLoaded) CalamityResEff();
             if (ThoriumLoaded) Thorium_ResetEffects();
         }
+        /*public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+        {
+            if (ModLoader.HasMod("CalamityMod")) CalamityPreHurt();
+            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource, ref cooldownCounter);
+        }*/
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
         {
             if (CalamityLoaded) CalamityHurt();
         }
+        public override void PostUpdate()
+        {
+            if (ModLoader.HasMod("CalamityMod")) CalamityPostUpd();
+        }
         public override void PostUpdateEquips()
         {
-            if (CalamityLoaded) CalamityPostUpd();
+            if (ModLoader.HasMod("CalamityMod")) CalamityPostUpdEqp();
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {

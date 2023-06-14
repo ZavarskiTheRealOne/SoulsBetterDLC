@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Daedalus Enchantment");
-            Tooltip.SetDefault("Grands Daedalus Wings.\nWhile flying or gliding, damaging icicles fall down from your feet rapidly.\nIcicles deal 72 true damage and cannot be affected by boosts.\n*wow, it looks like a blizzard in here.");
+            Tooltip.SetDefault("Grants Daedalus Wings.\nWhile flying or gliding, damaging icicles fall down from your feet rapidly.\nIcicles deal 72 true damage and cannot be affected by boosts.\n*wow, it looks like a blizzard in here.");
         }
         public override void SetDefaults()
         {

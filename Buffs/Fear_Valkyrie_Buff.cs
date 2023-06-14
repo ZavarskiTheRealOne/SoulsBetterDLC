@@ -4,8 +4,10 @@ using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Buffs
 {
+    [ExtendsFromMod("CalamityMod")]
     public class Fear_Valkyrie_Buff : ModBuff
     {
+        public override string Texture => "CalamityMod/Buffs/Summon/CorvidHarbringerBuff";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Damned Valkyrie");

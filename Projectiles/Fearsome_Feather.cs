@@ -32,7 +32,7 @@ namespace SoulsBetterDLC.Projectiles
             {
                 Projectile.tileCollide = true;
             }
-            CalamityUtils.HomeInOnNPC(Projectile, ignoreTiles: true, 150f, 12f, 20f);
+            CalamityUtils.HomeInOnNPC(Projectile, true, 150f, 12f, 20f);
         }
         public override void Kill(int timeLeft)
         {
