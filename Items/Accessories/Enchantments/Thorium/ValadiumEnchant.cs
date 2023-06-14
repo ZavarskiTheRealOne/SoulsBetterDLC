@@ -20,14 +20,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             Tooltip.SetDefault("Occasionally summons gravitationally attracted valadium chunks that can damage enemies");
         }
 
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
-        }
-
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
@@ -60,19 +52,6 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                                      3,
                                      player.whoAmI,
                                      Main.rand.Next(1, 4));
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
-                                     Main.MouseWorld,
-                                     Vector2.Zero,
-                                     ModContent.ProjectileType<Valadium_Chunk>(),
-                                     50,
-                                     3,
-                                     player.whoAmI,
-                                     Main.rand.Next(1, 4));
-            return true;
         }
     }
 }

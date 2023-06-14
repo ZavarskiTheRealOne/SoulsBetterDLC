@@ -90,5 +90,19 @@ namespace SoulsBetterDLC
                 Main.projectile[GraniteCores[0]].Kill();
             }
         }
+
+        public void SpawnAstroLaser(NPC target)
+        {
+            int Damage = 100;
+            if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Damage += 50;
+            if (Player.position.Y < Main.worldSurface * 0.35 * 16) Damage += 50; // in space
+            Vector2 pos = new(target.Center.X, MathHelper.Max(Player.Center.Y - Main.screenHeight, 10f));
+
+            Projectile.NewProjectile(AstroEnchItem.GetSource_Accessory(AstroEnchItem), pos,
+                Vector2.UnitY, ModContent.ProjectileType<SaucerDeathrayProj>(),
+                Damage, 2f, Player.whoAmI);
+
+            AstroLaserCD = 60;
+        }
     }
 }

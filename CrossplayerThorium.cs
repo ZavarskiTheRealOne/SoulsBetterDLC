@@ -28,12 +28,14 @@ namespace SoulsBetterDLC
         public bool BerserkerEnch;
         public bool FungusEnch;
         public bool GraniteEnch;
+        public bool AstroEnch;
 
         public Item TemplarEnchItem;
         public Item LivingWoodEnchItem;
         public Item SteelEnchItem;
         public Item ValadiumEnchItem;
         public Item GraniteEnchItem;
+        public Item AstroEnchItem;
 
         public List<int> LodeStonePlatforms = new();
         public List<int> ActiveValaChunks = new();
@@ -42,6 +44,7 @@ namespace SoulsBetterDLC
 
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;
+        internal int AstroLaserCD = 60;
 
         public bool GildedMonicle;
         public bool GildedBinoculars;
@@ -69,12 +72,14 @@ namespace SoulsBetterDLC
             BerserkerEnch = false;
             FungusEnch = false;
             GraniteEnch = false;
+            AstroEnch = false;
 
             TemplarEnchItem = null;
             LivingWoodEnchItem = null;
             SteelEnchItem = null;
             ValadiumEnchItem = null;
             GraniteEnchItem = null;
+            AstroEnchItem = null;
 
             GildedMonicle = false;
             GildedBinoculars = false;
@@ -103,6 +108,10 @@ namespace SoulsBetterDLC
             if (GraniteEnch && crit)
             {
                 SpawnGraniteCore(proj.Center);
+            }
+            if (AstroEnch && crit && AstroLaserCD <= 0)
+            {
+                SpawnAstroLaser(target);
             }
         }
 
