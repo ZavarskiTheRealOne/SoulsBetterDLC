@@ -10,7 +10,6 @@ namespace SoulsBetterDLC.Projectiles
 {
     public class LodeStonePlatform : ModProjectile
     {
-        //public int heldSentry = -1;
         public bool WorldPosAbovePlatform(Vector2 pos)
         {
             float left = Projectile.position.X;
@@ -26,11 +25,11 @@ namespace SoulsBetterDLC.Projectiles
             return false;
         }
 
-        public bool CanFitSentry => Projectile.ai[1] == -69;
+        public bool CanFitSentry => Projectile.ai[1] == -1;
 
         public bool TryAddSentryToPlatform(int index, Vector2 pos, Player player)
         {
-            if (Projectile.ai[1] != -1 || !WorldPosAbovePlatform(pos)) return false;
+            if (!CanFitSentry || !WorldPosAbovePlatform(pos)) return false;
             if (Main.myPlayer != player.whoAmI) return false;
 
             Projectile proj = Main.projectile[index];
@@ -49,23 +48,24 @@ namespace SoulsBetterDLC.Projectiles
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.friendly = true;
-            //Projectile.ai[1] = -1;
         }
 
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.Center = player.Center + new Vector2(MathF.Cos(Projectile.ai[0]), MathF.Sin(Projectile.ai[0])) * 80;
+            var (Sin, Cos) = MathF.SinCos(Projectile.ai[0]);
+            float orbitRadius = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 100 : 80;
+            Projectile.Center = player.Center + new Vector2(Cos, Sin) * orbitRadius;
             Projectile.ai[0] += (MathF.PI / 360);
-            if (Projectile.ai[0] >= 2 * MathF.PI) Projectile.ai[0] %= (2 * MathF.PI); 
+            Projectile.ai[0] %= MathF.Tau;
+            Projectile.velocity = (MathF.PI * orbitRadius / 180) * new Vector2(Sin, Cos);
 
             SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             if (player.dead || !player.active || !modPlayer.LodeStoneEnch || !modPlayer.LodeStonePlatforms.Contains(Projectile.whoAmI))
             {
-                //modPlayer.LodeStonePlatforms = new();
                 Projectile.Kill();
             }
-            else Projectile.timeLeft = 2; // stops sentries randomly falling off when default time runs out.
+            else Projectile.timeLeft = 2; 
         }
         public override void OnSpawn(IEntitySource source)
         {
@@ -100,7 +100,7 @@ namespace SoulsBetterDLC.Projectiles
         public int platform = -1;
 
         public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Projectile entity, bool lateInstantiation) => entity.sentry; // find some way to make it only gravity sentries, Proj.gravity isnt a thing??
+        public override bool AppliesToEntity(Projectile entity, bool lateInstantiation) => entity.sentry; // maybe find some way to make it only gravity sentries
 
         public override void PostAI(Projectile projectile)
         {
@@ -108,9 +108,9 @@ namespace SoulsBetterDLC.Projectiles
             {
                 projectile.timeLeft = 10;
                 projectile.position.X = Main.projectile[platform].Center.X - (projectile.width / 2);
-                projectile.position.Y = Main.projectile[platform].position.Y - projectile.height; 
+                projectile.position.Y = Main.projectile[platform].position.Y - projectile.height;
                 // TODO: lightning auras have weird positions
-                projectile.velocity = projectile.oldVelocity;
+                projectile.velocity = Main.projectile[platform].velocity;
             }
         }
 

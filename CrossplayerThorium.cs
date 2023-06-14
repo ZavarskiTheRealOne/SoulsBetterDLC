@@ -43,6 +43,9 @@ namespace SoulsBetterDLC
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;
 
+        public bool GildedMonicle;
+        public bool GildedBinoculars;
+
         private void AddThoriumClassesForSafety(ref Dictionary<DamageClass, float> dict)
         {
             dict.Add(ThoriumMod.HealerDamage.Instance, Player.GetDamage(ThoriumMod.HealerDamage.Instance).Additive);
@@ -72,6 +75,9 @@ namespace SoulsBetterDLC
             SteelEnchItem = null;
             ValadiumEnchItem = null;
             GraniteEnchItem = null;
+
+            GildedMonicle = false;
+            GildedBinoculars = false;
         }
 
         public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage, bool crit)

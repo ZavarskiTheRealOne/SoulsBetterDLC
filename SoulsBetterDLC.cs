@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using ThoriumMod;
 using CalamityMod.Items.Placeables.Furniture;
+using System.Reflection;
+using MonoMod.RuntimeDetour.HookGen;
 
 namespace SoulsBetterDLC
 {
@@ -22,7 +24,26 @@ namespace SoulsBetterDLC
             ThoriumLoaded = ModLoader.HasMod("ThoriumMod");
             CalamityLoaded = ModLoader.HasMod("CalamityMod");
 
+            LoadDetours();
+
             if (ThoriumLoaded) Thorium_Load();
+        }
+
+        private static void LoadDetours()
+        {
+            // Devi
+            Type deviDetourClass = ModContent.Find<ModNPC>("Fargowiltas/Deviantt").GetType();
+
+            if (deviDetourClass != null)
+            {
+                MethodInfo SetChatButtons_DETOUR = deviDetourClass.GetMethod("SetChatButtons", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+
+                HookEndpointManager.Add(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
+                HookEndpointManager.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
+                if (ThoriumLoaded) DevianttPatches.AddDevianttShop("Thorium", DevianttPatches.SetupThoriumDeviShop);
+            }
+
         }
 
         public void Thorium_Load()
@@ -47,10 +68,6 @@ namespace SoulsBetterDLC
             {
                 CalamityRecipes();
             }
-            //if (ModLoader.HasMod("ThoriumMod"))
-            //{
-            //    ThoriumRecipes();
-            //}
         }
         public override void AddRecipeGroups()
         {
@@ -178,15 +195,5 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Hydrothermic.HydrothermicHeadRogue>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyHydrothermHelms", HydrothermHelmsGroup);
         }
-
-        //static void ThoriumRecipes()
-        //{ }
-        //static void ThoriumGroups()
-        //{
-        //    RecipeGroup T3ShieldsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Silver Shield"}",
-        //        ModContent.ItemType<ThoriumMod.Items.BasicAccessories.SilverBulwark>(),
-        //        ModContent.ItemType<ThoriumMod.Items.BasicAccessories.TungstenBulwark>());
-        //    RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyT3Shield", T3ShieldsGroup);
-        //}
     }
 }
