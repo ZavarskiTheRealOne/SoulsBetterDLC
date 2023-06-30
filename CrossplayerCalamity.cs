@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace SoulsBetterDLC
 {
-    [ExtendsFromMod("CalamityMod")] // not sure that this does anything but it may be important so i won't remove until tested
+    [JITWhenModsEnabled("CalamityMod")] // this needs to be here, [extendsFromMod()] nukes entire class
     public partial class SoulsBetterDLCPlayer : ModPlayer
     {
         //effect booleans
