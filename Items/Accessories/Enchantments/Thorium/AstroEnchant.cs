@@ -22,13 +22,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             base.UpdateAccessory(player, hideVisual);
-            if (player.TryGetModPlayer(out SoulsBetterDLCPlayer DLCPlayer))
-            {
-                DLCPlayer.AstroEnch = true;
-                DLCPlayer.AstroEnchItem = Item;
-                player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().StabilizedGravity = true;
-                if (DLCPlayer.AstroLaserCD > 0) DLCPlayer.AstroLaserCD--;
-            }
+            SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            DLCPlayer.AstroEnch = true;
+            DLCPlayer.AstroEnchItem = Item;
+            player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().StabilizedGravity = true;
+            if (DLCPlayer.AstroLaserCD > 0) DLCPlayer.AstroLaserCD--;
         }
     }
 }
