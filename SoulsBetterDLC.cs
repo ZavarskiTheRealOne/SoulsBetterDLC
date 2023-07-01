@@ -50,6 +50,14 @@ namespace SoulsBetterDLC
         {
             LivingWoodBind = KeybindLoader.RegisterKeybind(this, "Living wood roots", Keys.P);
             SteelParryBind = KeybindLoader.RegisterKeybind(this, "Steel parry", Keys.F);
+
+            Assembly ThoriumAssembly = ModLoader.GetMod("ThoriumMod").GetType().Assembly;
+            Type thoriumProjExtensions = ThoriumAssembly.GetType("ThoriumMod.Utilities.ProjectileHelper", true );
+
+            Projectiles.Thorium.DLCHealing.HealMethod = thoriumProjExtensions.GetMethod("ThoriumHeal", BindingFlags.Static | BindingFlags.NonPublic);
+            Projectiles.Thorium.DLCHealing.CustomHealingType = thoriumProjExtensions.GetNestedType("CustomHealing", BindingFlags.NonPublic);
+            if (Projectiles.Thorium.DLCHealing.CustomHealingType == null) Logger.Debug("type cringe");
+            else Logger.Debug("type successful");
         }
     }
 

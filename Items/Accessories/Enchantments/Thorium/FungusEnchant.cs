@@ -47,7 +47,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             {
                 for (int i = 0; i < Main.rand.Next(2, 6); i++)
                 {
-                    Projectile spore = Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center + (Vector2.UnitY * npc.width / 2), Main.rand.NextVector2Circular(1, 1) * 8f, ModContent.ProjectileType<Projectiles.FungusSpore>(), 25, 1f, infectedBy);
+                    Projectile spore = Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center + (Vector2.UnitY * npc.width / 2), Main.rand.NextVector2Circular(1, 1) * 8f, ModContent.ProjectileType<Projectiles.Thorium.FungusSpore>(), 25, 1f, infectedBy);
                     spore.velocity.Y = -1.5f * MathF.Abs(spore.velocity.Y);
                 }
             }

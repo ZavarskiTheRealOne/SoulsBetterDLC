@@ -5,9 +5,9 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System;
 using Microsoft.Xna.Framework.Graphics;
-using static SoulsBetterDLC.Projectiles.ValaChunkCollisions;
+using static SoulsBetterDLC.Projectiles.Thorium.ValaChunkCollisions;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     public class Valadium_Chunk : ModProjectile
     {

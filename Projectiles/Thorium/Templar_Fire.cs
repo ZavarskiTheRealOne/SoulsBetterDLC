@@ -4,7 +4,7 @@ using Terraria.ID;
 using ThoriumMod;
 using Microsoft.Xna.Framework;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     [ExtendsFromMod("ThoriumMod")]
     public class Templar_Fire : ThoriumMod.Projectiles.Healer.HolyFirePro

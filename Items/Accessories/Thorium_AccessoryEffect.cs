@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using SoulsBetterDLC.Buffs;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using SoulsBetterDLC.Projectiles;
+using SoulsBetterDLC.Projectiles.Thorium;
 
 namespace SoulsBetterDLC
 {

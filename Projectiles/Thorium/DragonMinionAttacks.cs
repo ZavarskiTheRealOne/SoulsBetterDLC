@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
 	// this code is shit sorry
     public partial class DragonMinionHead : DragonMinion

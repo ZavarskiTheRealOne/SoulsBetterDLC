@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ID;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     [ExtendsFromMod("ThoriumMod")]
     public class GraniteCore : ModProjectile

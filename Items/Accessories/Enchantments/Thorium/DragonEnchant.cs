@@ -2,7 +2,7 @@
 using Terraria.ModLoader;
 using SoulsBetterDLC;
 using Microsoft.Xna.Framework;
-using SoulsBetterDLC.Projectiles;
+using SoulsBetterDLC.Projectiles.Thorium;
 using Terraria.DataStructures;
 using System;
 

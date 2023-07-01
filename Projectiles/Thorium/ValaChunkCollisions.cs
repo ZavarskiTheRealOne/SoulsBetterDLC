@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     internal static class ValaChunkCollisions
     {

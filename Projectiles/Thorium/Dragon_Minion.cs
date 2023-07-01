@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
 
 // god this is such a mess
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
 	public struct DragonData
     {

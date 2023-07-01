@@ -8,9 +8,12 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
 using Terraria.ID;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class GrandThunderBirb : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(ModContent.NPCType<TheGrandThunderBirdv2>());
@@ -128,7 +131,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                             npc.velocity = (NextPosition.Value - LastPosition) / RedAttSpeed;
 
                             // spawn projectile
-                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
                             redAttackNum--;
                         }
                         else if (redAttackNum == 0)
@@ -174,7 +177,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                                         // move in dash, spawning orbs every 3 blocks
                                         if (dashTimer % 3 == 0)
                                         {
-                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
                                         }
                                         dashTimer--;
                                     }
@@ -227,7 +230,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                                         // move in dash, spawning orbs every 3 blocks
                                         if (dashTimer % 3 == 0)
                                         {
-                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
                                         }
                                         if (dashTimer % (Main.ScreenSize.X / (dashnum * 16)) == 0)
                                         {

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Thorium;
 using Terraria.DataStructures;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     public class FungusSpore : ModProjectile
     {

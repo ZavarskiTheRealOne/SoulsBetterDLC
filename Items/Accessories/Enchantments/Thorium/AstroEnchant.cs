@@ -33,7 +33,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
     }
 }
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     public class SaucerDeathrayProj : FargowiltasSouls.Projectiles.Minions.SaucerDeathray
     {

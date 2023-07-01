@@ -44,7 +44,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
                                      player.Center.Y - 500,
                                      0f,
                                      10f,
-                                     ModContent.ProjectileType<Projectiles.Templar_Fire>(),
+                                     ModContent.ProjectileType<Projectiles.Thorium.Templar_Fire>(),
                                      FargoSoulsUtil.HighestDamageTypeScaling(player, 20),
                                      0f,
                                      player.whoAmI,

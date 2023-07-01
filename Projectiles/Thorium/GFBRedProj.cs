@@ -5,10 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.ID;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     public class GFBRedProjStatic : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Rage Orb");
+        }
+
         public override void SetDefaults()
         {
             Projectile.timeLeft = 360;
@@ -71,13 +76,18 @@ namespace SoulsBetterDLC.Projectiles
 
     public class GFBRedProjBlast : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Rage Blast");
+        }
+
         public override void SetDefaults()
         {
             Projectile.width = 14;
             Projectile.height = 9;
             Projectile.tileCollide = true;
             Projectile.timeLeft = 3600;
-            Projectile.damage = 14;
+            Projectile.damage = 12;
             Projectile.friendly = false;
             Projectile.hostile = true;
         }

@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using System;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     public class LodeStonePlatform : ModProjectile
     {

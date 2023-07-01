@@ -7,7 +7,7 @@ using SoulsBetterDLC.Items.Accessories.Enchantments.Thorium;
 using System;
 using Terraria.Audio;
 
-namespace SoulsBetterDLC.Projectiles
+namespace SoulsBetterDLC.Projectiles.Thorium
 {
     public class Steel_Parry : ModProjectile
     {

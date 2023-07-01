@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using SoulsBetterDLC.Projectiles;
+using SoulsBetterDLC.Projectiles.Thorium;
 using Terraria.ID;
 using System.Collections.Generic;
 
