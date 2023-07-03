@@ -71,7 +71,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Enemy
                 npc.velocity = (NextPosition.Value - LastPosition) / OrbAttSpeed;
 
                 // spawn projectile
-                Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.KluexOrb>(), 16, 3f, Main.myPlayer, Projectiles.Thorium.KluexOrb.GFBOrb);
                 WaitingTimer = WaitTime;
             }
             npc.spriteDirection = npc.velocity.X > 0 ? 1 : -1;

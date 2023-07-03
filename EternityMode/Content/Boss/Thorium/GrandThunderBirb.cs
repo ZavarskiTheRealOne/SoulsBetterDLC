@@ -131,7 +131,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                             npc.velocity = (NextPosition.Value - LastPosition) / RedAttSpeed;
 
                             // spawn projectile
-                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.KluexOrb>(), 16, 3f, Main.myPlayer, Projectiles.Thorium.KluexOrb.GFBOrb);
                             redAttackNum--;
                         }
                         else if (redAttackNum == 0)
@@ -177,7 +177,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                                         // move in dash, spawning orbs every 3 blocks
                                         if (dashTimer % 3 == 0)
                                         {
-                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.KluexOrb>(), 16, 3f, Main.myPlayer, Projectiles.Thorium.KluexOrb.GFBOrb);
                                         }
                                         dashTimer--;
                                     }
@@ -230,7 +230,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                                         // move in dash, spawning orbs every 3 blocks
                                         if (dashTimer % 3 == 0)
                                         {
-                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GFBRedProjStatic>(), 16, 3f, 255, npc.target);
+                                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.KluexOrb>(), 16, 3f, Main.myPlayer, Projectiles.Thorium.KluexOrb.GFBOrb);
                                         }
                                         if (dashTimer % (Main.ScreenSize.X / (dashnum * 16)) == 0)
                                         {
