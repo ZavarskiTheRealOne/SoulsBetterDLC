@@ -23,6 +23,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         internal const int GFBOrb = 0;
         internal const int StaffHeal = 1;
         internal const int StaffDmg = 2;
+        internal const int TempleCore = 3;
 
         public override void SetDefaults()
         {
@@ -46,6 +47,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     break;
                 case StaffDmg:
                 case StaffHeal:
+                case TempleCore:
                     Projectile.friendly = true;
                     Projectile.hostile = false;
                     break;
@@ -59,7 +61,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             {
                 case GFBOrb:
                 case StaffHeal:
-                    float targetDist = 1000000f;
+                    float targetDist = 9211600f;
                     for (int i = 0; i < Main.player.Length; i++)
                     {
                         //if (i == Projectile.owner) continue;
@@ -72,10 +74,12 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     }
                     break;
                 case StaffDmg:
-                    targetDist = 1000000f;
+                case TempleCore:
+                    targetDist = 409600f; // 40 tile away, squared
                     for (int i = 0; i < Main.npc.Length; i++)
                     {
                         NPC target2 = Main.npc[i];
+                        if (target2.friendly || !target2.active) continue;
                         if (Projectile.Center.DistanceSQ(target2.Center) < targetDist)
                         {
                             targetPos = target2.Center;
@@ -87,9 +91,20 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
             if (targetPos != Vector2.Zero)
                 Projectile.rotation = (targetPos - Projectile.Center).ToRotation();
-            else Projectile.rotation += 0.1f;
+            else
+            {
+                if (orbType == TempleCore)
+                {
+                    Projectile.rotation = (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation();
+                    if (Projectile.timeLeft == 71) Projectile.timeLeft++;
+                }
+                else
+                {
+                    Projectile.rotation += 0.1f;
+                }
+            }
 
-            if (Projectile.timeLeft == 60)
+            if (Projectile.timeLeft == 60 && targetPos != Vector2.Zero) // Launch blast with 1 second left to be annoying
             {
                 Vector2 velo = Vector2.Normalize(targetPos - Projectile.Center);
                 Projectile.hostile = false;
@@ -98,6 +113,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     GFBOrb => 14,
                     StaffHeal => 0,
                     StaffDmg => 30,
+                    TempleCore => 25,
                     _ => 0
                 };
                 int dustType = orbType switch
@@ -105,6 +121,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     GFBOrb => DustID.GemRuby,
                     StaffHeal => DustID.GemEmerald,
                     StaffDmg => DustID.GemRuby,
+                    TempleCore => DustID.GemRuby,
                     _ => 0
                 };
 
@@ -114,6 +131,12 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, dustType);
                 }
             }
+
+            if (orbType == TempleCore)
+            {
+                Projectile.Center = Main.player[Projectile.owner].Center + new Vector2((Projectile.ai[1] - 2) * 48, (2 - MathF.Abs(Projectile.ai[1] - 2)) * -48);
+            }
+
             return false;
         }
 
@@ -139,6 +162,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                 GFBOrb => DustID.GemRuby,
                 StaffHeal => DustID.GemEmerald,
                 StaffDmg => DustID.GemRuby,
+                TempleCore => DustID.GemRuby,
                 _ => 0
             };
             for (int i = 0; i < 8; i++)
@@ -156,20 +180,18 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         }
 
         int orbType => (int)Projectile.ai[0];
-        const int GFBOrb = 0;
-        const int StaffHeal = 1;
-        const int StaffDmg = 2;
 
         public override void OnSpawn(IEntitySource source)
         {
             switch (orbType)
             {
-                case GFBOrb:
+                case KluexOrb.GFBOrb:
                     Projectile.friendly = false;
                     Projectile.hostile = true;
                     break;
-                case StaffDmg:
-                case StaffHeal:
+                case KluexOrb.StaffDmg:
+                case KluexOrb.StaffHeal:
+                case KluexOrb.TempleCore:
                     Projectile.friendly = true;
                     Projectile.hostile = false;
                     break;
@@ -192,7 +214,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                 return false;
 
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-            Rectangle rect = new(orbType == StaffHeal ? 28 : 0, 0, 28, 18);
+            Rectangle rect = new(orbType == KluexOrb.StaffHeal ? 28 : 0, 0, 28, 18);
             Vector2 origin = rect.Size() / 2f;
             Color drawColor = Projectile.GetAlpha(lightColor);
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rect, drawColor, Projectile.rotation, origin, 1f, SpriteEffects.None, 0);
@@ -203,7 +225,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            if (orbType == StaffHeal) Projectile.DLCHeal(10);
+            if (orbType == KluexOrb.StaffHeal) Projectile.DLCHeal(10);
             base.AI();
         }
     }

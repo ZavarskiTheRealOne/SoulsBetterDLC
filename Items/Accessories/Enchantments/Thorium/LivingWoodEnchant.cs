@@ -32,5 +32,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             modPlayer.LivingWoodEnch = true;
             modPlayer.LivingWoodEnchItem = Item;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.SummonItems.LivingWoodMask>()
+                .AddIngredient<ThoriumMod.Items.SummonItems.LivingWoodChestguard>()
+                .AddIngredient<ThoriumMod.Items.SummonItems.LivingWoodBoots>()
+                .Register();
+        }
     }
 }

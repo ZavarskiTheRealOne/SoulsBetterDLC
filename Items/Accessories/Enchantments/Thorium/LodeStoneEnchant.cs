@@ -46,5 +46,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 }
             }
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.Lodestone.LodeStoneFaceGuard>()
+                .AddIngredient<ThoriumMod.Items.Lodestone.LodeStoneChestGuard>()
+                .AddIngredient<ThoriumMod.Items.Lodestone.LodeStoneShinGuards>()
+                .Register();
+        }
     }
 }

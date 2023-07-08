@@ -10,6 +10,7 @@ using System;
 
 namespace SoulsBetterDLC.EternityMode.Content.Enemy
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class GFBHatling : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(ModContent.NPCType<Hatchling>());

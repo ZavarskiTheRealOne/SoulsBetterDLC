@@ -12,7 +12,7 @@ namespace SoulsBetterDLC.NPCS
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => true;
         public override bool CheckDead(NPC npc)
         {
-            // can't use switches cus non-constant values :(
+            // can't use switches cus non-constant values
             if (npc.type == ModContent.NPCType<GildedLycan>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "GildedLycan");
             else if (npc.type == ModContent.NPCType<GildedBat>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "GildedBat");
             else if (npc.type == ModContent.NPCType<GildedSlime>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "GildedSlime");

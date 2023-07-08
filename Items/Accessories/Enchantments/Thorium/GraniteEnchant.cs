@@ -29,5 +29,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             DLCPlayer.GraniteEnch = true;
             DLCPlayer.GraniteEnchItem = Item;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.Granite.GraniteHelmet>()
+                .AddIngredient<ThoriumMod.Items.Granite.GraniteChestGuard>()
+                .AddIngredient<ThoriumMod.Items.Granite.GraniteGreaves>()
+                .Register();
+        }
     }
 }

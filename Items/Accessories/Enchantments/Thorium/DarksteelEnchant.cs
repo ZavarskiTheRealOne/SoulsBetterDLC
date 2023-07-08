@@ -25,5 +25,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             DLCPlayer.DarkSteelEnch = true;
             DLCPlayer.SteelEnchItem = Item;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.Darksteel.DarksteelFaceGuard>()
+                .AddIngredient<ThoriumMod.Items.Darksteel.DarksteelBreastPlate>()
+                .AddIngredient<ThoriumMod.Items.Darksteel.DarksteelGreaves>()
+                .Register();
+        }
     }
 }

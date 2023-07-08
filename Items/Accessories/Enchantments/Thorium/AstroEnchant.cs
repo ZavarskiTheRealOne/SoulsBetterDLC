@@ -2,6 +2,7 @@
 using System;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 {
@@ -29,6 +30,15 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().StabilizedGravity = true;
                 if (DLCPlayer.AstroLaserCD > 0) DLCPlayer.AstroLaserCD--;
             }
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.SummonItems.AstroHelmet>()
+                .AddIngredient<ThoriumMod.Items.SummonItems.AstroSuit>()
+                .AddIngredient<ThoriumMod.Items.SummonItems.AstroBoots>()
+                .Register();
         }
     }
 }
@@ -87,7 +97,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                 float num810 = Projectile.velocity.ToRotation() + ((Main.rand.NextBool(2)) ? -1f : 1f) * 1.57079637f;
                 float num811 = (float)Main.rand.NextDouble() * 2f + 2f;
                 Vector2 vector80 = new Vector2((float)Math.Cos((double)num810) * num811, (float)Math.Sin((double)num810) * num811);
-                int num812 = Dust.NewDust(vector79, 0, 0, 244, vector80.X, vector80.Y, 0, default(Color), 1f);
+                int num812 = Dust.NewDust(vector79, 0, 0, DustID.CopperCoin, vector80.X, vector80.Y, 0, default(Color), 1f);
                 Main.dust[num812].noGravity = true;
                 Main.dust[num812].scale = 1.7f;
                 num3 = num809;
@@ -95,7 +105,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             if (Main.rand.NextBool(5))
             {
                 Vector2 value29 = Projectile.velocity.RotatedBy(1.5707963705062866, default(Vector2)) * ((float)Main.rand.NextDouble() - 0.5f) * (float)Projectile.width;
-                int num813 = Dust.NewDust(vector79 + value29 - Vector2.One * 4f, 8, 8, 244, 0f, 0f, 100, default(Color), 1.5f);
+                int num813 = Dust.NewDust(vector79 + value29 - Vector2.One * 4f, 8, 8, DustID.CopperCoin, 0f, 0f, 100, default(Color), 1.5f);
                 Dust dust = Main.dust[num813];
                 dust.velocity *= 0.5f;
                 Main.dust[num813].velocity.Y = -Math.Abs(Main.dust[num813].velocity.Y);

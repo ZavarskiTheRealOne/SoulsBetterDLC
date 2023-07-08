@@ -14,8 +14,5 @@ namespace SoulsBetterDLC.Items
         public abstract string ModName { get; }
         public bool ModLoaded => ModLoader.HasMod(ModName);
         public override string Texture => ModContent.HasAsset(base.Texture) ? base.Texture : "SoulsBetterDLC/Items/Placeholder";
-
-        // Thorium Properties
-        bool isHealer;
     }
 }

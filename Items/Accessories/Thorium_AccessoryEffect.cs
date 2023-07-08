@@ -4,6 +4,7 @@ using SoulsBetterDLC.Buffs;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using SoulsBetterDLC.Projectiles.Thorium;
+using System.Linq;
 
 namespace SoulsBetterDLC
 {
@@ -103,6 +104,39 @@ namespace SoulsBetterDLC
                 Damage, 2f, Player.whoAmI);
 
             AstroLaserCD = 60;
+        }
+
+        static readonly int[] CoreOrder = { 0, 4, 2, 1, 3 };
+        public void TempleCoreEffect()
+        {
+            if (TempleCoreCounter == 600)
+            {
+                TempleCoreCounter = 0;
+            } else
+            {
+                TempleCoreCounter++;
+            }
+
+
+            if (TempleCoreCounter % 120 == 0)
+            {
+                int orbProjType = ModContent.ProjectileType<KluexOrb>();
+                var currentOrbs = Main.projectile.Take(Main.maxProjectiles).Where(p => p.active && p.owner == Player.whoAmI && p.ai[0] == KluexOrb.TempleCore && p.type == orbProjType);
+                int num = TempleCoreCounter / 120;
+                if (currentOrbs.Count() < 5)
+                {
+                    while (num < 5)
+                    {
+                        if (currentOrbs.Count(p => p.ai[1] == CoreOrder[num]) == 0) 
+                        {
+                            Projectile.NewProjectile(Player.GetSource_Accessory(TempleCoreItem), Player.Center, Vector2.Zero, orbProjType, 0, 0, Player.whoAmI, KluexOrb.TempleCore, CoreOrder[num]);
+                            break;
+                        }
+                        num++;
+                    }
+                }
+
+            }
         }
     }
 }

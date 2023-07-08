@@ -22,5 +22,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         {
             player.GetModPlayer<SoulsBetterDLCPlayer>().SilkEffect();
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.EarlyMagic.SilkHat>()
+                .AddIngredient<ThoriumMod.Items.EarlyMagic.SilkTabard>()
+                .AddIngredient<ThoriumMod.Items.EarlyMagic.SilkLeggings>()
+                .Register();
+        }
     }
 }

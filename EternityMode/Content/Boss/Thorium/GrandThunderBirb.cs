@@ -10,6 +10,8 @@ using System;
 using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
+using Terraria.GameContent.ItemDropRules;
+using FargowiltasSouls.ItemDropRules.Conditions;
 
 namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
 {
@@ -267,6 +269,16 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                 default: break;
             }
             return false;
+        }
+
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            IItemDropRule BossDrop(int item) => new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10));
+
+            LeadingConditionRule emodeRule = new(new EModeDropCondition());
+            emodeRule.OnSuccess(FargowiltasSouls.FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<Items.Accessories.Emode.Thorium.TempleCore>()));
+            npcLoot.Add(emodeRule);
+            npcLoot.Add(BossDrop(ModContent.ItemType<Items.Weapons.BossDrops.Thorium.Healer.KluexStaff>()));
         }
     }
 }

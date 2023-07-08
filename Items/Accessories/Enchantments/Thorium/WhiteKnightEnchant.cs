@@ -21,5 +21,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         {
             player.GetModPlayer<SoulsBetterDLCPlayer>().WhiteKnightEffect();
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.MagicItems.WhiteKnightMask>()
+                .AddIngredient<ThoriumMod.Items.MagicItems.WhiteKnightTabard>()
+                .AddIngredient<ThoriumMod.Items.MagicItems.WhiteKnightLeggings>()
+                .Register();
+        }
     }
 }

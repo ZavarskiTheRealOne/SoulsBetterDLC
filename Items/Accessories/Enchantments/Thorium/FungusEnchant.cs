@@ -28,6 +28,15 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
             DLCPlayer.FungusEnch = true;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.ThrownItems.FungusHat>()
+                .AddIngredient<ThoriumMod.Items.ThrownItems.FungusGuard>()
+                .AddIngredient<ThoriumMod.Items.ThrownItems.FungusLeggings>()
+                .Register();
+        }
     }
 
     public class FungusEnemy : GlobalNPC

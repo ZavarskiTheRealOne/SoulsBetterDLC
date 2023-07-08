@@ -14,6 +14,7 @@ namespace SoulsBetterDLC
 {
     public partial class SoulsBetterDLCPlayer : ModPlayer
     {
+        #region enchants
         public bool EbonEnch;
         public bool ClericEnch;
         public bool TemplarEnch;
@@ -45,9 +46,13 @@ namespace SoulsBetterDLC
         internal int TemplarCD = 360;
         internal int ValadiumCD = 240;
         internal int AstroLaserCD = 60;
+        #endregion
 
         public bool GildedMonicle;
         public bool GildedBinoculars;
+
+        public Item TempleCoreItem;
+        public int TempleCoreCounter;
 
         private void AddThoriumClassesForSafety(ref Dictionary<DamageClass, float> dict)
         {
@@ -83,6 +88,8 @@ namespace SoulsBetterDLC
 
             GildedMonicle = false;
             GildedBinoculars = false;
+
+            TempleCoreItem = null;
         }
 
         public void Thorium_OnHitNPCWithProj(Projectile proj, NPC target, int damage, bool crit)
@@ -155,7 +162,10 @@ namespace SoulsBetterDLC
 
         public void Thorium_PreUpdate()
         {
-
+            if (TempleCoreItem != null)
+            {
+                TempleCoreEffect();
+            }
         }
     }
 }

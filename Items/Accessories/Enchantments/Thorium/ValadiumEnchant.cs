@@ -53,5 +53,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                                      player.whoAmI,
                                      Main.rand.Next(1, 4));
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.Valadium.ValadiumHelmet>()
+                .AddIngredient<ThoriumMod.Items.Valadium.ValadiumBreastPlate>()
+                .AddIngredient<ThoriumMod.Items.Valadium.ValadiumGreaves>()
+                .Register();
+        }
     }
 }

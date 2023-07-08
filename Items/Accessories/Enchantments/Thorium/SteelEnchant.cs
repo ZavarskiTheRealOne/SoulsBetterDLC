@@ -24,5 +24,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             DLCPlayer.SteelEnch = true;
             DLCPlayer.SteelEnchItem = Item;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<ThoriumMod.Items.Steel.SteelHelmet>()
+                .AddIngredient<ThoriumMod.Items.Steel.SteelChestplate>()
+                .AddIngredient<ThoriumMod.Items.Steel.SteelGreaves>()
+                .Register();
+        }
     }
 }

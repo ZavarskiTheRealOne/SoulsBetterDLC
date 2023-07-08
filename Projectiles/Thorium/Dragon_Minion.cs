@@ -231,10 +231,10 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 			Projectile.position.Y = MathHelper.Clamp(Projectile.position.Y, 160f, Main.maxTilesY * 16 - 160);
 		}
 
-        public override void ModifyDamageScaling(ref float damageScale)
-        {
-			damageScale += (Head.Bonuses[DamageClass.Generic] - 1);
-        }
+   //     public override void ModifyDamageScaling(ref float damageScale)
+   //     {
+			//damageScale += (Head.Bonuses[DamageClass.Generic] - 1);
+   //     }
     }
 
 	public class DragonSpawnSource : EntitySource_Parent
@@ -248,24 +248,22 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
 	public partial class DragonMinionHead : DragonMinion
 	{
-		// sheinanigans to make it not have to get mod player and get damage as much
-		private Dictionary<DamageClass, float> _modes = null;
-		public Dictionary<DamageClass, float> Bonuses
-		{
-			get
-			{
-				if (_modes == null)
-				{
-					Dictionary<DamageClass, float> dict = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>().GetDamageBonuses(true, false);
-					_modes = dict;
-				}
-				return _modes;
-			}
-		}
+        // sheinanigans to make it not have to get mod player and get damage as much
+        private Dictionary<DamageClass, float> _modes = null;
+        public Dictionary<DamageClass, float> Bonuses
+        {
+            get
+            {
+                if (_modes == null)
+                {
+                    Dictionary<DamageClass, float> dict = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>().GetDamageBonuses(true, false);
+                    _modes = dict;
+                }
+                return _modes;
+            }
+        }
 
-		public bool Ranged => Bonuses[DamageClass.Ranged] > minimumBonus;
-
-		public override void AI()
+        public override void AI()
         {
 			CommonAI();
 			HeadAI();
@@ -285,7 +283,6 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
         public override void OnSpawn(IEntitySource source)
         {
-			Main.NewText("head spawned");
 			data = new(Projectile.whoAmI, 0);
 			SpawnSegment(BodyType1);
 		}
@@ -308,7 +305,6 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
 			if (retreating)
             {
-				Main.NewText('1');
 				if (Projectile.Center.Distance(targetPos) < 128) retreating = false;
 				if (targetPos.Distance(playerPos) > 2000f) SetRetreatPos();
 				targetPos += targetPos.DirectionTo(playerPos) * 16; // curves
@@ -319,13 +315,10 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 				HeadTarget();
 				if (targetPos != Vector2.Zero)
 				{
-					Main.NewText('2');
-					if (Ranged) RangedAttack();
 					HeadAttack();
 				}
 				else
 				{
-					Main.NewText('3');
 					HeadIdle();
 				}
 			}
@@ -368,6 +361,41 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 					targetPos = nPC.Center;
 					return;
 				}
+			}
+		}
+
+		void HeadAttack()
+		{
+			Vector2 toTarget = targetPos - Projectile.Center;
+			float distanceToTarget = toTarget.Length();
+
+			// velocity multiplier depending on how far it is from target
+			float scaleFactor;
+			scaleFactor = 0.4f;
+			if (distanceToTarget < 600f)
+			{
+				scaleFactor = 0.6f;
+			}
+			//if (distanceToTarget < 300f)
+			//{
+			//	scaleFactor = 0.8f;
+			//}
+
+			// general movement
+			if (distanceToTarget > 16f)
+			{
+				Projectile.velocity += Vector2.Normalize(toTarget) * scaleFactor * 1.5f;
+				// slower if the dragon isn't going directly towards the target
+				if (Vector2.Dot(Projectile.velocity, toTarget) < 0.25f)
+				{
+					Projectile.velocity *= 0.6f;
+				}
+			}
+
+			float maxVelocity = 15f;
+			if (Projectile.velocity.Length() > maxVelocity)
+			{
+				Projectile.velocity = Vector2.Normalize(Projectile.velocity) * maxVelocity;
 			}
 		}
 

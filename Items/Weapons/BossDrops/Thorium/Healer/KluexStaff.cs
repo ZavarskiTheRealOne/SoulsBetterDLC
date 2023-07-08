@@ -11,6 +11,7 @@ using Terraria.DataStructures;
 namespace SoulsBetterDLC.Items.Weapons.BossDrops.Thorium.Healer
 {
     // Todo: Fix rotation when held to be like a normal staff
+    [ExtendsFromMod("ThoriumMod")]
     public class KluexStaff : DLCItem
     {
         public override string ModName => "ThoriumMod";
@@ -39,7 +40,7 @@ namespace SoulsBetterDLC.Items.Weapons.BossDrops.Thorium.Healer
             Item.rare = ItemRarityID.Yellow;
             
             Item.autoReuse = true;
-            Item.shootSpeed = 1f;
+            Item.shootSpeed = 0f;
             Item.channel = true;
             Item.InterruptChannelOnHurt = true;
             Item.shoot = ModContent.ProjectileType<DmgOrbHack>();

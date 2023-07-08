@@ -44,6 +44,17 @@ namespace SoulsBetterDLC
                 if (ThoriumLoaded) DevianttPatches.AddDevianttShop("Thorium", DevianttPatches.SetupThoriumDeviShop);
             }
 
+            // Lumberboy
+            Type lumberDetourClass = ModContent.Find<ModNPC>("Fargowiltas/LumberJack").GetType();
+
+            if (lumberDetourClass != null)
+            {
+                MethodInfo SetChatButtons_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+
+                HookEndpointManager.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
+                HookEndpointManager.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
+            }
         }
 
         public void Thorium_Load()
