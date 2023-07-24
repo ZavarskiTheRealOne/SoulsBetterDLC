@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using SoulsBetterDLC.Buffs;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -89,6 +90,13 @@ namespace SoulsBetterDLC
                     Player.GetDamage(DamageClass.Generic) += 0.2f;
                     Player.GetAttackSpeed(DamageClass.Generic) += 0.2f;
                 }
+            }
+        }
+        public void ReaverHurtEffect()
+        {
+            if (Main.rand.NextBool(4) && !ReaverHageBuff)
+            {
+                Player.AddBuff(ModContent.BuffType<ReaverFury>(), 600);
             }
         }
     }

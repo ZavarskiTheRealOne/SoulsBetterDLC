@@ -1,4 +1,4 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ModLoader;
 using SoulsBetterDLC.Buffs;
 using Microsoft.Xna.Framework;
@@ -190,10 +190,7 @@ namespace SoulsBetterDLC
         {
             if (ReaverHage)
             {
-                if (Main.rand.NextBool(4) && !ReaverHageBuff)
-                {
-                    Player.AddBuff(ModContent.BuffType<ReaverFury>(), 600);
-                }
+                ReaverHurtEffect();
             }
 
         }
@@ -222,7 +219,7 @@ namespace SoulsBetterDLC
             {
                 AerospecEffects();
             }
-            
+
             //marnite
             if (Marnite)
             {
@@ -261,9 +258,9 @@ namespace SoulsBetterDLC
                 PlaguebringerEffects();
             }
 
-            
-            
-                
+
+
+
 
             //DESOLATION (2/5)
 
@@ -294,8 +291,8 @@ namespace SoulsBetterDLC
             //EXALTATION (1/5)
 
 
-            
-                
+
+
 
             //ANNIHILATION (1/4)
 
@@ -392,7 +389,7 @@ namespace SoulsBetterDLC
             if (UmbraCrazyRegen)
             {
                 UmbraphileProjHitEffect(damage);
-                
+
             }
 
             //bloodflare
@@ -415,7 +412,7 @@ namespace SoulsBetterDLC
         private void CalamityModifyHitProj(NPC target)
         {
             //plague reaper
-            if (DoctorBeeKill )
+            if (DoctorBeeKill)
             {
                 PlagueReaperProjHitEffect(target);
             }
