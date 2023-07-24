@@ -39,7 +39,7 @@ namespace SoulsBetterDLC.NPCS
         public override void AI()
         {
             Player player = Main.player[(int)NPC.ai[0]];
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             NPC.Center = player.Center + SBDPlayer.bubbleOffset;
             NPC.spriteDirection = 1;
             if (timerDead > 0)
@@ -60,7 +60,7 @@ namespace SoulsBetterDLC.NPCS
         public override void OnKill()
         {
             Player player = Main.player[(int)NPC.ai[0]];
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             if (timerDead > 0)
             {
                 SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/Thunder_0") with { Volume = 0.5f }, player.Center); ;

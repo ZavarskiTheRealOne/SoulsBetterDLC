@@ -23,7 +23,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             base.UpdateAccessory(player, hideVisual);
-            if (player.TryGetModPlayer(out SoulsBetterDLCPlayer DLCPlayer))
+            if (player.TryGetModPlayer(out CrossplayerThorium DLCPlayer))
             {
                 DLCPlayer.AstroEnch = true;
                 DLCPlayer.AstroEnchItem = Item;
@@ -39,6 +39,26 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 .AddIngredient<ThoriumMod.Items.SummonItems.AstroSuit>()
                 .AddIngredient<ThoriumMod.Items.SummonItems.AstroBoots>()
                 .Register();
+        }
+    }
+}
+
+namespace SoulsBetterDLC
+{
+    public partial class CrossplayerThorium
+    {
+        public void SpawnAstroLaser(NPC target)
+        {
+            int Damage = 100;
+            if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Damage += 50;
+            if (Player.position.Y < Main.worldSurface * 0.35 * 16) Damage += 50; // in space
+            Vector2 pos = new(target.Center.X, MathHelper.Max(Player.Center.Y - Main.screenHeight, 10f));
+
+            Projectile.NewProjectile(AstroEnchItem.GetSource_Accessory(AstroEnchItem), pos,
+                Vector2.UnitY, ModContent.ProjectileType<Projectiles.Thorium.SaucerDeathrayProj>(),
+                Damage, 2f, Player.whoAmI);
+
+            AstroLaserCD = 60;
         }
     }
 }

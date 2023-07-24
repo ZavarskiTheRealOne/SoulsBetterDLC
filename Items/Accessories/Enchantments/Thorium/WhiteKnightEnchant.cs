@@ -19,7 +19,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().WhiteKnightEffect();
+            player.GetModPlayer<CrossplayerThorium>().WhiteKnightEnch = true;
+            player.GetDamage(DamageClass.Generic) += (0.075f * player.townNPCs);
         }
 
         public override void AddRecipes()

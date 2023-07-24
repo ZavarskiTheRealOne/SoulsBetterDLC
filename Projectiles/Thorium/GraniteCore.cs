@@ -38,7 +38,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             Projectile.velocity = Projectile.oldVelocity;
             Projectile.frame = (int)MathF.Floor(Projectile.timeLeft / 15) % 3;
 
-            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = Main.player[Projectile.owner].GetModPlayer<CrossplayerThorium>();
 
             if (!DLCPlayer.GraniteCores.Contains(Projectile.whoAmI) || DLCPlayer.Player.dead) 
             {
@@ -78,7 +78,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
             if (Projectile.owner == Main.myPlayer)
             {
-                SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+                var DLCPlayer = Main.player[Projectile.owner].GetModPlayer<CrossplayerThorium>();
                 Projectile.damage += 15 * DLCPlayer.GraniteCores.Count;
                 DLCPlayer.GraniteCores.Remove(Projectile.whoAmI);
             }

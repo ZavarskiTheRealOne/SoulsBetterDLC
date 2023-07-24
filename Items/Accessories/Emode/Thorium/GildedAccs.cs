@@ -61,7 +61,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().GildedMonicle = true;
+            player.GetModPlayer<CrossplayerThorium>().GildedMonicle = true;
         }
     }
 
@@ -89,7 +89,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().GildedBinoculars = true;
+            player.GetModPlayer<CrossplayerThorium>().GildedBinoculars = true;
         }
     }
 
@@ -117,7 +117,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = player.GetModPlayer<CrossplayerThorium>();
             player.AddBuff(BuffID.Shine, 2);
             DLCPlayer.GildedBinoculars = true;
             DLCPlayer.GildedMonicle = true;

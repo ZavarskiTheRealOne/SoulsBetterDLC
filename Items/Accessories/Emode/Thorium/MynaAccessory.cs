@@ -20,7 +20,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = player.GetModPlayer<CrossplayerThorium>();
             DLCPlayer.MynaAccessory = true;
         }
     }

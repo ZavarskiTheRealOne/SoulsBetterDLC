@@ -60,7 +60,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             Projectile.ai[0] %= MathF.Tau;
             Projectile.velocity = (MathF.PI * orbitRadius / 180) * new Vector2(Sin, Cos);
 
-            SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var modPlayer = player.GetModPlayer<CrossplayerThorium>();
             if (player.dead || !player.active || !modPlayer.LodeStoneEnch || !modPlayer.LodeStonePlatforms.Contains(Projectile.whoAmI))
             {
                 Projectile.Kill();
@@ -119,7 +119,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             base.OnSpawn(projectile, source);
             if (source is EntitySource_ItemUse itemSource && itemSource.Entity is Player player && player.whoAmI == Main.myPlayer)
             {
-                SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+                var modPlayer = player.GetModPlayer<CrossplayerThorium>();
                 if (!modPlayer.LodeStoneEnch) return;
 
                 modPlayer.LodeStonePlatforms.Sort(new Comparison<int>((a, b) => Main.projectile[a].position.Y < Main.projectile[b].position.Y ? -1 : 1));

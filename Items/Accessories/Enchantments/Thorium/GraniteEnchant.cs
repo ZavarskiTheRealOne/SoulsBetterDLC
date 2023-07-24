@@ -25,7 +25,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = player.GetModPlayer<CrossplayerThorium>();
             DLCPlayer.GraniteEnch = true;
             DLCPlayer.GraniteEnchItem = Item;
         }
@@ -37,6 +37,31 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
                 .AddIngredient<ThoriumMod.Items.Granite.GraniteChestGuard>()
                 .AddIngredient<ThoriumMod.Items.Granite.GraniteGreaves>()
                 .Register();
+        }
+    }
+}
+
+namespace SoulsBetterDLC
+{
+    public partial class CrossplayerThorium
+    {
+        public void SpawnGraniteCore(Vector2 position)
+        {
+            Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_Accessory(GraniteEnchItem), position, Vector2.Zero, ModContent.ProjectileType<Projectiles.Thorium.GraniteCore>(), 0, 0f, Player.whoAmI);
+            if (GraniteCores.Count > 0)
+            {
+                proj.ai[0] = GraniteCores[^1];
+            }
+            else
+            {
+                proj.ai[0] = -1;
+            }
+            GraniteCores.Add(proj.whoAmI);
+
+            if (GraniteCores.Count >= 10)
+            {
+                Main.projectile[GraniteCores[0]].Kill();
+            }
         }
     }
 }

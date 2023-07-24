@@ -21,7 +21,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer DLCPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = player.GetModPlayer<CrossplayerThorium>();
             DLCPlayer.DarkSteelEnch = true;
             DLCPlayer.SteelEnchItem = Item;
         }

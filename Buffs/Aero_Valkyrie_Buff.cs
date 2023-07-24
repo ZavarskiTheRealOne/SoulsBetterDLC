@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             if (player.ownedProjectileCounts[ModContent.ProjectileType<Aero_Valkyrie>()] > 0)
             {
                 SBDPlayer.aValkie = true;

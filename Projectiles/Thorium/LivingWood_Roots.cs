@@ -35,7 +35,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                 return;
             }
 
-            if (!player.GetModPlayer<SoulsBetterDLCPlayer>().LivingWoodEnch)
+            if (!player.GetModPlayer<CrossplayerThorium>().LivingWoodEnch)
                 Projectile.Kill();
 
             Projectile.frame = 1;

@@ -26,7 +26,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var modPlayer = player.GetModPlayer<CrossplayerThorium>();
             modPlayer.TemplarEnch = true;
             modPlayer.TemplarEnchItem = Item;
 
@@ -38,7 +38,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
 
         public static void summonHolyFire(Player player)
         {
-            SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var modPlayer = player.GetModPlayer<CrossplayerThorium>();
             Projectile.NewProjectile(player.GetSource_Accessory(modPlayer.TemplarEnchItem),
                                      Main.MouseWorld.X,
                                      player.Center.Y - 500,

@@ -25,7 +25,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         {
             if (player.whoAmI != Main.myPlayer) return;
 
-            SoulsBetterDLCPlayer modplayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var modplayer = player.GetModPlayer<CrossplayerThorium>();
             modplayer.LodeStoneEnch = true;
 
             int maxPlatforms = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 3 : 2;

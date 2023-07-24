@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Player player = Main.player[Main.myPlayer];
-                if (player.GetModPlayer<SoulsBetterDLCPlayer>().GildedBinoculars)
+                if (player.GetModPlayer<CrossplayerThorium>().GildedBinoculars)
                 {
                     Lighting.AddLight(projectile.Center, new Vector3(0.6f, 0.6f, 0.6f));
                 }
@@ -47,7 +47,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             if (projectile.hostile)
             {
                 var player = Main.player[Main.myPlayer];
-                if (player.GetModPlayer<SoulsBetterDLCPlayer>().MynaAccessory && projectile.Center.Distance(player.Center) <= 192f)
+                if (player.GetModPlayer<CrossplayerThorium>().MynaAccessory && projectile.Center.Distance(player.Center) <= 192f)
                 {
                     Vector2 a = player.Center - projectile.Center;
                     float angle = projectile.velocity.ToRotation() - a.ToRotation();

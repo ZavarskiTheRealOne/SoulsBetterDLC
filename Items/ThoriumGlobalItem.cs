@@ -40,7 +40,7 @@ namespace SoulsBetterDLC.Items
             if (Main.netMode != NetmodeID.Server)
             {
                 Player player = Main.player[Main.myPlayer];
-                if (player.GetModPlayer<SoulsBetterDLCPlayer>().GildedMonicle)
+                if (player.GetModPlayer<CrossplayerThorium>().GildedMonicle)
                 {
                     Lighting.AddLight(item.position, new Vector3(0.6f, 0.6f, 0.6f));
                 }

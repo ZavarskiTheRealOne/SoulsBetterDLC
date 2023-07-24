@@ -22,7 +22,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var modPlayer = player.GetModPlayer<CrossplayerThorium>();
             modPlayer.ValadiumEnch = true;
             modPlayer.ValadiumEnchItem = Item;
 
@@ -40,7 +40,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public static void SummonChunk(Player player)
         {
             //Main.NewText("chunk spawned");
-            SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            var modPlayer = player.GetModPlayer<CrossplayerThorium>();
             float oneOnSqrt2 = 0.707106781187f;
             // doing this gives an elipse that surrounds the edge of the screen.
             Vector2 spawnPos = Main.rand.NextVector2CircularEdge(oneOnSqrt2 * Main.screenWidth, oneOnSqrt2 * Main.screenHeight);

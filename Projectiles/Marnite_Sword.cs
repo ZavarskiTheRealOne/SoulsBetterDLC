@@ -28,7 +28,7 @@ namespace SoulsBetterDLC.Projectiles
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
 
             //active check
             if (!SBDPlayer.MarniteSwords)

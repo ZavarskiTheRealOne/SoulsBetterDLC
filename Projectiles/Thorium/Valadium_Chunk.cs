@@ -61,7 +61,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         public override void OnSpawn(IEntitySource source)
         {
             if (Projectile.ai[0] == 0f) return;
-            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = Main.player[Projectile.owner].GetModPlayer<CrossplayerThorium>();
             DLCPlayer.ActiveValaChunks.Add(Projectile.whoAmI);
             Projectile.ai[1] = Mass;
             Projectile.width = Radius * 2;
@@ -73,7 +73,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         public override void Kill(int timeLeft)
         {
             //Main.NewText($"Chunk killed: {timeLeft}");
-            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = Main.player[Projectile.owner].GetModPlayer<CrossplayerThorium>();
             DLCPlayer.ActiveValaChunks.Remove(Projectile.whoAmI);
             if (timeLeft >= 0) Split();
         }
@@ -123,7 +123,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             if (hitCD > 0) hitCD--;
 
             Player player = Main.player[Projectile.owner];
-            if (!player.dead && player.active && player.GetModPlayer<SoulsBetterDLCPlayer>().ValadiumEnch)
+            if (!player.dead && player.active && player.GetModPlayer<CrossplayerThorium>().ValadiumEnch)
             {
                 Projectile.timeLeft = Main.rand.Next(3, 10);
             }
@@ -143,7 +143,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                 return;
             }
 
-            SoulsBetterDLCPlayer DLCPlayer = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>();
+            var DLCPlayer = Main.player[Projectile.owner].GetModPlayer<CrossplayerThorium>();
             if (DLCPlayer.ActiveValaChunks.Count <= 1) return;
 
             // chunk attraction

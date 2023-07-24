@@ -60,7 +60,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 		public void CommonAI()
         {
 			Player player = Main.player[Projectile.owner];
-			SoulsBetterDLCPlayer modPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+			var modPlayer = player.GetModPlayer<CrossplayerThorium>();
 			if ((int)Main.timeForVisualEffects % 120 == 0)
 			{
 				Projectile.netUpdate = true;
@@ -256,9 +256,13 @@ namespace SoulsBetterDLC.Projectiles.Thorium
             {
                 if (_modes == null)
                 {
-                    Dictionary<DamageClass, float> dict = Main.player[Projectile.owner].GetModPlayer<SoulsBetterDLCPlayer>().GetDamageBonuses(true, false);
-                    _modes = dict;
-                }
+					Player player = Main.player[Projectile.owner];
+                    _modes = new();
+					_modes.Add(DamageClass.Melee, player.GetDamage(DamageClass.Melee).Additive);
+					_modes.Add(DamageClass.Magic, player.GetDamage(DamageClass.Magic).Additive);
+					_modes.Add(DamageClass.Summon, player.GetDamage(DamageClass.Summon).Additive);
+					_modes.Add(DamageClass.Ranged, player.GetDamage(DamageClass.Ranged).Additive);
+				}
                 return _modes;
             }
         }

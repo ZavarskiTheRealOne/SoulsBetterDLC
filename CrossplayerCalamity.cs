@@ -12,10 +12,13 @@ using Terraria.ID;
 using SoulsBetterDLC.Items.Accessories.Enchantments;
 using System.Collections.Generic;
 
+// I'm not touching this again
+// -ghoose
+
 namespace SoulsBetterDLC
 {
-    [JITWhenModsEnabled("CalamityMod")] // this needs to be here, [extendsFromMod()] nukes entire class
-    public partial class SoulsBetterDLCPlayer : ModPlayer
+    [ExtendsFromMod("CalamityMod")] 
+    public partial class CrossplayerCalamity : ModPlayer
     {
         //effect booleans
         public bool RideOfTheValkyrie;
@@ -69,13 +72,7 @@ namespace SoulsBetterDLC
 
         public Vector2 bubbleOffset;
 
-        private void AddCalamityClassesForSafety(ref Dictionary<DamageClass, float> dict)
-        {
-            // i think this is what calamity uses for rogue?
-            dict.Add(DamageClass.Throwing, Player.GetDamage(DamageClass.Throwing).Additive);
-        }
-
-        private void CalamityResEff()
+        public override void ResetEffects()
         {
             RideOfTheValkyrie = false;
             //BobTheMarnite = false;
@@ -186,7 +183,7 @@ namespace SoulsBetterDLC
             }
             NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
         }*/
-        private void CalamityHurt()
+        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
         {
             if (ReaverHage)
             {
@@ -205,7 +202,7 @@ namespace SoulsBetterDLC
             AtaxiaCooldown = 0;
             kunaiKuldown = 0;
         }
-        private void CalamityPostUpd()
+        public override void PostUpdate()
         {
             if (FargoSoulsWorld.ShouldBeEternityMode)
             {
@@ -213,7 +210,7 @@ namespace SoulsBetterDLC
                 CalamityWorld.death = false;
             }
         }
-        private void CalamityPostUpdEqp()
+        public override void PostUpdateEquips()
         {
             //EXPLORATION (2/4)
 
@@ -435,7 +432,8 @@ namespace SoulsBetterDLC
                 }
             }
         }
-        private void CalamityOnHit(Item item, NPC target, int damage, bool crit)
+
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
             //bringer bees. based off of fargo souls' bee enchantment effect
             if (ButterBeeSwarm)
@@ -562,7 +560,8 @@ namespace SoulsBetterDLC
                 }
             }*/
         }
-        private void CalamityModifyHit(NPC target)
+
+        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
             //Plague Reaper conditions
             if (DoctorBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
@@ -577,7 +576,8 @@ namespace SoulsBetterDLC
                 }
             }
         }
-        private void CalamityOnHitProj(Projectile proj, NPC target, int damage, bool crit)
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             //bringer bees. you've read the part on top
             if (ButterBeeSwarm)
@@ -709,7 +709,8 @@ namespace SoulsBetterDLC
                 }
             }*/
         }
-        private void CalamityModifyHitProj(NPC target)
+
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             //plague reaper
             if (DoctorBeeKill && target.lifeMax <= 60000 && target.life == target.lifeMax)
