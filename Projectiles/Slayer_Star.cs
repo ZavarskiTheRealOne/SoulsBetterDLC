@@ -1,5 +1,4 @@
-﻿using CalamityMod;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Projectiles
@@ -20,7 +19,7 @@ namespace SoulsBetterDLC.Projectiles
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 15;
+            Projectile.localNPCHitCooldown = 20;
             Projectile.alpha = 100; 
         }
         public override void AI()

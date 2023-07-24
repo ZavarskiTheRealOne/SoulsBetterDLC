@@ -7,6 +7,8 @@ using CalamityMod;
 using CalamityMod.CalPlayer;
 using FargowiltasSouls;
 using CalamityMod.World;
+using System;
+using CalamityMod.CalPlayer.Dashes;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using SoulsBetterDLC.Items.Accessories.Enchantments;
@@ -20,6 +22,7 @@ namespace SoulsBetterDLC
         public bool RideOfTheValkyrie;
         public bool BobTheMarnite;
         public bool WulfrumOverpower;
+        public bool ProwlinOnTheFools;
         public bool ExploEffects;
 
         public bool ReaverHage;
@@ -40,11 +43,12 @@ namespace SoulsBetterDLC
         public bool UmbraCrazyRegen;
         public bool BFCrazierRegen;
         public bool StatigelNinjaStyle;
-        //public bool GodSlayerMeltdown;
-        //public bool SlayerCD;
+        public bool GodSlayerMeltdown;
+        public bool SlayerCD;
         public bool ExaltEffects;
 
         public bool FearOfTheValkyrie;
+        public bool Crocket;
         public bool AnnihilEffects;
 
         //mostly booleans for active checks
@@ -73,6 +77,7 @@ namespace SoulsBetterDLC
             RideOfTheValkyrie = false;
             //BobTheMarnite = false;
             WulfrumOverpower = false;
+            ProwlinOnTheFools = false;
 
             ReaverHage = false;
             ReaverHageBuff = false;
@@ -90,10 +95,11 @@ namespace SoulsBetterDLC
             UmbraCrazyRegen = false;
             BFCrazierRegen = false;
             StatigelNinjaStyle = false;
-            //GodSlayerMeltdown = false;
-            //SlayerCD = false;
+            GodSlayerMeltdown = false;
+            SlayerCD = false;
 
             FearOfTheValkyrie = false;
+            Crocket = false;
 
             ExploEffects = false;
             DevastEffects = false;
@@ -179,6 +185,7 @@ namespace SoulsBetterDLC
             }
             NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
         }*/
+
         private void CalamityHurt()
         {
             if (ReaverHage)
@@ -404,7 +411,7 @@ namespace SoulsBetterDLC
                 if (LifestealCD > 0) LifestealCD--;
 
             //statigel and god slayer
-            if (StatigelNinjaStyle)
+            if (StatigelNinjaStyle || GodSlayerMeltdown)
                 if (kunaiKuldown > 0) kunaiKuldown--;
 
             //ANNIHILATION (1/4)
@@ -430,6 +437,15 @@ namespace SoulsBetterDLC
         }
         private void CalamityOnHit(Item item, NPC target, int damage, bool crit)
         {
+            //desert prowler enchantment
+            if (ProwlinOnTheFools)
+            {
+                if (Main.rand.NextBool(10))
+                {
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center - new Vector2(960f, 0), new Vector2(12f, 0), ModContent.ProjectileType<Prowler_Tornado>(), 25, 0f, Player.whoAmI);
+
+                }
+            }
             //bringer bees. based off of fargo souls' bee enchantment effect
             if (ButterBeeSwarm)
             {
@@ -492,14 +508,14 @@ namespace SoulsBetterDLC
             if (damage / 4 <= 180)
             {
                 UmbraBuffTimer = damage / 4;
-                BloodBuffTimer = damage / 3;
+                BloodBuffTimer = damage / 4;
             }
-            else if (damage / 4 > 180 && damage / 3 <= 300)
+            else if (damage / 4 > 180 && damage / 4 <= 300)
             {
                 UmbraBuffTimer = 180;
-                BloodBuffTimer = damage / 3;
+                BloodBuffTimer = damage / 4;
             }
-            else if (damage / 3 > 300)
+            else if (damage / 4 > 300)
                 BloodBuffTimer = 300;
 
             //Umbraphile conditions
@@ -522,9 +538,9 @@ namespace SoulsBetterDLC
                 if (LifestealCD <= 0)
                 {
                     Item.NewItem(target.GetSource_Loot(), target.Hitbox, 58);
-                    if (damage / 2 < Player.statLifeMax2 / 2)
+                    if (damage / 2 < Player.statLifeMax2 / 5)
                         Player.Heal(damage / 2);
-                    else Player.Heal(Player.statLifeMax2 / 2);
+                    else Player.Heal(Player.statLifeMax2 / 5);
                     LifestealCD = 300;
                 }
             }
@@ -542,7 +558,7 @@ namespace SoulsBetterDLC
                 }
             }
 
-            /*God Slayer star
+            //God Slayer star
             if (GodSlayerMeltdown)
             {
                 int starDmg;
@@ -553,7 +569,7 @@ namespace SoulsBetterDLC
                     Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<Slayer_Star>(), starDmg, 0f, Player.whoAmI);
                     kunaiKuldown = 60;
                 }
-            }*/
+            }
         }
         private void CalamityModifyHit(NPC target)
         {
@@ -572,12 +588,22 @@ namespace SoulsBetterDLC
         }
         private void CalamityOnHitProj(Projectile proj, NPC target, int damage, bool crit)
         {
+            //desert prowler enchantment
+            if (ProwlinOnTheFools)
+            {
+                if (Main.rand.NextBool(10) && proj.type != ModContent.ProjectileType<Prowler_Tornado>())
+                {
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center - new Vector2(960f, 0), new Vector2(36f, 0), ModContent.ProjectileType<Prowler_Tornado>(), 25, 0f, Player.whoAmI);
+
+                }
+            }
+
             //bringer bees. you've read the part on top
             if (ButterBeeSwarm)
             {
                 int bee;
                 target.AddBuff(ModContent.BuffType<CalamityMod.Buffs.DamageOverTime.Plague>(), 300);
-                if (ButterBeeCD <= 0 && target.realLife == -1 && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Rogue.PlaguenadeBee>() && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Melee.PlagueSeeker>() && proj.maxPenetrate != 1 && !proj.usesLocalNPCImmunity && !proj.usesIDStaticNPCImmunity && proj.owner == Main.myPlayer)
+                if (ButterBeeCD <= 0 && target.realLife == -1 && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Rogue.PlaguenadeBee>() && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Melee.PlagueSeeker>() && proj.maxPenetrate != 1 && !proj.usesIDStaticNPCImmunity && proj.owner == Main.myPlayer)
                 {
                     if (damage > 0)
                     {
@@ -629,17 +655,17 @@ namespace SoulsBetterDLC
                 }
             }
             //umbra blood timer
-            if (damage / 2 <= 180)
+            if (damage / 4 <= 180)
             {
-                UmbraBuffTimer = damage / 2;
-                BloodBuffTimer = damage / 2;
+                UmbraBuffTimer = damage / 4;
+                BloodBuffTimer = damage / 4;
             }
-            else if (damage / 2 > 180 && damage / 2 <= 300)
+            else if (damage / 4 > 180 && damage / 4 <= 300)
             {
                 UmbraBuffTimer = 180;
-                BloodBuffTimer = damage / 2;
+                BloodBuffTimer = damage / 4;
             }
-            else if (damage / 2 > 300)
+            else if (damage / 4 > 300)
                 BloodBuffTimer = 300;
 
             //umbra
@@ -662,9 +688,9 @@ namespace SoulsBetterDLC
                 if (LifestealCD <= 0)
                 {
                     Item.NewItem(target.GetSource_Loot(), target.Hitbox, 58);
-                    if (damage / 3 < Player.statLifeMax2 / 2)
-                        Player.Heal(damage / 3);
-                    else Player.Heal(Player.statLifeMax2 / 2);
+                    if (damage / 2 < Player.statLifeMax2 / 5)
+                        Player.Heal(damage / 2);
+                    else Player.Heal(Player.statLifeMax2 / 5);
                     LifestealCD = 300;
                 }
             }
@@ -685,7 +711,7 @@ namespace SoulsBetterDLC
                 }
             }
 
-            /*slayer
+            //slayer
             if (GodSlayerMeltdown)
             {
                 int starDmg;
@@ -700,7 +726,7 @@ namespace SoulsBetterDLC
                     Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<Slayer_Star>(), starDmg, 0f, Player.whoAmI);
                     kunaiKuldown = 60;
                 }
-            }*/
+            }
         }
         private void CalamityModifyHitProj(NPC target)
         {

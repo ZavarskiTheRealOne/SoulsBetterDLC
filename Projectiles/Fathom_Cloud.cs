@@ -63,12 +63,15 @@ namespace SoulsBetterDLC.Projectiles
                     if (Projectile.owner == Main.myPlayer)
                     {
                         Player player = Main.player[Projectile.owner];
-                        int lightnDamage = (int)player.GetBestClassDamage().ApplyTo(80f);
-                        int lightning = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.position.Y, 0f, 15f, ProjectileID.CultistBossLightningOrbArc, lightnDamage, 0f, Projectile.owner, ai0: 1.5f, ai1: 0f);
+                        int lightnDamage = (int)player.GetBestClassDamage().ApplyTo(100f);
+                        int lightning = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.position.Y, 0f, 15f, ProjectileID.CultistBossLightningOrbArc, lightnDamage, 0f, Projectile.owner, ai0: 1.5f, ai1: Main.rand.Next(0,100));
                         if (Main.projectile.IndexInRange(lightning))
                         {
                             Main.projectile[lightning].friendly = true;
                             Main.projectile[lightning].hostile = false;
+                            Main.projectile[lightning].penetrate = 5;
+                            Main.projectile[lightning].usesLocalNPCImmunity = true;
+                            Main.projectile[lightning].localNPCHitCooldown = 100;
                         }
                     }
                 }

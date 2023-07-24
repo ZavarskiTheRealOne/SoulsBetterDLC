@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             //name and description
             DisplayName.SetDefault("Bloodflare Enchantment");
-            Tooltip.SetDefault("Drastically boosts your life regen and slightly boosts damage and DR on enemy hits.\nEvery 5 seconds you will lifesteal for a third of your damage,\nunless it exceeds half of your max health.\nEnemies have a chance to drop a heart on hit and always drop one on death.\n'I don't know dude, I jus- I just drink blood, dude.'");
+            Tooltip.SetDefault("Drastically boosts your life regen and slightly boosts damage and DR on enemy hits.\nEvery 5 seconds you will lifesteal for a half of your damage,\nunless it exceeds a fifth of your max health.\nEnemies have a chance to drop a heart on hit and always drop one on death.\n'I don't know dude, I jus- I just drink blood, dude.'");
         }
         public override void SetDefaults()
         {
