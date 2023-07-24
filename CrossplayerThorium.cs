@@ -50,6 +50,7 @@ namespace SoulsBetterDLC
 
         public bool GildedMonicle;
         public bool GildedBinoculars;
+        public bool MynaAccessory;
 
         public Item TempleCoreItem;
         public int TempleCoreCounter;
@@ -88,6 +89,7 @@ namespace SoulsBetterDLC
 
             GildedMonicle = false;
             GildedBinoculars = false;
+            MynaAccessory = false;
 
             TempleCoreItem = null;
         }

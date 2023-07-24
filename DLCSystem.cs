@@ -32,6 +32,7 @@ namespace SoulsBetterDLC
             "GildedLycan",
             "GildedBat",
             "GildedSlime",
+            "Myna",
         };
 
         public override void OnWorldLoad()

@@ -49,6 +49,8 @@ namespace SoulsBetterDLC
         {
             Deviantt.AddItem(DLCSystem.DLCDownedBools["GildedLycan"] && DLCSystem.DLCDownedBools["GildedBat"] && DLCSystem.DLCDownedBools["GildedSlime"],
                         ModContent.ItemType<GildedSummon>(), Item.buyPrice(0, 7), ref shop, ref nextSlot);
+            Deviantt.AddItem(DLCSystem.DLCDownedBools["Myna"],
+                        ModContent.ItemType<MynaSummon>(), Item.buyPrice(0, 15), ref shop, ref nextSlot);
             return nextSlot;
         }
         internal static int SetupCalamityDeviShop(Chest shop, int nextSlot)

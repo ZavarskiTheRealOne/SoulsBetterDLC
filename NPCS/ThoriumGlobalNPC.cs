@@ -16,6 +16,7 @@ namespace SoulsBetterDLC.NPCS
             if (npc.type == ModContent.NPCType<GildedLycan>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "GildedLycan");
             else if (npc.type == ModContent.NPCType<GildedBat>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "GildedBat");
             else if (npc.type == ModContent.NPCType<GildedSlime>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "GildedSlime");
+            else if (npc.type == ModContent.NPCType<Myna>()) DLCSystem.TryDowned(npc, "Deviantt", Color.Yellow, "Myna");
             return true;
         }
     }
