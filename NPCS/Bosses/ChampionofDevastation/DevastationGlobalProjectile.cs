@@ -1,11 +1,8 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using FargowiltasSouls.Projectiles;
-using Terraria.ID;
 using Microsoft.Xna.Framework;
-using System.Diagnostics.Metrics;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation

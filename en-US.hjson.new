@@ -2,39 +2,39 @@
 Mods: {
 	SoulsBetterDLC: {
 		Buffs: {
-			Aero_Valkyrie_Buff: {
+			AeroValkyrie_Buff: {
 				DisplayName: Enchanted Valkyrie
 				Description: It either really likes you or secretly wants to kill you
 			}
 
-			Bloodflare_Regeneration: {
+			BloodflareRegeneration: {
 				DisplayName: Bloodflare Regeneration
 				Description: The insides of your enemies drive you crazy.
 			}
 
-			Fear_Valkyrie_Buff: {
+			FearValkyrie_Buff: {
 				DisplayName: Damned Valkyrie
 				Description: This thing has gone through literal hell, so you better watch your back
 			}
 
-			Reaver_Fury: {
+			ReaverFury: {
 				DisplayName: Reaver Fury
 				Description: You are somewhat frustrated.
 			}
 
-			Vampiric_Regeneration: {
+			VampiricRegeneration: {
 				DisplayName: Vampiric Regeneration
 				Description: The blood of your enemies makes you stronger.
 			}
 
-			Wulfrum_Empowerment: {
+			WulfrumEmpowerment: {
 				DisplayName: Wulfrum Empowerment
 				Description: The core and scraps around it give you their strength.
 			}
 		}
 
 		Items: {
-			Aerospec_Enchantment: {
+			AerospecEnchantment: {
 				DisplayName: Aerospec Enchantment
 				Tooltip:
 					'''
@@ -44,7 +44,7 @@ Mods: {
 					'''
 			}
 
-			Bloodflare_Enchantment: {
+			BloodflareEnchantment: {
 				DisplayName: Bloodflare Enchantment
 				Tooltip:
 					'''
@@ -56,7 +56,7 @@ Mods: {
 					'''
 			}
 
-			Daedalus_Enchantment: {
+			DaedalusEnchantment: {
 				DisplayName: Daedalus Enchantment
 				Tooltip:
 					'''
@@ -67,7 +67,7 @@ Mods: {
 					'''
 			}
 
-			Fearmonger_Enchantment: {
+			FearmongerEnchantment: {
 				DisplayName: Fearmonger Enchantment
 				Tooltip:
 					'''
@@ -77,7 +77,7 @@ Mods: {
 					'''
 			}
 
-			Plague_Reaper_Enchantment: {
+			PlagueReaper_Enchantment: {
 				DisplayName: Plague Reaper Enchantment
 				Tooltip:
 					'''
@@ -88,7 +88,7 @@ Mods: {
 					'''
 			}
 
-			Reaver_Enchantment: {
+			ReaverEnchantment: {
 				DisplayName: Reaver Enchantment
 				Tooltip:
 					'''
@@ -100,7 +100,7 @@ Mods: {
 					'''
 			}
 
-			Ruffian_Enchantment: {
+			RuffianEnchantment: {
 				DisplayName: Snow Ruffian Enchantment
 				Tooltip:
 					'''
@@ -111,7 +111,7 @@ Mods: {
 					'''
 			}
 
-			Sulphur_Enchantment: {
+			SulphurEnchantment: {
 				DisplayName: Sulphurous Enchantment
 				Tooltip:
 					'''
@@ -122,7 +122,7 @@ Mods: {
 					'''
 			}
 
-			Umbraphile_Enchantment: {
+			UmbraphileEnchantment: {
 				DisplayName: Umbraphile Enchantment
 				Tooltip:
 					'''
@@ -133,7 +133,7 @@ Mods: {
 					'''
 			}
 
-			Victide_Enchantment: {
+			VictideEnchantment: {
 				DisplayName: Victide Enchantment
 				Tooltip:
 					'''
@@ -144,7 +144,7 @@ Mods: {
 					'''
 			}
 
-			Wulfrum_Enchantment: {
+			WulfrumEnchantment: {
 				DisplayName: Wulfrum Enchantment
 				Tooltip:
 					'''
@@ -154,7 +154,7 @@ Mods: {
 					'''
 			}
 
-			Le_Suorde: {
+			LeSuorde: {
 				DisplayName: L'epee
 				Tooltip:
 					'''
@@ -164,15 +164,14 @@ Mods: {
 			}
 		}
 
-		NPCs.Sulphur_Bubble.DisplayName: Sulphuric Bubble
+		NPCs.SulphurBubble.DisplayName: Sulphuric Bubble
 
 		Projectiles: {
-			Aero_Valkyrie.DisplayName: Enchanted Valkyrie
-			Fear_Valkyrie.DisplayName: Damned Valkyrie
-			Fearsome_Feather.DisplayName: Fearsome Feather
-			Invis_Crutch_Proj_End.DisplayName: Invis_ Crutch_ Proj_ End
-			Invis_Crutch_Proj_Start.DisplayName: Invis_ Crutch_ Proj_ Start
-			Sulphur_Cloud.DisplayName: Dirty Nimbus
+			AeroValkyrie.DisplayName: Enchanted Valkyrie
+			FearValkyrie.DisplayName: Damned Valkyrie
+			FearsomeFeather.DisplayName: Fearsome Feather
+			
+			SulphurCloud.DisplayName: Dirty Nimbus
 		}
 	}
 }

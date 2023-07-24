@@ -4,7 +4,6 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using CalamityMod.Items.Accessories;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
 {

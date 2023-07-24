@@ -1,9 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using CalamityMod.Items.Accessories;
 using FargowiltasSouls.Projectiles.MutantBoss;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation

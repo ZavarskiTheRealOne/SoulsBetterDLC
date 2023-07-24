@@ -1,31 +1,25 @@
-﻿using Terraria.ID;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
+using Terraria.ID;
 using SoulsBetterDLC.Buffs;
 using Terraria.DataStructures;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
-using SoulsBetterDLC.Items.Accessories.Enchantments;
-using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
-
 namespace SoulsBetterDLC.Projectiles
 {
     [ExtendsFromMod("CalamityMod")]
     public class MarniteSword : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.GladiusStab;
         public override void SetStaticDefaults()
         {
+            DisplayName.SetDefault("Marnite Sword");
+            //Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Type] = true;
         }
+        
         public override void SetDefaults()
         {
             Projectile.width = 10;
@@ -97,13 +91,13 @@ namespace SoulsBetterDLC.Projectiles
         }
         private bool CheckActive(Player owner)
         {
-            if (owner.dead || !owner.active || !owner.GetModPlayer<CalamityEnchantPlayer>().Marnite)
+            if (owner.dead || !owner.active || !owner.GetModPlayer<SoulsBetterDLCPlayer>().Marnite)
 
             {
-                owner.ClearBuff(ModContent.BuffType<MarniteSwordBuff>());
+                owner.ClearBuff(ModContent.BuffType<MarniteSwordsBuff>());
                 return false;
             }
-            if (owner.HasBuff(ModContent.BuffType<MarniteSwordBuff>()))
+            if (owner.HasBuff(ModContent.BuffType<MarniteSwordsBuff>()))
             {
                 Projectile.timeLeft = 2;
             }

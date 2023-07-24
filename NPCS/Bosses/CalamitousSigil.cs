@@ -1,8 +1,6 @@
 ﻿using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using CalamityMod.Items.Materials;
 namespace SoulsBetterDLC.NPCS.Bosses

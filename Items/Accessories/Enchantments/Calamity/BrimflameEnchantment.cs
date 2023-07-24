@@ -5,21 +5,17 @@ using Terraria.ID;
 using CalamityMod.Items.Armor.Brimflame;
 using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Weapons.Melee;
-using SoulsBetterDLC.Projectiles;
 using SoulsBetterDLC.Buffs;
 using CalamityMod;
-using Terraria.GameInput;
 using Terraria.Audio;
-using CalamityMod.CalPlayer;
 using System.Collections.Generic;
-using Terraria.GameContent.Creative;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [ExtendsFromMod("CalamityMod")]
     public class BrimflameEnchantment : BaseDLCEnchant
     {
-        public override string Texture => "SoulsBetterDLC/Items/Placeholder";
+       
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
         protected override Color nameColor => new Color(204, 42, 60);
@@ -42,7 +38,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<BrimflameMP>().Brimflame = true;
+            player.GetModPlayer<SoulsBetterDLCPlayer>().Brimflame = true;
         }
         public override void AddRecipes()
         {
@@ -56,29 +52,24 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.Register();
         }
     }
-    [ExtendsFromMod("CalamityMod")]
-    public class BrimflameMP : ModPlayer
+}
+namespace SoulsBetterDLC
+{
+    public partial class SoulsBetterDLCPlayer : ModPlayer
     {
-        public bool Brimflame;
-        public int BrimflameCooldown;
-        public override void ResetEffects()
+        public void BrimflameBuffActivate()
         {
-            Brimflame = false;
-            if (BrimflameCooldown > 0) BrimflameCooldown--;
-        }
-        public override void ProcessTriggers(TriggersSet triggersSet)
-        {
-            if (CalamityKeybinds.RageHotKey.JustPressed && Brimflame && BrimflameCooldown == 0)
+            if (CalamityKeybinds.RageHotKey.JustPressed && BrimflameCooldown == 0)
             {
                 Player.AddBuff(ModContent.BuffType<BrimflameBuff>(), 300);
                 BrimflameCooldown = 360;
                 SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/AbilitySounds/BrimflameAbility"));
-                for (int i = 0; i < 20; i++) {
-                    Dust dust = Dust.NewDustDirect(Player.Center, 0, 0, DustID.Rain_BloodMoon, newColor: new Color(200, 200, 200) * 0.75f, Scale:2);
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust dust = Dust.NewDustDirect(Player.Center, 0, 0, DustID.Rain_BloodMoon, newColor: new Color(200, 200, 200) * 0.75f, Scale: 2);
                     dust.noGravity = true;
                     dust.velocity *= 5;
                 }
-                
             }
         }
     }

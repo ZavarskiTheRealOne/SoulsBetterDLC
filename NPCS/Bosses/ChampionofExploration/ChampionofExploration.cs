@@ -8,9 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
-using Terraria.Utilities.Terraria.Utilities;
 using Terraria.Audio;
-using CalamityMod.Projectiles.Rogue;
 using FargowiltasSouls;
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
 {

@@ -1,9 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Terraria.Audio;
-using Terraria.GameContent;
-using ReLogic.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using FargowiltasSouls;

@@ -2,7 +2,6 @@
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
-
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using System.Collections.Generic;
@@ -12,9 +11,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using System;
 using FargowiltasSouls.Projectiles;
-using FargowiltasSouls.EternityMode.Content.Boss.HM;
-
-using Steamworks;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
 {

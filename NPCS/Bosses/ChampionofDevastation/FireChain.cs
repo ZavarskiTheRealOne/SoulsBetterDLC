@@ -2,7 +2,6 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-using Terraria.Audio;
 using Terraria.DataStructures;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation

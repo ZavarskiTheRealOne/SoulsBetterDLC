@@ -2,7 +2,6 @@
 using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Projectiles.Minions;
 using ReLogic.Content;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;

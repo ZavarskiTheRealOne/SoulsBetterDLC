@@ -6,14 +6,13 @@ using CalamityMod.Items.Armor.MarniteArchitect;
 using CalamityMod.Items.Accessories;
 using SoulsBetterDLC.Projectiles;
 using SoulsBetterDLC.Buffs;
-using CalamityMod;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [ExtendsFromMod("CalamityMod")]
     public class MarniteEnchantment : BaseDLCEnchant
     {
-        public override string Texture => "SoulsBetterDLC/Items/Placeholder";
+        
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
         protected override Color nameColor => new Color(153, 200, 193);
@@ -34,7 +33,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<CalamityEnchantPlayer>().Marnite = true;
+            player.GetModPlayer<SoulsBetterDLCPlayer>().Marnite = true;
         }
         public override void AddRecipes()
         {
@@ -47,19 +46,15 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }
-        
+
     }
-    [ExtendsFromMod("CalamityMod")]
-    public partial class CalamityEnchantPlayer : ModPlayer
+}
+namespace SoulsBetterDLC {
+    public partial class SoulsBetterDLCPlayer : ModPlayer
     {
-        public bool Marnite;
-        public override void ResetEffects()
+        public void MarniteEffects()
         {
-            Marnite = false;
-        }
-        public override void UpdateEquips()
-        {
-            if (Marnite && Main.myPlayer == Player.whoAmI)
+            if (Main.myPlayer == Player.whoAmI)
             {
                 Player.tileRangeX += 9;
                 Player.tileRangeY += 9;
@@ -67,10 +62,9 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
                 if (Player.ownedProjectileCounts[ModContent.ProjectileType<MarniteSword>()] < 2)
                 {
                     Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ModContent.ProjectileType<MarniteSword>(), 10, 0f, Main.myPlayer);
-                    Player.AddBuff(ModContent.BuffType<MarniteSwordBuff>(), 18000);
+                    Player.AddBuff(ModContent.BuffType<MarniteSwordsBuff>(), 18000);
                 }
             }
         }
-        
     }
 }

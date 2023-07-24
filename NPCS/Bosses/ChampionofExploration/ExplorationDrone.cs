@@ -3,7 +3,6 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.DataStructures;
 using CalamityMod.Sounds;
-using CalamityMod.Gores;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using FargowiltasSouls;

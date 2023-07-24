@@ -1,8 +1,6 @@
 ﻿using Terraria;
-using Terraria.ID;
 using Terraria.Audio;
 using Terraria.ModLoader;
-using CalamityMod.Projectiles.Ranged;
 using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration

@@ -2,9 +2,7 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
-using FargowiltasSouls.Projectiles.Souls;
 using System.IO;
 using CalamityMod.CalPlayer;
 using Terraria.Audio;
@@ -203,7 +201,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -1).RotatedBy(NPC.rotation + MathHelper.ToRadians(Main.rand.Next(-40, 40))) * Main.rand.Next(12, 20), ModContent.ProjectileType<SulphurCloud>(), scaledDamage, 0, Main.myPlayer);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -1).RotatedBy(NPC.rotation + MathHelper.ToRadians(Main.rand.Next(-40, 40))) * Main.rand.Next(12, 20), ModContent.ProjectileType<SulphurCloudHostile>(), scaledDamage, 0, Main.myPlayer);
                     }
                     SoundEngine.PlaySound(SoundID.Item8, NPC.Center);
                 }
@@ -214,7 +212,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -1).RotatedBy(NPC.rotation + MathHelper.ToRadians(Main.rand.Next(-40, 40))) * Main.rand.Next(12, 20), ModContent.ProjectileType<SulphurCloud>(), scaledDamage, 0, Main.myPlayer);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, -1).RotatedBy(NPC.rotation + MathHelper.ToRadians(Main.rand.Next(-40, 40))) * Main.rand.Next(12, 20), ModContent.ProjectileType<SulphurCloudHostile>(), scaledDamage, 0, Main.myPlayer);
                     }
                     SoundEngine.PlaySound(SoundID.Item8, NPC.Center);
 

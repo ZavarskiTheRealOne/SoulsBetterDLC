@@ -2,11 +2,9 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-using CalamityMod.Projectiles.Melee;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
 {

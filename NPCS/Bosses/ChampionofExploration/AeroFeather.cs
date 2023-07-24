@@ -1,6 +1,5 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 
@@ -10,6 +9,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
     [ExtendsFromMod("CalamityMod")]
     public class AeroFeather : ModProjectile
     {
+        public override string Texture => "CalamityMod/Projectiles/Magic/StickyFeather";
         public override void SetStaticDefaults()
         {
             
