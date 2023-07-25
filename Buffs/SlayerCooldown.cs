@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().SlayerCD = true;
+            player.GetModPlayer<CrossplayerCalamity>().SlayerCD = true;
         }
     }
 }

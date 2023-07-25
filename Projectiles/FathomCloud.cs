@@ -82,7 +82,7 @@ namespace SoulsBetterDLC.Projectiles
         public override void Kill(int timeLeft)
         {
             Player player = Main.player[Main.myPlayer];
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             SBDPlayer.NastyPop = false;
         }
     }

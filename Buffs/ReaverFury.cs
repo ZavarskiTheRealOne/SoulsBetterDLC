@@ -13,7 +13,7 @@ namespace SoulsBetterDLC.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().ReaverHageBuff = true;
+            player.GetModPlayer<CrossplayerCalamity>().ReaverHageBuff = true;
         }
     }
 }

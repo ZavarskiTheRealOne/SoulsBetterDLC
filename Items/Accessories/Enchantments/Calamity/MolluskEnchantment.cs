@@ -43,7 +43,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().Mollusk = true;
+            player.GetModPlayer<CrossplayerCalamity>().Mollusk = true;
         }
         public override void AddRecipes()
         {
@@ -62,7 +62,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 namespace SoulsBetterDLC
 {
     
-    public partial class SoulsBetterDLCPlayer : ModPlayer
+    public partial class CrossplayerCalamity : ModPlayer
     {
         public void MolluskEffects()
         {
@@ -80,7 +80,7 @@ namespace SoulsBetterDLC
         }
         public void MolluskClamShot(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int damage, float knockback)
         {
-            if (Player.GetModPlayer<SoulsBetterDLCPlayer>().Mollusk && Main.rand.NextBool(10))
+            if (Player.GetModPlayer<CrossplayerCalamity>().Mollusk && Main.rand.NextBool(10))
             {
                 Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<Shellclam>(), damage / 3, knockback, Main.myPlayer);
             }

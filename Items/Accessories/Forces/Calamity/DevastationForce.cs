@@ -26,7 +26,7 @@ namespace SoulsBetterDLC.Items.Accessories.Forces.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             SBDPlayer.DevastEffects = true;
             SBDPlayer.AyeCicle = true;
             SBDPlayer.ReaverHage = true;

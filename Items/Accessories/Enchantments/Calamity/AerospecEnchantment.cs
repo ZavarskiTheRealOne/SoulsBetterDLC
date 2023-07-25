@@ -25,7 +25,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             SBDPlayer.RideOfTheValkyrie = true;
         }
         public override void AddRecipes()
@@ -44,7 +44,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 }
 namespace SoulsBetterDLC
 {
-    public partial class SoulsBetterDLCPlayer : ModPlayer
+    public partial class CrossplayerCalamity : ModPlayer
     {
         public void AerospecEffects()
         {

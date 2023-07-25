@@ -4,11 +4,13 @@ using SoulsBetterDLC.Buffs;
 using Microsoft.Xna.Framework;
 using FargowiltasSouls;
 using CalamityMod.World;
+using Terraria.GameInput;
+using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 
 namespace SoulsBetterDLC
 {
     [ExtendsFromMod("CalamityMod")] // not sure that this does anything but it may be important so i won't remove until tested
-    public partial class SoulsBetterDLCPlayer : ModPlayer
+    public partial class CrossplayerCalamity : ModPlayer
     {
         //effect booleans
         public bool RideOfTheValkyrie;
@@ -41,6 +43,9 @@ namespace SoulsBetterDLC
 
         public bool Brimflame;
         public int BrimflameCooldown;
+        public bool Demonshade;
+        public int DemonshadeLevel;
+        public float DemonshadeXP;
         public bool FearOfTheValkyrie;
         public bool Crocket;
         public bool AnnihilEffects;
@@ -66,7 +71,7 @@ namespace SoulsBetterDLC
 
         public Vector2 bubbleOffset;
 
-        private void CalamityResEff()
+        public override void ResetEffects()
         {
             RideOfTheValkyrie = false;
             Marnite = false;
@@ -98,6 +103,8 @@ namespace SoulsBetterDLC
             Brimflame = false;
             if (BrimflameCooldown > 0)
                 BrimflameCooldown--;
+            Demonshade = false;
+            
             FearOfTheValkyrie = false;
             Crocket = false;
 
@@ -186,13 +193,16 @@ namespace SoulsBetterDLC
             NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
         }*/
 
-        private void CalamityHurt()
+        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
         {
             if (ReaverHage)
             {
                 ReaverHurtEffect();
             }
-
+            if (Demonshade)
+            {
+                DemonshadeHurtEffect((int)damage);
+            }
         }
         public override void UpdateDead()
         {
@@ -201,8 +211,10 @@ namespace SoulsBetterDLC
             ButterBeeCD = 0;
             AtaxiaCooldown = 0;
             kunaiKuldown = 0;
+            DemonshadeLevel = 0;
+            DemonshadeXP = 0;
         }
-        private void CalamityPostUpd()
+        public override void PostUpdate()
         {
             if (FargoSoulsWorld.ShouldBeEternityMode)
             {
@@ -210,7 +222,7 @@ namespace SoulsBetterDLC
                 CalamityWorld.death = false;
             }
         }
-        private void CalamityPostUpdEqp()
+        public override void PostUpdateEquips()
         {
             //EXPLORATION (2/4)
 
@@ -301,13 +313,17 @@ namespace SoulsBetterDLC
             {
                 BrimflameBuffActivate();
             }
+            if (Demonshade)
+            {
+                DemonshadeEffects();
+            }
             //fearmonger
             if (FearOfTheValkyrie)
             {
                 FearmongerEffects();
             }
         }
-        private void CalamityOnHit(Item item, NPC target, int damage, bool crit)
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
             //desert prowler enchantment
             if (ProwlinOnTheFools)
@@ -353,8 +369,12 @@ namespace SoulsBetterDLC
             {
                 GodSlayerHitEffect(target, damage);
             }
+            if (Demonshade)
+            {
+                DemonshadeHitEffect(damage);
+            }
         }
-        private void CalamityModifyHit(NPC target)
+        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
             //Plague Reaper conditions
             if (DoctorBeeKill)
@@ -362,7 +382,7 @@ namespace SoulsBetterDLC
                 PlagueReaperHitEffect(target);
             }
         }
-        private void CalamityOnHitProj(Projectile proj, NPC target, int damage, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             //desert prowler enchantment
             if (ProwlinOnTheFools)
@@ -408,8 +428,12 @@ namespace SoulsBetterDLC
             {
                 GodSlayerProjHitEffect(proj, target, damage, crit);
             }
+            if (Demonshade)
+            {
+                DemonshadeHitEffect(damage);
+            }
         }
-        private void CalamityModifyHitProj(NPC target)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             //plague reaper
             if (DoctorBeeKill)
@@ -417,6 +441,5 @@ namespace SoulsBetterDLC
                 PlagueReaperProjHitEffect(target);
             }
         }
-
     }
 }

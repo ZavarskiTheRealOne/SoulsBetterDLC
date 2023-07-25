@@ -15,7 +15,7 @@ namespace SoulsBetterDLC.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             if (player.ownedProjectileCounts[ModContent.ProjectileType<MarniteSword>()] > 0)
             {
                 SBDPlayer.aSword = true;

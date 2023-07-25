@@ -91,7 +91,7 @@ namespace SoulsBetterDLC.Projectiles
         }
         private bool CheckActive(Player owner)
         {
-            if (owner.dead || !owner.active || !owner.GetModPlayer<SoulsBetterDLCPlayer>().Marnite)
+            if (owner.dead || !owner.active || !owner.GetModPlayer<CrossplayerCalamity>().Marnite)
 
             {
                 owner.ClearBuff(ModContent.BuffType<MarniteSwordsBuff>());

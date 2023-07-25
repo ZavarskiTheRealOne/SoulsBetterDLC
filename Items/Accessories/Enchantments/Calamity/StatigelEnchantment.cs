@@ -30,7 +30,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            SoulsBetterDLCPlayer SBDPlayer = player.GetModPlayer<SoulsBetterDLCPlayer>();
+            CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             SBDPlayer.StatigelNinjaStyle = true;
             player.GetModPlayer<CalamityPlayer>().dodgeScarf = true;
             player.GetModPlayer<CalamityPlayer>().DashID = CounterScarfDash.ID;
@@ -50,7 +50,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 }
 namespace SoulsBetterDLC
 {
-    public partial class SoulsBetterDLCPlayer : ModPlayer
+    public partial class CrossplayerCalamity : ModPlayer
     {
         public void StatigelHitEffect(NPC target, int damage)
         {

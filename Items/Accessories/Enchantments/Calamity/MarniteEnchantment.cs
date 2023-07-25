@@ -33,7 +33,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SoulsBetterDLCPlayer>().Marnite = true;
+            player.GetModPlayer<CrossplayerCalamity>().Marnite = true;
         }
         public override void AddRecipes()
         {
@@ -50,7 +50,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
     }
 }
 namespace SoulsBetterDLC {
-    public partial class SoulsBetterDLCPlayer : ModPlayer
+    public partial class CrossplayerCalamity : ModPlayer
     {
         public void MarniteEffects()
         {
