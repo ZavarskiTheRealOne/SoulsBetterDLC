@@ -3,7 +3,6 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.ID;
 using CalamityMod.Items.Placeables.Furniture;
-using Terraria.GameContent;
 
 namespace SoulsBetterDLC
 {

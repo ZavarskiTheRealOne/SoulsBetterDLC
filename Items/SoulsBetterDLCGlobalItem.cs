@@ -12,11 +12,11 @@ namespace SoulsBetterDLC.Items
         {
             if (ModLoader.TryGetMod("CalamityMod", out _))
             {
-                CalamityShoot(item,player,source,position,velocity);
+                CalamityShoot(item,player,source,position,velocity,damage,knockback);
             }
             return true;
         }
-        private void CalamityShoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity)
+        private void CalamityShoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int damage, float knockback)
         { 
             CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             if (SBDPlayer.VictideSwimmin && (item.CountsAsClass<MeleeDamageClass>() || item.CountsAsClass<RangedDamageClass>() || item.CountsAsClass<MagicDamageClass>() || item.CountsAsClass<ThrowingDamageClass>() || item.CountsAsClass<SummonDamageClass>()) && Main.rand.NextBool(10) && !item.channel && player.whoAmI == Main.myPlayer)
@@ -27,6 +27,10 @@ namespace SoulsBetterDLC.Items
             {
                 Projectile.NewProjectile(source, position, velocity * 1.5f, ModContent.ProjectileType<CalamityMod.Projectiles.Summon.Shellfish>(), 60, 1f, player.whoAmI);
             }*/
+            if (SBDPlayer.Mollusk)
+            {
+                SBDPlayer.MolluskClamShot(source, position, velocity, damage, knockback);
+            }
         }
     }
 }

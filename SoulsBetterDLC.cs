@@ -109,7 +109,6 @@ namespace SoulsBetterDLC
             tocrecipe.AddIngredient(ItemID.RedHusk, 1);
             tocrecipe.AddTile(TileID.Furnaces);
             tocrecipe.Register();
-
             //gladiator's locket
             Recipe glrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.GladiatorsLocket>());
             glrecipe.AddIngredient(ItemID.Marble, 20);
@@ -117,7 +116,6 @@ namespace SoulsBetterDLC
             glrecipe.AddRecipeGroup("SoulsBetterDLC:AnyGoldWatch", 1);
             glrecipe.AddTile(TileID.DemonAltar);
             glrecipe.Register();
-
             //granite core recipe
             Recipe ugcrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.UnstableGraniteCore>());
             ugcrecipe.AddIngredient(ItemID.Granite, 20);
@@ -125,7 +123,6 @@ namespace SoulsBetterDLC
             ugcrecipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.AmidiasSpark>(), 1);
             ugcrecipe.AddTile(TileID.DemonAltar);
             ugcrecipe.Register();
-
             //symbiote recipe
             Recipe fgrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.FungalSymbiote>());
             fgrecipe.AddIngredient(ItemID.GlowingMushroom, 20);
@@ -141,7 +138,6 @@ namespace SoulsBetterDLC
             tlrecipe.AddIngredient(ItemID.Bunny, 1);
             tlrecipe.AddTile(TileID.CookingPots);
             tlrecipe.Register();
-
             //luxor recipe
             Recipe lgrecipe = Recipe.Create(ModContent.ItemType<CalamityMod.Items.Accessories.LuxorsGift>());
             lgrecipe.AddIngredient(ItemID.FossilOre, 20);
@@ -171,7 +167,7 @@ namespace SoulsBetterDLC
             RecipeGroup ReaverHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Reaver Headpiece"}",
                 ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadExplore>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadMobility>(),
-                ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadTank>());
+                ModContent.ItemType<CalamityMod.Items.Armor.Reaver.ReaverHeadMobility>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyReaverHelms", ReaverHelmsGroup);
             //daedalus head group
             RecipeGroup DeadalusHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Daedalus Headpiece"}",
