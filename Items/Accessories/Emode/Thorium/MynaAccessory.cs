@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class MynaAccessory : DLCItem
     {
         public override string ModName => "ThoriumMod";

@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Projectiles.Thorium
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class KluexOrb : ModProjectile
     {
         public override void SetStaticDefaults()
@@ -47,9 +48,13 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     break;
                 case StaffDmg:
                 case StaffHeal:
+                    Projectile.friendly = true;
+                    Projectile.hostile = false;
+                    break;
                 case TempleCore:
                     Projectile.friendly = true;
                     Projectile.hostile = false;
+                    Projectile.timeLeft = 80;
                     break;
             }
         }
