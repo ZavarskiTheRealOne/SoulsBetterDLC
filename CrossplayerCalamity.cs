@@ -6,6 +6,7 @@ using FargowiltasSouls;
 using CalamityMod.World;
 using Terraria.GameInput;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
+using Terraria.DataStructures;
 
 namespace SoulsBetterDLC
 {
@@ -27,6 +28,7 @@ namespace SoulsBetterDLC
         public bool AtaxiaEruption;
         public bool DevastEffects;
 
+        public bool Empyrean;
         public bool VictideSwimmin;
         public bool Mollusk;
         public bool SulphurBubble;
@@ -86,6 +88,7 @@ namespace SoulsBetterDLC
             AtaxiaEruption = false;
             if (AtaxiaCooldown > 0) AtaxiaCooldown--;
 
+            Empyrean = false;
             VictideSwimmin = false;
             Mollusk = false;
             SulphurBubble = false;
@@ -440,6 +443,14 @@ namespace SoulsBetterDLC
             {
                 PlagueReaperProjHitEffect(target);
             }
+        }
+        public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (Empyrean)
+            {
+                EmpyreanAttackEffects(source, damage, knockback);
+            }
+            return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
     }
 }

@@ -17,6 +17,7 @@ using CalamityMod.Buffs.StatDebuffs;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.DataStructures;
 using System;
+using CalamityMod.Rarities;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -35,7 +36,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.rare = ItemRarityID.Lime;
+            Item.rare = ModContent.RarityType<HotPink>();
         }
         
         
@@ -43,12 +44,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             base.SafeModifyTooltips(tooltips);
             string rageOverTime = "Rage generates over time and does not fade away when out of combat\n";
-            if (!CalamityWorld.revenge) rageOverTime = "Adds the rage meter\nRage generates over time and does not fade away when out of combat\n";
+            if (!CalamityWorld.revenge) rageOverTime = "Rage generates over time and does not fade away when out of combat\n";
             TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: DemonshadeEnch", $"Press " + CalamityKeybinds.RageHotKey.TooltipHotkeyString() + " to enrage nearby enemies, making them take 125% more damage but also deal 25% more damage\n" +
                 rageOverTime +
                 "Taking damage grants rage\n" +
                 "Dealing damage with rage mode increases the damage rage does\n" +
-                "\"Run, cowa- OUGH!\"");
+                "\"I think it\'s time for Jack… to let \'er rip!\"");
             tooltips.Add(tooltip);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -59,11 +60,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<BrimflameScowl>());
-            recipe.AddIngredient(ModContent.ItemType<BrimflameRobes>());
-            recipe.AddIngredient(ModContent.ItemType<BrimflameBoots>());
-            recipe.AddIngredient(ModContent.ItemType<Brimlance>());
-            recipe.AddIngredient(ModContent.ItemType<ChaosStone>());
+            recipe.AddIngredient(ModContent.ItemType<DemonshadeHelm>());
+            recipe.AddIngredient(ModContent.ItemType<DemonshadeBreastplate>());
+            recipe.AddIngredient(ModContent.ItemType<DemonshadeGreaves>());
+            recipe.AddIngredient(ModContent.ItemType<ShatteredCommunity>());
+            recipe.AddIngredient(ModContent.ItemType<GaelsGreatsword>());
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }
@@ -75,6 +76,7 @@ namespace SoulsBetterDLC
     {
         public void DemonshadeEffects()
         {
+            
             if (Player.dead || !Player.active)
             {
                 DemonshadeLevel = 0;
