@@ -62,6 +62,9 @@ namespace SoulsBetterDLC
             else if (damage / 4 > 180 && damage / 4 <= 300)
             {
                 UmbraBuffTimer = 180;
+            }else if (damage / 4 > 300)
+            {
+                UmbraBuffTimer = 180;
             }
         }
         public void UmbraphileHitEffect(int damage)
