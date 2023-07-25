@@ -16,9 +16,9 @@ namespace SoulsBetterDLC
             EbonEnch = false;
             ClericEnch = false;
         }
-        public void EbonBlast(int damage)
-        {
-            Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(-16 * Player.direction, 0), ModContent.ProjectileType<EbonBlast>(), damage, 5, Player.whoAmI);
-        }
+        //public void EbonBlast(int damage)
+        //{
+        //    Projectile.NewProjectile(new EntitySource_Parent(Player), Player.Center, new Vector2(-16 * Player.direction, 0), ModContent.ProjectileType<EbonBlast>(), damage, 5, Player.whoAmI);
+        //}
     }
 }

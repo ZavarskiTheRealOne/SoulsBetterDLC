@@ -20,7 +20,8 @@ namespace SoulsBetterDLC
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
-            if (ModLoader.HasMod("CalamityMod")) CalamityOnHit(target, damage);
+            if (ModLoader.HasMod("CalamityMod")) CalamityOnHit(item, target, damage, crit);
+            
         }
         public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
@@ -28,7 +29,7 @@ namespace SoulsBetterDLC
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
-            if (ModLoader.HasMod("CalamityMod")) CalamityOnHitProj(target, damage);
+            if (ModLoader.HasMod("CalamityMod")) CalamityOnHitProj(proj, target, damage, crit);
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
