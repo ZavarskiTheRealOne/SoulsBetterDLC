@@ -11,6 +11,17 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
         public bool ModLoaded => ModLoader.HasMod(ModName);
         public override string Texture => ModContent.HasAsset(base.Texture) ? base.Texture : "SoulsBetterDLC/Items/Placeholder";
 
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+
+            if (Name.Contains("Enchant"))
+            {
+                // "ValadiumEnchant" => "Valadium Enchantment"
+                DisplayName.SetDefault(Name.Remove(Name.LastIndexOf("Enchant")) + " Enchantment");
+            }
+        }
+
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
             base.SafeModifyTooltips(tooltips);

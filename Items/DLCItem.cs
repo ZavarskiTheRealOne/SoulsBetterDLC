@@ -4,54 +4,15 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace SoulsBetterDLC.Items 
+namespace SoulsBetterDLC.Items
 {
-	/// <summary>
-	///	Class that takes care of WeakReferences for recipes and Accessory effects.
-	///	Essentially, if you reference content from a mod not loaded then the game will crash. The 'safe' named methods let you reference crossmod stuff without causing issues.
-	///	Note that you still need to include [JITWhenModsEnabled("ModName")] before a class referencing other mods
-	/// </summary>
-	public abstract class CrossModItem : SoulsItem
-	{
-		/// <summary>
-		/// Internal name of requested mod. e.g. "ExampleMod"
-		/// </summary>
+    /// <summary>
+    ///	Gives a default texture and some fields specific to cross-mod items.
+    /// </summary>
+    public abstract class DLCItem : SoulsItem
+    {
         public abstract string ModName { get; }
-		// idk why this isn't a thing by default, has nothing to do with crossmod
-		public override string Texture => ModContent.HasAsset(base.Texture) ? base.Texture : "SoulsBetterDLC/Items/Placeholder"; 
-		
-        public override void AddRecipes()
-        {
-            if (!ModLoader.HasMod(ModName)) return;
-            SafeAddRecipes();
-        }
-
-        /// <summary>
-        /// Allows you to reference classes from other mods in recipes. If item doesn't use items from other mods in recipe then use AddRecipes()
-        /// </summary>
-        public virtual void SafeAddRecipes() { }
-		
-		public override void UpdateAccessory(Player player, bool hideVisual)
-		{
-			if (!ModLoader.HasMod(ModName)) return;
-			SafeUpdateAccessory(player, hideVisual);
-		}
-		
-		/// <summary>
-		/// Doesn't run unless ModName is loaded. Allows you to reference classes from that mod. If an item's effect does not reference content from other mods then use UpdateAccessory()
-		/// </summary>
-		public virtual void SafeUpdateAccessory(Player player, bool hideVisual) {}
-		
-		/// <summary>
-		/// Shows a warning to the player if the required mod is not loaded, method name is a misnomer, you shouldn't reference other mods in this method
-		/// </summary>
-		public override void SafeModifyTooltips(List<TooltipLine> tooltips)
-        {
-			base.SafeModifyTooltips(tooltips);
-			
-            TooltipLine line = new TooltipLine(Mod, "disabled", $"Doesn't do anything without {ModName}");
-            line.OverrideColor = Color.Red;
-            if (!ModLoader.HasMod(ModName)) tooltips.Add(line);
-        }
-	}
+        public bool ModLoaded => ModLoader.HasMod(ModName);
+        public override string Texture => ModContent.HasAsset(base.Texture) ? base.Texture : "SoulsBetterDLC/Items/Placeholder";
+    }
 }
