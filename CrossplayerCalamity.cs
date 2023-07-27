@@ -29,6 +29,8 @@ namespace SoulsBetterDLC
         public bool DevastEffects;
 
         public bool Empyrean;
+        public bool OmegaBlue;
+        public int OmegaGreenCounter;
         public bool VictideSwimmin;
         public bool Mollusk;
         public bool SulphurBubble;
@@ -89,6 +91,8 @@ namespace SoulsBetterDLC
             if (AtaxiaCooldown > 0) AtaxiaCooldown--;
 
             Empyrean = false;
+            OmegaBlue = false;
+            if (OmegaGreenCounter > 0) OmegaGreenCounter--;
             VictideSwimmin = false;
             Mollusk = false;
             SulphurBubble = false;
@@ -219,11 +223,7 @@ namespace SoulsBetterDLC
         }
         public override void PostUpdate()
         {
-            if (FargoSoulsWorld.ShouldBeEternityMode)
-            {
-                CalamityWorld.revenge = false;
-                CalamityWorld.death = false;
-            }
+            
         }
         public override void PostUpdateEquips()
         {
@@ -338,7 +338,16 @@ namespace SoulsBetterDLC
             {
                 PlaguebringerHitEffect(item, target, damage);
             }
-
+            //Empyrean
+            if (Empyrean)
+            {
+                EmpyreanHitEffect();
+            }
+            //omega blue
+            if (OmegaBlue)
+            {
+                OmegaBlueHitEffects();
+            }
             //hydrothermic. just based
             if (AtaxiaEruption)
             {
@@ -398,7 +407,16 @@ namespace SoulsBetterDLC
             {
                 PlaguebringerProjHitEffect(proj, target, damage);
             }
-
+            //Empyrean
+            if (Empyrean)
+            {
+                EmpyreanHitEffect();
+            }
+            //omega blue
+            if (OmegaBlue)
+            {
+                OmegaBlueHitEffects();
+            }
             //hydroth   ermic
             if (AtaxiaEruption)
             {
@@ -449,6 +467,10 @@ namespace SoulsBetterDLC
             if (Empyrean)
             {
                 EmpyreanAttackEffects(source, damage, knockback);
+            }
+            if (OmegaBlue)
+            {
+                OmegaBlueAttackEffects(source, damage, knockback);
             }
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }

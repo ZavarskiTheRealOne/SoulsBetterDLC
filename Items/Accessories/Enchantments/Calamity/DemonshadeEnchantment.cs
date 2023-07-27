@@ -2,21 +2,14 @@
 using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using CalamityMod.Items.Armor.Brimflame;
 using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Weapons.Melee;
-using SoulsBetterDLC.Buffs;
 using CalamityMod;
 using Terraria.Audio;
 using System.Collections.Generic;
 using CalamityMod.World;
-using System.IO;
-using Terraria.ModLoader.IO;
 using CalamityMod.Items.Armor.Demonshade;
 using CalamityMod.Buffs.StatDebuffs;
-using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
-using Terraria.DataStructures;
-using System;
 using CalamityMod.Rarities;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity

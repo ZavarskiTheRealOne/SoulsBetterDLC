@@ -1,4 +1,5 @@
 ﻿using CalamityMod.Buffs.DamageOverTime;
+using CalamityMod.Buffs.StatBuffs;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,7 +9,7 @@ using Terraria.ModLoader;
 namespace SoulsBetterDLC.Projectiles
 {
     [ExtendsFromMod("CalamityMod")]
-    public class MeldTentacle : ModProjectile
+    public class AbyssTentacle : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.ShadowFlame;
         public override void SetStaticDefaults()
@@ -30,7 +31,12 @@ namespace SoulsBetterDLC.Projectiles
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.AddBuff(ModContent.BuffType<Nightwither>(), 600);
+            target.AddBuff(ModContent.BuffType<CrushDepth>(), 600);
+            if (Projectile.owner != -1) {
+                int healAmount = damage / 10;
+                if (healAmount > 20) healAmount = 50;
+                Main.player[Projectile.owner].HealEffect(damage /50);
+            }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -88,10 +94,18 @@ namespace SoulsBetterDLC.Projectiles
             ptr += Projectile.ai[0] * 1.5f;
             ptr = ref Projectile.velocity.Y;
             ptr += Projectile.ai[1] * 1.5f;
-            if (Projectile.velocity.Length() > 16f)
+            float velocityLimit = 16f;
+            if (Projectile.owner != -1)
+            {
+                if (Main.player[Projectile.owner].HasBuff(ModContent.BuffType<AbyssalMadness>()))
+                {
+                    velocityLimit = 20f;
+                }
+            }
+            if (Projectile.velocity.Length() > velocityLimit)
             {
                 Projectile.velocity.Normalize();
-                Projectile.velocity *= 16f;
+                Projectile.velocity *= velocityLimit;
             }
             ptr = ref Projectile.ai[0];
             ptr *= 1.05f;
@@ -102,9 +116,10 @@ namespace SoulsBetterDLC.Projectiles
                 int i = 0;
                 while ((float)i < Projectile.scale * 10f)
                 {
-                    Dust dust = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.BubbleBurst_White, Projectile.velocity.X, Projectile.velocity.Y, 100, default(Color) * 0.75f, 1.1f);
+                    Dust dust = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.BlueTorch, Projectile.velocity.X, Projectile.velocity.Y, 100, new Color(170, 170, 170), 2);
                     dust.position = (dust.position + Projectile.Center) / 2f;
                     dust.noGravity = true;
+                    dust.noLight = true;
                     Dust dust2 = dust;
                     dust2.velocity *= 0.1f;
                     dust2 = dust;

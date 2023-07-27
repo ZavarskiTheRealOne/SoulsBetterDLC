@@ -15,7 +15,7 @@ using CalamityMod.Buffs.StatBuffs;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [ExtendsFromMod("CalamityMod")]
-    public class EmpyreanEnchantment : BaseDLCEnchant
+    public class OmegaBlueEnchantment : BaseDLCEnchant
     {
        
         public override string ModName => "CalamityMod";
@@ -23,7 +23,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(75, 75, 75);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Empyrean Enchantment");
+            DisplayName.SetDefault("Omega Blue Enchantment");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -37,15 +37,17 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             base.SafeModifyTooltips(tooltips);
 
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: EmpyreanEnch", $"Every third attack landed grants Empyrean Rage or Wrath\n" +
-                $"Meld tentacles have a chance to lash out when you attack\n" +
-                $"Tentacles deal half of your damage and inflict Nightwither\n" +
-                $"\"I remember seeing a movie that starts like this!\"");
+            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: OmegaBlueEnch", 
+                $"Abyss Tentacles have a chance to lash out when you attack\n" +
+                $"Abyss Tentacles deal half of your damage, inflict crush depth, and heal up tp 50\n" +
+                $"Every 100 hits landed you gain Abyssal Madness\n" +
+                $"Abyssal Madness increases your damage, crit chance, and Abyss Tentacle aggression\n" +
+                $"\"Yes, now I remember that movie!\"");
             tooltips.Add(tooltip);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<CrossplayerCalamity>().Empyrean = true;
+            player.GetModPlayer<CrossplayerCalamity>().OmegaBlue = true;
             
         }
         public override void AddRecipes()
@@ -66,22 +68,39 @@ namespace SoulsBetterDLC
 {
     public partial class CrossplayerCalamity : ModPlayer
     {
-        public int EmpyreanHitCounter;
-        public void EmpyreanHitEffect()
+        public int OmegaBlueCounter;
+        
+        public void OmegaBlueHitEffects()
         {
-            EmpyreanHitCounter++;
-            if (EmpyreanHitCounter >= 3)
+            if (!Player.HasBuff(ModContent.BuffType<AbyssalMadness>()))
+            OmegaBlueCounter++;
+            
+            if (OmegaBlueCounter >= 100)
             {
-                Player.AddBuff(Main.rand.NextBool() ? ModContent.BuffType<EmpyreanRage>() : ModContent.BuffType<EmpyreanWrath>(), 60);
-                EmpyreanHitCounter = 0;
+                OmegaBlueCounter = 0;
+                if (OmegaGreenCounter > 0) return;
+                Player.AddBuff(ModContent.BuffType<AbyssalMadness>(), 15 * Player.HeldItem.useTime);
+                
+                SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/AbilitySounds/OmegaBlueAbility"), Player.Center);
+                OmegaGreenCounter = 180 + 360;
             }
         }
-        public void EmpyreanAttackEffects(EntitySource_ItemUse_WithAmmo source, int damage, float knockback)
+        
+        public void OmegaBlueAttackEffects(EntitySource_ItemUse_WithAmmo source, int damage, float knockback)
         {
-            if (Player.whoAmI == Main.myPlayer && Main.rand.NextBool(5))
+            bool tentacle = Main.rand.NextBool(7);
+            
+            if (Player.HasBuff(ModContent.BuffType<AbyssalMadness>())) {
+                
+                tentacle = Main.rand.NextBool(2);
+                
+            }
+            if (Player.whoAmI == Main.myPlayer && tentacle)
             {
                 SoundEngine.PlaySound(SoundID.Item103, Player.Center);
-                Projectile.NewProjectile(source, Player.Center, (Main.MouseWorld - Player.Center).SafeNormalize(Vector2.Zero) * 20, ModContent.ProjectileType<MeldTentacle>(), damage / 2, knockback, Main.myPlayer, Main.rand.Next(10, 160) * 0.001f * (Main.rand.NextBool() ? 1 : -1), Main.rand.Next(10, 160) * 0.001f * (Main.rand.NextBool() ? 1 : -1));
+                
+                
+                Projectile.NewProjectile(source, Player.Center, (Main.MouseWorld - Player.Center).SafeNormalize(Vector2.Zero) * 25, ModContent.ProjectileType<AbyssTentacle>(), damage/2, knockback, Main.myPlayer, Main.rand.Next(10, 160) * 0.001f * (Main.rand.NextBool() ? 1 : -1), Main.rand.Next(10, 160) * 0.001f * (Main.rand.NextBool() ? 1 : -1));
             }
             
         }
