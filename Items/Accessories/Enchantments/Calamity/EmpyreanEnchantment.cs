@@ -2,7 +2,6 @@
 using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using CalamityMod.Items.Accessories;
 using Terraria.Audio;
 using System.Collections.Generic;
 using Terraria.DataStructures;
@@ -55,8 +54,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient(ModContent.ItemType<EmpyreanCloak>());
             recipe.AddIngredient(ModContent.ItemType<EmpyreanCuisses>());
             recipe.AddIngredient(ModContent.ItemType<TomeofFates>());
-            recipe.AddIngredient(ModContent.ItemType<CelestialReaper>());
-            recipe.AddIngredient(ModContent.ItemType<EtherealExtorter>());
+            recipe.AddIngredient(ModContent.ItemType<StarofDestruction>());
+            recipe.AddIngredient(ModContent.ItemType<UtensilPoker>());
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }

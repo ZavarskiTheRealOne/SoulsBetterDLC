@@ -6,11 +6,10 @@ using CalamityMod.Items.Accessories;
 using Terraria.Audio;
 using System.Collections.Generic;
 using Terraria.DataStructures;
-using CalamityMod.Items.Armor.Empyrean;
-using CalamityMod.Items.Weapons.Magic;
-using CalamityMod.Items.Weapons.Rogue;
 using SoulsBetterDLC.Projectiles;
 using CalamityMod.Buffs.StatBuffs;
+using CalamityMod.Items.Armor.OmegaBlue;
+using CalamityMod.Items.Weapons.Ranged;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -20,7 +19,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
        
         public override string ModName => "CalamityMod";
         public override string wizardEffect => "";
-        protected override Color nameColor => new Color(75, 75, 75);
+        protected override Color nameColor => new Color(30, 30, 130);
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Omega Blue Enchantment");
@@ -29,7 +28,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.rare = ItemRarityID.Red;
+            Item.rare = ItemRarityID.Lime;
         }
         
         
@@ -53,12 +52,12 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<EmpyreanMask>());
-            recipe.AddIngredient(ModContent.ItemType<EmpyreanCloak>());
-            recipe.AddIngredient(ModContent.ItemType<EmpyreanCuisses>());
-            recipe.AddIngredient(ModContent.ItemType<TomeofFates>());
-            recipe.AddIngredient(ModContent.ItemType<CelestialReaper>());
-            recipe.AddIngredient(ModContent.ItemType<EtherealExtorter>());
+            recipe.AddIngredient(ModContent.ItemType<OmegaBlueHelmet>());
+            recipe.AddIngredient(ModContent.ItemType<OmegaBlueChestplate>());
+            recipe.AddIngredient(ModContent.ItemType<OmegaBlueTentacles>());
+            recipe.AddIngredient(ModContent.ItemType<EmpyreanEnchantment>());
+            recipe.AddIngredient(ModContent.ItemType<TheMaelstrom>());
+            recipe.AddIngredient(ModContent.ItemType<LumenousAmulet>());
             recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }
