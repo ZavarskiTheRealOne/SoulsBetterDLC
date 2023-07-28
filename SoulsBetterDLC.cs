@@ -9,6 +9,9 @@ using ThoriumMod;
 using CalamityMod.Items.Placeables.Furniture;
 using System.Reflection;
 using MonoMod.RuntimeDetour.HookGen;
+using FargowiltasSouls.Toggler;
+using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
+using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 
 namespace SoulsBetterDLC
 {
@@ -19,14 +22,21 @@ namespace SoulsBetterDLC
         internal static ModKeybind LivingWoodBind;
         internal static ModKeybind SteelParryBind;
 
+        
         public override void Load()
         {
             ThoriumLoaded = ModLoader.HasMod("ThoriumMod");
             CalamityLoaded = ModLoader.HasMod("CalamityMod");
 
             LoadDetours();
-
+            
+            
             if (ThoriumLoaded) Thorium_Load();
+            
+                ToggleLoader.LoadTogglesFromAssembly(Code);
+            
+            
+
         }
 
         private static void LoadDetours()
@@ -70,6 +80,7 @@ namespace SoulsBetterDLC
             if (Projectiles.Thorium.DLCHealing.CustomHealingType == null) Logger.Debug("type cringe");
             else Logger.Debug("type successful");
         }
+       
     }
 
     [ExtendsFromMod("CalamityMod")]
@@ -100,6 +111,7 @@ namespace SoulsBetterDLC
                 CalamityGroups();
             }
         }
+        
         static void CalamityRecipes()
         {
             //trinket of chi

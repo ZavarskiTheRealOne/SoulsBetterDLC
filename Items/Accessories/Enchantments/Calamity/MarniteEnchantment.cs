@@ -6,6 +6,7 @@ using CalamityMod.Items.Armor.MarniteArchitect;
 using CalamityMod.Items.Accessories;
 using SoulsBetterDLC.Projectiles;
 using SoulsBetterDLC.Buffs;
+using FargowiltasSouls.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -56,10 +57,13 @@ namespace SoulsBetterDLC {
         {
             if (Main.myPlayer == Player.whoAmI)
             {
-                Player.tileRangeX += 9;
-                Player.tileRangeY += 9;
-                Player.tileSpeed += 0.5f;
-                if (Player.ownedProjectileCounts[ModContent.ProjectileType<MarniteSword>()] < 2)
+                if (Player.GetToggleValue("BuildBuff"))
+                {
+                    Player.tileRangeX += 9;
+                    Player.tileRangeY += 9;
+                    Player.tileSpeed += 0.5f;
+                }
+                if (Player.ownedProjectileCounts[ModContent.ProjectileType<MarniteSword>()] < 2 && Player.GetToggleValue("MarniteSwords"))
                 {
                     Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ModContent.ProjectileType<MarniteSword>(), 10, 0f, Main.myPlayer);
                     Player.AddBuff(ModContent.BuffType<MarniteSwordsBuff>(), 18000);

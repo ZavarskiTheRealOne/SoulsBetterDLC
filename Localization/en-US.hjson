@@ -1,0 +1,11 @@
+﻿
+Mods: {
+  "FargowiltasSouls": {
+    "ExplorationHeader": "[i:SoulsBetterDLC/ExplorationForce] {$Mods.SoulsBetterDLC.ItemName.ExplorationForce}",
+    "ValkyrieConfig": "[i:SoulsBetterDLC/AerospecEnchantment] [c/99c8c1:Valkyrie Minion]",
+    "TornadoesConfig": "[i:SoulsBetterDLC/ProwlerEnchantment] [c/cc2a3c:Desert Tornadoes]",
+    "BuildBuffConfig": "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Building Stats]",
+    "MarniteSwordsConfig": "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Marnite Sword Minions]",
+    "WulfrumBuffConfig": "[i:SoulsBetterDLC/WulfrumEnchantment] [c/cec9aa:Wulfrum Empower]"
+  }
+}

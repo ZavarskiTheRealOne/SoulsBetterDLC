@@ -7,6 +7,7 @@ using CalamityMod.World;
 using Terraria.GameInput;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.DataStructures;
+using FargowiltasSouls.Toggler;
 
 namespace SoulsBetterDLC
 {
@@ -230,19 +231,20 @@ namespace SoulsBetterDLC
             //EXPLORATION (2/4)
 
             //aerospec
-            if (RideOfTheValkyrie)
+            if (RideOfTheValkyrie && Player.GetToggleValue("Valkyrie"))
             {
                 AerospecEffects();
             }
 
             //marnite
+            //has 2 toggles so checks are in the method
             if (Marnite)
             {
                 MarniteEffects();
             }
 
             //wulfrum
-            if (WulfrumOverpower)
+            if (WulfrumOverpower && Player.GetToggleValue("WulfrumBuff"))
             {
                 WulfrumEffects();
             }
@@ -329,7 +331,7 @@ namespace SoulsBetterDLC
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
             //desert prowler enchantment
-            if (ProwlinOnTheFools)
+            if (ProwlinOnTheFools && Player.GetToggleValue("Tornadoes"))
             {
                 ProwlerHitEffect();
             }
@@ -397,7 +399,7 @@ namespace SoulsBetterDLC
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             //desert prowler enchantment
-            if (ProwlinOnTheFools)
+            if (ProwlinOnTheFools && Player.GetToggleValue("Tornadoes"))
             {
                 ProwlerProjHitEffect(proj);
             }

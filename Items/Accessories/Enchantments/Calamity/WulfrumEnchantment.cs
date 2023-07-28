@@ -54,6 +54,7 @@ namespace SoulsBetterDLC
         {
             if (Player.statLife <= Player.statLifeMax2 * 0.3f)
                 Player.AddBuff(ModContent.BuffType<WulfrumEmpowerment>(), 2);
+            
         }
     }
 }
