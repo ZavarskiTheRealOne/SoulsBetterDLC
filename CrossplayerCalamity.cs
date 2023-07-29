@@ -39,6 +39,8 @@ namespace SoulsBetterDLC
         public bool DoctorBeeKill;
         public bool DesolEffects;
 
+        public bool Tarragon;
+        public int TarragonTimer;
         public bool UmbraCrazyRegen;
         public bool BFCrazierRegen;
         public bool StatigelNinjaStyle;
@@ -100,6 +102,8 @@ namespace SoulsBetterDLC
             FathomBubble = false;
             DoctorBeeKill = false;
 
+            Tarragon = false;
+            if (TarragonTimer > 0) TarragonTimer--;
             UmbraCrazyRegen = false;
             BFCrazierRegen = false;
             if (LifestealCD > 0) LifestealCD--;

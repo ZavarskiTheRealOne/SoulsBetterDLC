@@ -494,6 +494,13 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.GodSlayer.GodSlayerHeadRanged>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.GodSlayer.GodSlayerHeadRogue>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnySlayerHelms", SlayerHelmsGroup);
+            RecipeGroup TarragonHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Tarragon Head Piece"}",
+                ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadMagic>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadRanged>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadSummon>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadRogue>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadMelee>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyTarragonHelms", TarragonHelmsGroup);
         }
     }
 }

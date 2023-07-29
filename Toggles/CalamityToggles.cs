@@ -1,10 +1,10 @@
 ﻿using FargowiltasSouls.Toggler;
-using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
 using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Toggles
 {
+    
     public class CalamityToggles : ToggleCollection
     {
         public override string Mod => "CalamityMod";
