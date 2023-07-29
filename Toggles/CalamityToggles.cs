@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Toggles
 {
-    
+    [ExtendsFromMod("CalamityMod")]
     public class CalamityToggles : ToggleCollection
     {
         public override string Mod => "CalamityMod";

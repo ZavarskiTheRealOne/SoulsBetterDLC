@@ -8,6 +8,7 @@ using Terraria.ID;
 
 namespace SoulsBetterDLC.Projectiles
 {
+    [ExtendsFromMod("CalamityMod")]
     public class TarragonAura : ModProjectile
     {
         public override string Texture => "CalamityMod/Projectiles/Healing/AuricOrb";

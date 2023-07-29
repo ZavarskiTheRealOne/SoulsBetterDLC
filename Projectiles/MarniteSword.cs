@@ -7,6 +7,8 @@ using Terraria.DataStructures;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
+using FargowiltasSouls.Toggler;
+
 namespace SoulsBetterDLC.Projectiles
 {
     [ExtendsFromMod("CalamityMod")]
@@ -91,7 +93,7 @@ namespace SoulsBetterDLC.Projectiles
         }
         private bool CheckActive(Player owner)
         {
-            if (owner.dead || !owner.active || !owner.GetModPlayer<CrossplayerCalamity>().Marnite)
+            if (owner.dead || !owner.active || !owner.GetModPlayer<CrossplayerCalamity>().Marnite || !owner.GetToggleValue("MarniteSwords"))
 
             {
                 owner.ClearBuff(ModContent.BuffType<MarniteSwordsBuff>());

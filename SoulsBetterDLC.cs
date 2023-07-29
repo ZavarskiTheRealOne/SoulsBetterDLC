@@ -12,6 +12,9 @@ using MonoMod.RuntimeDetour.HookGen;
 using FargowiltasSouls.Toggler;
 using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
+using Terraria.ModLoader.Core;
+using SoulsBetterDLC.Toggles;
+using System.Linq;
 
 namespace SoulsBetterDLC
 {
@@ -21,24 +24,38 @@ namespace SoulsBetterDLC
         internal static bool ThoriumLoaded;
         internal static ModKeybind LivingWoodBind;
         internal static ModKeybind SteelParryBind;
-
+        internal static SoulsBetterDLC Instance;
         
         public override void Load()
         {
             ThoriumLoaded = ModLoader.HasMod("ThoriumMod");
             CalamityLoaded = ModLoader.HasMod("CalamityMod");
-
+            Instance = this;
             LoadDetours();
             
             
             if (ThoriumLoaded) Thorium_Load();
-            
-                ToggleLoader.LoadTogglesFromAssembly(Code);
-            
-            
 
+            if (CalamityLoaded)
+            {
+                LoadTogglesFromType(typeof(CalamityToggles));
+            }
         }
+        public static void LoadTogglesFromType(Type type)
+        {
+            
+            ToggleCollection toggles = (ToggleCollection)Activator.CreateInstance(type);
 
+            if (toggles.Active)
+            {
+                Instance.Logger.Info($"ToggleCollection found: {nameof(type)}");
+                List<Toggle> toggleCollectionChildren = toggles.Load(ToggleLoader.LoadedToggles.Count - 1);
+                foreach (Toggle toggle in toggleCollectionChildren)
+                {
+                    ToggleLoader.RegisterToggle(toggle);
+                }
+            }
+        }
         private static void LoadDetours()
         {
             // Devi
