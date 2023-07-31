@@ -43,9 +43,12 @@ namespace SoulsBetterDLC
         public int TarragonTimer;
         public bool UmbraCrazyRegen;
         public bool BFCrazierRegen;
+        public bool Silva;
+        public int SilvaTimer;
         public bool StatigelNinjaStyle;
         public bool GodSlayerMeltdown;
         public bool SlayerCD;
+        public bool Auric;
         public bool ExaltEffects;
 
         public bool Brimflame;
@@ -107,10 +110,13 @@ namespace SoulsBetterDLC
             UmbraCrazyRegen = false;
             BFCrazierRegen = false;
             if (LifestealCD > 0) LifestealCD--;
+            Silva = false;
+            if (SilvaTimer > 0) SilvaTimer--;
             StatigelNinjaStyle = false;
             if (kunaiKuldown > 0) kunaiKuldown--;
             GodSlayerMeltdown = false;
             SlayerCD = false;
+            Auric = false;
 
             Brimflame = false;
             if (BrimflameCooldown > 0)
@@ -311,8 +317,11 @@ namespace SoulsBetterDLC
 
             //EXALTATION (1/5)
 
-
-
+            //silva
+            if (Silva && Player.GetToggleValue("SilvaCrystal"))
+            {
+                SilvaEffects();
+            }
 
 
             //ANNIHILATION (1/4)
@@ -355,7 +364,7 @@ namespace SoulsBetterDLC
                 OmegaBlueHitEffects();
             }
             //hydrothermic. just based
-            if (AtaxiaEruption)
+            if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
                 HydrothermicHitEffect(target, damage, crit);
             }
@@ -371,7 +380,7 @@ namespace SoulsBetterDLC
             }
 
             //Bloodflare conditions
-            if (BFCrazierRegen)
+            if (BFCrazierRegen && Player.GetToggleValue("BloodflareLifesteal"))
             {
                 BloodflareHitEffect(target, damage);
             }
@@ -383,7 +392,7 @@ namespace SoulsBetterDLC
             }
 
             //God Slayer star
-            if (GodSlayerMeltdown)
+            if (GodSlayerMeltdown && Player.GetToggleValue("SlayerStars"))
             {
                 GodSlayerHitEffect(target, damage);
             }
@@ -424,7 +433,7 @@ namespace SoulsBetterDLC
                 OmegaBlueHitEffects();
             }
             //hydroth   ermic
-            if (AtaxiaEruption)
+            if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
                 HydrothermicProjHitEffect(target, damage, crit);
             }
@@ -451,7 +460,7 @@ namespace SoulsBetterDLC
             }
 
             //slayer
-            if (GodSlayerMeltdown)
+            if (GodSlayerMeltdown && Player.GetToggleValue("SlayerStars"))
             {
                 GodSlayerProjHitEffect(proj, target, damage, crit);
             }
@@ -479,6 +488,13 @@ namespace SoulsBetterDLC
                 OmegaBlueAttackEffects(source, damage, knockback);
             }
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
+        }
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (Silva && Player.GetToggleValue("SilvaCrystal"))
+            {
+                SilvaTrigger();
+            }
         }
     }
 }

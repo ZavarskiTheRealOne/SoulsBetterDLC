@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using CalamityMod.CalPlayer;
+using FargowiltasSouls.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -52,15 +53,19 @@ namespace SoulsBetterDLC
     {
         public void PlaguebringerEffects()
         {
-            Player.GetModPlayer<CalamityPlayer>().plaguebringerPistons = true; //I mean why would I need to write all this shit down myself when it already exists in the form I need?
-            Player.strongBees = true;
+            if (Player.GetToggleValue("PlagueBees"))
+            {
+                Player.GetModPlayer<CalamityPlayer>().plaguebringerPistons = true; //I mean why would I need to write all this shit down myself when it already exists in the form I need?
+                Player.strongBees = true;
+            }
             if (ButterBeeCD > 0) ButterBeeCD--;
         }
         public void PlaguebringerHitEffect(Item item, NPC target, int damage)
         {
             int bee;
+            if (Player.GetToggleValue("PlagueDebuff"))
             target.AddBuff(ModContent.BuffType<CalamityMod.Buffs.DamageOverTime.Plague>(), 300);
-            if (ButterBeeCD <= 0 && target.realLife == -1)
+            if (ButterBeeCD <= 0 && target.realLife == -1 && Player.GetToggleValue("PlagueBees"))
             {
                 if (damage > 0)
                 {
@@ -86,8 +91,9 @@ namespace SoulsBetterDLC
         public void PlaguebringerProjHitEffect(Projectile proj, NPC target, int damage)
         {
             int bee;
+            if (Player.GetToggleValue("PlagueDebuff"))
             target.AddBuff(ModContent.BuffType<CalamityMod.Buffs.DamageOverTime.Plague>(), 300);
-            if (ButterBeeCD <= 0 && target.realLife == -1 && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Rogue.PlaguenadeBee>() && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Melee.PlagueSeeker>() && proj.maxPenetrate != 1 && !proj.usesIDStaticNPCImmunity && proj.owner == Main.myPlayer)
+            if (ButterBeeCD <= 0 && target.realLife == -1 && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Rogue.PlaguenadeBee>() && proj.type != ModContent.ProjectileType<CalamityMod.Projectiles.Melee.PlagueSeeker>() && proj.maxPenetrate != 1 && !proj.usesIDStaticNPCImmunity && proj.owner == Main.myPlayer && Player.GetToggleValue("PlagueBees"))
             {
                 if (damage > 0)
                 {

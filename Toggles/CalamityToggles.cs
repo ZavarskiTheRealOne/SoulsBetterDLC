@@ -18,6 +18,25 @@ namespace SoulsBetterDLC.Toggles
         public string BuildBuff;
         public string MarniteSwords;
         public string WulfrumBuff;
-        
+
+        public int ExaltationHeader = ModContent.ItemType<ExaltationForce>();
+        public string TarragonCloak;
+        public string TarragonAura;
+        public string BloodflareBuffs;
+        public string BloodflareLifesteal;
+        public string SilvaProjectiles;
+        public string SilvaCrystal;
+        public string SlayerDash;
+        public string SlayerStars;
+        public string AuricLightning;
+        public string AuricExplosions;
+
+        public int DevastationHeader = ModContent.ItemType<DevastationForce>();
+        public string IceSpikes;
+        public string ReaverStats;
+        public string ReaverRage;
+        public string HydrothermicHits;
+        public string PlagueBees;
+        public string PlagueDebuff;
     }
 }

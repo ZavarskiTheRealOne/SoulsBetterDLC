@@ -501,6 +501,17 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadRogue>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Tarragon.TarragonHeadMelee>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyTarragonHelms", TarragonHelmsGroup);
+            RecipeGroup SilvaHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Silva Head Piece"}",
+                ModContent.ItemType<CalamityMod.Items.Armor.Silva.SilvaHeadMagic>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Silva.SilvaHeadSummon>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnySilvaHelms", SilvaHelmsGroup);
+            RecipeGroup AuricHelmsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Auric Head Piece"}",
+                ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaRoyalHelm>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaPlumedHelm>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaSpaceHelmet>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaWireHemmedVisage>(),
+                ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaHoodedFacemask>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAuricHelms", AuricHelmsGroup);
         }
     }
 }

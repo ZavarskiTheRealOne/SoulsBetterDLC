@@ -1,5 +1,6 @@
 ﻿using CalamityMod.CalPlayer;
 using CalamityMod.CalPlayer.Dashes;
+using FargowiltasSouls.Toggler;
 using Microsoft.Xna.Framework;
 using SoulsBetterDLC.Projectiles;
 using Terraria;
@@ -32,8 +33,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             CrossplayerCalamity SBDPlayer = player.GetModPlayer<CrossplayerCalamity>();
             SBDPlayer.GodSlayerMeltdown = true;
-            player.GetModPlayer<CalamityPlayer>().dodgeScarf = true;
-            player.GetModPlayer<CalamityPlayer>().DashID = AsgardianAegisDash.ID;
+            if (player.GetToggleValue("SlayerDash"))
+            {
+                player.GetModPlayer<CalamityPlayer>().dodgeScarf = true;
+                player.GetModPlayer<CalamityPlayer>().DashID = AsgardianAegisDash.ID;
+            }
         }
         public override void AddRecipes()
         {
@@ -59,14 +63,17 @@ namespace SoulsBetterDLC
             {
                 if (damage < 700) starDmg = damage;
                 else starDmg = 700;
-                Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<SlayerStar>(), starDmg, 0f, Player.whoAmI);
+                if (Auric && Player.GetToggleValue("AuricExplosions"))
+                Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<SlayerStar>(), starDmg, 0f, Player.whoAmI, 1);
+                else
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<SlayerStar>(), starDmg, 0f, Player.whoAmI, 0);
                 kunaiKuldown = 60;
             }
         }
         public void GodSlayerProjHitEffect(Projectile proj, NPC target, int damage, bool crit)
         {
             int starDmg;
-            if ((damage > 500 || (crit && damage > 250)) && proj.type != ModContent.ProjectileType<SlayerStar>() && kunaiKuldown <= 0)
+            if ((damage > 500 || (crit && damage > 250)) && proj.type != ModContent.ProjectileType<SlayerStar>() && kunaiKuldown <= 0 && proj.type != ModContent.ProjectileType<AuricExplosion>())
             {
                 if (damage < 700 || (crit && damage < 350))
                 {
@@ -74,7 +81,10 @@ namespace SoulsBetterDLC
                     if (crit) starDmg = damage * 2;
                 }
                 else starDmg = 700;
-                Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<SlayerStar>(), starDmg, 0f, Player.whoAmI);
+                if (Auric && Player.GetToggleValue("AuricExplosions"))
+                Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<SlayerStar>(), starDmg, 0f, Player.whoAmI, 1);
+                else
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<SlayerStar>(), starDmg, 0f, Player.whoAmI, 0);
                 kunaiKuldown = 60;
             }
         }

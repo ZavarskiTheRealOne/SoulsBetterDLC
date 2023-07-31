@@ -1,4 +1,5 @@
 ﻿using CalamityMod;
+using FargowiltasSouls.Toggler;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -68,7 +69,7 @@ namespace SoulsBetterDLC
             {
                 SDIcicleCooldown--;
             }
-            if (SDIcicleCooldown <= 0 && Player.controlJump && !Player.canJumpAgain_Cloud && Player.jump == 0 && Player.velocity.Y != 0f && !Player.mount.Active && !Player.mount.Cart)
+            if (SDIcicleCooldown <= 0 && Player.controlJump && !Player.canJumpAgain_Cloud && Player.jump == 0 && Player.velocity.Y != 0f && !Player.mount.Active && !Player.mount.Cart && Player.GetToggleValue("IceSpikes"))
             {
                 if (!DevastEffects) icicleDmg = 72; else icicleDmg = 288;
                 int bigIcicle = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center.X, Player.Center.Y, 0f, 2f, ModContent.ProjectileType<CalamityMod.Projectiles.Rogue.FrostShardFriendly>(), icicleDmg, 3f, Player.whoAmI, 1f);

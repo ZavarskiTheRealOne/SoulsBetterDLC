@@ -1,6 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-
+using Microsoft.Xna.Framework;
 namespace SoulsBetterDLC.Projectiles
 {
     [ExtendsFromMod("CalamityMod")]
@@ -29,6 +29,10 @@ namespace SoulsBetterDLC.Projectiles
             {
                 Projectile.alpha += 5;
                 if (Projectile.alpha >= 255) Projectile.Kill();
+                if (Projectile.ai[0] == 1 && killTime % 5 == 0)
+                {
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + new Vector2(0, Main.rand.Next(20, 200)).RotatedByRandom(MathHelper.TwoPi), Vector2.Zero, ModContent.ProjectileType<AuricExplosion>(), 1000, 0, Main.myPlayer, 1);
+                }
             }
         }
     }

@@ -6,6 +6,26 @@ Mods: {
     "TornadoesConfig": "[i:SoulsBetterDLC/ProwlerEnchantment] [c/cc2a3c:Desert Tornadoes]",
     "BuildBuffConfig": "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Building Stats]",
     "MarniteSwordsConfig": "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Marnite Sword Minions]",
-    "WulfrumBuffConfig": "[i:SoulsBetterDLC/WulfrumEnchantment] [c/cec9aa:Wulfrum Empower]"
+    "WulfrumBuffConfig": "[i:SoulsBetterDLC/WulfrumEnchantment] [c/cec9aa:Wulfrum Empower]",
+
+    "ExaltationHeader": "[i:SoulsBetterDLC/ExaltationForce] {$Mods.SoulsBetterDLC.ItemName.ExaltationForce}",
+    "TarragonCloakConfig": "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Cloak]",
+    "TarragonAuraConfig": "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Aura]",
+    "BloodflareBuffsConfig": "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Buffs on hit]",
+    "BloodflareLifestealConfig": "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Lifesteal and hearts]",
+    "SilvaProjectilesConfig": "[i:SoulsBetterDLC/SilvaEnchantment] [c/a1ff6b:Crystal spawns projectiles]",
+    "SilvaCrystalConfig": "[i:SoulsBetterDLC/SilvaEnchantment] [c/a1ff6b:Silva Crystal]",
+    "SlayerDashConfig": "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Ram Dash]",
+    "SlayerStarsConfig": "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Cosmilite Stars]",
+    "AuricLightningConfig": "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Lightning]",
+    "AuricExplosionsConfig": "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Explosions]"
+
+    "DevastationHeader": "[i:SoulsBetterDLC/DevastationForce] {$Mods.SoulsBetterDLC.ItemName.DevastationForce}",
+    "IceSpikesConfig": "[i:SoulsBetterDLC/DaedalusEnchantment] [c/84d4f6:Ice Spikes]"
+    "ReaverStatsConfig": "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Stats]"
+    "ReaverRageConfig": "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Rage]"
+    "HydrothermicHitsConfig": "[i:SoulsBetterDLC/HydrothermicEnchantment] [c/f8b659:Hydrothermic Attacks]"
+    "PlagueBeesConfig": "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Plague Bees]"
+    "PlagueDebuffConfig": "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Inflict Plague]"
   }
 }

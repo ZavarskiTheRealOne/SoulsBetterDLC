@@ -2,6 +2,9 @@
 using Terraria;
 using Terraria.ModLoader;
 using CalamityMod.CalPlayer.Dashes;
+using Terraria.DataStructures;
+using Microsoft.Xna.Framework;
+using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments
 {
@@ -18,10 +21,17 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
         public override void OnDashEffects(Player player)
         {
             ModContent.GetInstance<AsgardianAegisDash>().OnDashEffects(player);
+            
         }
         public override void MidDashEffects(Player player, ref float dashSpeed, ref float dashSpeedDecelerationFactor, ref float runSpeedDecelerationFactor)
         {
             ModContent.GetInstance<AsgardianAegisDash>().MidDashEffects(player, ref dashSpeed, ref dashSpeedDecelerationFactor, ref runSpeedDecelerationFactor);
+            
+        }
+        public override void OnHitEffects(Player player, NPC npc, IEntitySource source, ref DashHitContext hitContext)
+        {
+            
+            base.OnHitEffects(player, npc, source, ref hitContext);
         }
     }
 }

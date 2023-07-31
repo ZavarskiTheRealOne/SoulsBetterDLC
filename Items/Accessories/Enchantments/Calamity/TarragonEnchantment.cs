@@ -8,6 +8,7 @@ using CalamityMod.Items.Armor.Tarragon;
 using CalamityMod.Items.Weapons.Melee;
 using CalamityMod.Items.Accessories;
 using SoulsBetterDLC.Buffs;
+using FargowiltasSouls.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -69,24 +70,42 @@ namespace SoulsBetterDLC
             CrossplayerCalamity calplayer = player.GetModPlayer<CrossplayerCalamity>();
             if (calplayer != null && item.type == ItemID.Heart)
             {
-                if (calplayer.TarragonTimer == 0)
+                if (calplayer.Auric && player.GetToggleValue("AuricLightning") && player.GetToggleValue("TarragonCloak"))
+                {
+                    Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ModContent.ProjectileType<AuricLightning>(), 1000, 0, Main.myPlayer, MathHelper.ToRadians(90), 0.6f);
+                    Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ModContent.ProjectileType<AuricLightning>(), 1000, 0, Main.myPlayer, MathHelper.ToRadians(120 + 90), 0.6f);
+                    Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ModContent.ProjectileType<AuricLightning>(), 1000, 0, Main.myPlayer, MathHelper.ToRadians(240 + 90), 0.6f);
+                }
+                if (calplayer.TarragonTimer == 0 && player.GetToggleValue("TarragonCloak"))
                 {
                     player.AddBuff(ModContent.BuffType<TarragonCloak>(), 600);
                     calplayer.TarragonTimer = 1800;
-
+                    
                 }
-                if (player.ownedProjectileCounts[ModContent.ProjectileType<TarragonAura>()] == 0 && player.statLife >= player.statLifeMax2)
+                if (player.GetToggleValue("TarragonAura"))
                 {
-                    Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<TarragonAura>(), player.statDefense * 2, 0, Main.myPlayer);
-                }
-                else if (player.statLife >= player.statLifeMax2)
-                {
-                    for (int i = 0; i < Main.projectile.Length; i++)
+                    if (player.ownedProjectileCounts[ModContent.ProjectileType<TarragonAura>()] == 0 && player.statLife >= player.statLifeMax2)
                     {
-                        if (Main.projectile[i].active && Main.projectile[i].type == ModContent.ProjectileType<TarragonAura>() && Main.projectile[i].owner == player.whoAmI)
+                        Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<TarragonAura>(), player.statDefense * 2, 0, Main.myPlayer);
+                        if (calplayer.Auric && player.GetToggleValue("AuricExplosions"))
                         {
-                            Main.projectile[i].timeLeft = 600;
-                            break;
+                            Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ModContent.ProjectileType<AuricExplosion>(), 1000, 0, Main.myPlayer, 22);
+                            Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ModContent.ProjectileType<AuricExplosion>(), 500, 0, Main.myPlayer, 11, 1);
+                        }
+                    }
+                    else if (player.statLife >= player.statLifeMax2)
+                    {
+                        for (int i = 0; i < Main.projectile.Length; i++)
+                        {
+                            if (Main.projectile[i].active && Main.projectile[i].type == ModContent.ProjectileType<TarragonAura>() && Main.projectile[i].owner == player.whoAmI)
+                            {
+                                Main.projectile[i].timeLeft = 600;
+                                break;
+                            }
+                        }
+                        if (calplayer.Auric && player.GetToggleValue("AuricExplosions"))
+                        {
+                            Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ModContent.ProjectileType<AuricExplosion>(), 1000, 0, Main.myPlayer, 15);
                         }
                     }
                 }

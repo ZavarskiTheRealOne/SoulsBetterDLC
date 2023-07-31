@@ -4,6 +4,8 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using CalamityMod.Rarities;
 using SoulsBetterDLC.Buffs;
+using SoulsBetterDLC.Projectiles;
+using FargowiltasSouls.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -68,25 +70,39 @@ namespace SoulsBetterDLC
         }
         public void BloodflareHitEffect(NPC target, int damage)
         {
-            Player.AddBuff(ModContent.BuffType<BloodflareRegeneration>(), BloodBuffTimer);
-            if (LifestealCD <= 0)
+            if (Player.GetToggleValue("BloodflareBuffs"))
+                Player.AddBuff(ModContent.BuffType<BloodflareRegeneration>(), BloodBuffTimer);
+            if (LifestealCD <= 0 && Player.GetToggleValue("BloodflareLifesteal"))
             {
                 Item.NewItem(target.GetSource_Loot(), target.Hitbox, 58);
                 if (damage / 2 < Player.statLifeMax2 / 5)
                     Player.Heal(damage / 2);
-                else Player.Heal(Player.statLifeMax2 / 5);
+                else
+                {
+                    Player.Heal(Player.statLifeMax2 / 5);
+                    
+                }
                 LifestealCD = 300;
+                if (Auric && Player.GetToggleValue("AuricLightning"))
+                {
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center + new Vector2(0, -600), Vector2.Zero, ModContent.ProjectileType<AuricLightning>(), 2000, 0, Main.myPlayer, MathHelper.PiOver2, 4);
+                }
             }
         }
         public void BloodflareProjHitEffect(NPC target, int damage) {
-            Player.AddBuff(ModContent.BuffType<BloodflareRegeneration>(), BloodBuffTimer);
-            if (LifestealCD <= 0)
+            if (Player.GetToggleValue("BloodflareBuffs"))
+                Player.AddBuff(ModContent.BuffType<BloodflareRegeneration>(), BloodBuffTimer);
+            if (LifestealCD <= 0 && Player.GetToggleValue("BloodflareLifesteal"))
             {
                 Item.NewItem(target.GetSource_Loot(), target.Hitbox, 58);
                 if (damage / 2 < Player.statLifeMax2 / 5)
                     Player.Heal(damage / 2);
                 else Player.Heal(Player.statLifeMax2 / 5);
                 LifestealCD = 300;
+                if (Auric && Player.GetToggleValue("AuricLightning"))
+                {
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center + new Vector2(0, -600), Vector2.Zero, ModContent.ProjectileType<AuricLightning>(), 2000, 0, Main.myPlayer, MathHelper.PiOver2, 3.5f);
+                }
             }
         }
     }
