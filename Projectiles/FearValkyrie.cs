@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.Projectiles
         public override string Texture => "CalamityMod/Projectiles/Summon/PowerfulRaven";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Damned Valkyrie");
+            // DisplayName.SetDefault("Damned Valkyrie");
             Main.projFrames[Projectile.type] = 5;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;

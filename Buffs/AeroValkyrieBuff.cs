@@ -10,8 +10,7 @@ namespace SoulsBetterDLC.Buffs
         public override string Texture => "CalamityMod/Buffs/Summon/ValkyrieBuff";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enchanted Valkyrie");
-            Description.SetDefault("It either really likes you or secretly wants to kill you");
+            
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

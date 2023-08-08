@@ -22,12 +22,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(75, 75, 75);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Empyrean Enchantment");
-            Tooltip.SetDefault("Every third attack landed grants Empyrean Rage or Wrath\n" +
-                "Meld tentacles have a chance to lash out when you attack\n" +
-                "Tentacles deal half of your damage and inflict Nightwither\n" +
-                "'I remember seeing a movie that starts like this!'");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

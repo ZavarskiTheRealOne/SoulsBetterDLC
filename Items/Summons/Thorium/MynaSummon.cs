@@ -17,9 +17,8 @@ namespace SoulsBetterDLC.Items.Summons.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Birb edg");
-            Tooltip.SetDefault("Summons a birb");
-            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
+            
+            Item.ResearchUnlockCount = 3;
         }
 
         public override void SetDefaults()

@@ -14,8 +14,7 @@ namespace SoulsBetterDLC.Buffs
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
-            DisplayName.SetDefault("Gilded Sight");
-            Description.SetDefault("Your vision betrays you");
+            
         }
 
         public static readonly int[] GildedItems =

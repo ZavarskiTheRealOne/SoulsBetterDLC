@@ -17,14 +17,8 @@ namespace SoulsBetterDLC.Items.Accessories.Forces.Calamity
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            DisplayName.SetDefault("Force of Exaltation");
-            Tooltip.SetDefault("[i:SoulsBetterDLC/TarragonEnchantment] Picking up hearts grants reduced contact damage and a damaging aura when at full health\n" +
-                "[i:SoulsBetterDLC/BloodflareEnchantment] Boosts life regen and DR on enemy hits and attacks lifesteal every 5 seconds. Enemies drop hearts on hit and on death\n" +
-                "[i:SoulsBetterDLC/SilvaEnchantment] You are encased in a silva crystal that boosts life regen and defense but decreases movement\n    Press [button] to shatter it and gain damage and spawn projectiles for the next 10 seconds\n" +
-                "[i:SoulsBetterDLC/SlayerEnchantment] Grants a ram dash that can dodge attacks and your attacks spawn cosmilite stars once per second\n" +
-                "[i:SoulsBetterDLC/AuricEnchantment] Previous effects are accompanied by lightning and auric explosions\n" +
-                "'What's a king to a God? What's a God to a non-believer?'");
-            SacrificeTotal = 1;
+           
+            
         }
         public override void SetDefaults()
         {

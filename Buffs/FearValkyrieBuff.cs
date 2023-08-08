@@ -10,8 +10,7 @@ namespace SoulsBetterDLC.Buffs
         public override string Texture => "CalamityMod/Buffs/Summon/CorvidHarbringerBuff";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Damned Valkyrie");
-            Description.SetDefault("This thing has gone through literal hell, so you better watch your back");
+            
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

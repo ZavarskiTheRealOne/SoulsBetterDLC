@@ -17,8 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color (160, 185, 213);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Snow Ruffian Enchantment");
-            Tooltip.SetDefault("Grants a glide effect.\nWhile flying or gliding, damaging icicles fall down from your feet.\nIcicles deal 24 true damage and cannot be affected by boosts.\n*and goes, sans, look, it's snowing!");
+            
         }
         public override void SetDefaults()
         {

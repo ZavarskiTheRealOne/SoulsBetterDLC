@@ -16,8 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new(89, 170, 204);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Statigel Enchantment");
-            Tooltip.SetDefault("Gives you a Counter dash that lets you dodge an attack by dashing into it.\nDealing more than 100 damage in one hit accompanies your attack with a Gel Dart afterimage.\nThis has a 2 seconds cooldown.\n'Gee, gee, I got it - ninja style!'");
+            
         }
         public override void SetDefaults()
         {

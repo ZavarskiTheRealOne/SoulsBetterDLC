@@ -23,9 +23,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void SetStaticDefaults()
         {
-            //name and description
-            DisplayName.SetDefault("Gemtech Enchantment");
             
+
         }
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {

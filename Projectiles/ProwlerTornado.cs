@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Projectiles
         public override string Texture => "SoulsBetterDLC/Projectiles/InvisCrutchTexture";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Prowler Tornado");
+            // DisplayName.SetDefault("Prowler Tornado");
         }
 
         public override void SetDefaults()

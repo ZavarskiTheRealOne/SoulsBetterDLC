@@ -74,7 +74,7 @@ namespace SoulsBetterDLC
         public override void OnInitialize()
         {
             UITextPanel<string> textBox = new("Switch Mod");
-            textBox.OnClick += (UIMouseEvent evt, UIElement listeningElement) => DevianttPatches.CycleShop();
+            textBox.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => DevianttPatches.CycleShop();
             textBox.Left.Set(600, 0);
             textBox.Top.Set(200, 0);
             textBox.IgnoresMouseInteraction = false;

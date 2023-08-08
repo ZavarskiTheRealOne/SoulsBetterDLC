@@ -7,8 +7,7 @@ namespace SoulsBetterDLC.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Reaver Fury");
-            Description.SetDefault("You are somewhat frustrated.");
+            
         }
 
         public override void Update(Player player, ref int buffIndex)

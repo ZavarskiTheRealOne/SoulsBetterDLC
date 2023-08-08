@@ -23,7 +23,7 @@ namespace SoulsBetterDLC.Projectiles
     {
         public override string Texture => "CalamityMod/Projectiles/Summon/SilvaCrystal";
         public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Silva Crystal");
+            // DisplayName.SetDefault("Silva Crystal");
             //Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Type] = true;

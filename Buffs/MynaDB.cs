@@ -12,8 +12,7 @@ namespace SoulsBetterDLC.Buffs
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
-            DisplayName.SetDefault("Finchified");
-            Description.SetDefault("Your projectiles dodge enemies");
+            
         }
     }
 }

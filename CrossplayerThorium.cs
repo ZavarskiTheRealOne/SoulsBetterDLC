@@ -88,7 +88,7 @@ namespace SoulsBetterDLC
             TempleCoreItem = null;
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
             if (TemplarEnch && TemplarCD == 0)
             {
@@ -103,11 +103,11 @@ namespace SoulsBetterDLC
                     funguy.Infected = true;
                 }
             }
-            if (GraniteEnch && crit)
+            if (GraniteEnch && hit.Crit)
             {
                 SpawnGraniteCore(proj.Center);
             }
-            if (AstroEnch && crit && AstroLaserCD <= 0)
+            if (AstroEnch && hit.Crit && AstroLaserCD <= 0)
             {
                 SpawnAstroLaser(target);
             }
@@ -133,7 +133,7 @@ namespace SoulsBetterDLC
             }
         }
 
-        public override void OnHitByNPC(NPC npc, int damage, bool crit)
+        public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
             if (Player.HasBuff<LivingWood_Root_B>())
             {
@@ -142,7 +142,7 @@ namespace SoulsBetterDLC
             }
         }
 
-        public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
+        public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
             if (Player.HasBuff<LivingWood_Root_B>())
             {
@@ -159,7 +159,7 @@ namespace SoulsBetterDLC
             }
         }
 
-        public override void OnEnterWorld(Player player)
+        public override void OnEnterWorld()
         {
             Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.ThoriumBuggyWarning1"), Color.Yellow);
             Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.ThoriumBuggyWarning2"), Color.Yellow);

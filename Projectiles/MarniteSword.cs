@@ -16,7 +16,7 @@ namespace SoulsBetterDLC.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Marnite Sword");
+            // DisplayName.SetDefault("Marnite Sword");
             //Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Type] = true;
@@ -51,7 +51,7 @@ namespace SoulsBetterDLC.Projectiles
             
             return Collision.CheckAABBvLineCollision2(targetHitbox.Location.ToVector2(), targetHitbox.Size(), Projectile.Center, Projectile.Center + new Vector2(0, -50 * Projectile.scale).RotatedBy(Projectile.rotation));
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(target, damage, knockback, crit);
             if (Projectile.owner != -1)

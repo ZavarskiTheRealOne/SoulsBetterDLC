@@ -278,9 +278,9 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 			_modes = null;
 		}
 
-        public override void ModifyDamageScaling(ref float damageScale)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            base.ModifyDamageScaling(ref damageScale);
+            base.ModifyHitNPC(ref damageScale);
 
 			if (Head.Bonuses[DamageClass.Melee] >= minimumBonus) damageScale += (Head.Bonuses[DamageClass.Melee] - 1);
 		}

@@ -82,6 +82,7 @@
 			LifeShell: {
 				DisplayName: Life Shell
 				Description: You are encased in a silva crystal, increasing defense, life regen, and decreasing movement speed
+				ShatteredDescription: The crystal has shattered. Damage increased and defense decreased, other stat changes gone
 			}
 
 			LivingWood_Root_B: {
@@ -285,7 +286,9 @@
 				Tooltip: Projectiles, items and the player glow. Immune to gilded sight.
 			}
 
-			MynaAccessory.DisplayName: Myna Accessory
+			MynaAccessory:{
+				DisplayName: Myna Accessory
+			}
 
 			TempleCore: {
 				DisplayName: Temple Core
@@ -522,7 +525,7 @@
 			}
 
 			LivingWoodEnchant: {
-				DisplayName: Living wood enchantment
+				DisplayName: Living Wood Enchantment
 				Tooltip:
 					'''
 					Pressing the living roots hotkey while causes you to stop moving and grow roots below you.
@@ -594,10 +597,10 @@
 				DisplayName: Force of Exploration
 				Tooltip:
 					'''
-					[i:10900] Summons a Valkyrie to fight for you
-					[i:10916] Your attacks have a chance to summon tornadoes that move across the screen
-					[i:10911] Increased placement speed and range and swords spin around you
-					[i:10926] Increased damage and DR by 30% when below 30% hp
+					[i:SoulsBetterDLC/AerospecEnchantment] Summons a Valkyrie to fight for you
+					[i:SoulsBetterDLC/ProwlerEnchantment] Your attacks have a chance to summon tornadoes that move across the screen
+					[i:SoulsBetterDLC/MarniteEnchantment] Increased placement speed and range and swords spin around you
+					[i:SoulsBetterDLC/WulfrumEnchantment] Increased damage and DR by 30% when below 30% hp
 					'In this world, it's kill or be killed.'
 					'''
 			}

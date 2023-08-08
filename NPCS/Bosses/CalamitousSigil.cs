@@ -12,7 +12,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
         public override string Texture => "CalamityMod/Items/Accessories/OccultSkullCrown";
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Summons Calamitous Champions when used in the correct biome");
+            // Tooltip.SetDefault("Summons Calamitous Champions when used in the correct biome");
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 13;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

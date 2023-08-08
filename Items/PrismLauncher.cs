@@ -9,8 +9,7 @@ namespace SoulsBetterDLC.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Prism Launcher");
-			Tooltip.SetDefault("test");
+			
 		}
 		public override void SetDefaults()
         {

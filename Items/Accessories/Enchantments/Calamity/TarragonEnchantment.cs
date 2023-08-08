@@ -21,12 +21,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(200, 100, 20);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tarragon Enchantment");
-            Tooltip.SetDefault("Collecting a heart will grant the Tarragon Cloak buff, reducing enemy contact damage\n" +
-                "This has a 30 second cooldown\n" +
-                "Collecting a heart at full health grants an aura that deals damage scaling with your defense\n" +
-                "'Behold, the nature's reclamation!'");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

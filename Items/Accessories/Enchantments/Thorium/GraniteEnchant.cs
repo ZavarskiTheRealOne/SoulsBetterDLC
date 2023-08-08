@@ -19,8 +19,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault("Critical strikes spawn stationary granite cores that link with nearby cores." +
-                "\nAfter 10 seconds pass the first core will explode, triggering any linked cores.");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

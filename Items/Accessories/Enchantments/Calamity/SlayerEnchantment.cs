@@ -17,8 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new(89, 170, 204);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("God Slayer Enchantment");
-            Tooltip.SetDefault("Gives you a ram dash that lets you dodge an attack by dashing into it.\nDealing more than 500 damage in one hit accompanies your attack with a Cosmilite Star afterimage.\nThis has a 1 seconds cooldown.\n'I can throw shurikens!'");
+            
         }
         public override void SetDefaults()
         {

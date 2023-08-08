@@ -16,8 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 		
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Desert Prowler Enchantment");
-            Tooltip.SetDefault("Your attacks have a chance to summon a damaging tornado moving from one side of the screen to another.\n'Here it comes!'");
+            
         }
 
         public override void SetDefaults()

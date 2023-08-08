@@ -16,8 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override string ModName => "CalamityMod";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fearmonger Enchantment");
-            Tooltip.SetDefault("Decreases summon nerf by 25%.\nSummons a Damned Valkyrie that fires homing feathers.\n'There's something gorgeous in these creatures.'");
+            
         }
         public override void SetDefaults()
         {

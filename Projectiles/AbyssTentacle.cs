@@ -29,7 +29,7 @@ namespace SoulsBetterDLC.Projectiles
             Projectile.localNPCHitCooldown = 10;
             Projectile.DamageType = DamageClass.Generic;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<CrushDepth>(), 600);
             if (Projectile.owner != -1) {

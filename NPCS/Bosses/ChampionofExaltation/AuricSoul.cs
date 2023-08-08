@@ -86,7 +86,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
             }
             SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/Thunder_0") with { Volume = 0.75f }, NPC.Center);
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             base.HitEffect(hitDirection, damage);
         }

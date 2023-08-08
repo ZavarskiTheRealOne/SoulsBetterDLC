@@ -23,13 +23,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(100, 120, 160);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mollusk Enchantment");
-            Tooltip.SetDefault("Allows swimming and free movement in water\n" +
-                "Decreases movement speed outside water\n" +
-                "Grants water breathing and moderately reduces breath loss in the abyss\n" +
-                "Effects of Giant Pearl and you have a chance to throw shellfish along with your weapons\n" +
-                "'It's very clampicated'");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

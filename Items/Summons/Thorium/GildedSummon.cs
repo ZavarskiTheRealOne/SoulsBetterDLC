@@ -17,10 +17,8 @@ namespace SoulsBetterDLC.Items.Summons.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gilded Dust");
-            Tooltip.SetDefault("Summons the gilded enemies" +
-                               "\nOnly usable at night or underground");
-            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
+            
+            Item.ResearchUnlockCount = 3;
         }
 
         public override bool CanUseItem(Player player)

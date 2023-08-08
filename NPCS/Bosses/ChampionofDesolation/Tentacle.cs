@@ -61,7 +61,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
         {
             behindNPCs.Add(index);
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             base.OnHitPlayer(target, damage, crit);
         }

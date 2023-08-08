@@ -12,7 +12,7 @@ namespace SoulsBetterDLC.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fearsome Feather");
+            // DisplayName.SetDefault("Fearsome Feather");
         }
         public override void SetDefaults()
         {

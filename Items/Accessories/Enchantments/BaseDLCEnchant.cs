@@ -15,19 +15,20 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments
         {
             base.SetStaticDefaults();
 
-            if (Name.Contains("Enchant"))
-            {
-                // "ValadiumEnchant" => "Valadium Enchantment"
-                DisplayName.SetDefault(Name.Remove(Name.LastIndexOf("Enchant")) + " Enchantment");
-            }
+            //Commented out because DisplayName no longer exists. if a modify name method pops up switch it to there but i cant find that
+            //if (Name.Contains("Enchant"))
+            //{
+            //    // "ValadiumEnchant" => "Valadium Enchantment"
+            //    DisplayName.SetDefault(Name.Remove(Name.LastIndexOf("Enchant")) + " Enchantment");
+            //}
         }
-
+        
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
             base.SafeModifyTooltips(tooltips);
             if (!ModLoader.HasMod(ModName))
             {
-                TooltipLine line = new(Mod, "disabled",
+                TooltipLine line = new(SoulsBetterDLC.Instance, "disabled",
                     $"Doesn't do anything without {ModName} " +
                     $"\nHow is this even loaded?");
 

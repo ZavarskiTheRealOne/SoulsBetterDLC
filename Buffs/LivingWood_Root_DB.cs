@@ -9,7 +9,7 @@ namespace SoulsBetterDLC.Buffs
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
-            DisplayName.SetDefault("Living wood drain");
+            
         }
     }
     public class LivingWood_Root_B : ModBuff
@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Buffs
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = false;
-            DisplayName.SetDefault("Taking root");
+            
         }
 
         public override void Update(Player player, ref int buffIndex)

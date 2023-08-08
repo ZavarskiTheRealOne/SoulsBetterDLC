@@ -13,8 +13,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override string wizardEffect => "TBD";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("White Knight Enchantment");
-            Tooltip.SetDefault("Increases damage the more frienly npcs are nearby");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

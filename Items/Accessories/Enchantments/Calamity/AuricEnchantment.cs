@@ -27,8 +27,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(227, 174, 0);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Auric Enchantment");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {
@@ -49,7 +49,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             if (player.BFCrazierRegen) bloodflareEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.BloodflareTooltip") + "\n";
             if (player.Silva) silvaEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.SilvaTooltip") + "\n";
             if (player.GodSlayerMeltdown) godslayerEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.GodSlayerTooltip") + "\n";
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: AuricEnch",
+            TooltipLine tooltip = new TooltipLine(SoulsBetterDLC.Instance, "SoulsBetterDLC: AuricEnch",
                 Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.AuricTooltip") + "\n" +
                 tarragonEffect  + bloodflareEffect + silvaEffect + godslayerEffect +
                 "\"" + Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.Quote") + "\"");

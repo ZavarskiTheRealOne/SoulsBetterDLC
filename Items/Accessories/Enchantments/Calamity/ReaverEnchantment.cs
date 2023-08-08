@@ -17,9 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void SetStaticDefaults()
         {
-            //name and description
-            DisplayName.SetDefault("Reaver Enchantment");
-            Tooltip.SetDefault("Increases your damage reduction, movement speed and flight time by 15%, mining speed by 30% and life regeneration by 2.\nIn exchange, reduces your damage by 15% and attack speed by 10%.\nAfter taking damage, there's a 25% chance to trigger 'Reaver Rage' buff.\nThe buff reverts back your damage, attack speed, damage reduction and life regen.\nGrants spelunker effect.\n'Jack of All Trades.'");
+            
         }
         public override void SetDefaults()
         {

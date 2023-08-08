@@ -14,8 +14,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(118, 146, 147);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Plague Reaper Enchantment");
-            Tooltip.SetDefault("If you hit an enemy that hass less than or 60000 max HP,\nyour first attack has a 50% chance to instantly kill them.\nAlso applies to bosses.\n'May your foes be many, and their days few!'");
+            
         }
         public override void SetDefaults() 
         {

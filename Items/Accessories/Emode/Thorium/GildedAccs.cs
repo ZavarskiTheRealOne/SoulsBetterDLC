@@ -16,9 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gilded Lamp");
-            Tooltip.SetDefault("Immune to Gilded Sight." +
-                "\nPermanent shine buff.");
+            
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -46,8 +44,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gilded Monicle");
-            Tooltip.SetDefault("Items glow slightly");
+            
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -74,8 +71,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gilded Binoculars");
-            Tooltip.SetDefault("Projectiles glow slightly");
+            
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -102,8 +98,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gilded night-vision goggles");
-            Tooltip.SetDefault("Projectiles, items and the player glow. Immune to gilded sight.");
+            
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

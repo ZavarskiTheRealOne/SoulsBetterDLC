@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Kluex Orb");
+            // DisplayName.SetDefault("Kluex Orb");
         }
 
         int orbType => (int)Projectile.ai[0];
@@ -181,7 +181,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Kluex Blast");
+            // DisplayName.SetDefault("Kluex Blast");
         }
 
         int orbType => (int)Projectile.ai[0];

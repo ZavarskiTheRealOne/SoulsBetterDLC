@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Projectiles
         public override string Texture => "CalamityMod/Items/Weapons/Rogue/GelDart";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Statis' Kunai");
+            // DisplayName.SetDefault("Statis' Kunai");
         }
         public override void SetDefaults()
         {

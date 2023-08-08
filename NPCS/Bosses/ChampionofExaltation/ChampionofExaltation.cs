@@ -21,7 +21,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
         public override string Texture => "CalamityMod/Projectiles/Summon/FieryDraconid";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Champion of Exaltation");
+            // DisplayName.SetDefault("Champion of Exaltation");
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
@@ -63,7 +63,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
             }
         }
         
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
 
@@ -127,7 +127,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
             //previousLocation = reader.ReadVector2();
             //NPC.localAI[0] = reader.ReadSingle();
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             base.HitEffect(hitDirection, damage);
         }

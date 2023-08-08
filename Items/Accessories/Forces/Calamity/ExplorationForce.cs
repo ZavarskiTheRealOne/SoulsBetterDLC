@@ -12,12 +12,7 @@ namespace SoulsBetterDLC.Items.Accessories.Forces.Calamity
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            DisplayName.SetDefault("Force of Exploration");
-            Tooltip.SetDefault($"[i:{ModContent.ItemType<AerospecEnchantment>()}] Summons a Valkyrie to fight for you\n" +
-                $"[i:{ModContent.ItemType<ProwlerEnchantment>()}] Your attacks have a chance to summon tornadoes that move across the screen\n" +
-                $"[i:{ModContent.ItemType<MarniteEnchantment>()}] Increased placement speed and range and swords spin around you\n" +
-                $"[i:{ModContent.ItemType<WulfrumEnchantment>()}] Increased damage and DR by 30% when below 30% hp\n" +
-                $"\"In this world, it's kill or be killed.\"");
+            
         }
         public override void SetDefaults()
         {

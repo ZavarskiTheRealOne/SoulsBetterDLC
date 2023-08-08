@@ -21,7 +21,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium // shortest cros
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault($"Occasionally summons holy fire from the sky above the cursor when attacking that heals allys and damages enemies");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

@@ -7,8 +7,7 @@ namespace SoulsBetterDLC.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vampiric Regeneration");
-            Description.SetDefault("The blood of your enemies makes you stronger.");
+            
         }
 
         public override void Update(Player player, ref int buffIndex)

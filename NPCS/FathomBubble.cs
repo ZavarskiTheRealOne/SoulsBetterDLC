@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.NPCS
         public override string Texture => "CalamityMod/Projectiles/Magic/AcidicSaxBubble";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphuric Bubble");
+            // DisplayName.SetDefault("Sulphuric Bubble");
             Main.npcFrameCount[NPC.type] = 7;
         }
         public override void SetDefaults()

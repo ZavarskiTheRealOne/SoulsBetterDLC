@@ -17,8 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         {
             //name and description
             base.SetStaticDefaults();
-            DisplayName.SetDefault("Hydrothermic Enchantment");
-            Tooltip.SetDefault("Every 3 seconds, your attacks produce a chaos flame eruption on enemy hit.\nIf your attack is a crit, it also spawns a Sun explosion.\n'They're out in the depths.'");
+            
         }
         public override void SetDefaults()
         {

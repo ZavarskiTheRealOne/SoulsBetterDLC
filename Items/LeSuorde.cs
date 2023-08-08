@@ -9,11 +9,10 @@ namespace SoulsBetterDLC.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("L'epee");
-			Tooltip.SetDefault("A bread sword from France.\nFor some reason, hitting enemies with it fulfills your hunger.");
+			
 		}
 
-		public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			if (target.lifeMax > 5)
 			{

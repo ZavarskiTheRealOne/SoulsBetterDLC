@@ -15,7 +15,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault("Increases damage with high but not full mana");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

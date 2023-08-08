@@ -19,13 +19,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(153, 200, 193);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Marnite Enchantment");
-            Tooltip.SetDefault("50% increased tile placement speed\n" +
-                "+10 block placement reach\n" +
-                "Marnite swords spin around you, protecting you and emitting sparks on hit\n" +
-                "\"Can we fix it?\"\n" +
-                "\"Yes, we can!\"");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

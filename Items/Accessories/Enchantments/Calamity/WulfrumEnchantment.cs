@@ -16,9 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void SetStaticDefaults()
         {
-            //name and description
-            DisplayName.SetDefault("Wulfrum Enchantment");
-            Tooltip.SetDefault("When your health is below 30%, you gain a buff.\nThis buff increases damage dealt and decreases damage taken by 30%.\n'ELECTRICITY IS FUN!'");
+            
         }
         public override void SetDefaults()
         {

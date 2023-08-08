@@ -29,7 +29,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 PortraitPositionYOverride = 12f
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
-            DisplayName.SetDefault("Champion of Desolation");
+            // DisplayName.SetDefault("Champion of Desolation");
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCID.Sets.DebuffImmunitySets.Add(NPC.type, new Terraria.DataStructures.NPCDebuffImmunityData
@@ -68,7 +68,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 SceneEffectPriority = SceneEffectPriority.BossLow;
             }
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
         }
@@ -363,7 +363,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 Hide = true
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
-            DisplayName.SetDefault("Champion of Desolation");
+            // DisplayName.SetDefault("Champion of Desolation");
 
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCID.Sets.DebuffImmunitySets.Add(NPC.type, new Terraria.DataStructures.NPCDebuffImmunityData
@@ -458,7 +458,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 Hide = true // Hides this NPC from the Bestiary, useful for multi-part NPCs whom you only want one entry.
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
-            DisplayName.SetDefault("Champion of Desolation");
+            // DisplayName.SetDefault("Champion of Desolation");
 
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCID.Sets.DebuffImmunitySets.Add(NPC.type, new Terraria.DataStructures.NPCDebuffImmunityData

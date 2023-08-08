@@ -22,13 +22,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(30, 30, 130);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Omega Blue Enchantment");
-            Tooltip.SetDefault("Abyss Tentacles have a chance to lash out when you attack\n" +
-                "Abyss Tentacles deal half of your damage, inflict crush depth, and heal up to 50\n" +
-                "Every 100 hits landed you gain Abyssal Madness\n" +
-                "Abyssal Madness increases your damage, crit chance, and Abyss Tentacle aggression\n" +
-                "'Yes, now I remember that movie!'");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

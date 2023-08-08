@@ -18,9 +18,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 
         public override void SetStaticDefaults()
         {
-            //name and description
-            DisplayName.SetDefault("Plaguebringer Enchantment");
-            Tooltip.SetDefault("Increases the strength of friendly bees.\nMelee hits and most piercing attacks spawn plague seekers.\nYour attacks inflict the Plague debuff.\nYou spawn bees while sprinting or dashing.\n'Pesky bee!'");
+            
         }
         public override void SetDefaults()
         {

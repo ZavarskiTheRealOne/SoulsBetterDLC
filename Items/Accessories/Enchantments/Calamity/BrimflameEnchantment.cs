@@ -21,9 +21,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(204, 42, 60);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Brimflame Enchantment");
-            Tooltip.SetDefault("Press [button] to inflame your insides, causing you to deal and take 25% more damage.\n\"Run, cowa- OUGH!\"");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

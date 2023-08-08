@@ -16,8 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault("Critical strikes summon an orbital laser strike on a 60 second cooldown. This effect does not activate underground. " +
-                "\nStabalises gravity in space.");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -54,7 +53,7 @@ namespace SoulsBetterDLC
             if (Player.position.Y < Main.worldSurface * 0.35 * 16) Damage += 50; // in space
             Vector2 pos = new(target.Center.X, MathHelper.Max(Player.Center.Y - Main.screenHeight, 10f));
 
-            Projectile.NewProjectile(AstroEnchItem.GetSource_Accessory(AstroEnchItem), pos,
+            Projectile.NewProjectile(Player.GetSource_Accessory(AstroEnchItem), pos,
                 Vector2.UnitY, ModContent.ProjectileType<Projectiles.Thorium.SaucerDeathrayProj>(),
                 Damage, 2f, Player.whoAmI);
 

@@ -24,11 +24,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             //name and description
-            DisplayName.SetDefault("Prismatic Enchantment");
-            Tooltip.SetDefault("Enemies with less than 500 hp deal no contact damage\n" +
-                "Your attacks charge up a Prismatic Rocket, press [button] to fire it\n" +
-                "The rocket pierces and summons lasers from the sky on enemy hits and summons a barrage of lasers when exploding\n" +
-                "'Identifier: destroyer.'");
+            
         }
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {

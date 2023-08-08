@@ -21,7 +21,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         public override string Texture => "CalamityMod/Projectiles/Summon/DaedalusGolem";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Champion of Devastation");
+            // DisplayName.SetDefault("Champion of Devastation");
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
@@ -62,7 +62,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
                 SceneEffectPriority = SceneEffectPriority.BossLow;
             }
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
 

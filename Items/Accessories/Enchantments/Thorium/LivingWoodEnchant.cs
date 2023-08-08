@@ -22,10 +22,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Living wood enchantment");
-            Tooltip.SetDefault($"Pressing the living roots hotkey while causes you to stop moving and grow roots below you." +
-                "\nTaking damage will result in the roots being destroyed while growing." +
-                "\nWhen fully grown the roots will fire at enemies for a minute before dying.");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

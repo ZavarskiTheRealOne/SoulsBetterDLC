@@ -14,8 +14,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(99, 160, 164);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fathom Swarmer Enchantment");
-            Tooltip.SetDefault("A bubble spawns on the screen sometimes.\nIf you hit the bubble, it will spawn a static Toxic Cloud\nthat rains Armor Crunch drops and sometimes strikes a lightning down.\nOnly one cloud can exist at a time.\n'Oh, look, someone already vomited in your glass.'");
+            
         }
         public override void SetDefaults()
         {

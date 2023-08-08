@@ -17,8 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Dragon Enchantment");
-            Tooltip.SetDefault("Summons a dragon familular that does stuff I'll fill this in later");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

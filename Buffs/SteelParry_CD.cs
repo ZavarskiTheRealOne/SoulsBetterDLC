@@ -9,8 +9,7 @@ namespace SoulsBetterDLC.Buffs
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
-            DisplayName.SetDefault("Parry Cooldown");
-            Description.SetDefault("Wait, isn't this meant to be free?");
+            
         }
     }
 }

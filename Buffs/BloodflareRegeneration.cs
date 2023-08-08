@@ -7,8 +7,7 @@ namespace SoulsBetterDLC.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bloodflare Regeneration");
-            Description.SetDefault("The insides of your enemies drive you crazy.");
+            
         }
 
         public override void Update(Player player, ref int buffIndex)

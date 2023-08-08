@@ -66,8 +66,8 @@ namespace SoulsBetterDLC
                 MethodInfo SetChatButtons_DETOUR = deviDetourClass.GetMethod("SetChatButtons", BindingFlags.Public | BindingFlags.Instance);
                 MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
 
-                HookEndpointManager.Add(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
-                HookEndpointManager.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
+                MonoModHooks.Add(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
+                MonoModHooks.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
                 if (ThoriumLoaded) DevianttPatches.AddDevianttShop("Thorium", DevianttPatches.SetupThoriumDeviShop);
             }
 
@@ -79,8 +79,8 @@ namespace SoulsBetterDLC
                 MethodInfo SetChatButtons_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
                 MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
 
-                HookEndpointManager.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
-                HookEndpointManager.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
+                MonoModHooks.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
+                MonoModHooks.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
             }
         }
 

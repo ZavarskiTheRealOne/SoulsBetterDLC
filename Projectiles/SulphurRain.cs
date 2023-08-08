@@ -9,7 +9,7 @@ namespace SoulsBetterDLC.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Dirty Rain Drop");
+            // DisplayName.SetDefault("Dirty Rain Drop");
         }
         public override void SetDefaults() 
         {
@@ -22,11 +22,11 @@ namespace SoulsBetterDLC.Projectiles
             Projectile.timeLeft = 300;
             Projectile.alpha = 50;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<CalamityMod.Buffs.StatDebuffs.ArmorCrunch>(), 600);
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<CalamityMod.Buffs.StatDebuffs.ArmorCrunch>(), 600);
         }

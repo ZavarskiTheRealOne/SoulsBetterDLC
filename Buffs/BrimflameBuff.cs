@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using SoulsBetterDLC.Projectiles;
-using CalamityMod.CalPlayer;
 
 namespace SoulsBetterDLC.Buffs
 {
@@ -15,8 +14,7 @@ namespace SoulsBetterDLC.Buffs
         public override string Texture => "FargowiltasSouls/Buffs/PlaceholderBuff";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Inflamed");
-            Description.SetDefault("You burn with power");
+            
             
             Main.debuff[Type] = true;
         }

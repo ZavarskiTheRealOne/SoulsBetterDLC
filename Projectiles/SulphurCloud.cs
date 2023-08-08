@@ -9,7 +9,7 @@ namespace SoulsBetterDLC.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("How did you get killed by this");
+            // DisplayName.SetDefault("How did you get killed by this");
             Main.projFrames[Projectile.type] = 6;
         }
         public override void SetDefaults()

@@ -1,6 +1,7 @@
 ﻿using SoulsBetterDLC.Projectiles;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.Localization;
 
 namespace SoulsBetterDLC.Buffs
 {
@@ -10,8 +11,7 @@ namespace SoulsBetterDLC.Buffs
         public override string Texture => "CalamityMod/Buffs/Summon/SilvaCrystalBuff";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Life Shell");
-            Description.SetDefault("You are encased in a silva crystal, increasing defense, life regen, and decreasing movement speed");
+            
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
@@ -57,15 +57,15 @@ namespace SoulsBetterDLC.Buffs
             
         }
         
-        public override void ModifyBuffTip(ref string tip, ref int rare)
+        public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             if (shattered)
             {
-                tip = "The crystal has shattered. Damage increased and defense decreased, other stat changes gone.";
+                tip = Language.GetTextValue("Mods.SoulsBetterDLC.Buffs.LifeShell.ShatteredDescription");
             }
             else
             {
-                tip = "You are encased in a silva crystal, increasing defense, life regen, and decreasing movement speed";
+                tip = Language.GetTextValue("Mods.SoulsBetterDLC.Buffs.LifeShell.Description");
             }
 
         }

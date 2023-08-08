@@ -16,8 +16,7 @@ namespace SoulsBetterDLC.Items.Accessories.Emode.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Temple Core");
-            Tooltip.SetDefault("The glowing heart of a defeated foe.");
+            
         }
 
         public override void SetDefaults()

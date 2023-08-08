@@ -17,8 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(255, 233, 197);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Victide Enchantment");
-            Tooltip.SetDefault("Provides increased underwater mobility.\nYou have infinite breath in the water and reduced breath loss in the Abyss.\nYour attacks have a 10% chance to summon a Snap Clam.\n'Once the Sunken Sea's water fills your lungs, it will feed oxygen directly into your bloodstream.'");
+            
         }
         public override void SetDefaults()
         {

@@ -17,7 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault("Occasionally summons gravitationally attracted valadium chunks that can damage enemies");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

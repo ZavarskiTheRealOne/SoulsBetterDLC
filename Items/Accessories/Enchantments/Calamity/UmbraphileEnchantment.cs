@@ -15,9 +15,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(117, 69, 87);
         public override void SetStaticDefaults()
         {
-            //name and description
-            DisplayName.SetDefault("Umbraphile Enchantment");
-            Tooltip.SetDefault("Boosts your life regen on enemy hits.\nEvery 5 seconds you will lifesteal for a quarter of your damage,\nunless it exceeds quarter of your max health.\n'When the vamps outside, lil bitch, you better be ready.'");
+            
         }
         public override void SetDefaults()
         {

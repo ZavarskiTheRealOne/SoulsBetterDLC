@@ -15,7 +15,7 @@ namespace SoulsBetterDLC.Items.Accessories.Forces
             base.SafeModifyTooltips(tooltips);
             if (!ModLoader.HasMod(ModName))
             {
-                TooltipLine line = new(Mod, "disabled",
+                TooltipLine line = new(SoulsBetterDLC.Instance, "disabled",
                     $"Doesn't do anything without {ModName} " +
                     $"\nHow is this even loaded?");
 

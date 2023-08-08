@@ -54,7 +54,7 @@ namespace SoulsBetterDLC.Projectiles
             offset = reader.ReadVector2();
         }
         public Vector2 offset;
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             offset = Projectile.Center - target.Center + new Vector2(0, -10) ;
             Projectile.ai[0] = 1;

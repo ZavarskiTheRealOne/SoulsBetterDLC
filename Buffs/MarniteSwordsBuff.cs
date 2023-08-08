@@ -8,8 +8,7 @@ namespace SoulsBetterDLC.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Marnite Swords");
-            Description.SetDefault("Swords forged by a great architect and infused with souls to protect the owner during peaceful activities");
+            
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

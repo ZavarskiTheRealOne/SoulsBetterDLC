@@ -7,8 +7,7 @@ namespace SoulsBetterDLC.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Slayer Dash Cooldown");
-            Description.SetDefault("I didn't really feel like making a custom Calamity cooldown,\nso here's a debuff cooldown.");
+            
             Main.debuff[Type] = true;
         }
 

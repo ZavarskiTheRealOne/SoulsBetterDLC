@@ -13,7 +13,7 @@ namespace SoulsBetterDLC.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Prismatic Missile");
+            // DisplayName.SetDefault("Prismatic Missile");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -33,7 +33,7 @@ namespace SoulsBetterDLC.Projectiles
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.myPlayer == Projectile.owner)
             {

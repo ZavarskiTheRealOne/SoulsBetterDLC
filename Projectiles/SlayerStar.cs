@@ -10,7 +10,7 @@ namespace SoulsBetterDLC.Projectiles
         public override string Texture => "CalamityMod/Projectiles/Typeless/NebulaStar";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("God Slayer's Star");
+            // DisplayName.SetDefault("God Slayer's Star");
         }
         public override void SetDefaults()
         {

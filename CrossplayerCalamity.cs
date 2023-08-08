@@ -217,7 +217,7 @@ namespace SoulsBetterDLC
             NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
         }*/
 
-        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
+        public override void OnHurt(Player.HurtInfo info)
         {
             if (ReaverHage)
             {
@@ -225,14 +225,14 @@ namespace SoulsBetterDLC
             }
             if (Demonshade)
             {
-                DemonshadeHurtEffect((int)damage);
+                DemonshadeHurtEffect(info.Damage);
             }
         }
-        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (Prismatic)
             {
-                damage = PrismaticeHitEffects(damage, npc);
+                modifiers.FinalDamage.Flat = PrismaticeHitEffects((int)modifiers.FinalDamage.Flat, npc);
             }
         }
         public override void UpdateDead()
@@ -354,7 +354,7 @@ namespace SoulsBetterDLC
                 FearmongerEffects();
             }
         }
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Item, consider using OnHitNPC instead */
         {
             //desert prowler enchantment
             if (ProwlinOnTheFools && Player.GetToggleValue("Tornadoes"))
@@ -364,7 +364,7 @@ namespace SoulsBetterDLC
             //bringer bees. based off of fargo souls' bee enchantment effect
             if (ButterBeeSwarm)
             {
-                PlaguebringerHitEffect(item, target, damage);
+                PlaguebringerHitEffect(item, target, damageDone);
             }
             //Empyrean
             if (Empyrean)
@@ -379,46 +379,46 @@ namespace SoulsBetterDLC
             //hydrothermic. just based
             if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
-                HydrothermicHitEffect(target, damage, crit);
+                HydrothermicHitEffect(target, damageDone, hit.Crit);
             }
 
             //umbra and blood timer calculus
-            UmbraphileCalc(damage);
-            BloodflareCalc(damage);
+            UmbraphileCalc(damageDone);
+            BloodflareCalc(damageDone);
 
             //Umbraphile conditions
             if (UmbraCrazyRegen)
             {
-                UmbraphileHitEffect(damage);
+                UmbraphileHitEffect(damageDone);
             }
 
             //Bloodflare conditions
             if (BFCrazierRegen && Player.GetToggleValue("BloodflareLifesteal"))
             {
-                BloodflareHitEffect(target, damage);
+                BloodflareHitEffect(target, damageDone);
             }
 
             //Statigel kunai
             if (StatigelNinjaStyle)
             {
-                StatigelHitEffect(target, damage);
+                StatigelHitEffect(target, damageDone);
             }
 
             //God Slayer star
             if (GodSlayerMeltdown && Player.GetToggleValue("SlayerStars"))
             {
-                GodSlayerHitEffect(target, damage);
+                GodSlayerHitEffect(target, damageDone);
             }
             if (Demonshade)
             {
-                DemonshadeHitEffect(damage);
+                DemonshadeHitEffect(damageDone);
             }
             if (Prismatic)
             {
-                PrismaticAttackEffects(damage);
+                PrismaticAttackEffects(damageDone);
             }
         }
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Item, consider using ModifyHitNPC instead */
         {
             //Plague Reaper conditions
             if (DoctorBeeKill)
@@ -426,7 +426,7 @@ namespace SoulsBetterDLC
                 PlagueReaperHitEffect(target);
             }
         }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
             //desert prowler enchantment
             if (ProwlinOnTheFools && Player.GetToggleValue("Tornadoes"))
@@ -437,7 +437,7 @@ namespace SoulsBetterDLC
             //bringer bees. you've read the part on top
             if (ButterBeeSwarm)
             {
-                PlaguebringerProjHitEffect(proj, target, damage);
+                PlaguebringerProjHitEffect(proj, target, damageDone);
             }
             //Empyrean
             if (Empyrean)
@@ -452,45 +452,45 @@ namespace SoulsBetterDLC
             //hydroth   ermic
             if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
-                HydrothermicProjHitEffect(target, damage, crit);
+                HydrothermicProjHitEffect(target, damageDone, hit.Crit);
             }
             //umbra blood timer
-            UmbraphileCalc(damage);
-            BloodflareCalc(damage);
+            UmbraphileCalc(damageDone);
+            BloodflareCalc(damageDone);
 
             //umbra
             if (UmbraCrazyRegen)
             {
-                UmbraphileProjHitEffect(damage);
+                UmbraphileProjHitEffect(damageDone);
 
             }
 
             //bloodflare
             if (BFCrazierRegen)
             {
-                BloodflareProjHitEffect(target, damage);
+                BloodflareProjHitEffect(target, damageDone);
             }
             //statigel
             if (StatigelNinjaStyle)
             {
-                StatigelProjHitEffect(proj, target, damage, crit);
+                StatigelProjHitEffect(proj, target, damageDone, hit.Crit);
             }
 
             //slayer
             if (GodSlayerMeltdown && Player.GetToggleValue("SlayerStars"))
             {
-                GodSlayerProjHitEffect(proj, target, damage, crit);
+                GodSlayerProjHitEffect(proj, target, damageDone, hit.Crit);
             }
             if (Demonshade)
             {
-                DemonshadeHitEffect(damage);
+                DemonshadeHitEffect(damageDone);
             }
             if (Prismatic)
             {
-                PrismaticAttackEffects(damage);
+                PrismaticAttackEffects(damageDone);
             }
         }
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
         {
             //plague reaper
             if (DoctorBeeKill)

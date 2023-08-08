@@ -17,10 +17,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            Tooltip.SetDefault("hit enemies have a chance to be afflicted with a fungal infection." +
-                "\nInfected enemies will burst into fungal spores on death." +
-                "\nEnemies killed by the spores are ganunteed to become infected." +
-                "\n\"It's an 1NF3S+@+!0N\"");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

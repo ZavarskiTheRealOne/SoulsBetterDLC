@@ -13,10 +13,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Darksteel Enchantment");
-            Tooltip.SetDefault($"Press the parry hotkey to parry incoming projectiles. " +
-                $"\nParrying projectiles allows then to deal boosted damage to enemies. " +
-                $"\nYour projectiles can also be boosted.");
+            
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

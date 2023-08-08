@@ -47,7 +47,7 @@ namespace SoulsBetterDLC.Projectiles
         {
             return targetHitbox.Distance(Projectile.Center) < 60 * Projectile.scale;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<CalamityMod.Buffs.DamageOverTime.Dragonfire>(), 300);
         }

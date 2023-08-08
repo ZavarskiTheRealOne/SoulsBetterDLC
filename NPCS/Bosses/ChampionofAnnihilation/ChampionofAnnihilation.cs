@@ -22,7 +22,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
         
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Champion of Annihilation");
+            // DisplayName.SetDefault("Champion of Annihilation");
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
             {
@@ -92,7 +92,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
         {
             
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = 5200000;
             if (Main.expertMode)
@@ -177,7 +177,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
                 }
             }
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {

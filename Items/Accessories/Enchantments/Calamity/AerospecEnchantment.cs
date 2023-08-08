@@ -15,8 +15,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(153, 200, 193);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Aerospec Enchantment");
-            Tooltip.SetDefault("Summons a Valkyrie that fires homing feathers.\nFeathers stick to enemies and explode after some time.\n'Those who were able to befriend the Valkyries are truly brave…'");
+            
         }
         public override void SetDefaults()
         {

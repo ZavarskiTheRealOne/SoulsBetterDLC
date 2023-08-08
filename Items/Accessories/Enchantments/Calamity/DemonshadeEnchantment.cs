@@ -23,13 +23,8 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         protected override Color nameColor => new Color(204, 42, 60);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Demonshade Enchantment");
-            Tooltip.SetDefault("Press [button] to enrage nearby enemies, making them take 125% more damage but also deal 25% more damage\n" +
-                "Rage generates over time and does not fade away when out of combat\n" +
-                "Taking damage grants rage\n" +
-                "Dealing damage with rage mode increases the damage rage does\n" +
-                "'I think it's time for Jack... to let 'er rip!'");
-            SacrificeTotal = 1;
+            
+            
         }
         public override void SetDefaults()
         {

@@ -14,8 +14,7 @@ namespace SoulsBetterDLC.Buffs
         public override string Texture => "CalamityMod/Buffs/StatBuffs/TarragonCloak";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tarragon Cloak");
-            Description.SetDefault("Contact damage is reduced");
+            
             Main.debuff[base.Type] = true;
             Main.pvpBuff[base.Type] = true;
             Main.buffNoSave[base.Type] = false;
