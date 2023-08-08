@@ -14,6 +14,7 @@ using CalamityMod.Items.Armor.Auric;
 using CalamityMod.Items.Weapons.Melee;
 using CalamityMod.Items.Placeables.Furniture;
 using CalamityMod.Rarities;
+using Terraria.Localization;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -44,14 +45,14 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             string silvaEffect = "";
             string godslayerEffect = "";
             CrossplayerCalamity player = Main.player[Main.myPlayer].GetModPlayer<CrossplayerCalamity>();
-            if (player.Tarragon) tarragonEffect = $"[i:SoulsBetterDLC/TarragonEnchantment] Picking up a heart throws lightning in several directions and causes an auric nuke explosion at full health\n";
-            if (player.BFCrazierRegen) bloodflareEffect = $"[i:SoulsBetterDLC/BloodflareEnchantment] A massive lightning bolt strikes enemies you lifesteal from\n";
-            if (player.Silva) silvaEffect = $"[i:SoulsBetterDLC/SilvaEnchantment] The shattered crystal also releases lightning bolts and causes an auric nuke explosion when activated\n";
-            if (player.GodSlayerMeltdown) godslayerEffect = $"[i:SoulsBetterDLC/SlayerEnchantment] Small auric explosions appear around cosmilite stars\n";
+            if (player.Tarragon) tarragonEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.TarragonTooltip") + "\n";
+            if (player.BFCrazierRegen) bloodflareEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.BloodflareTooltip") + "\n";
+            if (player.Silva) silvaEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.SilvaTooltip") + "\n";
+            if (player.GodSlayerMeltdown) godslayerEffect = Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.GodSlayerTooltip") + "\n";
             TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: AuricEnch",
-                $"Adds lightning and auric explosions to several effects of the auric component enchantments\n" +
-                tarragonEffect + bloodflareEffect + silvaEffect + godslayerEffect +
-                $"\"I need more power!\"");
+                Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.AuricTooltip") + "\n" +
+                tarragonEffect  + bloodflareEffect + silvaEffect + godslayerEffect +
+                "\"" + Language.GetTextValue("Mods.SoulsBetterDLC.Items.AuricEnchantment.Quote") + "\"");
             tooltips.Add(tooltip);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

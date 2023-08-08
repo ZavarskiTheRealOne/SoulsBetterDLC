@@ -24,6 +24,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Silva Enchantment");
+            Tooltip.SetDefault("You are encased in a silva crystal that increases defense and life regen but decreases movement speed\n" +
+                "Press [button] to shatter the crystal, removing the previous buffs but granting 40% damage and releasing various projectiles\n" +
+                "The shatter is repaired after 10 seconds and has a cooldown of 20 seconds\n" +
+                "'What's that thing over your body?'");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -35,14 +39,15 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
-            base.SafeModifyTooltips(tooltips);
-
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: SilvaEnch",
-                $"You are encased in a silva crystal that increases defense and life regen but decreases movement speed\n" +
-                $"Press " + CalamityKeybinds.SetBonusHotKey.TooltipHotkeyString() + $" to shatter the crystal, removing the previous buffs but granting 40% damage and releasing various projectiles\n" +
-                $"The shatter is repaired after 10 seconds and has a cooldown of 20 seconds\n" +
-                $"\"What's that thing over your body?\"");
-            tooltips.Add(tooltip);
+            foreach (TooltipLine tooltip in tooltips)
+            {
+                int index = tooltip.Text.IndexOf("[button]");
+                if (index != -1 && tooltip.Text.Length > 0)
+                {
+                    tooltip.Text = tooltip.Text.Remove(index, 8);
+                    tooltip.Text = tooltip.Text.Insert(index, CalamityKeybinds.SetBonusHotKey.TooltipHotkeyString());
+                }
+            }
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

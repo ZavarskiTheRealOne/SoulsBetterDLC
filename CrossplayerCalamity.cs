@@ -51,6 +51,8 @@ namespace SoulsBetterDLC
         public bool Auric;
         public bool ExaltEffects;
 
+        public bool Prismatic;
+        public int PrismaticCharge;
         public bool Brimflame;
         public int BrimflameCooldown;
         public bool Demonshade;
@@ -58,6 +60,9 @@ namespace SoulsBetterDLC
         public float DemonshadeXP;
         public bool FearOfTheValkyrie;
         public bool Crocket;
+        public bool Gemtech;
+        public int RangedGemTimer;
+        public int MeleeGemTimer;
         public bool AnnihilEffects;
 
         //mostly booleans for active checks
@@ -122,9 +127,10 @@ namespace SoulsBetterDLC
             if (BrimflameCooldown > 0)
                 BrimflameCooldown--;
             Demonshade = false;
-            
+            Prismatic = false;
             FearOfTheValkyrie = false;
             Crocket = false;
+            Gemtech = false;
 
             ExploEffects = false;
             DevastEffects = false;
@@ -220,6 +226,13 @@ namespace SoulsBetterDLC
             if (Demonshade)
             {
                 DemonshadeHurtEffect((int)damage);
+            }
+        }
+        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        {
+            if (Prismatic)
+            {
+                damage = PrismaticeHitEffects(damage, npc);
             }
         }
         public override void UpdateDead()
@@ -400,6 +413,10 @@ namespace SoulsBetterDLC
             {
                 DemonshadeHitEffect(damage);
             }
+            if (Prismatic)
+            {
+                PrismaticAttackEffects(damage);
+            }
         }
         public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
@@ -468,6 +485,10 @@ namespace SoulsBetterDLC
             {
                 DemonshadeHitEffect(damage);
             }
+            if (Prismatic)
+            {
+                PrismaticAttackEffects(damage);
+            }
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
@@ -494,6 +515,10 @@ namespace SoulsBetterDLC
             if (Silva && Player.GetToggleValue("SilvaCrystal"))
             {
                 SilvaTrigger();
+            }
+            if (Prismatic)
+            {
+                PrismaticTrigger();
             }
         }
     }

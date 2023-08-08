@@ -23,6 +23,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Empyrean Enchantment");
+            Tooltip.SetDefault("Every third attack landed grants Empyrean Rage or Wrath\n" +
+                "Meld tentacles have a chance to lash out when you attack\n" +
+                "Tentacles deal half of your damage and inflict Nightwither\n" +
+                "'I remember seeing a movie that starts like this!'");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -34,13 +38,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
-            base.SafeModifyTooltips(tooltips);
-
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: EmpyreanEnch", $"Every third attack landed grants Empyrean Rage or Wrath\n" +
-                $"Meld tentacles have a chance to lash out when you attack\n" +
-                $"Tentacles deal half of your damage and inflict Nightwither\n" +
-                $"\"I remember seeing a movie that starts like this!\"");
-            tooltips.Add(tooltip);
+            
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

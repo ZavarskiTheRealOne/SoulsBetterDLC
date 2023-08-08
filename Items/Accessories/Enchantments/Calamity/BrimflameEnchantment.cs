@@ -22,6 +22,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Brimflame Enchantment");
+            Tooltip.SetDefault("Press [button] to inflame your insides, causing you to deal and take 25% more damage.\n\"Run, cowa- OUGH!\"");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -32,9 +33,16 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
             base.SafeModifyTooltips(tooltips);
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: BrimflameEnch", $"Press " + CalamityKeybinds.RageHotKey.TooltipHotkeyString() + " to inflame your insides, causing you to deal and take 25% more damage.\n" +
-                "\"Run, cowa- OUGH!\"");
-            tooltips.Add(tooltip);
+            foreach (TooltipLine tooltip in tooltips)
+            {
+                int index = tooltip.Text.IndexOf("[button]");
+                if (index != -1 && tooltip.Text.Length > 0)
+                {
+                    tooltip.Text = tooltip.Text.Remove(index, 8);
+                    tooltip.Text = tooltip.Text.Insert(index, CalamityKeybinds.RageHotKey.TooltipHotkeyString());
+                }
+            }
+            
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

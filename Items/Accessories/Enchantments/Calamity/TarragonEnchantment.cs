@@ -22,6 +22,10 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Tarragon Enchantment");
+            Tooltip.SetDefault("Collecting a heart will grant the Tarragon Cloak buff, reducing enemy contact damage\n" +
+                "This has a 30 second cooldown\n" +
+                "Collecting a heart at full health grants an aura that deals damage scaling with your defense\n" +
+                "'Behold, the nature's reclamation!'");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -33,13 +37,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
-            base.SafeModifyTooltips(tooltips);
-
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: TarragonEnch", $"Collecting a heart will grant the Tarragon Cloak buff, reducing enemy contact damage\n" +
-                $"This has a 30 second cooldown\n" +
-                $"Collecting a heart at full health grants an aura that deals damage scaling with your defense\n" +
-                $"\"Behold, the nature's reclamation!\"");
-            tooltips.Add(tooltip);
+           
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

@@ -512,6 +512,10 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaWireHemmedVisage>(),
                 ModContent.ItemType<CalamityMod.Items.Armor.Auric.AuricTeslaHoodedFacemask>());
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyAuricHelms", AuricHelmsGroup);
+            RecipeGroup RailgunsGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {"Railgun"}",
+                ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.AdamantiteParticleAccelerator>(),
+                ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.TitaniumRailgun>());
+            RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyRailguns", RailgunsGroup);
         }
     }
 }

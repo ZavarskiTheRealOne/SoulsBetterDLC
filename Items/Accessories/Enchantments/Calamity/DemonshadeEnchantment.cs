@@ -24,6 +24,11 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Demonshade Enchantment");
+            Tooltip.SetDefault("Press [button] to enrage nearby enemies, making them take 125% more damage but also deal 25% more damage\n" +
+                "Rage generates over time and does not fade away when out of combat\n" +
+                "Taking damage grants rage\n" +
+                "Dealing damage with rage mode increases the damage rage does\n" +
+                "'I think it's time for Jack... to let 'er rip!'");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -36,14 +41,16 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
             base.SafeModifyTooltips(tooltips);
-            string rageOverTime = "Rage generates over time and does not fade away when out of combat\n";
-            if (!CalamityWorld.revenge) rageOverTime = "Rage generates over time and does not fade away when out of combat\n";
-            TooltipLine tooltip = new TooltipLine(Mod, "SoulsBetterDLC: DemonshadeEnch", $"Press " + CalamityKeybinds.RageHotKey.TooltipHotkeyString() + " to enrage nearby enemies, making them take 125% more damage but also deal 25% more damage\n" +
-                rageOverTime +
-                "Taking damage grants rage\n" +
-                "Dealing damage with rage mode increases the damage rage does\n" +
-                "\"I think it\'s time for Jack… to let \'er rip!\"");
-            tooltips.Add(tooltip);
+
+            foreach (TooltipLine tooltip in tooltips)
+            {
+                int index = tooltip.Text.IndexOf("[button]");
+                if (index != -1 && tooltip.Text.Length > 0)
+                {
+                    tooltip.Text = tooltip.Text.Remove(index, 8);
+                    tooltip.Text = tooltip.Text.Insert(index, CalamityKeybinds.RageHotKey.TooltipHotkeyString());
+                }
+            }
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
