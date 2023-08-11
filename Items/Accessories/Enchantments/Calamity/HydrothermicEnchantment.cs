@@ -3,6 +3,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using CalamityMod;
+using SoulsBetterDLC.Buffs;
+using Terraria.Audio;
+using Steamworks;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 { 
@@ -18,7 +21,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             //name and description
             base.SetStaticDefaults();
             DisplayName.SetDefault("Hydrothermic Enchantment");
-            Tooltip.SetDefault("Every 3 seconds, your attacks produce a chaos flame eruption on enemy hit.\nIf your attack is a crit, it also spawns a Sun explosion.\n'They're out in the depths.'");
+            Tooltip.SetDefault("Every 3 seconds, your attacks produce a chaos flame eruption on enemy hit.\nFor every proc, you get +5% DR, up to +25%.\nTaking damage will remove all the gained DR.\nIf you don't take hit for 30 seconds with max DR,\nyou'll lose it with additional 30% in exchange for +25% damage.\n\"They're out in the depths.\"");
         }
         public override void SetDefaults()
         {
@@ -42,7 +45,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Magic.ForbiddenSun>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.HavocsBreath>(), 1);
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.Hellborn>(), 1);
-            recipe.AddTile(TileID.DemonAltar);
+            recipe.AddTile(TileID.CrystalBall);
             recipe.Register();
         }
     }
@@ -51,59 +54,41 @@ namespace SoulsBetterDLC
 {
     public partial class CrossplayerCalamity : ModPlayer
     {
-        public void HydrothermicHitEffect(NPC target, int damage, bool crit)
+        public void AtaxiaEffects()
+        {
+            if (AtaxiaDR <= 5) Player.endurance += 0.05f * AtaxiaDR; else Player.endurance += 0.05f*5;
+            if (AtaxiaDR == 5) AtaxiaCountdown = 30 * 60;
+            if (AtaxiaDR == 5 && AtaxiaCountdown > 0) AtaxiaDR = 6;
+            if (AtaxiaDR == 6 && AtaxiaCountdown == 0)
+            {
+                SoundEngine.PlaySound(SoundID.Item74, Player.Center);
+                AtaxiaDR = 0;
+                Player.AddBuff(ModContent.BuffType<AtaxiaOverheat>(), 15 * 60);
+            }
+        }
+        public void HydrothermicHitEffect(NPC target, int damage)
         {
             if (AtaxiaCooldown <= 0 && Player.ownedProjectileCounts[ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.ChaoticGeyser>()] < 3)
             {
                 int ataxiaDamage = CalamityUtils.DamageSoftCap(damage, 60);
                 Projectile.NewProjectile(Player.GetSource_FromThis(), target.position, Vector2.Zero, ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.ChaoticGeyser>(), ataxiaDamage, 2f, Player.whoAmI);
-                if (crit)
-                {
-                    int kaboom = Projectile.NewProjectile(Player.GetSource_FromThis(), target.position, Vector2.Zero, ModContent.ProjectileType<CalamityMod.Projectiles.Magic.ForbiddenSunburst>(), (int)(ataxiaDamage * 1.5f), 0f, Player.whoAmI);
-                    if (DevastEffects)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            float flareOffset = 2 * i - 2;
-                            int flare = Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center.X, target.Center.Y - 2f, flareOffset, -4f, ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.HydrothermicSphere>(), (int)(ataxiaDamage * 1.5f), 1f, Player.whoAmI);
-                            if (flare != 1000)
-                                Main.projectile[flare].tileCollide = false;
-                        }
-                    }
-                    if (kaboom != 1000)
-                    {
-                        Main.projectile[kaboom].DamageType = DamageClass.Generic;
-                    }
-                }
+                if (AtaxiaDR < 5) AtaxiaDR++;
                 if (!DevastEffects) AtaxiaCooldown = 180; else AtaxiaCooldown = 60;
             }
         }
-        public void HydrothermicProjHitEffect(NPC target, int damage, bool crit)
+        public void HydrothermicProjHitEffect(NPC target, int damage)
         {
             if (AtaxiaCooldown <= 0 && Player.ownedProjectileCounts[ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.ChaoticGeyser>()] < 3)
             {
                 int ataxiaDamage = CalamityUtils.DamageSoftCap(damage, 60);
                 Projectile.NewProjectile(Player.GetSource_FromThis(), target.position, Vector2.Zero, ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.ChaoticGeyser>(), ataxiaDamage, 2f, Player.whoAmI);
-                if (crit)
-                {
-                    int kaboom = Projectile.NewProjectile(Player.GetSource_FromThis(), target.position, Vector2.Zero, ModContent.ProjectileType<CalamityMod.Projectiles.Magic.ForbiddenSunburst>(), (int)(ataxiaDamage * 1.5f), 0f, Player.whoAmI);
-                    if (DevastEffects)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            float flareOffset = 2 * i - 2;
-                            int flare = Projectile.NewProjectile(Player.GetSource_FromThis(), target.Center.X, target.Center.Y - 2f, flareOffset, -4f, ModContent.ProjectileType<CalamityMod.Projectiles.Typeless.HydrothermicSphere>(), (int)(ataxiaDamage * 1.5f), 1f, Player.whoAmI);
-                            if (flare != 1000)
-                                Main.projectile[flare].tileCollide = false;
-                        }
-                    }
-                    if (kaboom != 1000)
-                    {
-                        Main.projectile[kaboom].DamageType = DamageClass.Generic;
-                    }
-                }
+                if (AtaxiaDR < 5) AtaxiaDR++;
                 if (!DevastEffects) AtaxiaCooldown = 180; else AtaxiaCooldown = 60;
             }
+        }
+        public void AtaxiaHurt()
+        {
+            AtaxiaDR = 0;
         }
     }
 }
