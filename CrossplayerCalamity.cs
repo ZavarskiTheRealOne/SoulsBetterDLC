@@ -74,10 +74,13 @@ namespace SoulsBetterDLC
         public int SDIcicleCooldown;
         public int ButterBeeCD;
         public int AtaxiaCooldown;
+        public int AtaxiaCountdown;
         public int UmbraBuffTimer;
         public int BloodBuffTimer;
         public int LifestealCD;
         public int kunaiKuldown;
+
+        public int AtaxiaDR;
 
         public Vector2 bubbleOffset;
 
@@ -95,6 +98,7 @@ namespace SoulsBetterDLC
             AyeCicleSmol = false;
             AtaxiaEruption = false;
             if (AtaxiaCooldown > 0) AtaxiaCooldown--;
+            if (AtaxiaCountdown > 0) AtaxiaCountdown--;
 
             Empyrean = false;
             OmegaBlue = false;
@@ -221,6 +225,10 @@ namespace SoulsBetterDLC
             {
                 DemonshadeHurtEffect((int)damage);
             }
+            if (AtaxiaEruption)
+            {
+                AtaxiaHurt();
+            }
         }
         public override void UpdateDead()
         {
@@ -238,7 +246,7 @@ namespace SoulsBetterDLC
         }
         public override void PostUpdateEquips()
         {
-            //EXPLORATION (2/4)
+            //EXPLORATION (3/4)
 
             //aerospec
             if (RideOfTheValkyrie && Player.GetToggleValue("Valkyrie"))
@@ -246,8 +254,7 @@ namespace SoulsBetterDLC
                 AerospecEffects();
             }
 
-            //marnite
-            //has 2 toggles so checks are in the method
+            //marnite. has 2 toggles so checks are in the method
             if (Marnite)
             {
                 MarniteEffects();
@@ -258,6 +265,7 @@ namespace SoulsBetterDLC
             {
                 WulfrumEffects();
             }
+
 
             //DEVASTATION (4/4)
 
@@ -285,8 +293,11 @@ namespace SoulsBetterDLC
                 PlaguebringerEffects();
             }
 
-
-
+            //hydrothermic
+            if(AtaxiaEruption)
+            {
+                AtaxiaEffects();
+            }
 
 
             //DESOLATION (2/5)
@@ -315,7 +326,8 @@ namespace SoulsBetterDLC
                 FathomSwarmerEffects();
             }
 
-            //EXALTATION (1/5)
+
+            //EXALTATION (5/5)
 
             //silva
             if (Silva && Player.GetToggleValue("SilvaCrystal"))
@@ -324,7 +336,7 @@ namespace SoulsBetterDLC
             }
 
 
-            //ANNIHILATION (1/4)
+            //ANNIHILATION (2/4)
 
             //brimflame
             if (Brimflame)
@@ -366,7 +378,7 @@ namespace SoulsBetterDLC
             //hydrothermic. just based
             if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
-                HydrothermicHitEffect(target, damage, crit);
+                HydrothermicHitEffect(target, damage);
             }
 
             //umbra and blood timer calculus
@@ -435,7 +447,7 @@ namespace SoulsBetterDLC
             //hydroth   ermic
             if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
-                HydrothermicProjHitEffect(target, damage, crit);
+                HydrothermicProjHitEffect(target, damage);
             }
             //umbra blood timer
             UmbraphileCalc(damage);
