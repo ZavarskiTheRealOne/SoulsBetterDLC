@@ -9,6 +9,7 @@ namespace SoulsBetterDLC.Buffs
         {
             DisplayName.SetDefault("Reaver Fury");
             Description.SetDefault("You are somewhat frustrated.");
+            Main.debuff[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex)
