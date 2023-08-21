@@ -8,12 +8,9 @@ using Terraria.GameContent;
 using System.Collections.Generic;
 using FargowiltasSouls.Toggler;
 using SoulsBetterDLC.Buffs;
-using ThoriumMod.Projectiles;
 using System.IO;
 using System;
 using Terraria.Audio;
-using SteelSeries.GameSense;
-using rail;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 
 namespace SoulsBetterDLC.Projectiles

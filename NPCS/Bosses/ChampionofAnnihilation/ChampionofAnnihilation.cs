@@ -11,7 +11,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using ReLogic.Content;
-
+using Terraria.Localization;
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -22,7 +22,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
         
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Champion of Annihilation");
+            
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
             {
@@ -108,7 +108,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
-                new FlavorTextBestiaryInfoElement("Graah lore idk")
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.SoulsBetterDLC.NPCs.ChampionofAnnihilation.BestiaryEntry"))
             });
         }
         public override void OnSpawn(IEntitySource source)

@@ -632,6 +632,12 @@
 			CalamitousSigil: {
 				DisplayName: Calamitous Sigil
 				Tooltip: Summons Calamitous Champions when used in the correct biome
+				NothingFound: Nothing seems to answer the call...
+				ExplorationFound: You hear the cry of a battlehorn in the distance...
+				DevastationFound: The ice-cold wind grows stronger...
+				DesolationFound: The lumenyl of the void flickers...
+				ExaltationFound: Souls stir in the searing magma...
+				AnnihilationFound: Something glimmers brightly in the distance...
 			}
 		}
 
@@ -640,17 +646,50 @@
 				DisplayName: Sulphuric Bubble
 			}
 
-			ChampionofAnnihilation.DisplayName: Champion of Annihilation
-			BabyColossalSquid.DisplayName: Baby Colossal Squid
-			DesolationBody.DisplayName: Champion of Desolation
-			DesolationHead.DisplayName: Champion of Desolation
-			DesolationTail.DisplayName: Champion of Desolation
-			ChampionofDevastation.DisplayName: Champion of Devastation
-			AuricSoul.DisplayName: Auric Soul
-			ChampionofExaltation.DisplayName: Champion of Exaltation
-			ChampionofExploration.DisplayName: Champion of Exploration
-			ExplorationDrone.DisplayName: Exploration Drone
-			FathomBubble.DisplayName: Sulphuric Bubble
+			ChampionofAnnihilation:{
+				DisplayName: Champion of Annihilation
+				BestiaryEntry: Crystal thing
+			}
+			BabyColossalSquid:{
+				DisplayName: Baby Colossal Squid
+				BestiaryEntry: bestiary stuff
+			}
+			DesolationBody:{
+				DisplayName: Champion of Desolation
+				BestiaryEntry: bestiary stuff
+			}
+			DesolationHead:{
+				DisplayName: Champion of Desolation
+				BestiaryEntry: bestiary stuff
+			}
+			DesolationTail:{
+				DisplayName: Champion of Desolation
+				BestiaryEntry: bestiary stuff
+			}
+			ChampionofDevastation:{
+				DisplayName: Champion of Devastation
+				BestiaryEntry: bestiary stuff
+			}
+			AuricSoul:{
+				DisplayName: Auric Soul
+				BestiaryEntry: bestiary stuff
+			}
+			ChampionofExaltation:{
+				DisplayName: Champion of Exaltation
+				BestiaryEntry: bestiary stuff
+			}
+			ChampionofExploration:{
+				DisplayName: Champion of Exploration
+				BestiaryEntry: bestiary stuff
+			}
+			ExplorationDrone:{
+				DisplayName: Exploration Drone
+				BestiaryEntry: bestiary stuff
+			}
+			FathomBubble:{
+				DisplayName: Sulphuric Bubble
+				BestiaryEntry: bestiary stuff
+			}
 		}
 
 		Projectiles: {

@@ -6,7 +6,7 @@ using Terraria.GameContent.Bestiary;
 using System.IO;
 using CalamityMod.CalPlayer;
 using Terraria.Audio;
-
+using Terraria.Localization;
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -29,7 +29,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 PortraitPositionYOverride = 12f
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
-            // DisplayName.SetDefault("Champion of Desolation");
+            
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCID.Sets.DebuffImmunitySets.Add(NPC.type, new Terraria.DataStructures.NPCDebuffImmunityData
@@ -76,7 +76,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
         {
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
             {
-                new FlavorTextBestiaryInfoElement("graaah")
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.SoulsBetterDLC.NPCs.ChampionofDesolation.BestiaryEntry"))
             });
         }
         public override void Init()
@@ -363,7 +363,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 Hide = true
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
-            // DisplayName.SetDefault("Champion of Desolation");
+            
 
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCID.Sets.DebuffImmunitySets.Add(NPC.type, new Terraria.DataStructures.NPCDebuffImmunityData
@@ -458,7 +458,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 Hide = true // Hides this NPC from the Bestiary, useful for multi-part NPCs whom you only want one entry.
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
-            // DisplayName.SetDefault("Champion of Desolation");
+            
 
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCID.Sets.DebuffImmunitySets.Add(NPC.type, new Terraria.DataStructures.NPCDebuffImmunityData

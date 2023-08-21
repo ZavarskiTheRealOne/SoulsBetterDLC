@@ -97,7 +97,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = (int)(Projectile.velocity.LengthSquared() * Mass / 300); 
+            modifiers.FinalDamage.Flat = (int)(Projectile.velocity.LengthSquared() * Mass / 300); 
         }
 
         public override bool PreAI()

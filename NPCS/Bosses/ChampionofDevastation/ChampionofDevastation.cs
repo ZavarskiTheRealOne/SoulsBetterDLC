@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using System;
 using FargowiltasSouls.Projectiles;
-
+using Terraria.Localization;
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -21,7 +21,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         public override string Texture => "CalamityMod/Projectiles/Summon/DaedalusGolem";
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Champion of Devastation");
+            
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
@@ -64,7 +64,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         }
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * balance);
 
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -72,7 +72,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
-                new FlavorTextBestiaryInfoElement("Graah lore idk")
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.SoulsBetterDLC.NPCs.ChampionofDevastation.BestiaryEntry"))
             });
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)

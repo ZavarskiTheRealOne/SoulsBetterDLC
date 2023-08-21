@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Terraria.GameContent.Bestiary;
 using System.IO;
 using CalamityMod;
+using Terraria.Localization;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
 {
@@ -21,7 +22,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
         public override string Texture => "CalamityMod/Projectiles/Summon/FieryDraconid";
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Champion of Exaltation");
+            
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
@@ -65,7 +66,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
         
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * balance);
 
         }
         public override void FindFrame(int frameHeight)
@@ -96,7 +97,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
-                new FlavorTextBestiaryInfoElement("Graah lore idk")
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.SoulsBetterDLC.NPCs.ChampionofExaltation.BestiaryEntry"))
             });
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
@@ -129,7 +130,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
         }
         public override void HitEffect(NPC.HitInfo hit)
         {
-            base.HitEffect(hitDirection, damage);
+            base.HitEffect(hit);
         }
         public int barrierTime;
         public float barrierRot;

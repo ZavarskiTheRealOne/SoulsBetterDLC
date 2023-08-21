@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using CalamityMod.Items.Materials;
+using Terraria.Localization;
 namespace SoulsBetterDLC.NPCS.Bosses
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -12,7 +13,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
         public override string Texture => "CalamityMod/Items/Accessories/OccultSkullCrown";
         public override void SetStaticDefaults()
         {
-            // Tooltip.SetDefault("Summons Calamitous Champions when used in the correct biome");
+            
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 13;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -58,7 +59,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
             {
                 if (player.altFunctionUse == 2)
                 {
-                    Main.NewText("You hear the cry of a battlehorn in the distance...", new Color(175, 0, 0));
+                    Main.NewText(Language.GetTextValue("Mods.SoulsBetterDLC.Items.CalamitousSigil.ExplorationFound"), new Color(175, 0, 0));
                 }
                 else
                 {
@@ -70,7 +71,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
             {
                 if (player.altFunctionUse == 2)
                 {
-                    Main.NewText("The ice-cold wind grows stronger...", new Color(175, 0, 0));
+                    Main.NewText(Language.GetTextValue("Mods.SoulsBetterDLC.Items.CalamitousSigil.DevastationFound"), new Color(175, 0, 0));
                 }
                 else
                 {
@@ -82,7 +83,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
             {
                 if (player.altFunctionUse == 2)
                 {
-                    Main.NewText("The lumenyl of the void flickers...", new Color(175, 0, 0));
+                    Main.NewText(Language.GetTextValue("Mods.SoulsBetterDLC.Items.CalamitousSigil.DesolationFound"), new Color(175, 0, 0));
                 }
                 else
                 {
@@ -94,7 +95,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
             {
                 if (player.altFunctionUse == 2)
                 {
-                    Main.NewText("Souls stir in the searing magma...", new Color(175, 0, 0));
+                    Main.NewText(Language.GetTextValue("Mods.SoulsBetterDLC.Items.CalamitousSigil.ExaltationFound"), new Color(175, 0, 0));
                 }
                 else
                 {
@@ -106,7 +107,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
             {
                 if (player.altFunctionUse == 2)
                 {
-                    Main.NewText("Something glimmers brightly in the distance...", new Color(175, 0, 0));
+                    Main.NewText(Language.GetTextValue("Mods.SoulsBetterDLC.Items.CalamitousSigil.AnnihilationFound"), new Color(175, 0, 0));
                 }
                 else
                 {
@@ -117,7 +118,7 @@ namespace SoulsBetterDLC.NPCS.Bosses
             else
             {
                 if (player.altFunctionUse == 2)
-                Main.NewText("Nothing seems to answer the call...", new Color(175, 0, 0));
+                Main.NewText(Language.GetTextValue("Mods.SoulsBetterDLC.Items.CalamitousSigil.NothingFound"), new Color(175, 0, 0));
             }
             return true;
         }

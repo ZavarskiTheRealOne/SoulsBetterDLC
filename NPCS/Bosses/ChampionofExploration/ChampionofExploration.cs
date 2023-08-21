@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.Audio;
 using FargowiltasSouls;
+using Terraria.Localization;
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -24,7 +25,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
         public override string BossHeadTexture => "SoulsBetterDLC/NPCS/Bosses/ChampionofExploration/ChampionofExploration_Head_Boss";
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Champion of Exploration");
+            
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             //add more debuffs if it makes sense idk what else is needed (separate with comma)
             NPCDebuffImmunityData debuffdata = new NPCDebuffImmunityData
@@ -72,8 +73,8 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
         //without this the hp will just be doubled in expert (vanilla doesnt do that for bosses)
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
-            NPC.damage = (int)(NPC.damage * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * balance);
+            NPC.damage = (int)(NPC.damage * balance);
         }
         //bestiary bg is sky, idk what the info should be
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -81,7 +82,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Sky,
-                new FlavorTextBestiaryInfoElement("Graah lore idk")
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.SoulsBetterDLC.NPCs.ChampionofExploration.BestiaryEntry"))
             });
         }
         //drop forces

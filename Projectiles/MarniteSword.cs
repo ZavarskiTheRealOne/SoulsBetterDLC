@@ -53,7 +53,7 @@ namespace SoulsBetterDLC.Projectiles
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, damage, knockback, crit);
+            base.OnHitNPC(target, hit, damageDone);
             if (Projectile.owner != -1)
             {
                 Player owner = Main.player[Projectile.owner];

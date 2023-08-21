@@ -88,7 +88,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
         }
         public override void HitEffect(NPC.HitInfo hit)
         {
-            base.HitEffect(hitDirection, damage);
+            base.HitEffect(hit);
         }
         public override void AI()
         {

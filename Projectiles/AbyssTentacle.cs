@@ -33,9 +33,9 @@ namespace SoulsBetterDLC.Projectiles
         {
             target.AddBuff(ModContent.BuffType<CrushDepth>(), 600);
             if (Projectile.owner != -1) {
-                int healAmount = damage / 10;
+                int healAmount = damageDone / 10;
                 if (healAmount > 20) healAmount = 50;
-                Main.player[Projectile.owner].HealEffect(damage /50);
+                Main.player[Projectile.owner].HealEffect(damageDone /50);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

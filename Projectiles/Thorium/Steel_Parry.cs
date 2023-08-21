@@ -87,7 +87,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (alreadyParried) crit = true;
+            if (alreadyParried) modifiers.SetCrit();
         }
     }
 
