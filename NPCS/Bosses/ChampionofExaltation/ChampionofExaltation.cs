@@ -138,7 +138,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
         {
             if (barrierTime > 0)
             {
-                Asset<Texture2D> barrier = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Healing/AuricOrb");
+                Asset<Texture2D> barrier = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Healing/SilvaOrb");
                 for (int i = 0; i < 100; i++)
                 {
                     spriteBatch.Draw(barrier.Value, NPC.Center + new Vector2(0, 1500).RotatedBy(barrierRot + MathHelper.ToRadians(i*3.6f)) - Main.screenPosition, null, new Color(255, 255, 255, 100) * 0.9f, barrierRot * 2 + i, barrier.Size() / 2, 4, SpriteEffects.None, 0);

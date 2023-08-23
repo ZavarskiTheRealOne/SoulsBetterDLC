@@ -6,7 +6,7 @@ using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using System.Collections.Generic;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 using SoulsBetterDLC.Buffs;
 using System.IO;
 using System;

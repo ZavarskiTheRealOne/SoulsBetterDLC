@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.EternityMode;
-using FargowiltasSouls.EternityMode.NPCMatching;
+﻿using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -46,10 +46,10 @@ namespace SoulsBetterDLC.EternityMode.Content.Enemy
             }
         }
 
-        public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(ModContent.BuffType<Buffs.MynaDB>(), 600);
-            base.OnHitPlayer(npc, target, damage, crit);
+            base.OnHitPlayer(npc, target, hurtInfo);
         }
 
         public override bool SafePreAI(NPC npc)

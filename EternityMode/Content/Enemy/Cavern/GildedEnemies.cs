@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
-using FargowiltasSouls.EternityMode.NPCMatching;
-using FargowiltasSouls.EternityMode;
+using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core.Globals;
 using ThoriumMod.NPCs;
 using Terraria.GameContent.ItemDropRules;
 
@@ -19,11 +19,11 @@ namespace SoulsBetterDLC.EternityMode.Content.Enemy.Cavern
             ModContent.NPCType<GildedSlime>()
         );
 
-        public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(ModContent.BuffType<Buffs.GildedSightDB>(), 2700);
 
-            base.OnHitPlayer(npc, target, damage, crit);
+            base.OnHitPlayer(npc, target, hurtInfo);
         }
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)

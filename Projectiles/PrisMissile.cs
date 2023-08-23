@@ -5,10 +5,10 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using CalamityMod.Projectiles.Magic;
 using Terraria.Audio;
-using CalamityMod.EntitySources;
 
 namespace SoulsBetterDLC.Projectiles
 {
+    [ExtendsFromMod("CalamityMod")]
     public class PrisMissile : ModProjectile
     {
         public override void SetStaticDefaults()

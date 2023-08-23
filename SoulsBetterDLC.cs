@@ -9,7 +9,7 @@ using ThoriumMod;
 using CalamityMod.Items.Placeables.Furniture;
 using System.Reflection;
 using MonoMod.RuntimeDetour.HookGen;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.ModLoader.Core;
@@ -49,7 +49,8 @@ namespace SoulsBetterDLC
             if (toggles.Active)
             {
                 Instance.Logger.Info($"ToggleCollection found: {nameof(type)}");
-                List<Toggle> toggleCollectionChildren = toggles.Load(ToggleLoader.LoadedToggles.Count - 1);
+                //List<Toggle> toggleCollectionChildren = toggles.Load(ToggleLoader.LoadedToggles.Count - 1);
+                List<Toggle> toggleCollectionChildren = toggles.Load();
                 foreach (Toggle toggle in toggleCollectionChildren)
                 {
                     ToggleLoader.RegisterToggle(toggle);
@@ -64,10 +65,10 @@ namespace SoulsBetterDLC
             if (deviDetourClass != null)
             {
                 MethodInfo SetChatButtons_DETOUR = deviDetourClass.GetMethod("SetChatButtons", BindingFlags.Public | BindingFlags.Instance);
-                MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+                //MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("ModifyActiveShop", BindingFlags.Public | BindingFlags.Instance);
 
                 MonoModHooks.Add(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
-                MonoModHooks.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
+                //MonoModHooks.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
                 if (ThoriumLoaded) DevianttPatches.AddDevianttShop("Thorium", DevianttPatches.SetupThoriumDeviShop);
             }
 
@@ -76,11 +77,11 @@ namespace SoulsBetterDLC
 
             if (lumberDetourClass != null)
             {
-                MethodInfo SetChatButtons_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
-                MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+                //MethodInfo SetChatButtons_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
+                //MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
 
-                MonoModHooks.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
-                MonoModHooks.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
+                //MonoModHooks.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
+                //MonoModHooks.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
             }
         }
 

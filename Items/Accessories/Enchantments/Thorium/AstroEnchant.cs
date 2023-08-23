@@ -26,7 +26,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             {
                 DLCPlayer.AstroEnch = true;
                 DLCPlayer.AstroEnchItem = Item;
-                player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().StabilizedGravity = true;
+                player.GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().StabilizedGravity = true;
                 if (DLCPlayer.AstroLaserCD > 0) DLCPlayer.AstroLaserCD--;
             }
         }
@@ -49,7 +49,7 @@ namespace SoulsBetterDLC
         public void SpawnAstroLaser(NPC target)
         {
             int Damage = 100;
-            if (Player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) Damage += 50;
+            if (Player.GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive) Damage += 50;
             if (Player.position.Y < Main.worldSurface * 0.35 * 16) Damage += 50; // in space
             Vector2 pos = new(target.Center.X, MathHelper.Max(Player.Center.Y - Main.screenHeight, 10f));
 
@@ -64,7 +64,7 @@ namespace SoulsBetterDLC
 
 namespace SoulsBetterDLC.Projectiles.Thorium
 {
-    public class SaucerDeathrayProj : FargowiltasSouls.Projectiles.Minions.SaucerDeathray
+    public class SaucerDeathrayProj : FargowiltasSouls.Content.Projectiles.Minions.SaucerDeathray
     {
         // I stole this code from SoulsMod SaucerDeathray projectile but it looks like vanilla code anyway so I don't feel guilty. Had to change a few lines.
         public override void AI()

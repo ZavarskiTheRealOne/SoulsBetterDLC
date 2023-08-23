@@ -33,24 +33,25 @@ namespace SoulsBetterDLC
             button = ModShopNames[DevianttShopCurrent];
         }
 
-        internal delegate void orig_SetupShop(Deviantt self, Chest shop, ref int nextSlot);
-        internal static void SetupShop(orig_SetupShop orig, Deviantt self, Chest shop, ref int nextSlot)
-        {
-            DevianttShopCurrent %= ModShops.Count;
-            if (DevianttShopCurrent == 0) orig(self, shop, ref nextSlot);
-            else
-            {
-                nextSlot = ModShops[DevianttShopCurrent](shop, nextSlot);
-            }
-        }
+        //internal delegate void orig_SetupShop(Deviantt self, Chest shop, ref int nextSlot);
+        //internal static void SetupShop(orig_SetupShop orig, Deviantt self, Chest shop, ref int nextSlot)
+        //{
+        //    DevianttShopCurrent %= ModShops.Count;
+        //    if (DevianttShopCurrent == 0) orig(self, shop, ref nextSlot);
+        //    else
+        //    {
+        //        nextSlot = ModShops[DevianttShopCurrent](shop, nextSlot);
+        //    }
+        //}
 
         // lambdas can't have ref parameters so this returns the final value of nextSlot instead of using one.
         internal static int SetupThoriumDeviShop(Chest shop, int nextSlot)
         {
-            Deviantt.AddItem(DLCSystem.DLCDownedBools["GildedLycan"] && DLCSystem.DLCDownedBools["GildedBat"] && DLCSystem.DLCDownedBools["GildedSlime"],
-                        ModContent.ItemType<GildedSummon>(), Item.buyPrice(0, 7), ref shop, ref nextSlot);
-            Deviantt.AddItem(DLCSystem.DLCDownedBools["Myna"],
-                        ModContent.ItemType<MynaSummon>(), Item.buyPrice(0, 15), ref shop, ref nextSlot);
+            var npcShop = new NPCShop(ModContent.NPCType<Deviantt>(), Deviantt.ShopName);
+            npcShop.Add(new Item(ModContent.ItemType<GildedSummon>()) { shopCustomPrice = Item.buyPrice(0, 7) }, new Condition("Mods.SoulsBetterDLC.Conditions.GildedDown", () => DLCSystem.DLCDownedBools["GildedLycan"] && DLCSystem.DLCDownedBools["GildedBat"] && DLCSystem.DLCDownedBools["GildedSlime"]));
+            npcShop.Add(new Item(ModContent.ItemType<MynaSummon>()) { shopCustomPrice = Item.buyPrice(0, 15) }, new Condition("Mods.SoulsBetterDLC.Conditions.MynaDown", () => DLCSystem.DLCDownedBools["Myna"]));
+
+            npcShop.Register();
             return nextSlot;
         }
         internal static int SetupCalamityDeviShop(Chest shop, int nextSlot)

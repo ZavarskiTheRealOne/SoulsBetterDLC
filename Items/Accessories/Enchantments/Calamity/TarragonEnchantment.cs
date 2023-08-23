@@ -8,7 +8,7 @@ using CalamityMod.Items.Armor.Tarragon;
 using CalamityMod.Items.Weapons.Melee;
 using CalamityMod.Items.Accessories;
 using SoulsBetterDLC.Buffs;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {

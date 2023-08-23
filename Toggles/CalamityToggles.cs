@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Toggler;
+﻿using FargowiltasSouls.Core.Toggler;
 using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
 using Terraria.ModLoader;
 

@@ -11,7 +11,7 @@ namespace SoulsBetterDLC.Projectiles
     [ExtendsFromMod("CalamityMod")]
     public class TarragonAura : ModProjectile
     {
-        public override string Texture => "CalamityMod/Projectiles/Healing/AuricOrb";
+        public override string Texture => "CalamityMod/Projectiles/Healing/SilvaOrb";
         public override void SetStaticDefaults()
         {
             

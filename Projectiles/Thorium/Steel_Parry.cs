@@ -59,7 +59,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     }
 
                     parried.alreadyParried = true;
-                    parried.explodeOnDeath = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive;
+                    parried.explodeOnDeath = player.GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive;
                     proj.friendly = true;
                     proj.hostile = false;
 
@@ -91,7 +91,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         }
     }
 
-    public class MidExplosion : FargowiltasSouls.Projectiles.Masomode.MoonLordSunBlast
+    public class MidExplosion : FargowiltasSouls.Content.Projectiles.Masomode.MoonLordSunBlast
     {
         public override void SetDefaults()
         {

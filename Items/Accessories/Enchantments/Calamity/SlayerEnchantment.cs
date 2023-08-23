@@ -1,6 +1,6 @@
 ﻿using CalamityMod.CalPlayer;
 using CalamityMod.CalPlayer.Dashes;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using SoulsBetterDLC.Projectiles;
 using Terraria;

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace SoulsBetterDLC.Items.Accessories.Forces
 {
-    public abstract class BaseDLCForce : FargowiltasSouls.Items.Accessories.Forces.BaseForce
+    public abstract class BaseDLCForce : FargowiltasSouls.Content.Items.Accessories.Forces.BaseForce
     {
         public abstract string ModName { get; }
         public bool ModLoaded => ModLoader.HasMod(ModName);

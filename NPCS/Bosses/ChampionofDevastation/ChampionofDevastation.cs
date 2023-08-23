@@ -10,7 +10,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using System;
-using FargowiltasSouls.Projectiles;
+using FargowiltasSouls.Content.Projectiles;
 using Terraria.Localization;
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
 {
@@ -203,7 +203,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -8);
+                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -8);
                 }
                 SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                 phase2 = true;
@@ -554,7 +554,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             {
                 TimeLeft = 120;
             }
-            if (FargowiltasSouls.FargoSoulsWorld.EternityMode)
+            if (FargowiltasSouls.Core.Systems.WorldSavingSystem.EternityMode)
             {
                 TimeLeft = 60;
             }
@@ -609,15 +609,15 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
                 {
                     if (nextAttack == 1)
                     {
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -10);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -10);
                     }
                     if (nextAttack == 2)
                     {
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -9);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -9);
                     }
                     if (nextAttack == 3)
                     {
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -11);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -11);
                     }
                 }
                 SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);

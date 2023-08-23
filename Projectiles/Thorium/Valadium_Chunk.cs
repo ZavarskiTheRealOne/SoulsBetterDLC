@@ -157,7 +157,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
                 if (distSQ < 256)
                 {
-                    if (Main.player[Projectile.owner].GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive)
+                    if (Main.player[Projectile.owner].GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive)
                     {
                         Collide(Projectile, proj);
                     }

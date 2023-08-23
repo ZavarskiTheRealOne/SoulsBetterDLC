@@ -6,7 +6,7 @@ using CalamityMod.Items.Armor.MarniteArchitect;
 using CalamityMod.Items.Accessories;
 using SoulsBetterDLC.Projectiles;
 using SoulsBetterDLC.Buffs;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {

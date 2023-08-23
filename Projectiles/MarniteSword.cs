@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 
 namespace SoulsBetterDLC.Projectiles
 {

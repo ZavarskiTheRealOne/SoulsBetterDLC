@@ -7,7 +7,8 @@ using CalamityMod.World;
 using Terraria.GameInput;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.DataStructures;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
+using FargowiltasSouls.Core.ModPlayers;
 
 namespace SoulsBetterDLC
 {
@@ -150,7 +151,7 @@ namespace SoulsBetterDLC
                 Player.GetModPlayer<FargoSoulsPlayer>().WizardEnchantActive = false;
                 for (int i = 3; i <= 9; i++)
                 {
-                    if (!Player.armor[i].IsAir && (Player.armor[i].type == ModContent.ItemType<FargowiltasSouls.Items.Accessories.Enchantments.WizardEnchant>() || Player.armor[i].type == ModContent.ItemType<FargowiltasSouls.Items.Accessories.Forces.CosmoForce>()))
+                    if (!Player.armor[i].IsAir && (Player.armor[i].type == ModContent.ItemType<FargowiltasSouls.Content.Items.Accessories.Enchantments.WizardEnchant>() || Player.armor[i].type == ModContent.ItemType<FargowiltasSouls.Content.Items.Accessories.Forces.CosmoForce>()))
                     {
                         Player.GetModPlayer<FargoSoulsPlayer>().WizardEnchantActive = true;
                         ExploEffects = true;

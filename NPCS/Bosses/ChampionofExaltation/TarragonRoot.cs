@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExaltation
     [ExtendsFromMod("CalamityMod")]
     public class TarragonRoot : ModProjectile
     {
-        public override string Texture => "CalamityMod/Projectiles/Healing/AuricOrb";
+        public override string Texture => "CalamityMod/Projectiles/Healing/SilvaOrb";
         public override void SetDefaults()
         {
             Projectile.hostile = true;

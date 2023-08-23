@@ -1,7 +1,7 @@
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using FargowiltasSouls.Items.Accessories.Essences;
+using FargowiltasSouls.Content.Items.Accessories.Essences;
 
 namespace SoulsBetterDLC.Items.Accessories.Essences
 {

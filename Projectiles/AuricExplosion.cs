@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.Projectiles
     [ExtendsFromMod("CalamityMod")]
     public class AuricExplosion : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Projectiles/GlowRing";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/GlowRing";
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

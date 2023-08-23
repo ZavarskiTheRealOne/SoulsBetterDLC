@@ -54,7 +54,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         {
             Player player = Main.player[Projectile.owner];
             var (Sin, Cos) = MathF.SinCos(Projectile.ai[0]);
-            float orbitRadius = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 100 : 80;
+            float orbitRadius = player.GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive ? 100 : 80;
             Projectile.Center = player.Center + new Vector2(Cos, Sin) * orbitRadius;
             Projectile.ai[0] += (MathF.PI / 360);
             Projectile.ai[0] %= MathF.Tau;
@@ -87,7 +87,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-            Rectangle rect = new(0, Main.player[Projectile.owner].GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive ? 32 : 0, 60, 32);
+            Rectangle rect = new(0, Main.player[Projectile.owner].GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive ? 32 : 0, 60, 32);
             Vector2 origin = rect.Size() / 2f;
             Color drawColor = Projectile.GetAlpha(lightColor);                          // removes gap
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition - (Vector2.UnitY * 2), rect, drawColor, 0f, origin, 1f, SpriteEffects.None, 0);

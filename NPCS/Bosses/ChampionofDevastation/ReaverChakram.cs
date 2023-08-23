@@ -2,7 +2,7 @@
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using FargowiltasSouls.Projectiles.MutantBoss;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
 {
@@ -14,7 +14,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            DisplayName.SetDefault("Reaver Chakram");
+            //DisplayName.SetDefault("Reaver Chakram");
         }
         public override void SetDefaults()
         {
@@ -28,10 +28,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             Projectile.height = 38;
             
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
-        {
-            
-        }
+        
         public override void OnSpawn(IEntitySource source)
         {
            

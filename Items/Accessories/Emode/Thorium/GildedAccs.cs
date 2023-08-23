@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FargowiltasSouls.Items;
+using FargowiltasSouls.Content.Items;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

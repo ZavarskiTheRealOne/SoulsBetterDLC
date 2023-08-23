@@ -148,7 +148,7 @@ namespace SoulsBetterDLC
                 ModContent.ItemType<CalamityMod.Items.Accessories.CryoStone>(),
                 ModContent.ItemType<CalamityMod.Items.Accessories.FrostFlare>()
             });
-            CreateCalBagRecipes(ModContent.ItemType<CalamityMod.Items.Placeables.Furniture.Trophies.CryogenTrophy>(), new int[1] { ModContent.ItemType<CalamityMod.Items.Weapons.Summon.ColdDivinity>() });
+            CreateCalBagRecipes(ModContent.ItemType<CalamityMod.Items.Placeables.Furniture.Trophies.CryogenTrophy>(), new int[1] { ModContent.ItemType<CalamityMod.Items.Weapons.Summon.GlacialEmbrace>() });
             CreateCalBagRecipes(1368, new int[1] { ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.Arbalest>() }); //twins 1
             CreateCalBagRecipes(1369, new int[1] { ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.Arbalest>() }); //twins 2
             CreateCalBagRecipes(ModContent.ItemType<CalamityMod.Items.TreasureBags.AquaticScourgeBag>(), new int[6]
@@ -256,7 +256,7 @@ namespace SoulsBetterDLC
             {
                 ModContent.ItemType<CalamityMod.Items.Weapons.Melee.TheMicrowave>(),
                 ModContent.ItemType<CalamityMod.Items.Weapons.Ranged.StarSputter>(),
-                ModContent.ItemType<CalamityMod.Items.Weapons.Magic.Starfall>(),
+                ModContent.ItemType<CalamityMod.Items.Weapons.Magic.StarShower>(),
                 ModContent.ItemType<CalamityMod.Items.Weapons.Summon.GodspawnHelixStaff>(),
                 ModContent.ItemType<CalamityMod.Items.Weapons.Rogue.RegulusRiot>(),
                 ModContent.ItemType<CalamityMod.Items.Pets.ChromaticOrb>()
