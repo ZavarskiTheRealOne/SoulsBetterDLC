@@ -11,7 +11,8 @@ namespace SoulsBetterDLC.Projectiles.Thorium
     [ExtendsFromMod("ThoriumMod")]
     public class GraniteCore : ModProjectile
     {
-        public override string Texture => "ThoriumMod/NPCs/Granite/GraniteEnergy";
+        public override string Texture => "ThoriumMod/NPCs/BossGraniteEnergyStorm/CoalescedEnergy";
+        public override string GlowTexture => "ThoriumMod/NPCs/BossGraniteEnergyStorm/CoalescedEnergy_Glow";
         public override void SetDefaults()
         {
             Projectile.width = 54;

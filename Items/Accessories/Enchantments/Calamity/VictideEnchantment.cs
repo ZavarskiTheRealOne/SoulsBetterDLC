@@ -53,6 +53,9 @@ namespace SoulsBetterDLC
             Player.gills = true;
         }
     }
+}
+namespace SoulsBetterDLC.Globals
+{
     public partial class CalamityGlobalItem : GlobalItem
     {
         public void VictideShootEffect(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity)

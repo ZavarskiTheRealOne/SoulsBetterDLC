@@ -9,7 +9,7 @@ using ThoriumMod;
 using CalamityMod.Items.Placeables.Furniture;
 using System.Reflection;
 using MonoMod.RuntimeDetour.HookGen;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.ModLoader.Core;
@@ -43,17 +43,19 @@ namespace SoulsBetterDLC
         }
         public static void LoadTogglesFromType(Type type)
         {
+            // TODO: fix toggles
+            return;
             
             ToggleCollection toggles = (ToggleCollection)Activator.CreateInstance(type);
 
             if (toggles.Active)
             {
                 Instance.Logger.Info($"ToggleCollection found: {nameof(type)}");
-                List<Toggle> toggleCollectionChildren = toggles.Load(ToggleLoader.LoadedToggles.Count - 1);
-                foreach (Toggle toggle in toggleCollectionChildren)
-                {
-                    ToggleLoader.RegisterToggle(toggle);
-                }
+                //List<Toggle> toggleCollectionChildren = toggles.Load(ToggleLoader.LoadedToggles.Count - 1);
+                //foreach (Toggle toggle in toggleCollectionChildren)
+                //{
+                //    ToggleLoader.RegisterToggle(toggle);
+                //}
             }
         }
         private static void LoadDetours()
@@ -64,10 +66,10 @@ namespace SoulsBetterDLC
             if (deviDetourClass != null)
             {
                 MethodInfo SetChatButtons_DETOUR = deviDetourClass.GetMethod("SetChatButtons", BindingFlags.Public | BindingFlags.Instance);
-                MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+                //MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
 
                 MonoModHooks.Add(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
-                MonoModHooks.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
+                //MonoModHooks.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
                 if (ThoriumLoaded) DevianttPatches.AddDevianttShop("Thorium", DevianttPatches.SetupThoriumDeviShop);
             }
 
@@ -77,10 +79,10 @@ namespace SoulsBetterDLC
             if (lumberDetourClass != null)
             {
                 MethodInfo SetChatButtons_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
-                MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+                //MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
 
-                MonoModHooks.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
-                MonoModHooks.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
+                //MonoModHooks.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
+                //MonoModHooks.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
             }
         }
 
@@ -94,8 +96,6 @@ namespace SoulsBetterDLC
 
             Projectiles.Thorium.DLCHealing.HealMethod = thoriumProjExtensions.GetMethod("ThoriumHeal", BindingFlags.Static | BindingFlags.NonPublic);
             Projectiles.Thorium.DLCHealing.CustomHealingType = thoriumProjExtensions.GetNestedType("CustomHealing", BindingFlags.NonPublic);
-            if (Projectiles.Thorium.DLCHealing.CustomHealingType == null) Logger.Debug("type cringe");
-            else Logger.Debug("type successful");
         }
        
     }

@@ -102,7 +102,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
                 {
                     Dust.NewDustDirect(Projectile.Center + new Vector2(0, Main.rand.Next(0, (int)(Projectile.height * 0.7f))).RotatedByRandom(MathHelper.TwoPi), 0, 0, DustID.RedTorch, Scale: 3).noGravity = true;
                 }
-                //Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, 0, -7);
+                //Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, 0, -7);
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
             }
             if (Projectile.timeLeft == 1)

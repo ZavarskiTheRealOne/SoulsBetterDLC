@@ -86,7 +86,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
             if (target != null)
             {
-                bool wizard = player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive;
+                bool wizard = player.GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive;
                 int projType = wizard ? ProjectileID.BulletHighVelocity : ProjectileID.WoodenArrowFriendly; // Goofy ah
                 int damage = wizard ? 50 : 20;
                 Vector2 ShootOrigin = Projectile.Center + new Vector2(0, -24);
@@ -125,7 +125,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
 
             if (GrowingRoots == null)
             {
-                GrowingRoots = ModContent.Request<Texture2D>("SoulsBetterDLC/Projectiles/LivingWood_GrowRoots");
+                GrowingRoots = ModContent.Request<Texture2D>("SoulsBetterDLC/Projectiles/Thorium/LivingWood_GrowRoots");
             }
 
             int frame;

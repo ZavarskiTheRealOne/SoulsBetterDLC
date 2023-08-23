@@ -70,7 +70,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
         }
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
+            //NPC.lifeMax = (int)(NPC.lifeMax * bossLifeScale);
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -141,7 +141,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -10);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.GlowRing>(), 0, 0, Main.myPlayer, NPC.whoAmI, -10);
                     }
                     SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                 }

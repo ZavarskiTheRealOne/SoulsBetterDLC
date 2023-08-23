@@ -11,7 +11,7 @@ namespace SoulsBetterDLC.Buffs
 {
     public class BrimflameBuff : ModBuff
     {
-        public override string Texture => "FargowiltasSouls/Buffs/PlaceholderBuff";
+        public override string Texture => "SoulsBetterDLC/Buffs/PlaceholderB";
         public override void SetStaticDefaults()
         {
             

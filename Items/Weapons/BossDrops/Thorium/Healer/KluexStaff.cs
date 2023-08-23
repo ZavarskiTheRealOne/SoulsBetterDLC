@@ -19,8 +19,8 @@ namespace SoulsBetterDLC.Items.Weapons.BossDrops.Thorium.Healer
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            DisplayName.SetDefault("Staff of Copyrighted Content");
-            Tooltip.SetDefault("Summons self-aiming orbs at the cursor. Lwft click summons red damage orbs and right click summons green healing orbs. Use speed increases with use.");
+            //DisplayName.SetDefault("Staff of Copyrighted Content");
+            //Tooltip.SetDefault("Summons self-aiming orbs at the cursor. Lwft click summons red damage orbs and right click summons green healing orbs. Use speed increases with use.");
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
             Item.staff[Type] = true;
         }

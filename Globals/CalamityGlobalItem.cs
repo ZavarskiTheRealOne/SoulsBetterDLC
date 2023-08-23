@@ -1,10 +1,10 @@
-﻿
+﻿using SoulsBetterDLC;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace SoulsBetterDLC
+namespace SoulsBetterDLC.Globals
 {
     [ExtendsFromMod("CalamityMod")]
     public partial class CalamityGlobalItem : GlobalItem

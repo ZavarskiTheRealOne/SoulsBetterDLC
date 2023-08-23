@@ -23,7 +23,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Thorium
             player.GetModPlayer<CrossplayerThorium>().SilkEnch = true;
             if (player.statMana >= player.statManaMax * 0.95) return; // so you dont get boosts with just full mana
             player.GetDamage(DamageClass.Generic) += (0.0025f * player.statMana);
-            if (player.GetModPlayer<FargowiltasSouls.FargoSoulsPlayer>().WizardEnchantActive) player.GetDamage(DamageClass.Generic) += (0.0025f * player.statMana);
+            if (player.GetModPlayer<FargowiltasSouls.Core.ModPlayers.FargoSoulsPlayer>().WizardEnchantActive) player.GetDamage(DamageClass.Generic) += (0.0025f * player.statMana);
         }
 
         public override void AddRecipes()

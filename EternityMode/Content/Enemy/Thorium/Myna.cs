@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.EternityMode;
-using FargowiltasSouls.EternityMode.NPCMatching;
+﻿using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,7 +8,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace SoulsBetterDLC.EternityMode.Content.Enemy
+namespace SoulsBetterDLC.EternityMode.Content.Enemy.Thorium
 {
     [ExtendsFromMod("ThoriumMod")]
     public class Myna : EModeNPCBehaviour
@@ -46,11 +46,11 @@ namespace SoulsBetterDLC.EternityMode.Content.Enemy
             }
         }
 
-        public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
-        {
-            target.AddBuff(ModContent.BuffType<Buffs.MynaDB>(), 600);
-            base.OnHitPlayer(npc, target, damage, crit);
-        }
+        //public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
+        //{
+        //    target.AddBuff(ModContent.BuffType<Buffs.MynaDB>(), 600);
+        //    base.OnHitPlayer(npc, target, damage, crit);
+        //}
 
         public override bool SafePreAI(NPC npc)
         {

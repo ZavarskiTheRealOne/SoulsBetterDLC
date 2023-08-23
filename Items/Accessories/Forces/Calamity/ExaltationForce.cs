@@ -1,7 +1,7 @@
 ﻿using CalamityMod;
 using CalamityMod.CalPlayer.Dashes;
 using CalamityMod.CalPlayer;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using System.Collections.Generic;
 using Terraria;

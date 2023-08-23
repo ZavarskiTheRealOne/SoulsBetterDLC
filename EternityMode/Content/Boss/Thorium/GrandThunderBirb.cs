@@ -1,8 +1,8 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using FargowiltasSouls.EternityMode;
-using ThoriumMod.NPCs.Thunder;
-using FargowiltasSouls.EternityMode.NPCMatching;
+using FargowiltasSouls.Core.Globals;
+using ThoriumMod.NPCs.BossTheGrandThunderBird;
+using FargowiltasSouls.Core.NPCMatching;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -11,14 +11,14 @@ using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.GameContent.ItemDropRules;
-using FargowiltasSouls.ItemDropRules.Conditions;
+//using FargowiltasSouls.ItemDropRules.Conditions;
 
 namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
 {
     [ExtendsFromMod("ThoriumMod")]
     public class GrandThunderBirb : EModeNPCBehaviour
     {
-        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(ModContent.NPCType<TheGrandThunderBirdv2>());
+        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(ModContent.NPCType<TheGrandThunderBird>());
 
         internal enum AIMode
         {
@@ -103,7 +103,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                     p1 = false;
                     for (int i = 0; i < 3; i++)
                     {
-                        NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<Hatchling>(), Target: npc.target, ai0: npc.whoAmI);
+                        NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<StormHatchling>(), Target: npc.target, ai0: npc.whoAmI);
                     }
                     hatlingSpawnTimer = 600;
                 }
@@ -111,7 +111,7 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
                 if (!p1 && hatlingSpawnTimer == 0)
                 {
                     hatlingSpawnTimer = npc.life <= npc.lifeMax * 0.2 ? 300 : 600;
-                    NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<Hatchling>(), Target: npc.target, ai0: npc.whoAmI);
+                    NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<StormHatchling>(), Target: npc.target, ai0: npc.whoAmI);
                 }
 
                 hatlingSpawnTimer--;
@@ -271,14 +271,14 @@ namespace SoulsBetterDLC.EternityMode.Content.Boss.Thorium
             return false;
         }
 
-        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
-        {
-            IItemDropRule BossDrop(int item) => new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10));
+        //public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        //{
+        //    IItemDropRule BossDrop(int item) => new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10));
 
-            LeadingConditionRule emodeRule = new(new EModeDropCondition());
-            emodeRule.OnSuccess(FargowiltasSouls.FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<Items.Accessories.Emode.Thorium.TempleCore>()));
-            npcLoot.Add(emodeRule);
-            npcLoot.Add(BossDrop(ModContent.ItemType<Items.Weapons.BossDrops.Thorium.Healer.KluexStaff>()));
-        }
+        //    LeadingConditionRule emodeRule = new(new EModeDropCondition());
+        //    emodeRule.OnSuccess(FargowiltasSouls.FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<Items.Accessories.Emode.Thorium.TempleCore>()));
+        //    npcLoot.Add(emodeRule);
+        //    npcLoot.Add(BossDrop(ModContent.ItemType<Items.Weapons.BossDrops.Thorium.Healer.KluexStaff>()));
+        //}
     }
 }

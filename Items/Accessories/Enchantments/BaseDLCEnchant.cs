@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments
 {

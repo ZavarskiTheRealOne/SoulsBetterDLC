@@ -3,7 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using CalamityMod.CalPlayer;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
@@ -37,7 +37,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Plaguebringer.PlaguebringerVisor>());
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Plaguebringer.PlaguebringerCarapace>());
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Armor.Plaguebringer.PlaguebringerPistons>());
-            recipe.AddIngredient(ModContent.ItemType<FargowiltasSouls.Items.Accessories.Enchantments.BeeEnchant>());
+            recipe.AddIngredient(ModContent.ItemType<FargowiltasSouls.Content.Items.Accessories.Enchantments.BeeEnchant>());
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Accessories.PlagueHive>());
             recipe.AddIngredient(ModContent.ItemType<CalamityMod.Items.Weapons.Rogue.EpidemicShredder>());
             recipe.AddTile(TileID.CrystalBall);

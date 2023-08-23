@@ -131,7 +131,13 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofAnnihilation
                 if (Projectile.timeLeft % 10 == 0)
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, new Vector2(10, 0).RotatedBy(Projectile.rotation), ModContent.ProjectileType<CalamityMod.Projectiles.Boss.BrimstoneBarrage>(), FargowiltasSouls.FargoSoulsUtil.ScaledProjectileDamage(400), 0, Main.myPlayer);
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(),
+                                                 Projectile.Center,
+                                                 new Vector2(10, 0).RotatedBy(Projectile.rotation),
+                                                 ModContent.ProjectileType<CalamityMod.Projectiles.Boss.BrimstoneBarrage>(),
+                                                 FargowiltasSouls.FargoSoulsUtil.ScaledProjectileDamage(400),
+                                                 0,
+                                                 Main.myPlayer);
                 }
             }
             if (Projectile.localAI[1] == 5)

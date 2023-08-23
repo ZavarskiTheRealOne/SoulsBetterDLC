@@ -9,6 +9,7 @@ using CalamityMod.EntitySources;
 
 namespace SoulsBetterDLC.Projectiles
 {
+    [ExtendsFromMod("CalamityMod")]
     public class PrisMissile : ModProjectile
     {
         public override void SetStaticDefaults()

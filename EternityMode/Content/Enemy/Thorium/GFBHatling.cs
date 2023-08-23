@@ -1,19 +1,19 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using FargowiltasSouls.EternityMode;
-using ThoriumMod.NPCs.Thunder;
-using FargowiltasSouls.EternityMode.NPCMatching;
+using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core.Globals;
+using ThoriumMod.NPCs.BossTheGrandThunderBird;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
 
-namespace SoulsBetterDLC.EternityMode.Content.Enemy
+namespace SoulsBetterDLC.EternityMode.Content.Enemy.Thorium
 {
     [ExtendsFromMod("ThoriumMod")]
     public class GFBHatling : EModeNPCBehaviour
     {
-        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(ModContent.NPCType<Hatchling>());
+        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(ModContent.NPCType<StormHatchling>());
 
         const int OrbAttSpeed = 100;
         const int WaitTime = 60;

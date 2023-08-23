@@ -1,34 +1,33 @@
-﻿Mods: {
-  "FargowiltasSouls": {
-    "ExplorationHeader": "[i:SoulsBetterDLC/ExplorationForce] {$Mods.SoulsBetterDLC.ItemName.ExplorationForce}",
-    "ValkyrieConfig": "[i:SoulsBetterDLC/AerospecEnchantment] [c/99c8c1:Valkyrie Minion]",
-    "TornadoesConfig": "[i:SoulsBetterDLC/ProwlerEnchantment] [c/cc2a3c:Desert Tornadoes]",
-    "BuildBuffConfig": "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Building Stats]",
-    "MarniteSwordsConfig": "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Marnite Sword Minions]",
-    "WulfrumBuffConfig": "[i:SoulsBetterDLC/WulfrumEnchantment] [c/cec9aa:Wulfrum Empower]",
+Mods: {
+	FargowiltasSouls: {
+		ExplorationHeader: "[i:SoulsBetterDLC/ExplorationForce] {$Mods.SoulsBetterDLC.ItemName.ExplorationForce}"
+		ValkyrieConfig: "[i:SoulsBetterDLC/AerospecEnchantment] [c/99c8c1:Valkyrie Minion]"
+		TornadoesConfig: "[i:SoulsBetterDLC/ProwlerEnchantment] [c/cc2a3c:Desert Tornadoes]"
+		BuildBuffConfig: "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Building Stats]"
+		MarniteSwordsConfig: "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Marnite Sword Minions]"
+		WulfrumBuffConfig: "[i:SoulsBetterDLC/WulfrumEnchantment] [c/cec9aa:Wulfrum Empower]"
+		ExaltationHeader: "[i:SoulsBetterDLC/ExaltationForce] {$Mods.SoulsBetterDLC.ItemName.ExaltationForce}"
+		TarragonCloakConfig: "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Cloak]"
+		TarragonAuraConfig: "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Aura]"
+		BloodflareBuffsConfig: "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Buffs on hit]"
+		BloodflareLifestealConfig: "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Lifesteal and hearts]"
+		SilvaProjectilesConfig: "[i:SoulsBetterDLC/SilvaEnchantment] [c/a1ff6b:Crystal spawns projectiles]"
+		SilvaCrystalConfig: "[i:SoulsBetterDLC/SilvaEnchantment] [c/a1ff6b:Silva Crystal]"
+		SlayerDashConfig: "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Ram Dash]"
+		SlayerStarsConfig: "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Cosmilite Stars]"
+		AuricLightningConfig: "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Lightning]"
+		AuricExplosionsConfig: "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Explosions]"
+		DevastationHeader: "[i:SoulsBetterDLC/DevastationForce] {$Mods.SoulsBetterDLC.ItemName.DevastationForce}"
+		IceSpikesConfig: "[i:SoulsBetterDLC/DaedalusEnchantment] [c/84d4f6:Ice Spikes]"
+		ReaverStatsConfig: "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Stats]"
+		ReaverRageConfig: "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Rage]"
+		HydrothermicHitsConfig: "[i:SoulsBetterDLC/HydrothermicEnchantment] [c/f8b659:Hydrothermic Attacks]"
+		PlagueBeesConfig: "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Plague Bees]"
+		PlagueDebuffConfig: "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Inflict Plague]"
+	}
 
-    "ExaltationHeader": "[i:SoulsBetterDLC/ExaltationForce] {$Mods.SoulsBetterDLC.ItemName.ExaltationForce}",
-    "TarragonCloakConfig": "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Cloak]",
-    "TarragonAuraConfig": "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Aura]",
-    "BloodflareBuffsConfig": "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Buffs on hit]",
-    "BloodflareLifestealConfig": "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Lifesteal and hearts]",
-    "SilvaProjectilesConfig": "[i:SoulsBetterDLC/SilvaEnchantment] [c/a1ff6b:Crystal spawns projectiles]",
-    "SilvaCrystalConfig": "[i:SoulsBetterDLC/SilvaEnchantment] [c/a1ff6b:Silva Crystal]",
-    "SlayerDashConfig": "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Ram Dash]",
-    "SlayerStarsConfig": "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Cosmilite Stars]",
-    "AuricLightningConfig": "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Lightning]",
-    "AuricExplosionsConfig": "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Explosions]"
-
-    "DevastationHeader": "[i:SoulsBetterDLC/DevastationForce] {$Mods.SoulsBetterDLC.ItemName.DevastationForce}",
-    "IceSpikesConfig": "[i:SoulsBetterDLC/DaedalusEnchantment] [c/84d4f6:Ice Spikes]"
-    "ReaverStatsConfig": "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Stats]"
-    "ReaverRageConfig": "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Rage]"
-    "HydrothermicHitsConfig": "[i:SoulsBetterDLC/HydrothermicEnchantment] [c/f8b659:Hydrothermic Attacks]"
-    "PlagueBeesConfig": "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Plague Bees]"
-    "PlagueDebuffConfig": "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Inflict Plague]"
-  }
-  SoulsBetterDLC:{
-    Buffs: {
+	SoulsBetterDLC: {
+		Buffs: {
 			AeroValkyrie_Buff: {
 				DisplayName: Enchanted Valkyrie
 				Description: It either really likes you or secretly wants to kill you
@@ -286,8 +285,9 @@
 				Tooltip: Projectiles, items and the player glow. Immune to gilded sight.
 			}
 
-			MynaAccessory:{
+			MynaAccessory: {
 				DisplayName: Myna Accessory
+				Tooltip: ""
 			}
 
 			TempleCore: {
@@ -305,7 +305,7 @@
 				Quote: I need more power!
 			}
 
-			BrimflameEnchantment:{
+			BrimflameEnchantment: {
 				DisplayName: Brimflame Enchantment
 				Tooltip:
 					'''
@@ -326,9 +326,9 @@
 					'''
 			}
 
-			DemonshadeEnchantment:{
+			DemonshadeEnchantment: {
 				DisplayName: Demonshade Enchantment
-				Tooltip: 
+				Tooltip:
 					'''
 					Press [button] to enrage nearby enemies, making them take 125% more damage but also deal 25% more damage
 					Rage generates over time and does not fade away when out of combat
@@ -337,7 +337,8 @@
 					'I think it's time for Jack... to let 'er rip!'
 					'''
 			}
-			EmpyreanEnchantment:{
+
+			EmpyreanEnchantment: {
 				DisplayName: Empyrean Enchantment
 				Tooltip:
 					'''
@@ -382,9 +383,9 @@
 					'''
 			}
 
-			MolluskEnchantment:{
+			MolluskEnchantment: {
 				DisplayName: Mollusk Enchantment
-				Tooltip: 
+				Tooltip:
 					'''
 					Allows swimming and free movement in water
 					Decreases movement speed outside water
@@ -393,7 +394,8 @@
 					'It's very clampicated'
 					'''
 			}
-			OmegaBlueEnchantment:{
+
+			OmegaBlueEnchantment: {
 				DisplayName: Omega Blue Enchantment
 				Tooltip:
 					'''
@@ -416,7 +418,7 @@
 					'''
 			}
 
-			PrismaticEnchantment:{
+			PrismaticEnchantment: {
 				DisplayName: Prismatic Enchantment
 				Tooltip:
 					'''
@@ -436,7 +438,7 @@
 					'''
 			}
 
-			SilvaEnchantment:{
+			SilvaEnchantment: {
 				DisplayName: Silva Enchantment
 				Tooltip:
 					'''
@@ -469,7 +471,7 @@
 					'''
 			}
 
-			TarragonEnchantment:{
+			TarragonEnchantment: {
 				DisplayName: Tarragon Enchantment
 				Tooltip:
 					'''
@@ -568,7 +570,7 @@
 				Tooltip: Increases damage the more frienly npcs are nearby
 			}
 
-			DevastationForce:{
+			DevastationForce: {
 				DisplayName: Devastation Force
 				Tooltip:
 					'''
@@ -579,7 +581,8 @@
 					'You have destroyed so much. What is it, exactly, that you have created?'
 					'''
 			}
-			ExaltationForce:{
+
+			ExaltationForce: {
 				DisplayName: Force of Exaltation
 				Tooltip:
 					'''
@@ -642,73 +645,69 @@
 		}
 
 		NPCs: {
-			SulphurBubble: {
-				DisplayName: Sulphuric Bubble
-			}
+			SulphurBubble.DisplayName: Sulphuric Bubble
 
-			ChampionofAnnihilation:{
+			ChampionofAnnihilation: {
 				DisplayName: Champion of Annihilation
 				BestiaryEntry: Crystal thing
 			}
-			BabyColossalSquid:{
+
+			BabyColossalSquid: {
 				DisplayName: Baby Colossal Squid
 				BestiaryEntry: bestiary stuff
 			}
-			DesolationBody:{
+
+			DesolationBody: {
 				DisplayName: Champion of Desolation
 				BestiaryEntry: bestiary stuff
 			}
-			DesolationHead:{
+
+			DesolationHead: {
 				DisplayName: Champion of Desolation
 				BestiaryEntry: bestiary stuff
 			}
-			DesolationTail:{
+
+			DesolationTail: {
 				DisplayName: Champion of Desolation
 				BestiaryEntry: bestiary stuff
 			}
-			ChampionofDevastation:{
+
+			ChampionofDevastation: {
 				DisplayName: Champion of Devastation
 				BestiaryEntry: bestiary stuff
 			}
-			AuricSoul:{
+
+			AuricSoul: {
 				DisplayName: Auric Soul
 				BestiaryEntry: bestiary stuff
 			}
-			ChampionofExaltation:{
+
+			ChampionofExaltation: {
 				DisplayName: Champion of Exaltation
 				BestiaryEntry: bestiary stuff
 			}
-			ChampionofExploration:{
+
+			ChampionofExploration: {
 				DisplayName: Champion of Exploration
 				BestiaryEntry: bestiary stuff
 			}
-			ExplorationDrone:{
+
+			ExplorationDrone: {
 				DisplayName: Exploration Drone
 				BestiaryEntry: bestiary stuff
 			}
-			FathomBubble:{
+
+			FathomBubble: {
 				DisplayName: Sulphuric Bubble
 				BestiaryEntry: bestiary stuff
 			}
 		}
 
 		Projectiles: {
-			AeroValkyrie: {
-				DisplayName: Enchanted Valkyrie
-			}
-
-			FearValkyrie: {
-				DisplayName: Damned Valkyrie
-			}
-
-			FearsomeFeather: {
-				DisplayName: Fearsome Feather
-			}
-
-			SulphurCloud: {
-				DisplayName: How did you get killed by this
-			}
-
+			AeroValkyrie.DisplayName: Enchanted Valkyrie
+			FearValkyrie.DisplayName: Damned Valkyrie
+			FearsomeFeather.DisplayName: Fearsome Feather
+			SulphurCloud.DisplayName: How did you get killed by this
 			DmgOrbHack.DisplayName: Kluex Orb
 			HealOrbHack.DisplayName: Kluex Orb
 			AnnihilationLaser.DisplayName: Annihilation Laser
@@ -769,6 +768,15 @@
 			Steel_Parry.DisplayName: Steel_ Parry
 			Templar_Fire.DisplayName: Templar_ Fire
 			Valadium_Chunk.DisplayName: Valadium_ Chunk
+			MagicShard.DisplayName: Magic Shard
+			MeleeShockwave.DisplayName: Melee Shockwave
+			RangedGem.DisplayName: Ranged Gem
+			SummonGem.DisplayName: Summon Gem
+		}
+
+		Keybinds: {
+			"Steel parry.DisplayName": Steel parry
+			"Living wood roots.DisplayName": Living wood roots
 		}
 	}
 }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using CalamityMod.Rarities;
 using SoulsBetterDLC.Buffs;
 using SoulsBetterDLC.Projectiles;
-using FargowiltasSouls.Toggler;
+using FargowiltasSouls.Core.Toggler;
 
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {

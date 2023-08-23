@@ -5,7 +5,7 @@ using ThoriumMod;
 using FargowiltasSouls;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using FargowiltasSouls.Utilities;
+using FargowiltasSouls.Common.Utilities;
 using ThoriumMod.Items.Donate;
 using ThoriumMod.Items.HealerItems;
 using SoulsBetterDLC.Buffs;
