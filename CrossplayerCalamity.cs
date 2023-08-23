@@ -9,6 +9,7 @@ using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.DataStructures;
 using FargowiltasSouls.Core.Toggler;
 using FargowiltasSouls.Core.ModPlayers;
+using ThoriumMod.Empowerments;
 
 namespace SoulsBetterDLC
 {
@@ -80,6 +81,8 @@ namespace SoulsBetterDLC
         public int SDIcicleCooldown;
         public int ButterBeeCD;
         public int AtaxiaCooldown;
+        public int AtaxiaCountdown;
+        public int AtaxiaDR;
         public int UmbraBuffTimer;
         public int BloodBuffTimer;
         public int LifestealCD;
@@ -101,6 +104,7 @@ namespace SoulsBetterDLC
             AyeCicleSmol = false;
             AtaxiaEruption = false;
             if (AtaxiaCooldown > 0) AtaxiaCooldown--;
+            if (AtaxiaCountdown > 0) AtaxiaCountdown--;
 
             Empyrean = false;
             OmegaBlue = false;
@@ -228,6 +232,10 @@ namespace SoulsBetterDLC
             {
                 DemonshadeHurtEffect(info.Damage);
             }
+            if (AtaxiaEruption)
+            {
+                AtaxiaHurt();
+            }
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
@@ -252,7 +260,7 @@ namespace SoulsBetterDLC
         }
         public override void PostUpdateEquips()
         {
-            //EXPLORATION (2/4)
+            //EXPLORATION (3/4)
 
             //aerospec
             if (RideOfTheValkyrie && Player.GetToggleValue("Valkyrie"))
@@ -299,7 +307,10 @@ namespace SoulsBetterDLC
                 PlaguebringerEffects();
             }
 
-
+            if (AtaxiaEruption)
+            {
+                AtaxiaEffects();
+            }
 
 
 
@@ -380,7 +391,7 @@ namespace SoulsBetterDLC
             //hydrothermic. just based
             if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
-                HydrothermicHitEffect(target, damageDone, hit.Crit);
+                HydrothermicHitEffect(target, damageDone);
             }
 
             //umbra and blood timer calculus
@@ -453,7 +464,7 @@ namespace SoulsBetterDLC
             //hydroth   ermic
             if (AtaxiaEruption && Player.GetToggleValue("HydrothermicHits"))
             {
-                HydrothermicProjHitEffect(target, damageDone, hit.Crit);
+                HydrothermicProjHitEffect(target, damageDone);
             }
             //umbra blood timer
             UmbraphileCalc(damageDone);

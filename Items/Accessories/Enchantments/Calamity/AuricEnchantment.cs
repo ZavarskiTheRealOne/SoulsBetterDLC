@@ -72,7 +72,7 @@ namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
             recipe.AddIngredient(ModContent.ItemType<DraedonsHeart>());
             recipe.AddIngredient(ModContent.ItemType<Ataraxia>());
             recipe.AddIngredient(ModContent.ItemType<AuricToilet>());
-            recipe.AddTile(TileID.CrystalBall);
+            recipe.AddTile(ModContent.TileType<CalamityMod.Tiles.Furniture.CraftingStations.DraedonsForge>());
             recipe.Register();
         }
     }

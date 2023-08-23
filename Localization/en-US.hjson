@@ -33,6 +33,11 @@ Mods: {
 				Description: It either really likes you or secretly wants to kill you
 			}
 
+			AtaxiaOverheat: {
+				DisplayName: Hydrothermic Overheat
+				Description: It got so hot inside you, you feel like you can twist metal with your bare hands.
+			}
+
 			BloodflareRegeneration: {
 				DisplayName: Bloodflare Regeneration
 				Description: The insides of your enemies drive you crazy.
@@ -367,8 +372,11 @@ Mods: {
 				Tooltip:
 					'''
 					Every 3 seconds, your attacks produce a chaos flame eruption on enemy hit.
-					If your attack is a crit, it also spawns a Sun explosion.
-					'They're out in the depths.'
+					For every proc, you get +5% DR, up to +25%.
+					Taking damage will remove all the gained DR.
+					If you don't take hit for 30 seconds with max DR,
+					you'll lose it with additional 30% in exchange for +25% damage.
+					"They're out in the depths."
 					'''
 			}
 

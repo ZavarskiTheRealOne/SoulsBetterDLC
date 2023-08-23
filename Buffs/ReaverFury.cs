@@ -7,7 +7,7 @@ namespace SoulsBetterDLC.Buffs
     {
         public override void SetStaticDefaults()
         {
-            
+            Main.debuff[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex)
