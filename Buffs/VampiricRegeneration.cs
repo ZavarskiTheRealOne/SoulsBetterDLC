@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Buffs
 {
+    [ExtendsFromMod("CalamityMod")]
     public class VampiricRegeneration : ModBuff
     {
         public override void SetStaticDefaults()

@@ -171,7 +171,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         {
             Targetting();
             Player target = Main.player[NPC.target];
-            if (NPC.Distance(target.Center) > 1000 && !(NPC.ai[0] == 1 && NPC.ai[1] < 70) && !(NPC.ai[0] == 2) && !(NPC.ai[0] == 3 && NPC.ai[1] < 60) && !(NPC.ai[1] < 0))
+            if (NPC.Distance(target.Center) > 1400 && !(NPC.ai[0] == 1 && NPC.ai[1] < 70) && !(NPC.ai[0] == 2) && !(NPC.ai[0] == 3 && NPC.ai[1] < 60) && !(NPC.ai[1] < 0))
             {
                 NPC.ai[3] = 1;
                 
@@ -179,6 +179,19 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             if (!WorldGen.SolidTile(NPC.Bottom.ToTileCoordinates()) && !TileID.Sets.Platforms[Main.tile[NPC.Bottom.ToTileCoordinates()].TileType] && NPC.velocity.Y < 10)
             {
                 NPC.velocity.Y += 0.3f;
+            }
+            bool onplatforms = false;
+            for (int i = NPC.BottomLeft.ToTileCoordinates().X; i < NPC.BottomRight.ToTileCoordinates().X; i++)
+            {
+                if (TileID.Sets.Platforms[Main.tile[i, NPC.Bottom.ToTileCoordinates().Y].TileType])
+                {
+                    onplatforms = true;
+                    break;
+                }
+            }
+            if (target.Center.Y > NPC.Bottom.Y && onplatforms)
+            {
+                NPC.position.Y += 1;
             }
             if (NPC.ai[3] == 1)
             {
@@ -241,25 +254,26 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
                         
                     }
                     if (Main.netMode != NetmodeID.MultiplayerClient)
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PlaguebringerSmalliath>(), 50, 0, Main.myPlayer);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PlaguebringerSmalliath>(), 50, 0, Main.myPlayer, ai1: 2);
                     SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/PlagueSounds/PBGAttackSwitch1"));
                 }
                 if (NPC.ai[1] == 45)
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PlaguebringerSmalliath>(), 50, 0, Main.myPlayer);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PlaguebringerSmalliath>(), 50, 0, Main.myPlayer, ai1: 0);
                     SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/PlagueSounds/PBGAttackSwitch1"));
                 }
                 if (NPC.ai[1] == 59)
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PlaguebringerSmalliath>(), 50, 0, Main.myPlayer);
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PlaguebringerSmalliath>(), 50, 0, Main.myPlayer, ai1: Main.rand.Next(1, 3));
                     SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/PlagueSounds/PBGAttackSwitch1"));
                 }
                 NPC.ai[1]++;
                 NPC.velocity.Y = 0;
             }
-            if (NPC.collideY && NPC.Bottom.Y > target.Center.Y && NPC.ai[1] == 60)
+            
+            if ((NPC.collideY || Collision.SolidCollision(NPC.BottomLeft - new Vector2(5, 0), NPC.width + 10, 6)) && NPC.ai[1] == 60)
             {
                 SoundEngine.PlaySound(SoundID.Item14, NPC.Bottom);
                 for (int i = 0; i < 10; i++)
@@ -372,7 +386,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             {
                 NPC.velocity = new Vector2(0, 20);
             }
-            if (NPC.ai[1] > 300 && (NPC.collideY && NPC.Bottom.Y > target.Center.Y))
+            if (NPC.ai[1] > 300 && (NPC.collideY || Collision.SolidCollision(NPC.BottomLeft - new Vector2(5, 0), NPC.width + 10, 6)))
             {
                 SoundEngine.PlaySound(SoundID.Item14, NPC.Bottom);
                 for (int i = 0; i < 10; i++)

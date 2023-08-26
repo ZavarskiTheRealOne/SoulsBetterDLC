@@ -4,6 +4,7 @@ using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Buffs
 {
+    [ExtendsFromMod("CalamityMod")]
     public class MarniteSwordsBuff : ModBuff
     {
         public override void SetStaticDefaults()

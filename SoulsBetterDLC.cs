@@ -8,13 +8,17 @@ using System;
 using ThoriumMod;
 using CalamityMod.Items.Placeables.Furniture;
 using System.Reflection;
-using MonoMod.RuntimeDetour.HookGen;
+
 using FargowiltasSouls.Core.Toggler;
 using SoulsBetterDLC.Items.Accessories.Forces.Calamity;
 using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.ModLoader.Core;
 using SoulsBetterDLC.Toggles;
 using System.Linq;
+using MonoMod.Cil;
+using MonoMod.RuntimeDetour.HookGen;
+using MonoMod.RuntimeDetour;
+using FargowiltasSouls.Content.Items.Accessories.Souls;
 
 namespace SoulsBetterDLC
 {
@@ -38,8 +42,52 @@ namespace SoulsBetterDLC
 
             if (CalamityLoaded)
             {
-                LoadTogglesFromType(typeof(CalamityToggles));
+                LoadTogglesFromType(typeof(CalamityEnchToggles));
+                
+                
+                Type calamityDetourClass = ModLoader.GetMod("CalamityMod").Code.GetType("CalamityMod.NPCs.CalamityGlobalNPC");
+                MethodInfo detourMethod = calamityDetourClass.GetMethod("PreAI", BindingFlags.Public | BindingFlags.Instance);
+
+                MonoModHooks.Modify(detourMethod, CalamityPreAI_ILEdit);
             }
+        }
+        //disables rev ai when emode is active
+        public static void CalamityPreAI_ILEdit(ILContext il)
+        {
+            
+            var c = new ILCursor(il);
+            //go to correct boss rush check
+            c.GotoNext(i => i.MatchLdsfld<CalamityMod.Events.BossRushEvent>("BossRushActive"));
+            c.Index++;
+            c.GotoNext(i => i.MatchLdsfld<CalamityMod.Events.BossRushEvent>("BossRushActive"));
+            c.Index++;
+            //get label for skipping past ai changes
+            ILLabel label = null;
+            c.GotoNext(i => i.MatchBrfalse(out label));
+            //go to before checks
+            c.Index -= 3;
+            //add new check and get label for skipping to it
+            
+            c.EmitDelegate(() => FargowiltasSouls.Core.Systems.WorldSavingSystem.EternityMode);
+            c.Emit(Mono.Cecil.Cil.OpCodes.Brtrue, label);
+            c.Index -= 4;
+            ILLabel label2 = il.DefineLabel(c.Prev);
+            
+            //go to checking for queen bee and go to the skipper after it
+            c.GotoPrev(i => i.MatchLdcI4(222));
+            c.Index++;
+            //replace skipper with my own
+            c.Remove();
+            c.Emit(Mono.Cecil.Cil.OpCodes.Bne_Un, label2);
+            
+            //do it again but make the check for zenith seed not skip my check
+            c.GotoPrev(i => i.MatchLdsfld(typeof(Main), nameof(Main.zenithWorld)));
+            c.Index++;
+            c.Remove();
+            c.Emit(Mono.Cecil.Cil.OpCodes.Brfalse, label2);
+            MonoModHooks.DumpIL(Instance, il);
+            
+            
         }
         public static void LoadTogglesFromType(Type type)
         {
@@ -241,4 +289,5 @@ namespace SoulsBetterDLC
             RecipeGroup.RegisterGroup("SoulsBetterDLC:AnyHydrothermHelms", HydrothermHelmsGroup);
         }
     }
+    
 }

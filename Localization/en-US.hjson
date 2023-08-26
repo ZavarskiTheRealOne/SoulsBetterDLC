@@ -1,12 +1,12 @@
 Mods: {
 	FargowiltasSouls: {
-		ExplorationHeader: "[i:SoulsBetterDLC/ExplorationForce] {$Mods.SoulsBetterDLC.ItemName.ExplorationForce}"
+		ExplorationHeader: "[i:SoulsBetterDLC/ExplorationForce] {$Mods.SoulsBetterDLC.Items.ExplorationForce.DisplayName}"
 		ValkyrieConfig: "[i:SoulsBetterDLC/AerospecEnchantment] [c/99c8c1:Valkyrie Minion]"
 		TornadoesConfig: "[i:SoulsBetterDLC/ProwlerEnchantment] [c/cc2a3c:Desert Tornadoes]"
 		BuildBuffConfig: "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Building Stats]"
 		MarniteSwordsConfig: "[i:SoulsBetterDLC/MarniteEnchantment] [c/99c8c1:Marnite Sword Minions]"
 		WulfrumBuffConfig: "[i:SoulsBetterDLC/WulfrumEnchantment] [c/cec9aa:Wulfrum Empower]"
-		ExaltationHeader: "[i:SoulsBetterDLC/ExaltationForce] {$Mods.SoulsBetterDLC.ItemName.ExaltationForce}"
+		ExaltationHeader: "[i:SoulsBetterDLC/ExaltationForce] {$Mods.SoulsBetterDLC.Items.ExaltationForce.DisplayName}"
 		TarragonCloakConfig: "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Cloak]"
 		TarragonAuraConfig: "[i:SoulsBetterDLC/TarragonEnchantment] [c/c86414:Tarragon Aura]"
 		BloodflareBuffsConfig: "[i:SoulsBetterDLC/BloodflareEnchantment] [c/cc2a3c:Buffs on hit]"
@@ -17,13 +17,14 @@ Mods: {
 		SlayerStarsConfig: "[i:SoulsBetterDLC/SlayerEnchantment] [c/59aacc:Cosmilite Stars]"
 		AuricLightningConfig: "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Lightning]"
 		AuricExplosionsConfig: "[i:SoulsBetterDLC/AuricEnchantment] [c/e3ae00:Auric Explosions]"
-		DevastationHeader: "[i:SoulsBetterDLC/DevastationForce] {$Mods.SoulsBetterDLC.ItemName.DevastationForce}"
+		DevastationHeader: "[i:SoulsBetterDLC/DevastationForce] {$Mods.SoulsBetterDLC.Items.DevastationForce.DisplayName}"
 		IceSpikesConfig: "[i:SoulsBetterDLC/DaedalusEnchantment] [c/84d4f6:Ice Spikes]"
 		ReaverStatsConfig: "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Stats]"
 		ReaverRageConfig: "[i:SoulsBetterDLC/ReaverEnchantment] [c/91cb66:Reaver Rage]"
 		HydrothermicHitsConfig: "[i:SoulsBetterDLC/HydrothermicEnchantment] [c/f8b659:Hydrothermic Attacks]"
 		PlagueBeesConfig: "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Plague Bees]"
 		PlagueDebuffConfig: "[i:SoulsBetterDLC/BringerEnchantment] [c/80bc43:Inflict Plague]"
+		AngelTreadsConfig: "[i:CalamityMod/AngelTreads] Angel Flight and Speed"
 	}
 
 	SoulsBetterDLC: {
@@ -135,6 +136,37 @@ Mods: {
 		}
 
 		Items: {
+			AddedEffects: {
+				AngelTreads: Effects of Angel Treads
+				AeolusBoots: Effects of Aeolus Boots
+				ThoriumSuperSonic: Effects of Air Walkers, Survivalist Boots, and Weighted Winglets
+				CalamityColossus: Effects of The Amalgam, Asgardian Aegis, Rampart of Deities, and The Camper
+				ThoriumColossus:
+					'''
+					Effects of Sweet Vengeance, Obsidian Scale, Terrarium Defender,
+					Phylactery, Heart of Stone, and Spiny Shell
+					'''
+				CalamityBerserker: Effects of Reaper Tooth Necklace, Badge of Bravery, and Elemental Gauntlet
+				ThoriumBerserker: Effects of Rapier Badge
+				CalamityWizard: Effects of Ethereal Talisman
+				ThoriumWizard: Effects of Murky Catalyst
+				CalamitySniper:
+					'''
+					Effects of Elemental Quiver, Quiver of Nihility
+					Effects of Daawnlight Spirit Origin and Dynamo Stem Cells
+					'''
+				ThoriumSniper: Effects of Concussive Warhead
+				CalamityConjurist: Effects of Nucleogenesis
+				ThoriumConjurist: Effects of Yuma's Pendant and Crystal Scorpion
+				CalamityTrawler: Effects of Abyssal Diving Suit
+				ThoriumUniverse:
+					'''
+					15% increased throwing velocity
+					Effects of Guide to Expert Throwing Volume III,
+					Mermaid Canteen, and Deadman's Patch
+					'''
+			}
+
 			AerospecEnchantment: {
 				DisplayName: Aerospec Enchantment
 				Tooltip:
@@ -656,6 +688,26 @@ Mods: {
 				DisplayName: Gemtech Enchantment
 				Tooltip: ""
 			}
+
+			SlingersEssence: {
+				DisplayName: Slinger's Essence
+				Tooltip:
+					'''
+					18% increased throwing damage
+					5% increased throwing crit chance and velocity
+					'''
+			}
+
+			OlympiansSoul: {
+				DisplayName: Olympian's Soul
+				Tooltip:
+					'''
+					30% increased throwing damage
+					15% increased throwing crit chance and velocity
+					Effects of Guide to Expert Throwing Volume III,
+					Mermaid Canteen, and Deadman's Patch
+					'''
+			}
 		}
 
 		NPCs: {
@@ -794,6 +846,11 @@ Mods: {
 				ExplorationDust.DisplayName: Exploration Dust
 				ExplorationTurbulence.DisplayName: Exploration Turbulence
 			}
+
+			MagicStar.DisplayName: Magic Star
+			OrbitGem.DisplayName: Orbit Gem
+			RogueSoul.DisplayName: Rogue Soul
+			LineTelegraph.DisplayName: Line Telegraph
 		}
 
 		Conditions: {

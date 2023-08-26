@@ -11,6 +11,8 @@ using Terraria.GameContent;
 using Terraria.Audio;
 using FargowiltasSouls;
 using Terraria.Localization;
+using ReLogic.Content;
+
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -104,7 +106,14 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
         //special effects like drawing extra sprites or afterimages. I assume this will be used later.
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            
+            if (attack == 4)
+            {
+                Asset<Texture2D> telegraph = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowLine");
+                if (attackTimer < 60)
+                {
+                    Main.EntitySpriteDraw(telegraph.Value, NPC.Center + new Vector2(1000, 0).RotatedBy(laserBaseVel.ToRotation()) - Main.screenPosition, null, Color.LightGreen * (attackTimer/60f), laserBaseVel.ToRotation(), telegraph.Size() / 2, new Vector2(2000, 0.1f), SpriteEffects.None);
+                }
+            }
             
             //afterimage
             Main.instance.LoadNPC(NPC.type);
@@ -347,6 +356,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
                 {
                     attack = Main.rand.Next((int)attackP1.Circle, (int)attackP1.Wulfrum + 1);
                 }
+                
                 lastAttack = attack;
                 //attack = (int)attackP1.Lightning;
                 dashTimer = 0;
@@ -362,6 +372,13 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
                 if (Main.rand.NextBool())
                 {
                     direction = -1;
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), target.Center, Vector2.Zero, ModContent.ProjectileType<LineTelegraph>(), 0, 0, ai0: 1, ai1: 1);
+                }
+                else
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), target.Center, Vector2.Zero, ModContent.ProjectileType<LineTelegraph>(), 0, 0, ai0: 1, ai1: -1);
                 }
                 offset = new Vector2(400, 0);
                 offset = offset.RotatedBy(target.AngleTo(NPC.Center));
@@ -433,24 +450,17 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
             NPC.velocity = Vector2.Lerp(NPC.velocity, (target.Center+new Vector2(0, -300) - NPC.Center).SafeNormalize(Vector2.Zero)*30, 0.05f);
             if (attackTimer == 0 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                for (int i = -750; i < 751; i += 250)
+                
+                for (int i = 0; i < 90; i++)
                 {
-                    Projectile proj2 = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(-1000, i), Vector2.Zero, ProjectileID.SandnadoHostile, FargoSoulsUtil.ScaledProjectileDamage(210), 0f, Main.myPlayer);
-                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(1000, i), Vector2.Zero, ProjectileID.SandnadoHostile, FargoSoulsUtil.ScaledProjectileDamage(210), 0f, Main.myPlayer);
-                    
+                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(0, -900).RotatedBy(MathHelper.ToRadians(i * 4)), Vector2.Zero, ModContent.ProjectileType<ExplorationDust>(), FargoSoulsUtil.ScaledProjectileDamage(210), 0, Main.myPlayer, 0, -100);
                 }
                 if (phase == 1)
                 {
                     Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(-500, 0), Vector2.Zero, ProjectileID.SandnadoHostile, NPC.damage / 2, 0f, Main.myPlayer);
                     Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(500, 0), Vector2.Zero, ProjectileID.SandnadoHostile, NPC.damage / 2, 0f, Main.myPlayer);
                 }
-                for (int i = -1000; i < 1001; i += 75)
-                {
-                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(i, -750), Vector2.Zero, ModContent.ProjectileType<ExplorationDust>(), FargoSoulsUtil.ScaledProjectileDamage(210), 0, Main.myPlayer, 0, -100);
-                    
-                    Projectile proj2 = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), target.Center + new Vector2(i, 750), Vector2.Zero, ModContent.ProjectileType<ExplorationDust>(), FargoSoulsUtil.ScaledProjectileDamage(210), 0, Main.myPlayer, 0, -100);
-                    
-                }
+                
             }
             if (attackTimer%5 == 0 && attackTimer <= 130 && attackTimer > 60)
             {
@@ -713,7 +723,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
                 }
             }
             attackTimer++;
-            laserBaseVel = laserBaseVel.RotatedBy(MathHelper.ToRadians(-2.2f));
+            laserBaseVel = laserBaseVel.RotatedBy(MathHelper.ToRadians(-1.6f));
             if (attackTimer == 10 + sweepingTime)
             {
                 for (int i = 0; i < 3; i++)

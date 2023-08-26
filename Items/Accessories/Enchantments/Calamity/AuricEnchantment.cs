@@ -16,6 +16,7 @@ using CalamityMod.Items.Placeables.Furniture;
 using CalamityMod.Rarities;
 using Terraria.Localization;
 
+using CalamityMod.Rarities;
 namespace SoulsBetterDLC.Items.Accessories.Enchantments.Calamity
 {
     [ExtendsFromMod("CalamityMod")]

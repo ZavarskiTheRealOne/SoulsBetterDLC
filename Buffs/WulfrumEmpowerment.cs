@@ -3,7 +3,8 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Buffs
 {
-	public class WulfrumEmpowerment : ModBuff
+    [ExtendsFromMod("CalamityMod")]
+    public class WulfrumEmpowerment : ModBuff
 	{
 		public override void SetStaticDefaults()
 		{

@@ -4,9 +4,10 @@ using Terraria.ModLoader;
 using Terraria.ID;
 namespace SoulsBetterDLC.Projectiles.GemTech
 {
+    [ExtendsFromMod("CalamityMod")]
     public class MeleeShockwave : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Item_" + ItemID.Diamond;
+        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.TerraBlade2Shot;
         public override void SetDefaults()
         {
             base.SetDefaults();

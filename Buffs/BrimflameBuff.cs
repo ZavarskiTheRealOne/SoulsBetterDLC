@@ -9,6 +9,7 @@ using SoulsBetterDLC.Projectiles;
 
 namespace SoulsBetterDLC.Buffs
 {
+    [ExtendsFromMod("CalamityMod")]
     public class BrimflameBuff : ModBuff
     {
         public override string Texture => "CalamityMod/Buffs/StatBuffs/BrimflameFrenzyBuff";

@@ -27,8 +27,8 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
             Projectile.aiStyle = -1;
             Projectile.hostile = false;
             Projectile.ignoreWater = true;
-            Projectile.alpha = 100;
-            Projectile.timeLeft = 500;
+            Projectile.Opacity = 0.5f;
+            Projectile.timeLeft = 400;
             Projectile.scale = 2;
         }
         public override void OnSpawn(IEntitySource source)
@@ -37,13 +37,15 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
         }
         public override void Kill(int timeLeft)
         {
-            
+            for (int i = 0; i < 20; i++) {
+                Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GemEmerald).noGravity = true;
+                    }
         }
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> t = TextureAssets.Item[ModContent.ItemType<CalamityMod.Items.Materials.WulfrumMetalScrap>()];
 
-            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, t.Width(), t.Height()), lightColor * (1 - 255/(float)(Projectile.alpha + 1)), Projectile.rotation, t.Size()/2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, t.Width(), t.Height()), lightColor * Projectile.Opacity, Projectile.rotation, t.Size()/2, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
         public override void AI()
@@ -52,7 +54,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
             Projectile.rotation += Projectile.velocity.Length() / 10;
             if (Projectile.ai[0] == 180)
             {
-                Projectile.alpha = 0;
+                Projectile.Opacity = 1;
                 Projectile.hostile = true;
                 for (int i = 0; i < 10; i++)
                 {

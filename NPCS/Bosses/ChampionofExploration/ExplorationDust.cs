@@ -8,13 +8,14 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofExploration
     [ExtendsFromMod("CalamityMod")]
     public class ExplorationDust : DuststormCloud
     {
-        public override string Texture => "CalamityMod/Projectiles/Rogue/DuststormCloud";
+        public override string Texture => "CalamityMod/Projectiles/Magic/DustProjectile";
         public override void SetDefaults()
         {
             base.SetDefaults();
             Projectile.hostile = true;
             Projectile.friendly = false;
             Projectile.timeLeft = 360;
+            Main.projFrames[Type] = 6;
         }
     }
 }

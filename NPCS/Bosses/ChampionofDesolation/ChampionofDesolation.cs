@@ -7,6 +7,8 @@ using System.IO;
 using CalamityMod.CalPlayer;
 using Terraria.Audio;
 using Terraria.Localization;
+using CalamityMod;
+
 namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
 {
     [JITWhenModsEnabled("CalamityMod")]
@@ -47,7 +49,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
             NPC.width = 50;
             NPC.height = 24;
             NPC.scale = 2;
-            NPC.lifeMax = 800000;
+            NPC.lifeMax = 6500000;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.defense = 20;
@@ -70,7 +72,10 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
         }
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * bossAdjustment);
+            NPC.lifeMax = 6500000;
+            if (Main.expertMode) NPC.lifeMax += 1000000;
+            if (Main.masterMode) NPC.lifeMax += 2000000;
+            NPC.lifeMax += 3000000 * (numPlayers - 1);
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -375,7 +380,17 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
             NPCID.Sets.TrailCacheLength[NPC.type] = 10;
             NPCID.Sets.MPAllowedEnemies[Type] = true;
         }
+
         public override string Texture => "CalamityMod/NPCs/SunkenSea/SeaSerpent2";
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            projectile.damage = (int)(projectile.damage / 1.5f);
+            return;
+           if (projectile.penetrate > 5 || projectile.penetrate < 0)
+            {
+                modifiers.FinalDamage /= 5;
+            }
+        }
         public override void SetDefaults()
         {
             NPC.width = 24;
@@ -384,7 +399,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
             NPC.lifeMax = 400000;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
-            NPC.defense = 20;
+            NPC.defense = 100;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
             NPC.knockBackResist = 0f;
@@ -394,6 +409,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDesolation
             NPC.SpawnWithHigherTime(30);
             NPC.aiStyle = -1;
             NPC.damage = 110;
+            
         }
         public override void Init()
         {

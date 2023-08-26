@@ -31,7 +31,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.ai[1] = Main.rand.Next(0, 3);
+                
                 Projectile.netUpdate = true;
             }
         }
@@ -60,6 +60,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
             {
                 Projectile.spriteDirection = -1;
             }
+            
             else if (Projectile.ai[1] != 3)
             {
                 Projectile.spriteDirection = 1;
@@ -98,7 +99,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         {
             Player target = Main.player[(int)Projectile.ai[0]];
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, ((target.Center + new Vector2(0, -375)) - Projectile.Center).SafeNormalize(Vector2.Zero) * 15, 0.05f);
-            if (Projectile.timeLeft < 200 && Projectile.timeLeft%30 == 0)
+            if (Projectile.timeLeft < 200 && Projectile.timeLeft%60 == 0)
             {
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, (target.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * 10, ModContent.ProjectileType<CalamityMod.Projectiles.Boss.PlagueStingerGoliath>(), 50, 0);
                 SoundEngine.PlaySound(SoundID.Item42, Projectile.Center);
@@ -108,7 +109,7 @@ namespace SoulsBetterDLC.NPCS.Bosses.ChampionofDevastation
         {
             Player target = Main.player[(int)Projectile.ai[0]];
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, ((target.Center + new Vector2(0, -375)) - Projectile.Center).SafeNormalize(Vector2.Zero) * 15, 0.05f);
-            if (Projectile.timeLeft < 200 && Projectile.timeLeft % 40 == 0)
+            if (Projectile.timeLeft < 200 && Projectile.timeLeft % 90 == 0)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {

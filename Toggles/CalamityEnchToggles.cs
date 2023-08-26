@@ -5,11 +5,11 @@ using Terraria.ModLoader;
 namespace SoulsBetterDLC.Toggles
 {
     [ExtendsFromMod("CalamityMod")]
-    public class CalamityToggles : ToggleCollection
+    public class CalamityEnchToggles : ToggleCollection
     {
         public override string Mod => "CalamityMod";
         public override string SortCatagory => "Enchantments";
-        public override int Priority => 0;
+        public override int Priority => 1;
         public override bool Active => true;
 
         public int ExplorationHeader = ModContent.ItemType<ExplorationForce>();

@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 
 namespace SoulsBetterDLC.Buffs
 {
+    [ExtendsFromMod("CalamityMod")]
     public class AtaxiaOverheat : ModBuff
     {
         public override void SetStaticDefaults()

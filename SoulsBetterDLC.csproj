@@ -27,4 +27,8 @@
       <HintPath>..\..\..\..\..\..\AppData\Roaming\TML-Patcher\Extracted\ThoriumMod\ThoriumMod.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Items\Accessories\Essences\Calamity\" />
+    <Folder Include="Items\Accessories\Souls\Calamity\" />
+  </ItemGroup>
 </Project>

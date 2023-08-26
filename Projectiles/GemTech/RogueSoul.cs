@@ -7,24 +7,26 @@ using Terraria;
 namespace SoulsBetterDLC.Projectiles.GemTech
 {
     [ExtendsFromMod("CalamityMod")]
-    public class SummonGem : ModProjectile
+    public class RogueSoul : ModProjectile
     {
-        public override string Texture => "CalamityMod/Projectiles/Typeless/GemTechBlueGem";
+        public override string Texture => "CalamityMod/Projectiles/Rogue/PhantasmalSoul";
         public override void SetDefaults()
         {
-            base.SetDefaults();
+            Main.projFrames[Type] = 4;
+
         }
         public override void SetStaticDefaults()
         {
-            base.SetStaticDefaults();
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            return base.PreDraw(ref lightColor);
+            ProjectileID.Sets.TrailingMode[Type] = 2;
+            ProjectileID.Sets.TrailCacheLength[Type] = 10;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(target, hit, damageDone);
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return base.PreDraw(ref lightColor);
         }
         public override void OnSpawn(IEntitySource source)
         {
