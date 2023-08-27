@@ -778,5 +778,10 @@ Mods: {
 			"Steel parry.DisplayName": Steel parry
 			"Living wood roots.DisplayName": Living wood roots
 		}
+
+		Conditions: {
+			GildedDown: Mods.SoulsBetterDLC.Conditions.GildedDown
+			MynaDown: Mods.SoulsBetterDLC.Conditions.MynaDown
+		}
 	}
 }

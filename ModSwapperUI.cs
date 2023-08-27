@@ -38,7 +38,7 @@ namespace SoulsBetterDLC
         {
             _lastUpdateUiGameTime = gameTime;
             // Update this when we add more shop patches
-            if (Main.LocalPlayer.talkNPC > 0 && !Main.playerInventory && Main.npc[Main.LocalPlayer.talkNPC].TypeName == "Deviantt")
+            if (Main.LocalPlayer.talkNPC > 0 && !Main.playerInventory/* && Main.npc[Main.LocalPlayer.talkNPC].ModNPC.Type == ModContent.NPCType<Fargowiltas.NPCs.Deviantt>()*/)
             {
                 if (SwapperInterface?.CurrentState != null)
                 {

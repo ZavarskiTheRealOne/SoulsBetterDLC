@@ -53,7 +53,7 @@ namespace SoulsBetterDLC.Projectiles.Thorium
                     float angle = projectile.velocity.ToRotation() - a.ToRotation();
                     if (MathF.Abs(angle) < MathF.PI / 6)
                     {
-                        projectile.velocity = projectile.velocity.RotatedBy(MathF.PI / 240f * MathF.Sign(angle));
+                        projectile.velocity = projectile.velocity.RotatedBy(MathF.PI / 320f * MathF.Sign(angle));
                     }
                 }
             }

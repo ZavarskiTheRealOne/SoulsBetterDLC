@@ -15,6 +15,7 @@ using SoulsBetterDLC.Items.Accessories.Enchantments.Calamity;
 using Terraria.ModLoader.Core;
 using SoulsBetterDLC.Toggles;
 using System.Linq;
+using MonoMod.RuntimeDetour;
 
 namespace SoulsBetterDLC
 {
@@ -31,8 +32,7 @@ namespace SoulsBetterDLC
             ThoriumLoaded = ModLoader.HasMod("ThoriumMod");
             CalamityLoaded = ModLoader.HasMod("CalamityMod");
             Instance = this;
-            LoadDetours();
-            
+            LoadDetours();            
             
             if (ThoriumLoaded) Thorium_Load();
 
@@ -43,7 +43,6 @@ namespace SoulsBetterDLC
         }
         public static void LoadTogglesFromType(Type type)
         {
-            // TODO: fix toggles
             return;
             
             ToggleCollection toggles = (ToggleCollection)Activator.CreateInstance(type);
@@ -58,31 +57,51 @@ namespace SoulsBetterDLC
                 //}
             }
         }
+
+        private struct DeviantHooks
+        {
+            internal static Hook SetChatButtons;
+            internal static Hook OnChatButtonClicked;
+            internal static Hook AddShops;
+        }
+        private struct LumberHooks
+        {
+            internal static Hook OnChatButtonClicked;
+            internal static Hook AddShops;
+        }
+
         private static void LoadDetours()
         {
-            // Devi
             Type deviDetourClass = ModContent.Find<ModNPC>("Fargowiltas/Deviantt").GetType();
 
             if (deviDetourClass != null)
             {
                 MethodInfo SetChatButtons_DETOUR = deviDetourClass.GetMethod("SetChatButtons", BindingFlags.Public | BindingFlags.Instance);
-                //MethodInfo SetupShop_DETOUR = deviDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo OnChatButtonClicked_DETOUR = deviDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo AddShops_DETOUR = deviDetourClass.GetMethod("AddShops", BindingFlags.Public | BindingFlags.Instance);
+                
 
-                MonoModHooks.Add(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
-                //MonoModHooks.Add(SetupShop_DETOUR, DevianttPatches.SetupShop);
-                if (ThoriumLoaded) DevianttPatches.AddDevianttShop("Thorium", DevianttPatches.SetupThoriumDeviShop);
+                DeviantHooks.SetChatButtons = new Hook(SetChatButtons_DETOUR, DevianttPatches.SetChatButtons);
+                DeviantHooks.OnChatButtonClicked = new Hook(OnChatButtonClicked_DETOUR, DevianttPatches.OnChatButtonClicked);
+                //DeviantHooks.AddShops = new Hook(AddShops_DETOUR, DevianttPatches.AddShops);
+
+                DeviantHooks.SetChatButtons.Apply();
+                DeviantHooks.OnChatButtonClicked.Apply();
+                //DeviantHooks.AddShops.Apply();
             }
 
-            // Lumberboy
             Type lumberDetourClass = ModContent.Find<ModNPC>("Fargowiltas/LumberJack").GetType();
 
             if (lumberDetourClass != null)
             {
-                MethodInfo SetChatButtons_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
-                //MethodInfo SetupShop_DETOUR = lumberDetourClass.GetMethod("SetupShop", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo OnChatButtonClicked_DETOUR = lumberDetourClass.GetMethod("OnChatButtonClicked", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo AddShops_DETOUR = lumberDetourClass.GetMethod("AddShops", BindingFlags.Public | BindingFlags.Instance);
 
-                //MonoModHooks.Add(SetChatButtons_DETOUR, LumberBoyPatches.OnChatButtonClicked);
-                //MonoModHooks.Add(SetupShop_DETOUR, LumberBoyPatches.SetupShop);
+                LumberHooks.OnChatButtonClicked = new Hook(OnChatButtonClicked_DETOUR, LumberBoyPatches.OnChatButtonClicked);
+                LumberHooks.AddShops = new Hook(AddShops_DETOUR, LumberBoyPatches.AddShops);
+
+                LumberHooks.OnChatButtonClicked.Apply();
+                LumberHooks.AddShops.Apply();
             }
         }
 
@@ -96,8 +115,19 @@ namespace SoulsBetterDLC
 
             Projectiles.Thorium.DLCHealing.HealMethod = thoriumProjExtensions.GetMethod("ThoriumHeal", BindingFlags.Static | BindingFlags.NonPublic);
             Projectiles.Thorium.DLCHealing.CustomHealingType = thoriumProjExtensions.GetNestedType("CustomHealing", BindingFlags.NonPublic);
+
+            DevianttPatches.AddThoriumDeviShop();
         }
-       
+
+        public override void Unload()
+        {
+            DeviantHooks.SetChatButtons.Undo();
+            DeviantHooks.OnChatButtonClicked.Undo();
+            //DeviantHooks.AddShops.Undo();
+
+            LumberHooks.OnChatButtonClicked.Undo();
+            LumberHooks.AddShops.Undo();
+        }
     }
 
     [ExtendsFromMod("CalamityMod")]

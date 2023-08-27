@@ -18,9 +18,6 @@ using Terraria.Localization;
 namespace SoulsBetterDLC
 {
     // Btw the majority of this class's structure is based off of FargoWorld.cs in Fargo's mutant mod (FargoWiltas)
-
-    // This is the system used for things including all mods, so should be coded so it doesnt break without random mods
-    // e.g. killing a thorium enemy should not be reverted by disabling thorium
     public class DLCSystem : ModSystem
     {
         internal static Dictionary<string, bool> DLCDownedBools = new Dictionary<string, bool>();
